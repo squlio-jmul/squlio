@@ -5,14 +5,15 @@ namespace Entities;
 use Doctrine\Common\Collections\ArrayCollection;
 
 require_once(APPPATH."models/Entities/EntitySuperClass.php");
+require_once(APPPATH."models/Entities/School.php");
 
 /**
- * Login
+ * ClassroomSubject
  *
- * @Table(name="login")
+ * @Table(name="classroom_subject")
  * @Entity
  */
-class Login extends EntitySuperClass {
+class ClassroomSubject extends EntitySuperClass {
 	/**
 	 * @var integer
 	 *
@@ -23,39 +24,19 @@ class Login extends EntitySuperClass {
 	protected $id;
 
 	/**
-	 * @var string
+	 * @var integer
 	 *
-	 * @Column(name="email", type="string", nullable=false)
-	 */
-	protected $email;
+	 * @ManyToOne(targetEntity="School", inversedBy="classroom_subject", cascade={"persist"})
+	 * @JoinColumn(name="school_id", referencedColumnName="id", nullable=false)
+	 **/
+	protected $school;
 
 	/**
 	 * @var string
 	 *
-	 * @Column(name="username", type="string", nullable=false)
+	 * @Column(name="name", type="string", nullable=false)
 	 */
-	protected $username;
-
-	/**
-	 * @var string
-	 *
-	 * @Column(name="password", type="string", nullable=false)
-	 */
-	protected $password;
-
-	/**
-	 * @var string
-	 *
-	 * @Column(name="type", type="string", nullable=false)
-	 */
-	protected $type;
-
-	/**
-	 * @var string
-	 *
-	 * @Column(name="token", type="string", nullable=false)
-	 */
-	protected $token;
+	protected $name;
 
 	/**
 	 * @var boolean
@@ -70,20 +51,6 @@ class Login extends EntitySuperClass {
 	 * @Column(name="deleted", type="boolean", nullable=false)
 	 */
 	protected $deleted;
-
-	/**
-	 * @var boolean
-	 *
-	 * @Column(name="reset_password", type="boolean", nullable=false)
-	 */
-	protected $reset_password;
-
-	/**
-	 * @var \DateTime
-	 *
-	 * @Column(name="last_login", type="datetime", nullable=true)
-	 */
-	protected $last_login;
 
 	/**
 	 * @var \DateTime
@@ -107,15 +74,10 @@ class Login extends EntitySuperClass {
 	public function getData() {
 		return array(
 			'id' => $this->id,
-			'email' => $this->email,
-			'username' => $this->username,
-			'password' => $this->password,
-			'type' => $this->type,
-			'token' => $this->token,
+			'school_id' => $this->school->__get('id'),
+			'name' => $this->name,
 			'active' => $this->active,
 			'deleted' => $this->deleted,
-			'reset_password' => $this->reset_password,
-			'last_login' => $this->last_login,
 			'created_on' => $this->created_on,
 			'last_updated' => $this->last_updated
 		);
