@@ -13,8 +13,8 @@ class Login_model extends SQ_Model {
 		$login_obj = $this->doctrine->em->getRepository('Entities\Login')->findBy($filters, $order_by, $limit, $offset);
 
 		$logins = array();
-		foreach($login_obj as $index => $l){
-			$login = $l->getData();
+		foreach($login_obj as $index => $obj){
+			$login = $obj->getData();
 
 			if($fields){
 				$temp_login = array();
@@ -39,7 +39,6 @@ class Login_model extends SQ_Model {
 		try {
 			$new_login = new Entities\Login;
 			$new_login->setData($login_data);
-			$new_login->created_on = new \Datetime('now');
 
 			$this->doctrine->em->persist($new_login);
 			$this->doctrine->em->flush();

@@ -6,7 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 require_once(APPPATH."models/Entities/EntitySuperClass.php");
 require_once(APPPATH."models/Entities/Login.php");
-require_once(APPPATH."models/Entities/School.php");
 
 /**
  * Guardian
@@ -31,14 +30,6 @@ class Guardian extends EntitySuperClass {
 	 * @JoinColumn(name="login_id", referencedColumnName="id")
 	 */
 	protected $login;
-
-	/**
-	 * @var integer
-	 *
-	 * @ManyToOne(targetEntity="School", inversedBy="guardian", cascade={"persist"})
-	 * @JoinColumn(name="school_id", referencedColumnName="id", nullable=false)
-	 **/
-	protected $school;
 
 	/**
 	 * @var string
@@ -79,7 +70,6 @@ class Guardian extends EntitySuperClass {
 			'login_id' => $this->login->__get('id'),
 			'email' => $this->login->__get('email'),
 			'username' => $this->login->__get('username'),
-			'school_id' => $this->school->__get('id'),
 			'first_name' => $this->first_name,
 			'last_name' => $this->last_name,
 			'created_on' => $this->created_on,
