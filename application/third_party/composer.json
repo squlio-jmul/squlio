@@ -1,6 +1,7 @@
 {
 	"require": {
 		"doctrine/orm": "*",
-		"lcobucci/jwt": "~3.1"
+		"lcobucci/jwt": "~3.1",
+		"twbs/bootstrap": "^3.3"
 	}
 }

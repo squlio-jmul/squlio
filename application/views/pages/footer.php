@@ -10,7 +10,6 @@
 			</div>
 		</div>
 	</footer>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<? if ($minified_js) : ?>
 		<script src="<?=$js_path?>/third_party/require_optimized.js"></script>
 	<? else: ?>
@@ -36,9 +35,9 @@
                 'SQ': '<?=$js_path?>/SQ',
                 'ThirdParty': '<?=$js_path?>/third_party',
                 'Global': '<?=$js_path?>',
-                'jquery': '<?=$js_path?>/third_party/jquery.min',
+                'jquery': '<?=$js_path?>/third_party/jquery-3.1.1.min',
 				'bootstrap': '<?=$js_path?>/third_party/bootstrap',
-                'underscore': '<?=$js_path?>/third_party/underscore',
+                'underscore': '<?=$js_path?>/third_party/underscore-min',
                 'text': '<?=$js_path?>/third_party/text',
 				<? if (isset($requireJsDataSource) && $requireJsDataSource) : ?>
 					<? if ($minified_js) : ?>
