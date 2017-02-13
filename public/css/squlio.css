@@ -1,0 +1,15 @@
+footer .copyright {
+	text-align: center;
+}
+label.error {
+	color: #FF0000;
+}
+.error-container {
+	font-weight: bold;
+	color: #FF0000;
+}
+#login-container {
+	width: 80%;
+	margin: 0px auto;
+	padding: 60px;
+}

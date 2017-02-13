@@ -1,13 +1,6 @@
 	<footer>
 		<div class="container-fluid">
-			<div class="row">
-				<ul class="footer-links">
-					<li><a href="/support/about" target="_blank">About Us</a></li>
-					<li><a href="/support/conditions" target="_blank">Conditions of Use</a></li>
-					<li><a href="/support/privacy" target="_blank">Privacy Policy</a></li>
-				</ul>
-				<p class="copyright">&copy; <?=date('Y')?> Squlio - All rights reserved.</p>
-			</div>
+			<p class="copyright">&copy; <?=date('Y')?> Squlio - All rights reserved.</p>
 		</div>
 	</footer>
 	<? if ($minified_js) : ?>
@@ -41,9 +34,9 @@
                 'text': '<?=$js_path?>/third_party/text',
 				<? if (isset($requireJsDataSource) && $requireJsDataSource) : ?>
 					<? if ($minified_js) : ?>
-						'<?=$requireJsDataSource?>_optimized': '<?=$js_path?>/bw_js/<?=$requireJsDataSource?>_optimized'
+						'<?=$requireJsDataSource?>_optimized': '<?=$js_path?>/sq_js/<?=$requireJsDataSource?>_optimized'
 					<? else : ?>
-						'<?=$requireJsDataSource?>': '<?=$js_path?>/bw_js/<?=$requireJsDataSource?>'
+						'<?=$requireJsDataSource?>': '<?=$js_path?>/sq_js/<?=$requireJsDataSource?>'
 					<? endif; ?>
 				<? endif; ?>
             },
