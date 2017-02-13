@@ -3,6 +3,7 @@ define([
 	'Global/SQ',
 	'SQ/Util',
 	'SQ/Model/Login',
+	'SQ/Screen/Login/Views/LoginForm',
 	'ThirdParty/q',
 	'ThirdParty/jquery.validate'
 ], function(
@@ -10,6 +11,7 @@ define([
 	SQ,
 	Util,
 	LoginModel,
+	LoginForm,
 	Q
 ) {
 	'use strict';
@@ -18,41 +20,21 @@ define([
 		var _me = this;
 		var _util = new Util();
 		var _loginModel = new LoginModel();
+		var _loginForm = new LoginForm();
 
 		(function _init() {
-			$('#login-form').validate({
-				rules: {
-					'username': {
-						required: true,
-						remote: {
-							url: '/ajax/school_admin/usernameExist',
-							type: 'post'
-						}
-					},
-					'password': {
-						required: true
-					}
-				},
-				messages: {
-					'username': {
-						remote: $.validator.format('Unable to find this username.')
-					}
-				},
-				submitHandler: function(form) {
-					var _login_data = _util.serializeJSON($(form));
-					_doLogin(_login_data);
-				}
-			});
+			_loginForm.initialize($('#login-form'));
+			_loginForm.setListener('verify_login', _verifyLogin);
 		})();
 
-		function _doLogin(data) {
-			$('.error-container').empty();
+		function _verifyLogin(data) {
+			_loginForm.clearError();
 			_loginModel.verifyLogin(data.username, data.password).then(
 				function(response) {
 					if (response.success) {
 						window.location = response.redirect_page;
 					} else {
-						$('.error-container').text('Invalid username and password');
+						_loginForm.displayError('Invalid username and password.');
 					}
 				}
 			);
