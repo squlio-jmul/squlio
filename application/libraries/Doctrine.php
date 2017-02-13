@@ -4,6 +4,7 @@ require_once(APPPATH . '/third_party/vendor/autoload.php');
 
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Configuration;
 
 class Doctrine {
 	public $em = null;
@@ -14,8 +15,17 @@ class Doctrine {
 	public function __construct() {
 		require(APPPATH . '/config/database.php');
 
-		$paths = array(APPPATH . '/models/Entities');
-		$isDevMode = false;
+		$cache = new \Doctrine\Common\Cache\ArrayCache;
+
+		$config = new Configuration;
+		$config->setMetadataCacheImpl($cache);
+		$driverImpl = $config->newDefaultAnnotationDriver(APPPATH . '/models/Entities');
+		$config->setMetadataDriverImpl($driverImpl);
+		$config->setQueryCacheImpl($cache);
+		$config->setProxyDir(APPPATH . '/models/proxies');
+		$config->setProxyNamespace('Proxies');
+
+		$config->setAutoGenerateProxyClasses(true);
 
 		// the connection configuration
 		$dbParams = array(
@@ -26,7 +36,6 @@ class Doctrine {
 			'dbname'   => $db['default']['database'],
 		);
 
-		$config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
 		$this->em = EntityManager::create($dbParams, $config);
 	}
 }

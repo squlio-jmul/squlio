@@ -29,8 +29,6 @@ class Login extends SQ_Controller {
 		$password = $this->input->post('password');
 		$login_response = $this->login_library->verifyLogin($username, $password);
 
-		echo "<pre>"; print_r($login_response); die();
-
 		$this->setResponseElement('success', $login_response['success']);
 		if($login_response['success']){
 			$this->setResponseElement('redirect_page', $login_response['redirect_page']);

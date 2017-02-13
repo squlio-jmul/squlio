@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Login extends SQ_Controller {
+class Home extends SQ_Controller {
 
 	public function index()
 	{
@@ -11,13 +11,13 @@ class Login extends SQ_Controller {
 			'headerJs' => array(
 			),
 			'footerJs' => array(),
-			'requireJsDataSource' => 'login',
+			'requireJsDataSource' => false,
 			'jsControllerParam' => false
 		);
 		if (!$this->cookie->get('id')) {
-			$this->page->show('default', 'Squlio - Login', 'login', $data, $data);
+			redirect('/');
 		} else {
-			redirect('/home');
+			$this->page->show('default', 'Squlio - Welcome', 'home', $data, $data);
 		}
 	}
 }
