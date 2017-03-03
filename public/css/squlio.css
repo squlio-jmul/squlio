@@ -13,3 +13,52 @@ label.error {
 	margin: 0px auto;
 	padding: 60px;
 }
+#admin-container{
+	margin-top:60px
+}
+.center-wrapper{
+	display: block;
+	width:100%;
+	max-width:400px;
+	margin: 0 auto;
+	position: relative;
+}
+.panel-body{
+	width: 100%;
+	max-width: 400px;
+	box-shadow: 0 0 5px rgba(0,0,0,0.3);
+	padding: 50px;
+}
+.panel{
+	border:none;
+}
+#admin-form .btn.btn-primary,
+#admin-forget-password .btn.btn-primary {
+	width: 100%;
+}
+.logo{
+	display:block;
+	width: 100%;
+	text-align: center;
+	margin-bottom: 50px;
+}
+.logo-img{
+	width: 250px;
+}
+.forget-password,
+.login-link {
+	width: 100%;
+	text-align: center;
+	display: block;
+	font-size: 14px;
+	color: #999;
+}
+#admin-form,
+#admin-forget-password {
+	display:none;
+}
+#admin-form.form-active,
+#admin-forget-password.form-active{
+	display:block
+}
+
