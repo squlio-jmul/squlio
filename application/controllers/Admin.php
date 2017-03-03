@@ -13,7 +13,20 @@ class Admin extends SQ_Controller{
 		if (!$this->cookie->get('id')){
 			$this->page->show('default', 'Squlio - Admin', 'admin', $data, $data);
 		} else {
-			redirect('/home');
+			redirect('/admin/dashboard');
+		}
+	}
+
+	public function dashboard() {
+		$data = array(
+			'headerCss' => array(),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => false,
+			'jsControllerParam' => false
+		);
+		if ($this->cookie->get('id')){
+			$this->page->show('default', 'Squlio - Dashboard', 'dashboard', $data, $data);
 		}
 	}
 }

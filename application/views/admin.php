@@ -16,6 +16,7 @@
 					<div class="form-group">
 						<button type="submit" class="btn btn-primary">Login</button>
 					</div>
+					<div class="error-container"></div>
 					<a class="forget-password" href="#admin-forget-password">Forget Password </a>
 				</form>
 				<form id="admin-forget-password">
@@ -27,8 +28,7 @@
 						<button type="submit" class="btn btn-primary">RESET PASSWORD</button>
 					</div>
 					<a class="login-link" href="#admin-form">Login</a>
-				</form>
-				<div class="error-container"></div>
+				</form> 
 			</div>
 		</div>
 	</div>

@@ -2,7 +2,7 @@ define([
 	'jquery',
 	'Global/SQ',
 	'SQ/Util',
-	'SQ/Model/Login',
+	'SQ/Model/Admin',
 	'SQ/Screen/Admin/Views/AdminForm',
 	'ThirdParty/q',
 	'ThirdParty/jquery.validate'
@@ -25,9 +25,19 @@ define([
 		(function _init() {
 			_adminForm.initialize($('#admin-container'));
 			_adminForm.setListener('verify_login', _verifyLogin);
-		}) ();
+		})();
 
 		function _verifyLogin(data) {
+			_adminForm.clearError();
+			_adminModel.verifyLogin(data.email, data.password).then(
+				function(response) {
+					if (response.success) {
+						window.location = response.redirect_page;
+					} else {
+						_adminForm.displayError('Ivalid email and password.');
+					}
+				}
+			);
 		}
 	}
 });

@@ -20,22 +20,42 @@ define([
 		SQ.mixin(_me, new Broadcaster(['verify_login']));
 
 		(function _init() {
-		}) ();
+		})();
 
 		this.initialize = function($e) {
 			_$admin_form = $e;
-			_$admin_form.validate({
+			_$admin_form.find('#admin-form').validate({
 				rules: {
 					'email': {
-						required: true
+						required: true,
+						remote: {
+							url: 'ajax/admin/emailExist',
+							type: 'post'
+						}
 					},
 					'password': {
 						required: true
 					}
 				},
+				messages: {
+					'email': {
+						remote: $.validator.format('Unable to find this email.')
+					}
+				},
 				submitHandler: function(form) {
 					var _login_data = _util.serializeJSON($(form));
 					_me.broadcast('verify_login', _login_data);
+				}
+			});
+			_$admin_form.find('#admin-forget-password').validate({
+				rules: {
+					'email': {
+						required: true
+					}
+				},
+				submitHandler: function(form) {
+					var _email = _util.serializeJSON($(form));
+					_me.broadcast('verify_login', _email);
 				}
 			});
 			_$admin_form.find("a.forget-password").click(function(){
@@ -53,7 +73,7 @@ define([
 		};
 
 		this.displayError = function(error_msg) {
-			_$admin_form.find('.error-container').empty();
+			_$admin_form.find('.error-container').text(error_msg);
 		};
 	}
 });

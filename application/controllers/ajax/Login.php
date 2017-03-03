@@ -25,7 +25,7 @@ class Login extends SQ_Controller {
 	}
 
 	public function verifyLogin() {
-		$username = $this->input->post('username');
+		$email = $this->input->post('username');
 		$password = $this->input->post('password');
 		$login_response = $this->login_library->verifyLogin($username, $password);
 
