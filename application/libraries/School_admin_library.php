@@ -42,4 +42,15 @@ class School_admin_library extends SQ_Library {
 			die($err->getMessage());
 		}
 	}
+
+	public function add($school_admin_data){
+		try{
+			if ($school_admin_id = $this->_ci->School_admin_model->add($school_admin_data)) {
+				return $school_admin_id;
+			}
+			return false;
+		} catch(Exception $err) {
+			die($err->getMessage());
+		}
+	}
 }

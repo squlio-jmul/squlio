@@ -73,9 +73,9 @@ class Syllabus extends EntitySuperClass {
 	protected $description;
 
 	/**
-	 * @var \DateTime
+	 * @var string
 	 *
-	 * @Column(name="date", type="datetime", nullable=false)
+	 * @Column(name="date", type="string", nullable=false)
 	 */
 	protected $date;
 
