@@ -18,6 +18,7 @@ class Admin extends SQ_Controller{
 	}
 
 	public function dashboard() {
+		$this->load->model('Admin_model');
 		$data = array(
 			'headerCss' => array(
 				//'/public/css/simple-sidebar.css',
@@ -29,8 +30,18 @@ class Admin extends SQ_Controller{
 			'requireJsDataSource' => 'dashboard',
 			'jsControllerParam' => false
 		);
+		$admin_id = array(
+			'admin' => null
+		);
+		$admin_obj = $this->Admin_model->get();
+		$admin_id['admin'] = $admin_obj;
+		echo "<pre>";
+		$total =  count($admin_id);
+		echo "console.log($total)";
+		echo "</pre>";
+		$pageData = $admin_id;
 		if ($this->cookie->get('id')){
-			$this->page->show('default', 'Squlio - Dashboard', 'dashboard', $data, $data);
+			$this->page->show('default', 'Squlio - Dashboard', 'dashboard', $pageData, $data);
 		}
 	}
 }
