@@ -22,19 +22,19 @@
 			<ul class="list-status">
 				<li class="status">
 					<div class="status-content">
-						<h2>20</h2>
+						<h2><?=$school_amount?></h2>
 						<p>SCHOOLS</p>
 					</div>
 				</li>
 				<li class="status">
 					<div class="status-content">
-						<h2>20</h2>
+						<h2><?=$principal_amount?></h2>
 						<p>PRINCIPLES</p>
 					</div>
 				</li>
 				<li class="status">
 					<div class="status-content">
-						<h2>20</h2>
+						<h2><?=$admin_amount?></h2>
 						<p>ADMINS</p>
 					</div>
 				</li>
