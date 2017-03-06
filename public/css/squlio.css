@@ -61,4 +61,76 @@ label.error {
 #admin-forget-password.form-active{
 	display:block
 }
+.admin-content-wrapper {
+	display: table;
+	width: 100%;
+	background-color: #222;
+}
+.admin-sidebar,
+.admin-content {
+	display: block;
+}
+.admin-sidebar {
+	float: left;
+	background-color: #222;
+	color: #fff;
+	width: 200px;
+	padding: 20px;
+}
+.admin-sidebar a {
+	color: #fff;
+}
+.admin-sidebar h3 {
+	text-transform: uppercase;
+	font-size: 18px;
+	margin-bottom: 30px;
+}
+.admin-sidebar .sidebar-nav {
+	padding: 0;
+	list-style-type: none;
+}
+.sidebar-nav li {
+	margin-bottom: 20px;
+}
+.admin-content {
+	float: right;
+	width: calc(100% - 200px);
+	background-color: #fafafa;
+	position: relative;
+}
+.admin-page-header {
+	padding: 20px;
+	display: table;
+	width: 100%;
+	background-color: #fff;
+	box-shadow: 0 2px 2px rgba(0,0,0,0.2);
+}
+.admin-logout {
+	float: right;
+}
+.admin-page-header h4 {
+	font-size: 16px;
+	text-transform: uppercase;
+	float: left;
+	margin: 0;
+}
+.admin-main-content {
+	background-color: #fafafa;
+	padding: 20px;
 
+}
+.container-fluid {
+	margin: 0;
+	padding: 0;
+}
+.admin-footer {
+	position: absolute;
+	bottom: 0;
+	padding: 20px;
+	background-color: #fafafa;
+	border-top: 1px solid #eaeaea;
+	width: 100%;
+}
+.admin-footer p {
+	margin-bottom: 0;
+}

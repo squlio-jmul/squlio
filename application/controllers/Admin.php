@@ -19,10 +19,14 @@ class Admin extends SQ_Controller{
 
 	public function dashboard() {
 		$data = array(
-			'headerCss' => array(),
+			'headerCss' => array(
+				//'/public/css/simple-sidebar.css',
+				'/public/css/bootstrap.css',
+				'/public/css/bootstrap.min.css'
+				),
 			'headerJs' => array(),
 			'footerJs' => array(),
-			'requireJsDataSource' => false,
+			'requireJsDataSource' => 'dashboard',
 			'jsControllerParam' => false
 		);
 		if ($this->cookie->get('id')){

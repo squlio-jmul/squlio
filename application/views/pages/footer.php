@@ -1,7 +1,5 @@
-	<footer>
-		<div class="container-fluid">
-			<p class="copyright">&copy; <?=date('Y')?> Squlio - All rights reserved.</p>
-		</div>
+	<footer class="admin-footer">
+		<p class="copyright">&copy; <?=date('Y')?> Squlio - All rights reserved.</p>
 	</footer>
 	<? if ($minified_js) : ?>
 		<script src="<?=$js_path?>/third_party/require_optimized.js"></script>
