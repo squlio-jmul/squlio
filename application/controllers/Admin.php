@@ -27,7 +27,6 @@ class Admin extends SQ_Controller{
 	public function dashboard() {
 		$data = array(
 			'headerCss' => array(
-				'/public/css/bootstrap.css',
 				'/public/css/bootstrap.min.css'
 				),
 			'headerJs' => array(),
@@ -65,6 +64,23 @@ class Admin extends SQ_Controller{
 		$pageData = array_merge($admin_amount, $school_amount, $principal_amount);
 		if ($this->cookie->get('id')){
 			$this->page->show('default', 'Squlio - Dashboard', 'dashboard', $pageData, $data);
+		} else {
+			redirect('/admin');
+		}
+	}
+
+	public function settings () {
+		$data = array(
+			'headerCss' => array(),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'settings',
+			'jsControllerParam' => false
+		);
+		if ($this->cookie->get('id')) {
+			$this->page->show('default', 'Squlio - Apps Settings', 'settings', $data, $data);
+		} else {
+			redirect('/admin');
 		}
 	}
 }

@@ -3,13 +3,13 @@
 		<h3>Squlio</h3>
 		<ul class="sidebar-nav">
 			<li>
-				<a href="#">Dashboard</a>
+				<a class="active"  href="#dashboard">Dashboard</a>
 			</li>
 			<li>
 				<a href=#">Schools</a>
 			</li>
 			<li>
-				<a href=#">App Settings</a>
+				<a href="/admin/settings">App Settings</a>
 			</li>
 		</ul>
 	</div>

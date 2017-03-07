@@ -160,5 +160,13 @@ label.error {
 }
 .status-content h2{
 	margin-bottom: 10px;
-	color: #fff 
+	color: #fff
+}
+.admin-sidebar .active {
+	color: #00BFFF;
+}
+.admin-main-content p {
+	float: left;
+	padding: 15px;
+	margin-top: -8px;
 }
