@@ -69,7 +69,7 @@ class Admin extends SQ_Controller{
 		}
 	}
 
-	public function settings () {
+	public function settings() {
 		$data = array(
 			'headerCss' => array(),
 			'headerJs' => array(),
@@ -79,6 +79,21 @@ class Admin extends SQ_Controller{
 		);
 		if ($this->cookie->get('id')) {
 			$this->page->show('default', 'Squlio - Apps Settings', 'settings', $data, $data);
+		} else {
+			redirect('/admin');
+		}
+	}
+
+	public function addType() {
+		$data = array(
+			'headerCss' => array(),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => false,
+			'jqControllerParam' => false
+		);
+		if ($this->cookie->get('id')) {
+			$this->page->show('default', 'Squlio - Add New Type', 'add_type', $data, $data);
 		} else {
 			redirect('/admin');
 		}

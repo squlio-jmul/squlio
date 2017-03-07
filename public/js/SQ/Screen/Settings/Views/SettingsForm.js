@@ -15,7 +15,7 @@ define([
 		var _me = this;
 		var _util = new Util();
 		var _$settings_form = null;
-		var screenwidth =  $(window).height();
+		var screenHeight =  $(window).height();
 
 		//SQ.mixin(_me, new Braodcaster(['data_amount']);
 
@@ -24,9 +24,10 @@ define([
 
 		this.initialize = function($e) {
 			_$settings_form = $e;
-			_$settings_form.find('.admin-content').css('min-height', screenwidth);
+			var contentHeight = screenHeight - 125;
+			_$settings_form.find('.admin-main-content').css('min-height', contentHeight);
 			_$settings_form.find('.btn.btn-primary').click(function(){
-				window.location.replace("dashboard");
+				window.location.replace("addType");
 			});
 		};
 	}

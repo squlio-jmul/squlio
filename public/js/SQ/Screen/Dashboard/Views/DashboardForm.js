@@ -15,7 +15,7 @@ define([
 		var _me = this;
 		var _util = new Util();
 		var _$dashboard_form = null;
-		var screenwidth =  $(window).height();
+		var screenHeight = $(window).height();
 
 		//SQ.mixin(_me, new Braodcaster(['data_amount']);
 
@@ -24,7 +24,8 @@ define([
 
 		this.initialize = function($e) {
 			_$dashboard_form = $e;
-			_$dashboard_form.find('.admin-content').css('min-height', screenwidth);
+			var contentHeight = screenHeight - 125;
+			_$dashboard_form.find('.admin-main-content').css('min-height', contentHeight);
 		};
 	}
 });
