@@ -8,6 +8,12 @@ label.error {
 	font-weight: bold;
 	color: #FF0000;
 }
+#success-container {
+	font-weight: bold;
+	padding: 10px;
+	text-align: center;
+	color: #00FF00;
+}
 #login-container {
 	width: 80%;
 	margin: 0px auto;
@@ -104,6 +110,7 @@ label.error {
 	width: 100%;
 	background-color: #fff;
 	box-shadow: 0 2px 2px rgba(0,0,0,0.2);
+	position: relative;
 }
 .admin-logout {
 	float: right;

@@ -89,7 +89,7 @@ class Admin extends SQ_Controller{
 			'headerCss' => array(),
 			'headerJs' => array(),
 			'footerJs' => array(),
-			'requireJsDataSource' => false,
+			'requireJsDataSource' =>'addAccountType' ,
 			'jqControllerParam' => false
 		);
 		if ($this->cookie->get('id')) {
