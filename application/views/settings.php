@@ -19,7 +19,7 @@
 			<a class="admin-logout" href="/logout">Logout</a>
 		</header>
 		<div class="admin-main-content">
-			<p>Account Type</p>
+			<h4>Account Type</h4>
 			<button type="submit" class="btn btn-primary">+ Add New</button>
 		</div>
 	</div>

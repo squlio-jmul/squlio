@@ -165,7 +165,7 @@ label.error {
 .admin-sidebar .active {
 	color: #00BFFF;
 }
-.admin-main-content p {
+.admin-main-content h4 {
 	float: left;
 	padding: 15px;
 	margin-top: -8px;
