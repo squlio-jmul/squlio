@@ -174,3 +174,48 @@ label.error {
 	padding: 15px;
 	margin-top: -8px;
 }
+.add-type {
+	margin-left: -15px;
+	margin-bottom: 10px;
+	display: table;
+}
+.list-type {
+	margin: -12px;
+	list-style-type: none;
+	padding: 0;
+}
+.list-type::after {
+	content:"";
+	display: table;
+	clear: both;
+}
+.list-type .type {
+	display: block;
+	float: left;
+	width: 50%;
+	padding: 12px;
+}
+.type th {
+	background-color: #fff;
+	padding:  10px;
+	box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.1);
+}
+.type td {
+	padding: 10px;
+	background-color: #eaeaea;
+}
+.type tr {
+	box-shadow: 2px 0 0 rgba)0,0,0,0.2);
+	padding: 10px;
+}
+.type #value {
+	background-color: #fff;
+	text-align: left;
+	width: 10%;
+}
+.type .edit-btn {
+	margin-top: 25px;
+	color: #fff;
+	background-color: #337ab7;
+	border-radius: 5px;
+}

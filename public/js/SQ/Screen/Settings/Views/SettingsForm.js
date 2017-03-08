@@ -29,6 +29,9 @@ define([
 			_$settings_form.find('.btn.btn-primary').click(function(){
 				window.location.replace("addType");
 			});
+			_$settings_form.find('.edit-btn').click(function(){
+				window.location.replace("editType");
+			});
 		};
 	}
 });

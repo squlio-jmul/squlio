@@ -7,6 +7,7 @@ class Admin extends SQ_Controller{
 		$this->load->model('Admin_model');
 		$this->load->model('School_model');
 		$this->load->model('Principal_model');
+		$this->load->model('Account_type_model');
 	}
 
 	public function index() {
@@ -77,8 +78,16 @@ class Admin extends SQ_Controller{
 			'requireJsDataSource' => 'settings',
 			'jsControllerParam' => false
 		);
+
+		$account_type_data = array (
+			'account_type' => null
+		);
+		$account_type_obj = $this->Account_type_model->get();
+		$account_type_data['account_type'] = $account_type_obj;
+		$pageData = $account_type_data;
+
 		if ($this->cookie->get('id')) {
-			$this->page->show('default', 'Squlio - Apps Settings', 'settings', $data, $data);
+			$this->page->show('default', 'Squlio - Apps Settings', 'settings', $pageData, $data);
 		} else {
 			redirect('/admin');
 		}
