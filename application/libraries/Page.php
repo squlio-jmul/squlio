@@ -21,7 +21,8 @@ class Page extends SQ_Library {
 	 * @var array
 	 */
 	static public $_validPageTypes = array(
-		'default'
+		'default',
+		'admin_ui'
 	);
 
 	/**

@@ -64,7 +64,7 @@ class Admin extends SQ_Controller{
 		$principal_amount['principal_amount'] = $principal_value;
 		$pageData = array_merge($admin_amount, $school_amount, $principal_amount);
 		if ($this->cookie->get('id')){
-			$this->page->show('default', 'Squlio - Dashboard', 'dashboard', $pageData, $data);
+			$this->page->show('admin_ui', 'Squlio - Dashboard', 'dashboard', $pageData, $data);
 		} else {
 			redirect('/admin');
 		}
@@ -87,7 +87,7 @@ class Admin extends SQ_Controller{
 		$pageData = $account_type_data;
 
 		if ($this->cookie->get('id')) {
-			$this->page->show('default', 'Squlio - Apps Settings', 'settings', $pageData, $data);
+			$this->page->show('admin_ui', 'Squlio - Apps Settings', 'settings', $pageData, $data);
 		} else {
 			redirect('/admin');
 		}
@@ -102,7 +102,22 @@ class Admin extends SQ_Controller{
 			'jqControllerParam' => false
 		);
 		if ($this->cookie->get('id')) {
-			$this->page->show('default', 'Squlio - Add New Type', 'add_type', $data, $data);
+			$this->page->show('admin_ui', 'Squlio - Add New Type', 'add_type', $data, $data);
+		} else {
+			redirect('/admin');
+		}
+	}
+
+	public function editType() {
+		$data = array(
+			'headerCss' => array(),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'editAccountType',
+			'jsControllerParam' => false
+		);
+		if ($this->cookie->get('id')) {
+			$this->page->show('admin_ui', 'Squlio - Edit Account Type', 'edit_type', $data, $data);
 		} else {
 			redirect('/admin');
 		}
