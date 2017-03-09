@@ -38,4 +38,15 @@ class Account_type_library extends SQ_Library {
 			die($err->getMessage());
 		}
 	}
+
+	public function update($account_type_id, $account_type_data) {
+		try {
+			if ($account_type = $this->_ci->Account_type_model->update($account_type_id, $account_type_data)) {
+				return $account_type;
+			}
+			return false;
+		} catch(Exception $err) {
+			die($err->getMessage());
+		}
+	}
 }

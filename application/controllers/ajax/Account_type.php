@@ -49,11 +49,12 @@ class Account_type extends SQ_Controller {
 	}
 
 	public function update(){
+		$account_type_id = $this->input->post('id');
 		$update_account_type_data = array(
 			'name' => $this->input->post('name'),
 			'display_name' => $this->input->post('display_name'),
 			'num_principal' => $this->input->post('num_principal'),
-			'num_school_admin' => $this->input->post->('num_school_admin'),
+			'num_school_admin' => $this->input->post('num_school_admin'),
 			'num_teacher' => $this->input->post('num_teacher'),
 			'num_classroom' => $this->input->post('num_classroom'),
 			'num_guardian' => $this->input->post('num_guardian'),
@@ -63,9 +64,9 @@ class Account_type extends SQ_Controller {
 			'created_on' => new \DateTime('now'),
 			'last_updated' => new \DateTime('now')
 		);
-		if ($account_type_id = $this->account_type_library->update($update_account_type_data)) {
+		if ($account_type = $this->account_type_library->update($account_type_id, $update_account_type_data)) {
 			$this->setResponseElement('success', true);
-			$this->setResponseElement('account_type_id', $account_type_id);
+			$this->setResponseElement('account_type', $account_type);
 		} else {
 			$this->setResponseElement('success', false);
 		}

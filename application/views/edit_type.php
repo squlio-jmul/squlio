@@ -8,6 +8,9 @@
 			foreach ($account_type as $at) {
 ?>
 		<div class="form-group">
+		<input type="hidden" name="id" class="form-control" placeholder="" value="<?=$at['id']?>"/>
+		</div>
+		<div class="form-group">
 			<label for="name">Name</label>
 			<input type="text" name="name" class="form-control" placeholder="Name" value="<?=$at['name']?>" />
 		</div>

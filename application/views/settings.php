@@ -18,10 +18,6 @@
 					<th colspan="2"><?=$at['display_name']?></th>
 				</tr>
 				<tr>
-					<td>Id</td>
-					<td id=value"><?=$at['id']?></td>
-				</tr>
-				<tr>
 					<td>Principal</td>
 					<td id="value"><?=$at['num_principal']?></td>
 				</tr>

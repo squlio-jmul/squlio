@@ -61,9 +61,10 @@ define(
 				return _deferred.promise;
 			};
 
-			this.editAccountTypeData = function(name, display_name, num_principal, num_school_admin, num_teacher, num_classroom, num_guardian, num_student) {
+			this.editType = function(id, name, display_name, num_principal, num_school_admin, num_teacher, num_classroom, num_guardian, num_student) {
 				var _deferred = Q.defer();
 				var data = {
+					id: id,
 					name: name,
 					display_name: display_name,
 					num_principal: num_principal,
