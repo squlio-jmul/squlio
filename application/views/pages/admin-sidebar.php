@@ -5,7 +5,7 @@
 			<a  href="/admin/dashboard">Dashboard</a>
 		</li>
 		<li>
-			<a href=#">Schools</a>
+			<a href="/admin/school">Schools</a>
 		</li>
 		<li>
 			<a href="/admin/settings">App Settings</a>

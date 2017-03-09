@@ -18,7 +18,7 @@
 		</li>
 		<li class="status">
 			<div class="status-content">
-				<h2><?=$admin_amount?></h2>
+				<h2><?=$school_admin_amount?></h2>
 				<p>ADMINS</p>
 			</div>
 		</li>

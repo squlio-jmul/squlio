@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Admin extends SQ_Controller{
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('Admin_model');
+		$this->load->model('School_admin_model');
 		$this->load->model('School_model');
 		$this->load->model('Principal_model');
 		$this->load->model('Account_type_model');
@@ -35,8 +35,8 @@ class Admin extends SQ_Controller{
 			'requireJsDataSource' => 'dashboard',
 			'jsControllerParam' => false
 		);
-		$admin_id = array(
-			'admin' => null
+		$schoo_admin_id = array(
+			'school_admin' => null
 		);
 		$school_id = array(
 			'school' => null
@@ -44,14 +44,14 @@ class Admin extends SQ_Controller{
 		$principal_id = array(
 			'principal' => null
 		);
-		$admin_obj = $this->Admin_model->get();
-		$admin_id['admin'] = $admin_obj;
+		$school_admin_obj = $this->School_admin_model->get();
+		$school_admin_id['school_admin'] = $school_admin_obj;
 		$school_obj = $this->School_model->get();
 		$school_id['school'] = $school_obj;
 		$principal_obj = $this->Principal_model->get();
 		$principal_id['principal'] = $principal_obj;
-		foreach ($admin_id as $a) {
-			$admin_value = count($a);
+		foreach ($school_admin_id as $a) {
+			$school_admin_value = count($a);
 		}
 		foreach ($school_id as $s) {
 			$school_value = count($s);
@@ -59,10 +59,10 @@ class Admin extends SQ_Controller{
 		foreach ($principal_id as $p) {
 			$principal_value = count($p);
 		}
-		$admin_amount['admin_amount'] = $admin_value;
+		$school_admin_amount['school_admin_amount'] = $school_admin_value;
 		$school_amount['school_amount'] = $school_value;
 		$principal_amount['principal_amount'] = $principal_value;
-		$pageData = array_merge($admin_amount, $school_amount, $principal_amount);
+		$pageData = array_merge($school_admin_amount, $school_amount, $principal_amount);
 		if ($this->cookie->get('id')){
 			$this->page->show('admin_ui', 'Squlio - Dashboard', 'dashboard', $pageData, $data);
 		} else {
@@ -126,6 +126,22 @@ class Admin extends SQ_Controller{
 		$pageData = $account_type_data;
 		if ($this->cookie->get('id')) {
 			$this->page->show('admin_ui', 'Squlio - Edit Account Type', 'edit_type', $pageData, $data);
+		} else {
+			redirect('/admin');
+		}
+	}
+
+	public function school() {
+		$data = array(
+			'headerCss' => array('/public/css/jquery.dataTables.min.css'),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'school',
+			'jsControllerParam' => false
+		);
+
+		if ($this->cookie->get('id')) {
+			$this->page->show('admin_ui', 'Squlio - Schools', 'school', $data, $data);
 		} else {
 			redirect('/admin');
 		}
