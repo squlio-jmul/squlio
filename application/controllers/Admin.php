@@ -146,4 +146,19 @@ class Admin extends SQ_Controller{
 			redirect('/admin');
 		}
 	}
+
+	public function addSchool() {
+		$data = array(
+			'headerCss' => array(),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => false,
+			'jsControllerParam' => false
+		);
+		if ($this->cookie->get('id')) {
+			$this->page->show('admin_ui', 'Squlio - Add School', 'add_school', $data, $data);
+		} else {
+			redirect('admin');
+		}
+	}
 }

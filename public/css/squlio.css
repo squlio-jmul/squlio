@@ -222,3 +222,62 @@ label.error {
 .add-school{
 	margin-left: -18px;
 }
+.school-form{
+	display: table;
+	width: 75%;
+}
+.account-type-option {
+	float: right;
+	margin-top: -470px;
+	width: 25%;
+	padding: 40px;
+	display: block;
+}
+.account-type-option #account_type{
+	display: block;
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+.account-type-option .btn.btn-primary {
+	display: block;
+	width: 100%;
+	padding: 10px;
+}
+.account-type-option p {
+	font-weight: bold;
+}
+.principal-form{
+	display: table;
+	width: 75%;
+	margin-top: 20px;
+}
+.principal-form .principal-header{
+	background-color: #eaeaea;
+	margin-bottom: 20px;
+	display: table;
+	width: 100%;
+	padding: 15px;
+}
+.principal-header .btn.btn-primary{
+	float: right;
+}
+.principal-header p {
+	font-weight: bold;
+	float: left;
+	line-height: 2.5;
+	margin-bottom: 0;
+}
+.principal-form .form-group {
+	width: 85%;
+	float: left;
+	display: table;
+}
+.principal-form .form-control {
+	margin-bottom: 10px;
+	float: right;
+}
+.principal-form .delete-btn{
+	float: right;
+}
+
