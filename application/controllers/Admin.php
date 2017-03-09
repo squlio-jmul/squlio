@@ -116,8 +116,16 @@ class Admin extends SQ_Controller{
 			'requireJsDataSource' => 'editAccountType',
 			'jsControllerParam' => false
 		);
+
+		$get_type_id = $this->input->get('id');
+		$account_type_obj = $this->Account_type_model->get(['id'=>$get_type_id]);
+		$account_type_data = array (
+			'account_type' => null
+		);
+		$account_type_data['account_type'] =  $account_type_obj;
+		$pageData = $account_type_data;
 		if ($this->cookie->get('id')) {
-			$this->page->show('admin_ui', 'Squlio - Edit Account Type', 'edit_type', $data, $data);
+			$this->page->show('admin_ui', 'Squlio - Edit Account Type', 'edit_type', $pageData, $data);
 		} else {
 			redirect('/admin');
 		}

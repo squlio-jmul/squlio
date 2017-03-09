@@ -213,9 +213,8 @@ label.error {
 	text-align: left;
 	width: 10%;
 }
-.type .edit-btn {
-	margin-top: 25px;
-	color: #fff;
-	background-color: #337ab7;
-	border-radius: 5px;
+.type .edit {
+	display: block;
+	margin-top: 15px;
+	font-size: 18px;
 }

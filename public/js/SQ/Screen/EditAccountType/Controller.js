@@ -28,6 +28,15 @@ define([
 		})();
 
 		function _edit_type(data) {
+			_editAccountTypeMode.editAccountTypeData(data.name, data.display_name, data.num_principal, data.num_school_admin, data.num_teacher, data.num_classroom, data.num_guardian, data.num_student).then(
+				function(response) {
+					if (response.success) {
+						_editAccountTypeForm.displaySuccess('Data successfully edited');
+					} else {
+						_editAccountTypeForm.displayError('data cannot be inserted');
+					}
+				}
+			);
 		};
 	}
 });

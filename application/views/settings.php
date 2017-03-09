@@ -12,10 +12,14 @@
 	if (isset($account_type)) {
 		foreach ($account_type as $at) {
 ?>
-		<li class="type">
+	<li class="type" data-id="<?=$at['id']?>">
 			<table class="type-table" style="width:100%;">
 				<tr>
 					<th colspan="2"><?=$at['display_name']?></th>
+				</tr>
+				<tr>
+					<td>Id</td>
+					<td id=value"><?=$at['id']?></td>
 				</tr>
 				<tr>
 					<td>Principal</td>
@@ -42,7 +46,7 @@
 					<td id="value"><?=$at['num_student']?></td>
 				</tr>
 			</table>
-			<button type="submit" class="edit-btn">Edit</button>
+			<a class="edit" href="/admin/editType?id=<?=$at['id']?>">Edit</a>
 		</li>
 <?
 		}
