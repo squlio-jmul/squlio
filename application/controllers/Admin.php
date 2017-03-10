@@ -152,7 +152,7 @@ class Admin extends SQ_Controller{
 			'headerCss' => array(),
 			'headerJs' => array(),
 			'footerJs' => array(),
-			'requireJsDataSource' => false,
+			'requireJsDataSource' => 'addSchool',
 			'jsControllerParam' => false
 		);
 		if ($this->cookie->get('id')) {
