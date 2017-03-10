@@ -17,14 +17,14 @@ define([
 		var _util = new Util();
 		var _$add_school_form = null;
 
-		SQ.mixin(_me, new Broadcaster(['add_school']));
+		SQ.mixin(_me, new Broadcaster(['add_school', 'add_principal']));
 
 		(function _init() {
 		})();
 
 		this.initialize = function($e) {
 			_$add_school_form = $e;
-			_$add_school_form.validate({
+			_$add_school_form.find('#add-school-form').validate({
 				rules: {
 					'school_name': {
 						required: true
@@ -56,6 +56,20 @@ define([
 					var _add_school_form = _util.serializeJSON($(form));
 					var _add_school_data = [_account_type, _add_school_form];
 					_me.broadcast('add_school', _add_school_data);
+				}
+			});
+			_$add_school_form.find('#add-principal-form').validate({
+				rules: {
+					'principal_name': {
+						required: true
+					},
+					'principal_password': {
+						required: true
+					}
+				},
+				submitHandler: function(form) {
+					var _principal_data = _util.serializeJSON($(form));
+					_me.broadcast('add_principal', _principal_data);
 				}
 			});
 		};

@@ -48,35 +48,40 @@
 				<button type="submit" class="btn btn-primary">Save</button>
 		</div>
 	</form>
+	<form id="add-principal-form">
 		<div class="principal-form">
 			<div class="principal-header">
 				<p>School Principal</p>
-				<button type="buttom" class="btn btn-primary">+ Add New</button>
+				<button type="submit" class="btn btn-primary">+ Add New</button>
 			</div>
 			<div class="form-group">
 				<input type="text" name="principal_name" class="form-control" placeholder="Name" value="" style="width:99%;" />
-				<input type="email" name="principal_email" class="form-control" placeholder="Email" value="" style="width:49%;" />
-				<input type="password" name="principal_password" class="form-control" placeholder="password" value="" style="width:49%;" />
+			</div>
+			<div class="form-group">
+				<input type="email" name="principal_email" class="form-control form-email" placeholder="Email" value="" style="width:49%;" />
+				<input type="password" name="principal_password" class="form-control form-password" placeholder="password" value="" style="width:49%;" />
 			</div>
 			<div class="delete">
 				<button type="reset" class="delete-btn"></button>
 			</div>
 			<div id="success-container"></div>
 		</div>
-		<div class="school-avatar">
-			<div class="school-avatar-header">
-				<p>School Avatar</p>
-			</div>
-			<div class="school-avatar-content">
-				<div class="school-avatar-photo">
-					<div class="upload-btn">
-						<span class="btn btn-default btn-file ">
-							Upload <input type="file" hidden />
-						</span>
-					</div>
+	</form>
+	<div class="school-avatar">
+		<div class="school-avatar-header">
+			<p>School Avatar</p>
+		</div>
+		<div class="school-avatar-content">
+			<div class="school-avatar-photo">
+				<div class="upload-btn">
+					<span class="btn btn-default btn-file ">
+						Upload <input type="file" hidden />
+					</span>
 				</div>
 			</div>
 		</div>
+	</div>
+	<form id="add-school-admin-form">
 		<div class="school-admin-form">
 			<div class="school-admin-header">
 				<p>School Admin</p>
@@ -84,7 +89,11 @@
 			</div>
 			<div class="form-group">
 				<input type="text" name="school_admin_name" class="form-control" placeholder="Name" value="" style="width:99%;" />
+			</div>
+			<div class="form-group">
 				<input type="email" name="school_admin_email" class="form-control" placeholder="Email" value="" style="width:49%;" />
+			</div>
+			<div class="form-group">
 				<input type="password" name="school_admin_password" class="form-control" placeholder="password" value="" style="width:49%;" />
 			</div>
 			<div class="delete">
@@ -92,4 +101,5 @@
 			</div>
 			<div id="success-container"></div>
 		</div>
+	</form>
 </div>

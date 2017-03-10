@@ -25,11 +25,11 @@ class School extends SQ_Controller {
 	}
 
 	public function add(){
-	/*	$get_account_type_value = array(
+		$get_account_type_value = array(
 			'account_type' => $this->input->post('account_type_id')
-		);*/
+		);
 		$add_school_data = array(
-			'account_type_id' => 1,
+			'account_type_id' => $get_account_type_value,
 			'name' => $this->input->post('school_name'),
 			'address_1' => $this->input->post('address_1'),
 			'address_2' => '',
