@@ -24,7 +24,7 @@ define([
 
 		this.initialize = function($e) {
 			_$add_school_form = $e;
-			_$add_school_form.find('#add-school-form').validate({
+			_$add_school_form.validate({
 				rules: {
 					'school_name': {
 						required: true
@@ -51,13 +51,15 @@ define([
 						email: $.validator.format('Your email must be in correct format')
 					}
 				},
-				submitHanlder: function(form) {
-					var _add_school_data = _util.serializeJSON($(form));
+				submitHandler: function(form) {
+					var _account_type = _$add_school_form.find('#account_type').val();
+					var _add_school_form = _util.serializeJSON($(form));
+					var _add_school_data = [_account_type, _add_school_form];
 					_me.broadcast('add_school', _add_school_data);
 				}
 			});
 		};
-		this.displaySuccess = function(error_msg) {
+		this.displaySuccess = function(success_msg) {
 			_$add_school_form.find('input[type="text"],textarea').val('');
 			_$add_school_form.find('#success-container').html(success_msg);
 		};

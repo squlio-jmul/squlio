@@ -3,7 +3,7 @@
 	<a class="admin-logout" href="/logout">Logout</a>
 </header>
 <div class="admin-main-content">
-	<form id ="add-school-form">
+	<form id="add-school-form">
 		<div class="school-form">
 			<div class="form-group">
 				<label for="name">School Name</label>
@@ -35,14 +35,23 @@
 			<p>Account Type</p>
 			<select id="account_type">
 				<option  value="">  Select One  </option>
+			<?
+				if (isset($account_type)) {
+					foreach ($account_type as $at) {
+			?>
+						<option value="<?=$at['id']?>"><?=$at['display_name']?></option>
+			<?
+					}
+				}
+			?>
 			</select>
-			<button type="submit" class="btn btn-primary">Save</button>
+				<button type="submit" class="btn btn-primary">Save</button>
 		</div>
 	</form>
 		<div class="principal-form">
 			<div class="principal-header">
 				<p>School Principal</p>
-				<button type="submit" class="btn btn-primary">+ Add New</button>
+				<button type="buttom" class="btn btn-primary">+ Add New</button>
 			</div>
 			<div class="form-group">
 				<input type="text" name="principal_name" class="form-control" placeholder="Name" value="" style="width:99%;" />
@@ -71,7 +80,7 @@
 		<div class="school-admin-form">
 			<div class="school-admin-header">
 				<p>School Admin</p>
-				<button type="submit" class="btn btn-primary">+Add New</button>
+				<button type="button" class="btn btn-primary">+Add New</button>
 			</div>
 			<div class="form-group">
 				<input type="text" name="school_admin_name" class="form-control" placeholder="Name" value="" style="width:99%;" />

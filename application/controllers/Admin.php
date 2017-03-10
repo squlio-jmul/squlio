@@ -155,8 +155,14 @@ class Admin extends SQ_Controller{
 			'requireJsDataSource' => 'addSchool',
 			'jsControllerParam' => false
 		);
+		$account_type = array(
+			'account_type' => null
+		);
+		$account_type_obj = $this->Account_type_model->get();
+		$account_type['account_type'] = $account_type_obj;
+		$pageData = $account_type;
 		if ($this->cookie->get('id')) {
-			$this->page->show('admin_ui', 'Squlio - Add School', 'add_school', $data, $data);
+			$this->page->show('admin_ui', 'Squlio - Add School', 'add_school', $pageData, $data);
 		} else {
 			redirect('admin');
 		}
