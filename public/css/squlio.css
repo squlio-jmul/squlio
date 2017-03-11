@@ -14,6 +14,11 @@ label.error {
 	text-align: center;
 	color: #00FF00;
 }
+#success-container-principal {
+	font-weight: bold;
+	padding: 10px;
+	color: #00FF00;
+}
 #login-container {
 	width: 80%;
 	margin: 0px auto;
@@ -271,27 +276,13 @@ label.error {
 .principal-form .form-group {
 	width: 90%;
 	float: left;
-	display: table;
-}
-.principal-form .form-group .form-email{
-	width: 36%;
-	float: left;
-}
-.principal-form .form-group .form-password {
-	width: 36%;
-	float: right;
-}
-.principal-form .form-control {
-	margin-bottom: 10px;
-	float: left;
-	margin-left: 7px;
 }
 .principal-form .delete-btn{
 	float: right;
 	width: 40px;
 	height: 40px;
 	background-image: url(/public/img/icon-delete.png);
-	margin-top: -60px;
+	margin-top: -195px;
 }
 .principal-form #success-container {
 	float: left;

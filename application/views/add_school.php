@@ -55,17 +55,40 @@
 				<button type="submit" class="btn btn-primary">+ Add New</button>
 			</div>
 			<div class="form-group">
-				<input type="text" name="principal_name" class="form-control" placeholder="Name" value="" style="width:99%;" />
+				<label for="school"> Select a School </label>
+				<select id="school">
+					<option value=""> Select One </option>
+			<?
+				if (isset($school)) {
+					foreach ($school as $s) {
+			?>
+						<option value="<?=$s['id']?>"><?=$s['name']?></option>
+			<?
+					}
+				}
+			?>
+				</select>
 			</div>
 			<div class="form-group">
-				<input type="email" name="principal_email" class="form-control form-email" placeholder="Email" value="" style="width:49%;" />
-				<input type="password" name="principal_password" class="form-control form-password" placeholder="password" value="" style="width:49%;" />
+				<input type="text" name="username" class="form-control" placeholder="Username" value="" style="width:99%;" />
+			</div>
+			<div class="form-group">
+				<input type="email" name="email" class="form-control" placeholder="Email" value="" style="width:99%;" />
+			</div>
+			<div class="form-group">
+				<input type="password" name="password" class="form-control" placeholder="password" value="" style="width:99%;" />
+			</div>
+			<div class="form-group">
+				<input type="text" name="first_name" class="form-control" placeholder="First Name" value="" style="width:99%;" />
+			</div>
+			<div class="form-group">
+				<input type="text" name="last_name" class="form-control" placeholder="Last Name" value="" style="width:99%;" />
 			</div>
 			<div class="delete">
 				<button type="reset" class="delete-btn"></button>
 			</div>
-			<div id="success-container"></div>
 		</div>
+		<div id="success-container-principal"></div>
 	</form>
 	<div class="school-avatar">
 		<div class="school-avatar-header">
@@ -99,7 +122,7 @@
 			<div class="delete">
 				<button type="reset" class="delete-btn"></button>
 			</div>
-			<div id="success-container"></div>
+			<div id="success-container">Data Successfully Inserted</div>
 		</div>
 	</form>
 </div>

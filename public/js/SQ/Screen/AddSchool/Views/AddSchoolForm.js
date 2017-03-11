@@ -46,11 +46,6 @@ define([
 						required: true
 					}
 				},
-				messages: {
-					'school_email': {
-						email: $.validator.format('Your email must be in correct format')
-					}
-				},
 				submitHandler: function(form) {
 					var _account_type = _$add_school_form.find('#account_type').val();
 					var _add_school_form = _util.serializeJSON($(form));
@@ -60,22 +55,40 @@ define([
 			});
 			_$add_school_form.find('#add-principal-form').validate({
 				rules: {
-					'principal_name': {
+					'username': {
 						required: true
 					},
-					'principal_password': {
+					'email': {
+						required: true,
+						email: true
+					},
+					'password': {
+						required: true
+					},
+					'first_name': {
+						required: true
+					},
+					'last_name': {
 						required: true
 					}
 				},
 				submitHandler: function(form) {
-					var _principal_data = _util.serializeJSON($(form));
+					var _school = _$add_school_form.find('#school').val();
+					var _principal_data_form = _util.serializeJSON($(form));
+					var _principal_data = [_school, _principal_data_form];
 					_me.broadcast('add_principal', _principal_data);
 				}
 			});
 		};
+
 		this.displaySuccess = function(success_msg) {
 			_$add_school_form.find('input[type="text"],textarea').val('');
 			_$add_school_form.find('#success-container').html(success_msg);
+		};
+
+		this.displaySuccessPrincipal = function(success_msg) {
+			_$add_school_form.find('input[type="text"],textarea').val('');
+			_$add_school_form.find('#success-container-principal').html(success_msg);
 		};
 	}
 });
