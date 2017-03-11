@@ -369,18 +369,13 @@ label.error {
 .school-admin-form .form-group {
 	width: 90%;
 	float: left;
-	display: table;
-}
-.school-admin-form .form-control {
-	margin-bottom: 10px;
-	float: left;
-	margin-left: 7px;
 }
 .school-admin-form .delete-btn {
 	float: right;
 	width: 40px;
 	height: 40px;
 	background-image: url(/public/img/icon-delete.png);
+	margin-top: -195px;
 }
 .school-admin-form #success-container {
 	float: left;

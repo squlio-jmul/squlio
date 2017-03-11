@@ -79,6 +79,32 @@ define([
 					_me.broadcast('add_principal', _principal_data);
 				}
 			});
+			_$add_school_form.find('#add-school-admin-form').validate({
+				rules: {
+					'username': {
+						required: true
+					},
+					'email': {
+						required: true,
+						email: true
+					},
+					'password': {
+						required: true
+					},
+					'first_name': {
+						required: true
+					},
+					'last_name': {
+						required: true
+					}
+				},
+				submitHandler: function(form) {
+					var _school = _$add_school_form.find('#school').val();
+					var _school_admin_data_form = _util.serializeJSON($(form));
+					var _school_admin_data = [_school, _school_admin_data_form];
+					_me.broadcast('add_school_admin', _school_admin_data);
+				}
+			});
 		};
 
 		this.displaySuccess = function(success_msg) {

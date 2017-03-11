@@ -108,21 +108,41 @@
 		<div class="school-admin-form">
 			<div class="school-admin-header">
 				<p>School Admin</p>
-				<button type="button" class="btn btn-primary">+Add New</button>
+				<button type="submit" class="btn btn-primary">+Add New</button>
 			</div>
 			<div class="form-group">
-				<input type="text" name="school_admin_name" class="form-control" placeholder="Name" value="" style="width:99%;" />
+				<select id="school">
+					<option value="">Select One</option>
+			<?
+				if (isset($school)){
+					foreach($school as $s) {
+			?>
+						<option value="<?=$s['id']?>"><?=$s['name']?></option>
+			<?
+					}
+				}
+			?>
+				</select>
 			</div>
 			<div class="form-group">
-				<input type="email" name="school_admin_email" class="form-control" placeholder="Email" value="" style="width:49%;" />
+				<input type="text" name="username" class="form-control" placeholder="Name" value="" style="width:99%;" />
 			</div>
 			<div class="form-group">
-				<input type="password" name="school_admin_password" class="form-control" placeholder="password" value="" style="width:49%;" />
+				<input type="email" name="email" class="form-control" placeholder="Email" value="" style="width:99%;" />
+			</div>
+			<div class="form-group">
+				<input type="password" name="password" class="form-control" placeholder="Password" value="" style="width:99%;" />
+			</div>
+			<div class="form-group">
+				<input type="text" name="first_name" class="form-control" placeholder="First Name" value="" style="width:99%;" />
+			</div>
+			<div class="form-group">
+				<input type="text" name="last_name" class="form-control" placeholder="Last Name" value="" style="width:99%;"/>
 			</div>
 			<div class="delete">
 				<button type="reset" class="delete-btn"></button>
 			</div>
-			<div id="success-container">Data Successfully Inserted</div>
+			<div id="success-container-school-admin"></div>
 		</div>
 	</form>
 </div>
