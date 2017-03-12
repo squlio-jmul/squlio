@@ -111,7 +111,7 @@
 				<button type="submit" class="btn btn-primary">+Add New</button>
 			</div>
 			<div class="form-group">
-				<select id="school">
+				<select id="school-id">
 					<option value="">Select One</option>
 			<?
 				if (isset($school)){
@@ -125,7 +125,7 @@
 				</select>
 			</div>
 			<div class="form-group">
-				<input type="text" name="username" class="form-control" placeholder="Name" value="" style="width:99%;" />
+				<input type="text" name="username" class="form-control" placeholder="Username" value="" style="width:99%;" />
 			</div>
 			<div class="form-group">
 				<input type="email" name="email" class="form-control" placeholder="Email" value="" style="width:99%;" />
@@ -142,7 +142,7 @@
 			<div class="delete">
 				<button type="reset" class="delete-btn"></button>
 			</div>
-			<div id="success-container-school-admin"></div>
 		</div>
+			<div id="success-container-school-admin"></div>
 	</form>
 </div>

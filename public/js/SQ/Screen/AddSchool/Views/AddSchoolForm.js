@@ -17,7 +17,7 @@ define([
 		var _util = new Util();
 		var _$add_school_form = null;
 
-		SQ.mixin(_me, new Broadcaster(['add_school', 'add_principal']));
+		SQ.mixin(_me, new Broadcaster(['add_school', 'add_principal', 'add_school_admin']));
 
 		(function _init() {
 		})();
@@ -99,7 +99,7 @@ define([
 					}
 				},
 				submitHandler: function(form) {
-					var _school = _$add_school_form.find('#school').val();
+					var _school = _$add_school_form.find('#school-id').val();
 					var _school_admin_data_form = _util.serializeJSON($(form));
 					var _school_admin_data = [_school, _school_admin_data_form];
 					_me.broadcast('add_school_admin', _school_admin_data);
@@ -115,6 +115,11 @@ define([
 		this.displaySuccessPrincipal = function(success_msg) {
 			_$add_school_form.find('input[type="text"],textarea').val('');
 			_$add_school_form.find('#success-container-principal').html(success_msg);
+		};
+
+		this.displaySuccessSchoolAdmin = function(success_msg) {
+			_$add_school_form.find('input[type="text"],textarea').val('');
+			_$add_school_form.find('#success-container-school-admin').html(success_msg);
 		};
 	}
 });

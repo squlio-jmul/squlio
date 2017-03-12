@@ -14,7 +14,8 @@ label.error {
 	text-align: center;
 	color: #00FF00;
 }
-#success-container-principal {
+#success-container-principal,
+#success-container-school-admin {
 	font-weight: bold;
 	padding: 10px;
 	color: #00FF00;
