@@ -140,8 +140,18 @@ class Admin extends SQ_Controller{
 			'jsControllerParam' => false
 		);
 
+		$school_id = array(
+			'school' => null
+		);
+		$school_obj = $this->School_model->get();
+		$school_id['school'] = $school_obj;
+		foreach ($school_id as $sid) {
+			$school_value = count($sid);
+		}
+		$school_amount['school_amount'] = $school_value;
+		$pageData = $school_amount;
 		if ($this->cookie->get('id')) {
-			$this->page->show('admin_ui', 'Squlio - Schools', 'school', $data, $data);
+			$this->page->show('admin_ui', 'Squlio - Schools', 'school', $pageData, $data);
 		} else {
 			redirect('/admin');
 		}

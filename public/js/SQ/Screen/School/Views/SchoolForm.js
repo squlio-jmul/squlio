@@ -2,7 +2,8 @@ define([
 	'jquery',
 	'Global/SQ',
 	'SQ/Broadcaster',
-	'SQ/Util'
+	'SQ/Util',
+	'ThirdParty/jquery.dataTables.min'
 ], function(
 	$,
 	SQ,
@@ -16,6 +17,7 @@ define([
 		var _util = new Util();
 		var _$school_form = null;
 		var screenHeight = $(window).height();
+		var table = null;
 
 		(function _init() {
 		})();
@@ -27,6 +29,18 @@ define([
 			_$school_form.find('.btn.btn-primary').click(function(){
 				window.location.replace("addSchool");
 			});
+			/*_$school_form.find('#table').DataTable({
+				'data': school_data,
+				columnds: [
+					{ title: "ID"},
+					{ title: "Name"},
+					{ title: "Principle"},
+					{ title: "Admins"},
+					{ title: "Students"},
+					{ title: "Classroom"},
+					{ title: "Status"}
+				]
+			});*/
 		};
 	}
 });

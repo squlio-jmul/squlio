@@ -56,4 +56,7 @@ class School extends SQ_Controller {
 		}
 		$this->sendResponse();
 	}
+
+	public function displayTable() {
+	}
 }

@@ -60,6 +60,21 @@ define(
 				});
 				return _deferred.promise;
 			};
+
+			this.getSchoolData = function() {
+				var _deferred = Q.defer();
+				$.ajax({
+					url: '/ajax/school/displayTable',
+					dataType: 'json',
+					success: function(response) {
+						_deferred.resolve(response);
+					},
+					error: function(response, textStatus, jqXHR) {
+						_deferred.reject(response);
+					}
+				});
+				return _deferred.promise;
+			};
 		}
 	}
 );
