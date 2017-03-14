@@ -159,7 +159,7 @@ class Admin extends SQ_Controller{
 
 	public function addSchool() {
 		$data = array(
-			'headerCss' => array(),
+			'headerCss' => array('/public/css/jquery-ui.css'),
 			'headerJs' => array(),
 			'footerJs' => array(),
 			'requireJsDataSource' => 'addSchool',
@@ -168,14 +168,9 @@ class Admin extends SQ_Controller{
 		$account_type = array(
 			'account_type' => null
 		);
-		$school = array(
-			'school' => null
-		);
 		$account_type_obj = $this->Account_type_model->get();
 		$account_type['account_type'] = $account_type_obj;
-		$school_obj = $this->School_model->get();
-		$school['school'] = $school_obj;
-		$pageData = array_merge($account_type, $school);
+		$pageData = $account_type;
 		if ($this->cookie->get('id')) {
 			$this->page->show('admin_ui', 'Squlio - Add School', 'add_school', $pageData, $data);
 		} else {

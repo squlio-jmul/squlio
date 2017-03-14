@@ -7,7 +7,8 @@ define([
 	'SQ/Model/School_admin',
 	'SQ/Screen/AddSchool/Views/AddSchoolForm',
 	'ThirdParty/q',
-	'ThirdParty/jquery.validate'
+	'ThirdParty/jquery.validate',
+	'ThirdParty/jquery-ui'
 ], function(
 	$,
 	SQ,
@@ -31,47 +32,33 @@ define([
 		(function _init(){
 			_addSchoolForm.initialize($('.admin-main-content'));
 			_addSchoolForm.setListener('add_school', _add_school);
-			_addSchoolForm.setListener('add_principal', _add_principal);
-			_addSchoolForm.setListener('add_school_admin', _add_school_admin);
 		})();
 
 		function _add_school(data) {
 			var account_type_id = data[0];
 			var form = data[1];
+			var principal = data[2];
+			var school_admin = data[3];
+			console.log(account_type_id);
+			console.log(form);
+			console.log(principal);
 			_schoolModel.addSchool(account_type_id, form.school_name, form.school_email, form.phone_1, form.address_1, form.zipcode, form.city).then(
 				function(response) {
-					if (response.success) {
-						_addSchoolForm.displaySuccess('Data successfully inserted');
+					if (response.school_id) {
+						var school_id = response.school_id;
+						console.log(school_id);
+						Q.all([_principalModel.addPrincipal(school_id, principal.username, principal.email, principal.password, principal.first_name,
+							principal.last_name), _schoolAdminModel.addSchoolAdmin(school_id, school_admin.username, school_admin.email, school_admin.password, 
+							school_admin.first_name, school_admin.last_name)]).done (
+								function(response) {
+									console.log('success');
+									_addSchoolForm.displaySuccess('Data successfully inserted');
+								}
+							);
 					} else {
 					}
 				}
 			);
-		};
-
-		function _add_principal(data) {
-			var school_id  = data[0];
-			var form = data[1];
-			_principalModel.addPrincipal(school_id, form.username, form.email, form.password, form.first_name, form.last_name).then(
-				function(response) {
-					if (response.success) {
-						_addSchoolForm.displaySuccessPrincipal('Data successfully inserted');
-					} else {
-					}
-				}
-			);
-		};
-
-		function _add_school_admin(data) {
-			var school_id = data[0];
-			var form = data[1];
-			_schoolAdminModel.addSchoolAdmin(school_id, form.username, form.email, form.password, form.first_name, form.last_name).then(
-				function(response) {
-					if (response.success) {
-						_addSchoolForm.displaySuccessSchoolAdmin('Data successfully inserted');
-					} else {
-					}
-				}
-			);
-		};
+		}
 	}
 });

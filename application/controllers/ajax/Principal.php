@@ -27,9 +27,6 @@ class Principal extends SQ_Controller {
 	}
 
 	public function add() {
-		$school_id = array (
-			'school' => $this->input->post('school_id')
-		);
 		$add_login_data = array (
 			'email' => $this->input->post('email'),
 			'username' => $this->input->post('username'),
@@ -45,7 +42,7 @@ class Principal extends SQ_Controller {
 		if ($login_id = $this->login_library->add($add_login_data)) {
 			$add_principal_data = array(
 				'login_id' => $login_id,
-				'school_id' => $school_id,
+				'school_id' => $this->input->post('school_id'),
 				'first_name' => $this->input->post('first_name'),
 				'last_name' => $this->input->post('last_name'),
 				'created_on' => new \DateTime('now'),

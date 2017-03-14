@@ -5,6 +5,8 @@ class School extends SQ_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->library('School_library');
+		$this->load->library('Login_library');
+		$this->load->library('Principal_library');
 	}
 
 	public function get() {
@@ -24,7 +26,7 @@ class School extends SQ_Controller {
 		$this->sendResponse();
 	}
 
-	public function add(){
+	public function addSchool(){
 		$get_account_type_value = array(
 			'account_type' => $this->input->post('account_type_id')
 		);
@@ -48,15 +50,13 @@ class School extends SQ_Controller {
 			'created_on' => new \DateTime('now'),
 			'last_updated' => new \DateTime('now')
 		);
-		if ($school_id = $this->school_library->add($add_school_data)) {
+		if ($school_id = $this->school_library->add($add_school_data)){
 			$this->setResponseElement('success', true);
 			$this->setResponseElement('school_id', $school_id);
 		} else {
 			$this->setResponseElement('success', false);
-		}
+		};
+		//var_dump($school_id);
 		$this->sendResponse();
-	}
-
-	public function displayTable() {
 	}
 }

@@ -47,7 +47,7 @@ define(
 					city: city
 				};
 				$.ajax({
-					url: '/ajax/school/add',
+					url: '/ajax/school/addSchool',
 					type: 'post',
 					dataType: 'json',
 					data: data,
