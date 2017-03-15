@@ -265,8 +265,10 @@ label.error {
 	width: 100%;
 	padding: 15px;
 }
-.principal-header .btn.btn-primary{
+.principal-header .add-principal{
+	background-color: #337ab7;
 	float: right;
+	color: #fff;
 }
 .principal-header p {
 	font-weight: bold;
@@ -357,8 +359,10 @@ label.error {
 	width: 100%;
 	padding: 15px;
 }
-.school-admin-header .btn.btn-primary{
+.school-admin-header .add-school-admin{
 	float: right;
+	background-color: #337ab7;
+	color: #fff;
 
 }
 .school-admin-header p {

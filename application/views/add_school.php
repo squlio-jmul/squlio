@@ -51,53 +51,55 @@
 		<div class="principal-form">
 			<div class="principal-header">
 				<p>School Principal</p>
-				<!-- <button type="submit" class="btn btn-primary">+ Add New</button> -->
+				 <button type="button" class="add-principal">+ Add New</button>
 		    </div>
 			<div class="form-group">
-				<input type="text" id="username"  name="username" class="form-control" placeholder="Username" value="" style="width:99%;" />
+				<input type="text" id="username"  name="username" class="form-control" placeholder="Username" value="" style="width:99%;" required/>
 			</div>
 			<div class="form-group">
-				<input type="email" id="email" name="_email" class="form-control" placeholder="Email" value="" style="width:99%;" />
+				<input type="email" id="email" name="email" class="form-control" placeholder="Email" value="" style="width:99%;" required/>
 			</div>
 			<div class="form-group">
-				<input type="password" id="password" name="_password" class="form-control" placeholder="password" value="" style="width:99%;" />
+				<input type="password" id="password" name="password" class="form-control" placeholder="password" value="" style="width:99%;" required/>
 			</div>
 			<div class="form-group">
-				<input type="text" id="first_name" name="first_name" class="form-control" placeholder="First Name" value="" style="width:99%;" />
+				<input type="text" id="first_name" name="first_name" class="form-control" placeholder="First Name" value="" style="width:99%;" required/>
 			</div>
 			<div class="form-group">
-				<input type="text" id="last_name" name="last_name" class="form-control" placeholder="Last Name" value="" style="width:99%;" />
+				<input type="text" id="last_name" name="last_name" class="form-control" placeholder="Last Name" value="" style="width:99%;" required/>
 			</div>
 			<div class="delete">
 				<button type="reset" class="delete-btn"></button>
 			</div>
 		</div>
+		<div id="success-container-principal"></div>
 	</form>
 	<form id="add-school-admin-form">
 		<div class="school-admin-form">
 			<div class="school-admin-header">
 				<p>School Admin</p>
-				<!--<button type="submit" class="btn btn-primary">+Add New</button>-->
+				<button type="button" class="add-school-admin">+Add New</button>
 			</div>
 			<div class="form-group">
-				<input type="text" id="school_admin_username" name="username" class="form-control" placeholder="Username" value="" style="width:99%;" />
+				<input type="text" id="school_admin_username" name="username" class="form-control" placeholder="Username" value="" style="width:99%;" required />
 			</div>
 			<div class="form-group">
-				<input type="email" id="school_admin_email" name="email" class="form-control" placeholder="Email" value="" style="width:99%;" />
+				<input type="email" id="school_admin_email" name="email" class="form-control" placeholder="Email" value="" style="width:99%;" required/>
 			</div>
 			<div class="form-group">
-				<input type="password" id="school_admin_password" name="password" class="form-control" placeholder="Password" value="" style="width:99%;" />
+				<input type="password" id="school_admin_password" name="password" class="form-control" placeholder="Password" value="" style="width:99%;" required/>
 			</div>
 			<div class="form-group">
-				<input type="text" id="school_admin_first_name" name="first_name" class="form-control" placeholder="First Name" value="" style="width:99%;" />
+				<input type="text" id="school_admin_first_name" name="first_name" class="form-control" placeholder="First Name" value="" style="width:99%;" required/>
 			</div>
 			<div class="form-group">
-				<input type="text" id="school_admin_last_name" name=last_name" class="form-control" placeholder="Last Name" value="" style="width:99%;"/>
+				<input type="text" id="school_admin_last_name" name="last_name" class="form-control" placeholder="Last Name" value="" style="width:99%;" required/>
 			</div>
 			<div class="delete">
 				<button type="reset" class="delete-btn"></button>
 			</div>
 		</div>
+		<div id="success-container-school-admin"></div>
 	 </form>
     <div class="school-avatar">
         <div class="school-avatar-header">
@@ -114,4 +116,5 @@
 		</div>
 	</div>
 	<div id="success-container"></div>
+	<div class="error-container"></div>
 </div>

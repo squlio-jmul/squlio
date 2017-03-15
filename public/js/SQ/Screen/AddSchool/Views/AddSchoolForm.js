@@ -18,7 +18,7 @@ define([
 		var _util = new Util();
 		var _$add_school_form = null;
 
-		SQ.mixin(_me, new Broadcaster(['add_school']));
+		SQ.mixin(_me, new Broadcaster(['add_school', 'add_principal', 'add_school_admin']));
 
 		(function _init() {
 		})();
@@ -68,10 +68,42 @@ define([
 					_me.broadcast('add_school', _add_all_data);
 				}
 			});
+
+			_$add_school_form.find('.add-principal').on('click', function() {
+				_$add_school_form.find('#add-principal-form').valid();
+				var _principal_data = _util.serializeJSON($('#add-principal-form'));
+				console.log(_principal_data);
+				_me.broadcast('add_principal', _principal_data);
+				_$add_school_form.find('input[type="text"],textarea').val('');
+				_$add_school_form.find('input[type="email"],textarea').val('');
+				_$add_school_form.find('input[type="password"],textarea').val('');
+			});
+
+			_$add_school_form.find('.add-school-admin').on('click', function() {
+				_$add_school_form.find('#add-school-admin-form').valid();
+				var _school_admin_data = _util.serializeJSON($('#add-school-admin-form'));
+				console.log(_school_admin_data);
+				_me.broadcast('add_school_admin', _school_admin_data);
+				_$add_school_form.find('input[type="text"],textarea').val('');
+				_$add_school_form.find('input[type="email"],textarea').val('');
+				_$add_school_form.find('input[type="password"],textarea').val('');
+			});
 		};
 
 		this.displaySuccess = function(success_msg) {
 			_$add_school_form.find('#success-container').html(success_msg);
+		};
+
+		this.displaySuccessPrincipal = function(success_msg) {
+			_$add_school_form.find('#success-container-principal').html(success_msg);
+		};
+
+		this.displaySuccessSchoolAdmin = function(success_msg) {
+			_$add_school_form.find('#success-container-school-admin').html(success_msg);
+		};
+
+		this.displayError = function(error_msg) {
+			_$add_school_form.find('.error-container').text(error_msg);
 		};
 	}
 });
