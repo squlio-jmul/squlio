@@ -59,4 +59,12 @@ class Principal extends SQ_Controller {
 		}
 		$this->sendResponse();
 	}
+
+	public function addBulk() {
+		$school_id = $this->input->post('school_id');
+		$principals = $this->input->post('principals');
+		$success = $this->principal_library->addBulk($school_id, $principals);
+		$this->setResponseElement('success', $success);
+		$this->sendResponse();
+	}
 }

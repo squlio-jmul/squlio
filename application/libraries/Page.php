@@ -145,6 +145,7 @@ class Page extends SQ_Library {
 		if($this->minifiedCss){
 			//$data['headerCss'][] = $this->cssPath . '/third_party/bootstrap.css';
 		}else{
+			$data['headerCss'][] = $this->cssPath . '/jquery.jgrowl.min.css';
 			$data['headerCss'][] = $this->cssPath . '/bootstrap.css';
 			$data['headerCss'][] = $this->cssPath . '/squlio.css';
 		}

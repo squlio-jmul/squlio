@@ -14,6 +14,7 @@ class Principal_library extends SQ_Library {
 	{
 		parent::__construct();
 		$this->_ci->load->model('Principal_model');
+		$this->_ci->load->model('Login_model');
 	}
 
 	public function get($filters = array(), $fields = array(), $order_by = array(), $limit = null, $offset = null, $modules = array()) {
@@ -40,5 +41,41 @@ class Principal_library extends SQ_Library {
 		} catch(Exception $err) {
 			die($err->getMessage());
 		}
+	}
+
+	public function addBulk($school_id, $principals) {
+		$success = true;
+		foreach($principals as $p) {
+			$login_data = array(
+				'email' => $p['email'],
+				'username' => $p['username'],
+				'password' => $p['password'],
+				'type' => 'principal',
+				'token' => md5(strtotime('now')),
+				'active' => 1,
+				'deleted' => 0,
+				'reset_password' => 0,
+				'last_login' => null,
+				'created_on' => new \DateTime('now'),
+				'last_updated' => new \DateTime('now')
+			);
+			if ($login_id = $this->_ci->Login_model->add($login_data)) {
+				$principal_data = array(
+					'login_id' => $login_id,
+					'school_id' => $school_id,
+					'first_name' => $p['first_name'],
+					'last_name' => $p['last_name'],
+					'created_on' => new \DateTime('now'),
+					'last_updated' => new \DateTime('now')
+				);
+				if ($principal_id = $this->_ci->Principal_model->add($principal_data)) {
+				} else {
+					$success = false;
+				}
+			} else {
+				$success = false;
+			}
+		}
+		return $success;
 	}
 }

@@ -28,7 +28,8 @@
                 'Global': '<?=$js_path?>',
                 'jquery': '<?=$js_path?>/third_party/jquery-3.1.1.min',
 				'bootstrap': '<?=$js_path?>/third_party/bootstrap',
-                'underscore': '<?=$js_path?>/third_party/underscore-min',
+                'underscore': '<?=$js_path?>/third_party/underscore',
+				'jgrowl': '<?=$js_path?>/third_party/jquery.jgrowl.min',
                 'text': '<?=$js_path?>/third_party/text',
 				<? if (isset($requireJsDataSource) && $requireJsDataSource) : ?>
 					<? if ($minified_js) : ?>

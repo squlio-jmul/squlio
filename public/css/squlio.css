@@ -20,6 +20,12 @@ label.error {
 	padding: 10px;
 	color: #00FF00;
 }
+#limit-container-principal,
+#limit-container-school-admin {
+	font-weight: bold;
+	padding: 10px;
+	color: #FF0000;
+}
 #login-container {
 	width: 80%;
 	margin: 0px auto;
@@ -386,4 +392,6 @@ label.error {
 	float: left;
 	padding: 20px;
 }
-
+.hidden {
+	display: none;
+}

@@ -53,4 +53,41 @@ class School_admin_library extends SQ_Library {
 			die($err->getMessage());
 		}
 	}
+
+	public function addBulk($school_id, $school_admins) {
+		$success = true;
+		foreach($school_admins as $sa) {
+			$login_data = array(
+				'email' => $sa['email'],
+				'username' => $sa['username'],
+				'password' => $sa['password'],
+				'type' => 'school_admin',
+				'token' => md5(strtotime('now')),
+				'active' => 1,
+				'deleted' => 0,
+				'reset_password' => 0,
+				'last_login' => null,
+				'created_on' => new \DateTime('now'),
+				'last_updated' => new \DateTime('now')
+			);
+			if ($login_id = $this->_ci->Login_model->add($login_data)) {
+				$school_admin_data = array(
+					'login_id' => $login_id,
+					'school_id' => $school_id,
+					'first_name' => $sa['first_name'],
+					'last_name' => $sa['last_name'],
+					'created_on' => new \DateTime('now'),
+					'last_updated' => new \DateTime('now')
+				);
+				if ($school_admin_id = $this->_ci->School_admin_model->add($school_admin_data)) {
+				} else {
+					$success = false;
+				}
+			} else {
+				$success = false;
+			}
+		}
+		return $success;
+	}
+
 }

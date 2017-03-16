@@ -57,7 +57,29 @@ define(
 					}
 				});
 				return _deferred.promise;
-			}
+			};
+
+			this.addBulk = function(school_id, school_admins) {
+			   var _deferred = Q.defer();
+				var data = {
+					school_id: school_id,
+					school_admins: school_admins
+				};
+				$.ajax({
+					url: '/ajax/school_admin/addBulk',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(response, textStatus, jqXHR) {
+						_deferred.resolve(response.success);
+					},
+					error: function(response, textStatus, jqXHR) {
+						_deferred.reject(response);
+					}
+				});
+				return _deferred.promise;
+			};
+
 		}
 	}
 );

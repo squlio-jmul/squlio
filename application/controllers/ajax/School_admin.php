@@ -70,4 +70,12 @@ class School_admin extends SQ_Controller {
 		}
 		$this->sendResponse();
 	}
+
+	public function addBulk() {
+		$school_id = $this->input->post('school_id');
+		$school_admins = $this->input->post('school_admins');
+		$success = $this->school_admin_library->addBulk($school_id, $school_admins);
+		$this->setResponseElement('success', $success);
+		$this->sendResponse();
+	}
 }

@@ -7,6 +7,8 @@ class School extends SQ_Controller {
 		$this->load->library('School_library');
 		$this->load->library('Login_library');
 		$this->load->library('Principal_library');
+		$this->load->library('Account_type_library');
+		$this->load->model('Account_type_model');
 	}
 
 	public function get() {
@@ -27,11 +29,8 @@ class School extends SQ_Controller {
 	}
 
 	public function addSchool(){
-		$get_account_type_value = array(
-			'account_type' => $this->input->post('account_type_id')
-		);
 		$add_school_data = array(
-			'account_type_id' => $get_account_type_value,
+			'account_type_id' => $this->input->post('account_type_id'),
 			'name' => $this->input->post('school_name'),
 			'address_1' => $this->input->post('address_1'),
 			'address_2' => '',
@@ -55,8 +54,7 @@ class School extends SQ_Controller {
 			$this->setResponseElement('school_id', $school_id);
 		} else {
 			$this->setResponseElement('success', false);
-		};
-		//var_dump($school_id);
+		}
 		$this->sendResponse();
 	}
 }

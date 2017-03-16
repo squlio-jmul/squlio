@@ -58,6 +58,28 @@ define(
 				});
 				return _deferred.promise;
 			};
+
+			this.addBulk = function(school_id, principals) {
+			   var _deferred = Q.defer();
+				var data = {
+					school_id: school_id,
+					principals: principals
+				};
+				$.ajax({
+					url: '/ajax/principal/addBulk',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(response, textStatus, jqXHR) {
+						_deferred.resolve(response.success);
+					},
+					error: function(response, textStatus, jqXHR) {
+						_deferred.reject(response);
+					}
+				});
+				return _deferred.promise;
+			};
+
 		}
 	}
 );
