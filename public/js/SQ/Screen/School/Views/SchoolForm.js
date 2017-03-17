@@ -29,18 +29,23 @@ define([
 			_$school_form.find('.btn.btn-primary').click(function(){
 				window.location.replace("addSchool");
 			});
-			/*_$school_form.find('#table').DataTable({
-				'data': school_data,
-				columnds: [
-					{ title: "ID"},
-					{ title: "Name"},
-					{ title: "Principle"},
-					{ title: "Admins"},
-					{ title: "Students"},
-					{ title: "Classroom"},
-					{ title: "Status"}
-				]
-			});*/
-		};
+			if (!table){
+
+				table = _$school_form.find('#table').DataTable({
+					'ajax': '/ajax/school/displayTable',
+					columns: [
+						{ title: "ID"},
+						{ title: "Name"},
+						{ title: "Principle"},
+						{ title: "Admins"},
+						{ title: "Students"},
+						{ title: "Classroom"},
+						{ title: "Status"},
+						{ title: "Action"}
+					],
+				});
+
+			};
+		}
 	}
 });

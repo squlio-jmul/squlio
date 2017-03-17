@@ -75,6 +75,32 @@ define(
 				});
 				return _deferred.promise;
 			};
+
+			this.editSchool = function(id, name, email, phone_1, address_1, zipcode, city) {
+				var _deferred = Q.defer();
+				var data = {
+					id: id,
+					name: name,
+					email: email,
+					phone_1: phone_1,
+					address_1: address_1,
+					zipcode: zipcode,
+					city: city
+				};
+				$.ajax({
+					url: '/ajax/school/update',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(response, textStatus, jqXHR) {
+						_deferred.resolve(response);
+					},
+					error: function(response, textStatus, jqXHR) {
+						_deferred.reject(response);
+					}
+				});
+				return _deferred.promise;
+			};
 		}
 	}
 );

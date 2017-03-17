@@ -13,7 +13,6 @@ class Principal_model extends SQ_Model {
 	public function get($filters = array(), $fields = array(), $order_by = array(), $limit = null, $offset = null, $modules = array()){
 		$order_by = ($order_by) ? $order_by : null;
 		$principal_obj = $this->doctrine->em->getRepository('Entities\Principal')->findBy($filters, $order_by, $limit, $offset);
-
 		$principals = array();
 		foreach($principal_obj as $index => $obj){
 			$principal = $obj->getData();

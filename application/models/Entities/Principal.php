@@ -68,6 +68,15 @@ class Principal extends EntitySuperClass {
 	 */
 	protected $last_updated;
 
+	/**
+	 * @var integer
+	 *
+	 * @Column(name="school_id", type="integer", nullable=false)
+	 */
+	//protected $school_id;
+
+
+
 	public function __construct() {
 		$this->created_on = new \DateTime('now');
 		$this->last_updated = new \DateTime('now');

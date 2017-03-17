@@ -1,14 +1,16 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+//defined('BASEPATH') OR exit('No direct script access allowed');
 
 class School extends SQ_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->library('School_library');
-		$this->load->library('Login_library');
-		$this->load->library('Principal_library');
+		$this->load->library('School_admin_library');
 		$this->load->library('Account_type_library');
-		$this->load->model('Account_type_model');
+		$this->load->library('Principal_library');
+		$this->load->library('Classroom_library');
+		$this->load->library('Student_library');
+		$this->load->library('Classroom_library');
 	}
 
 	public function get() {
@@ -56,5 +58,77 @@ class School extends SQ_Controller {
 			$this->setResponseElement('success', false);
 		}
 		$this->sendResponse();
+	}
+
+	public function update(){
+		$school_id = $this->input->post('id');
+		$update_school_data = array(
+			'account_type_id' => $this->input->post('account_type_id'),
+			'name' => $this->input->post('name'),
+			'address_1' => $this->input->post('address_1'),
+			'address_2' => '',
+			'city' => $this->input->post('city'),
+			'state' => 'DKI Jakarta',
+			'zipcode' => $this->input->post('zipcode'),
+			'country' => 'Indonesia',
+			'phone_1' => $this->input->post('phone_1'),
+			'phone_2' => '',
+			'branch' => '',
+			'email' => $this->input->post('email'),
+			'url' => '',
+			'code' => 1,
+			'active' => 1,
+			'deleted' => 0,
+			'created_on' => new \DateTime('now'),
+			'last_updated' => new \DateTime('now')
+		);
+		if ($school = $this->school_library->update($school_id, $update_school_data)) {
+			$this->setResponseElement('success', true);
+			$this->setResponseElement('school', $school);
+		} else {
+			$this->setResponseElement('success', false);
+		}
+		$this->sendResponse();
+	}
+
+
+	public function displayTable() {
+
+		$table_data = array();
+		if ($school_obj = $this->school_library->get(array(), array(), array(), null, null, array('account_type'=>true))){
+			foreach($school_obj as $s){
+				$row = array();
+				$row[] = $s['id'];
+				$row[] = $s['name'];
+				$school_id = array (
+					'school_id' => $s['id']
+				);
+				if ($principal_obj = $this->principal_library->get(['school' => $s['id']])) {
+					$row[] = count($principal_obj);
+				} else {
+					$row[] = "0";
+				}
+				if ($school_admin_obj = $this->school_admin_library->get(['school' => $s['id']])) {
+					$row[] = count($school_admin_obj);
+				} else {
+					$row[] = "0";
+				}
+				if ($student_obj = $this->student_library->get(['school' => $s['id']])) {
+					$row[] = count($student_obj);
+				} else {
+					$row[] = "0";
+				}
+				if ($classroom_obj = $this->classroom_library->get(['school' => $s['id']])) {
+					$row[] = count($classroom_obj);
+				} else {
+					$row[] = "0";
+				}
+				$row[] = $s['account_type']['display_name'];
+				//$row[] = '<a href="/admin/editSchool?id=' + $s['id'] + '">Edit</a>';
+				$row[] = '<a href="/admin/editSchool?id=2">Edit</a>';
+				$table_data[] = $row;
+			}
+		}
+		echo json_encode(array('data' => $table_data));
 	}
 }

@@ -17,7 +17,9 @@
 				<th>Students</th>
 				<th>classroom</th>
 				<th>status</th>
+				<th>Action</th>
 			</tr>
+
 		</thead>
 	</table>
 </div>

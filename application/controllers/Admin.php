@@ -177,4 +177,29 @@ class Admin extends SQ_Controller{
 			redirect('admin');
 		}
 	}
+
+	public function editSchool() {
+		$data = array(
+			'headerCss' => array(),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'editSchool',
+			'jsControllerParam' => false
+		);
+
+		$get_type_id = $this->input->get('id');
+		$school_obj = $this->School_model->get(['id'=>$get_type_id]);
+		$school_data = array (
+			'school' => null
+		);
+		$school_data['school'] =  $school_obj;
+		$pageData = $school_data;
+		if ($this->cookie->get('id')) {
+			$this->page->show('admin_ui', 'Squlio - Edit School', 'edit_school', $pageData, $data);
+		} else {
+			redirect('/admin');
+		}
+	}
+
+
 }
