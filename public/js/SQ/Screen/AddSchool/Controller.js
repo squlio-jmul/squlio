@@ -8,8 +8,7 @@ define([
 	'SQ/Screen/AddSchool/Views/AddSchoolForm',
 	'ThirdParty/q',
 	'jgrowl',
-	'ThirdParty/jquery.validate',
-	'ThirdParty/jquery-ui'
+	'ThirdParty/jquery.validate'
 ], function(
 	$,
 	SQ,
@@ -66,38 +65,6 @@ define([
 			);
 			console.log(data);
 			return;
-			/*
-			var account_type_id = data[0];
-			var form = data[1];
-			var principal = data[2];
-			var school_admin = data[3];
-			_schoolModel.addSchool(account_type_id, form.school_name, form.school_email, form.phone_1, form.address_1, form.zipcode, form.city).then(
-				function(response) {
-					if (response.success) {
-						school_id = response.school_id;
-						console.log(school_id);
-						account_type_id  = response.account_type_id;
-						console.log(account_type_id);
-						_account_type_data = response.account_type_data[0];
-						console.log(_account_type_data);
-						num_principal = _account_type_data[0];
-						console.log(num_principal);
-						num_school_admin = _account_type_data[1];
-						console.log(num_school_admin);
-						Q.all([_principalModel.addPrincipal(school_id, principal.username, principal.email, principal.password, principal.first_name,
-							principal.last_name), _schoolAdminModel.addSchoolAdmin(school_id, school_admin.username, school_admin.email, school_admin.password, 
-							school_admin.first_name, school_admin.last_name)]).done (
-								function(response) {
-									console.log('success');
-									_addSchoolForm.displaySuccess('Data successfully inserted');
-								}
-							);
-					} else {
-						_addSchoolForm.displayError('Fail to insert data');
-					}
-				}
-			);
-			*/
 		}
 	}
 });

@@ -71,4 +71,15 @@ class Login_library extends SQ_Library {
 			die($err->getMessage());
 		}
 	}
+
+	public function update($login_id, $login_data) {
+		try {
+			if ($login = $this->_ci->Login_model->update($login_id, $login_data)) {
+				return $login;
+			}
+			return false;
+		} catch(Exception $err) {
+			die($err->getMessage());
+		}
+	}
 }

@@ -67,4 +67,28 @@ class Principal extends SQ_Controller {
 		$this->setResponseElement('success', $success);
 		$this->sendResponse();
 	}
+
+	public function delete() {
+		$login_id = $this->input->post('login_id');
+		$delete_principal_data = array (
+			//'email' => $this->input->post('email'),
+			//'username' => $this->input->post('username'),
+		//	'password' => $this->input->post('password'),
+			'type' => 'principal',
+			'token' => 'blah',
+			'active' => 0,
+			'deleted' => 1,
+			'reset_password' => 0,
+			'created_on' => new \DateTime('now'),
+			'last_updated' => new \DateTime('now')
+		);
+		if ($login = $this->login_library->update($login_id, $delete_principal_data)) {
+			$this->setResponseElement('success', true);
+			$this->setResponseElement('login', $login);
+		} else {
+			$this->setResponseElement('success', false);
+		}
+		$this->sendResponse();
+
+	}
 }

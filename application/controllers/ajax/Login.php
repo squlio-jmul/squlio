@@ -57,5 +57,4 @@ class Login extends SQ_Controller {
 		}
 		return;
 	}
-
 }

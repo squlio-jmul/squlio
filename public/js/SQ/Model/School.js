@@ -76,9 +76,10 @@ define(
 				return _deferred.promise;
 			};
 
-			this.editSchool = function(id, name, email, phone_1, address_1, zipcode, city) {
+			this.editSchool = function(account_type, id, name, email, phone_1, address_1, zipcode, city) {
 				var _deferred = Q.defer();
 				var data = {
+					account_type: account_type,
 					id: id,
 					name: name,
 					email: email,

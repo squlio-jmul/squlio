@@ -33,16 +33,22 @@ define([
 
 				table = _$school_form.find('#table').DataTable({
 					'ajax': '/ajax/school/displayTable',
-					columns: [
-						{ title: "ID"},
-						{ title: "Name"},
-						{ title: "Principle"},
-						{ title: "Admins"},
-						{ title: "Students"},
-						{ title: "Classroom"},
-						{ title: "Status"},
-						{ title: "Action"}
+					'columns': [
+						{ 'data': 'id' },
+						{ 'data': 'name' },
+						{ 'data': 'num_principal' },
+						{ 'data': 'num_school_admin' },
+						{ 'data': 'num_student' },
+						{ 'data': 'num_classroom' },
+						{ 'data': 'status' }
 					],
+					'columnDefs': [ {
+						'targets': 7,
+						'data': 'action',
+						'render': function ( data, type, full, meta ) {
+							return '<a href="/admin/editSchool?id='+data+'">Edit</a>';
+						}
+					} ]
 				});
 
 			};

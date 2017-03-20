@@ -8,6 +8,7 @@ class Admin extends SQ_Controller{
 		$this->load->model('School_model');
 		$this->load->model('Principal_model');
 		$this->load->model('Account_type_model');
+		$this->load->model('Login_model');
 	}
 
 	public function index() {
@@ -188,12 +189,22 @@ class Admin extends SQ_Controller{
 		);
 
 		$get_type_id = $this->input->get('id');
-		$school_obj = $this->School_model->get(['id'=>$get_type_id]);
-		$school_data = array (
+			$school_data = array (
 			'school' => null
 		);
+		$account_type = array (
+			'account_type' => null
+		);
+		$principal = array (
+			'principal' => null
+		);
+		$school_obj = $this->School_model->get(['id'=>$get_type_id]);
+		$account_type_obj = $this->Account_type_model->get();
+		$principal_obj = $this->Principal_model->get(['school'=>$get_type_id]);
 		$school_data['school'] =  $school_obj;
-		$pageData = $school_data;
+		$account_type['account_type'] = $account_type_obj;
+		$principal['principal'] = $principal_obj;
+		$pageData = array_merge($school_data, $account_type, $principal);
 		if ($this->cookie->get('id')) {
 			$this->page->show('admin_ui', 'Squlio - Edit School', 'edit_school', $pageData, $data);
 		} else {

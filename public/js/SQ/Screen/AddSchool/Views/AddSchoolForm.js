@@ -7,8 +7,7 @@ define([
 	'text!./template/principal.tmpl',
 	'text!./template/school_admin.tmpl',
 	'jgrowl',
-	'ThirdParty/jquery.validate',
-	'ThirdParty/jquery-ui'
+	'ThirdParty/jquery.validate'
 ], function(
 	$,
 	SQ,

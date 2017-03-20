@@ -395,3 +395,20 @@ label.error {
 .hidden {
 	display: none;
 }
+.list-principal-data {
+	list-style-type: none;
+	margin: -12px;
+	padding: 0;
+}
+.list-principal-data::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.principal {
+	display: block;
+	float: left;
+	padding: 12px;
+	width: 50%;
+}
+
