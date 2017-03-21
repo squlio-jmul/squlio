@@ -38,12 +38,13 @@ define([
 						{ 'data': 'name' },
 						{ 'data': 'num_principal' },
 						{ 'data': 'num_school_admin' },
+						{ 'data': 'num_teacher'},
 						{ 'data': 'num_student' },
 						{ 'data': 'num_classroom' },
 						{ 'data': 'status' }
 					],
 					'columnDefs': [ {
-						'targets': 7,
+						'targets': 8,
 						'data': 'action',
 						'render': function ( data, type, full, meta ) {
 							return '<a href="/admin/editSchool?id='+data+'">Edit</a>';

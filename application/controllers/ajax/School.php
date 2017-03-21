@@ -11,6 +11,7 @@ class School extends SQ_Controller {
 		$this->load->library('Classroom_library');
 		$this->load->library('Student_library');
 		$this->load->library('Classroom_library');
+		$this->load->library('Teacher_library');
 	}
 
 	public function get() {
@@ -97,18 +98,20 @@ class School extends SQ_Controller {
 		$table_data = array();
 		if ($school_obj = $this->school_library->get(array(), array(), array(), null, null, array('account_type'=>true))){
 			foreach($school_obj as $s){
-				$principal_obj = $this->principal_library->get(['school' => $s['id']]);
-				$school_admin_obj = $this->school_admin_library->get(['school' => $s['id']]);
-				$student_obj = $this->student_library->get(['school' => $s['id']]);
+				$num_principal = $this->principal_library->getActiveCountBySchoolId($s['id']);
+				$num_school_admin = $this->school_admin_library->getActiveCountBySchoolId($s['id']);
+				$num_teacher = $this->teacher_library->getActiveCountBySchoolId($s['id']);
+				$num_student = $this->student_library->getActiveCountBySchoolId($s['id']);
 				$classroom_obj = $this->classroom_library->get(['school' => $s['id']]);
 
 				$data = array(
 					'id' => $s['id'],
 					'name' => $s['name'],
-					'num_principal' => isset($principal_obj) ? count($principal_obj) : 0,
-					'num_school_admin' => isset($school_admin_obj) ? count($school_admin_obj) : 0,
-					'num_student' =>isset($student_obj) ? count($student_obj) : 0,
-					'num_classroom' => isset($classroom_obj) ? count($classroom_obj) : 0,
+					'num_principal' => $num_principal,
+					'num_school_admin' => $num_school_admin,
+					'num_teacher' => $num_teacher,
+					'num_student' => $num_student,
+					'num_classroom' => isset($classroom_obj)&& $classroom_obj ? count($classroom_obj) : 0,
 					'status' => $s['account_type']['display_name'],
 					'action' => $s['id']
 				);

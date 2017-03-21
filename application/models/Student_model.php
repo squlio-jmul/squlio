@@ -93,4 +93,15 @@ class Student_model extends SQ_Model {
 		}
 		return true;
 	}
+
+	public function getActiveCountBySchoolId($school_id) {
+		$params = array('school_id' => $school_id, 'active'=>true, 'deleted'=>false);
+		$query = $this->doctrine->em->createQuery('SELECT COUNT(st.id) AS num_student FROM Entities\Student st JOIN st.school s JOIN st.login l WHERE s.id = :school_id AND l.active = :active AND l.deleted =:deleted')->setParameters($params);
+		$result = $query->getSingleResult();
+		if ($result['num_student']) {
+			return (int) $result['num_student'];
+		}
+		return 0;
+	}
+
 }

@@ -83,4 +83,14 @@ class School_admin_model extends SQ_Model {
 		}
 		return true;
 	}
+	public function getActiveCountBySchoolId($school_id) {
+		$params = array('school_id' => $school_id, 'active'=>true, 'deleted'=>false);
+		$query = $this->doctrine->em->createQuery('SELECT COUNT(sa.id) AS num_school_admin FROM Entities\SchoolAdmin sa JOIN sa.school s JOIN sa.login l WHERE s.id = :school_id AND l.active = :active AND l.deleted =:deleted')->setParameters($params);
+		$result = $query->getSingleResult();
+		if ($result['num_school_admin']) {
+			return (int) $result['num_school_admin'];
+		}
+		return 0;
+	}
+
 }

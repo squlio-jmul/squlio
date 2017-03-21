@@ -89,5 +89,8 @@ class School_admin_library extends SQ_Library {
 		}
 		return $success;
 	}
+	public function getActiveCountBySchoolId($school_id) {
+		return $this->_ci->School_admin_model->getActiveCountBySchoolId($school_id);
+	}
 
 }

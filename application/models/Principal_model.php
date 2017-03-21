@@ -82,4 +82,14 @@ class Principal_model extends SQ_Model {
 		}
 		return true;
 	}
+
+	public function getActiveCountBySchoolId($school_id) {
+		$params = array('school_id' => $school_id, 'active'=>true, 'deleted'=>false);
+		$query = $this->doctrine->em->createQuery('SELECT COUNT(p.id) AS num_principal FROM Entities\Principal p JOIN p.school s JOIN p.login l WHERE s.id = :school_id AND l.active = :active AND l.deleted =:deleted')->setParameters($params);
+		$result = $query->getSingleResult();
+		if ($result['num_principal']) {
+			return (int) $result['num_principal'];
+		}
+		return 0;
+	}
 }

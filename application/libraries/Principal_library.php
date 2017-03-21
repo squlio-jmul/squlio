@@ -78,4 +78,8 @@ class Principal_library extends SQ_Library {
 		}
 		return $success;
 	}
+
+	public function getActiveCountBySchoolId($school_id) {
+		return $this->_ci->Principal_model->getActiveCountBySchoolId($school_id);
+	}
 }

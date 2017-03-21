@@ -14,6 +14,7 @@
 				<th>Name</th>
 				<th>Principle</th>
 				<th>Admins</th>
+				<th>Teacher</th>
 				<th>Students</th>
 				<th>classroom</th>
 				<th>status</th>
