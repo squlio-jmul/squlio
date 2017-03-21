@@ -84,7 +84,7 @@ class School extends SQ_Controller {
 		);
 		if ($school = $this->school_library->update($school_id, $update_school_data)) {
 			$this->setResponseElement('success', true);
-			$this->setResponseElement('school', $school);
+			$this->setResponseElement('school_id', $school_id);
 		} else {
 			$this->setResponseElement('success', false);
 		}

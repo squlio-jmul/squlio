@@ -196,30 +196,6 @@ define([
 			_setListeners($e);
 		};
 
-		this.displaySuccess = function(success_msg) {
-			_$add_school_form.find('#success-container').html(success_msg);
-		};
-
-		this.displaySuccessPrincipal = function(success_msg) {
-			_$add_school_form.find('#success-container-principal').html(success_msg);
-		};
-
-		this.displaySuccessSchoolAdmin = function(success_msg) {
-			_$add_school_form.find('#success-container-school-admin').html(success_msg);
-		};
-
-		this.displayError = function(error_msg) {
-			_$add_school_form.find('.error-container').text(error_msg);
-		};
-
-		this.displayLimitPrincipal = function(error_msg) {
-			_$add_school_form.find('#limit-container-principal').html(error_msg);
-		};
-
-		this.displayLimitSchoolAdmin = function(error_msg) {
-			_$add_school_form.find('#limit-container-school-admin').html(error_msg);
-		};
-
 		// Private function
 		function _setListeners($e) {
 			$e.find('#add-school-form').find('#account_type').on('change', function() {

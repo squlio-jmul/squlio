@@ -81,18 +81,17 @@
 			<div class="form-group">
 				<input type="text" name="last_name" class="form-control" placeholder="Last Name" value="" style="width:99%;" required/>
 			</div>
-			<div class="delete">
+			<div class="clear">
 				<button type="reset" class="delete-btn"></button>
 			</div>
 		</div>
-		<!--<div id="preview-principal-container" class="row"></div -->
 	</form>
 	<div id="list-principal">
 		<ul class="list-principal-data">
-<?
+	<?
 			if (isset($principal)){
 				foreach ($principal as $p) {
-?>
+	?>
 				<li class="principal" data-id="<?=$p['id']?>">
 					<p class="username"><?=$p['username']?></p>
 					<p class="email"><?=$p['email']?></p>
@@ -100,12 +99,12 @@
 					<input type="hidden" id="principal_login_id" value="<?=$p['login_id']?>" />
 					<button type"button" class="btn btn-danger delete">Delete</button>
 				</li>
-<?
+	<?
 				}
 			}
-?>
+	?>
 			</ul>
-		</div>
+	</div>
 
 	<form id="edit-school-admin-form">
 		<div class="school-admin-form">
@@ -128,10 +127,28 @@
 			<div class="form-group">
 				<input type="text" id="school_admin_last_name" name="last_name" class="form-control" placeholder="Last Name" value="" style="width:99%;" required/>
 			</div>
-			<div class="delete">
+			<div class="clear">
 				<button type="reset" class="delete-btn"></button>
 			</div>
 		</div>
-		<div id="preview-school-admin-container" class="row"></div>
 	 </form>
+	<div id="list-school-admin">
+		<ul class="list-school-admin-data">
+	<?
+			if (isset($school_admin)){
+				foreach ($school_admin as $sa) {
+	?>
+				<li class="school-admin" data-id="<?=$sa['id']?>">
+					<p class="username"><?=$sa['username']?></p>
+					<p class="email"><?=$sa['email']?></p>
+					<p class="fullname"><?=$sa['first_name']?> <?=$sa['last_name']?></p>
+					<input type="hidden" id="school_admin_login_id" value="<?=$sa['login_id']?>" />
+					<button type"button" class="btn btn-danger delete">Delete</button>
+				</li>
+	<?
+				}
+			}
+	?>
+		</ul>
+	</div>
 </div>

@@ -198,13 +198,21 @@ class Admin extends SQ_Controller{
 		$principal = array (
 			'principal' => null
 		);
+		$school_admin = array (
+			'school_admin' =>null
+		);
+
 		$school_obj = $this->School_model->get(['id'=>$get_type_id]);
 		$account_type_obj = $this->Account_type_model->get();
 		$principal_obj = $this->Principal_model->get(['school'=>$get_type_id]);
+		$school_admin_obj = $this->School_admin_model->get(['school'=>$get_type_id]);
+
 		$school_data['school'] =  $school_obj;
 		$account_type['account_type'] = $account_type_obj;
 		$principal['principal'] = $principal_obj;
-		$pageData = array_merge($school_data, $account_type, $principal);
+		$school_admin['school_admin'] = $school_admin_obj;
+
+		$pageData = array_merge($school_data, $account_type, $principal, $school_admin);
 		if ($this->cookie->get('id')) {
 			$this->page->show('admin_ui', 'Squlio - Edit School', 'edit_school', $pageData, $data);
 		} else {

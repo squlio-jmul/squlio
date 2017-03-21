@@ -80,6 +80,25 @@ define(
 				return _deferred.promise;
 			};
 
+			this.deleteSchoolAdmin = function(login_id) {
+				var _deferred = Q.defer();
+				var data = {
+					login_id: login_id
+				};
+				$.ajax({
+					url: '/ajax/school_admin/delete',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(response, textStatus, jqXHR) {
+						_deferred.resolve(response);
+					},
+					error: function(response, textStatus, jqXHR) {
+						_deferred.reject(response);
+					}
+				});
+				return _deferred.promise;
+			};
 		}
 	}
 );

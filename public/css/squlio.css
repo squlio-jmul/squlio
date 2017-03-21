@@ -395,7 +395,7 @@ label.error {
 .hidden {
 	display: none;
 }
-.list-principal-data {
+.list-principal-data{
 	list-style-type: none;
 	margin: -12px;
 	padding: 0;
@@ -409,6 +409,22 @@ label.error {
 	display: block;
 	float: left;
 	padding: 12px;
-	width: 50%;
+	width: 25%;
+}
+.list-school-admin-data {
+	list-style-type: none;
+	margin: -12px;
+	padding: 0
+}
+.list-school-admin-data::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.school-admin {
+	display: block;
+	float: left;
+	padding: 12px;
+	width: 25%;
 }
 

@@ -71,9 +71,6 @@ class Principal extends SQ_Controller {
 	public function delete() {
 		$login_id = $this->input->post('login_id');
 		$delete_principal_data = array (
-			//'email' => $this->input->post('email'),
-			//'username' => $this->input->post('username'),
-		//	'password' => $this->input->post('password'),
 			'type' => 'principal',
 			'token' => 'blah',
 			'active' => 0,
