@@ -94,4 +94,18 @@ class Teacher_model extends SQ_Model {
 		return 0;
 	}
 
+	public function getActiveTeacher($school_id) {
+		$params = array('school_id' => $school_id, 'active'=>true, 'deleted'=>false);
+		$query = $this->doctrine->em->createQuery('SELECT t FROM Entities\Teacher t JOIN t.login l JOIN t.school s WHERE s.id = :school_id AND l.active = :active AND l.deleted =:deleted')->setParameters($params);
+		$result =  $query->getResult();
+		$teachers = array();
+		if ($result){
+			foreach ($result as $r) {
+				$teachers[] = $r->getData();
+			}
+		}
+		return $teachers;
+	}
+
+
 }

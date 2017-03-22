@@ -92,4 +92,17 @@ class Principal_model extends SQ_Model {
 		}
 		return 0;
 	}
+
+	public function getActivePrincipal($school_id) {
+		$params = array('school_id' => $school_id, 'active'=>true, 'deleted'=>false);
+		$query = $this->doctrine->em->createQuery('SELECT p FROM Entities\Principal p JOIN p.login l JOIN p.school s WHERE s.id = :school_id AND l.active = :active AND l.deleted =:deleted')->setParameters($params);
+		$result =  $query->getResult();
+		$principals = array();
+		if ($result){
+			foreach ($result as $r) {
+				$principals[] = $r->getData();
+			}
+		}
+		return $principals;
+	}
 }

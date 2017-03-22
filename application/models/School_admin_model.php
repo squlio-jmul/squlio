@@ -93,4 +93,17 @@ class School_admin_model extends SQ_Model {
 		return 0;
 	}
 
+	public function getActiveSchoolAdmin($school_id) {
+		$params = array('school_id' => $school_id, 'active'=>true, 'deleted'=>false);
+		$query = $this->doctrine->em->createQuery('SELECT sa FROM Entities\SchoolAdmin sa JOIN sa.login l JOIN sa.school s WHERE s.id = :school_id AND l.active = :active AND l.deleted =:deleted')->setParameters($params);
+		$result = $query->getResult();
+		$school_admins = array();
+		if ($result) {
+			foreach ($result as $r) {
+				$school_admins[] = $r->getData();
+			}
+		}
+		return $school_admins;
+	}
+
 }

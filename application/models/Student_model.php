@@ -104,4 +104,18 @@ class Student_model extends SQ_Model {
 		return 0;
 	}
 
+	public function getActiveStudent($school_id) {
+		$params = array('school_id' => $school_id, 'active'=>true, 'deleted'=>false);
+		$query = $this->doctrine->em->createQuery('SELECT st FROM Entities\Student st JOIN st.login l JOIN st.school s WHERE s.id = :school_id AND l.active = :active AND l.deleted =:deleted')->setParameters($params);
+		$result =  $query->getResult();
+		$students = array();
+		if ($result){
+			foreach ($result as $r) {
+				$students[] = $r->getData();
+			}
+		}
+		return $students;
+	}
+
+
 }

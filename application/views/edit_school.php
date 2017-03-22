@@ -92,7 +92,7 @@
 			if (isset($principal)){
 				foreach ($principal as $p) {
 	?>
-				<li class="principal" data-id="<?=$p['id']?>">
+				<li class="principal" data-id="<?=$p['id']['active']?>">
 					<p class="username"><?=$p['username']?></p>
 					<p class="email"><?=$p['email']?></p>
 					<p class="fullname"><?=$p['first_name']?> <?=$p['last_name']?></p>
