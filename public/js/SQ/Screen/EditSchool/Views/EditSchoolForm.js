@@ -102,11 +102,11 @@ define([
 					}
 				},
 				submitHandler: function(form) {
-					/*if (_principals.length >= _allowed_num_principals) {
+					if (_principals.length >= _allowed_num_principals) {
 						$.jGrowl('You have exceeded the max number of principals', {header: 'Error'});
 						$(form).trigger('reset');
 						return;
-					}*/
+					}
 					var _principal_data = _util.serializeJSON($(form));
 					_principals.push(_principal_data);
 					console.log(_principals);
@@ -164,11 +164,11 @@ define([
 					}
 				},
 				submitHandler: function(form) {
-					/*if (_school_admins.length >= _allowed_num_school_admins) {
+					if (_school_admins.length >= _allowed_num_school_admins) {
 						$.jGrowl('You have exceeded the max number of school admins', {header: 'Error'});
 						$(form).trigger('reset');
 						return;
-					}*/
+					}
 					var _school_admin_data = _util.serializeJSON($(form));
 					_school_admins.push(_school_admin_data);
 					$(form).trigger('reset');
@@ -204,6 +204,20 @@ define([
 				_me.broadcast('delete_school_admin', _delete_school_admin_data);
 				_$self.closest('.school-admin').remove();
 			});
+			_setListeners($e);
 		};
+
+		// Private function
+		function _setListeners($e) {
+			$e.find('#edit-school-form').find('#account_type').on('change', function() {
+				if ($(this).val()) {
+					_allowed_num_principals = parseInt($(this).find('option:selected').attr('data-num-principal'));
+					_allowed_num_school_admins = parseInt($(this).find('option:selected').attr('data-num-school-admin'));
+				} else {
+					_allowed_num_principals = 0;
+					_allowed_num_school_admins = 0;
+				}
+			});
+		}
 	}
 });

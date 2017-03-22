@@ -38,28 +38,28 @@ define([
 		})();
 
 		function _edit_school(data) {
-		/*	console.log(data);
 			console.log(data.account_type);
-			console.log(data.school);
-			console.log(data.principals);
-			console.log(data.school_admins);*/
 			_schoolModel.editSchool(data.account_type, data.school.id, data.school.name, data.school.email, data.school.phone_1, data.school.address_1,
 				data.school.zipcode, data.school.city).then(
 				function(response) {
+					$.jGrowl('School is update successfully<br /><br /><a href="/admin/school">Click here to view your school</a>', {header: 'Success'});
+
 					if (response.success && response.school_id) {
-						console.log(response.school_id);
 						Q.all([_principalModel.addBulk(response.school_id, data.principals), _schoolAdminModel.addBulk(response.school_id, data.school_admins)]).done(
 							function(response) {
 								var _principal_success = response[0];
 								var _school_admin_success = response[1];
-								if (_principal_success) {
+								if (_principal_success && _school_admin_success) {
 
 									$.jGrowl('School is update successfully<br /><br /><a href="/admin/school">Click here to view your school</a>', {header: 'Success'});
-								}  else if (_school_admin_success) {
+								} else if (_principal_success) {
+									$.jGrowl('School is update successfully<br /><br /><a href="/admin/school">Click here to view your school</a>', {header: 'Success'});
+								} else if (_school_admin_success) {
 									$.jGrowl('School is update successfully<br /><br /><a href="/admin/school">Click here to view your school</a>', {header: 'Success'});
 								} else {
 									$.jGrowl('Unable to update school', {header: 'Error'});
 								}
+
 							}
 						);
 					} else {

@@ -427,4 +427,9 @@ label.error {
 	padding: 12px;
 	width: 25%;
 }
+.principal-container,
+.school-admin-container {
+	padding: 20px;
+	margin-left: -20px;
+	width: 25%;
 

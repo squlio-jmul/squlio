@@ -64,8 +64,15 @@ class School_model extends SQ_Model {
 	public function update($school_id, $school_data){
 		try {
 			$school = $this->doctrine->em->find('Entities\School', $school_id);
+			$account_type = null;
+			if (isset($school_data['account_type_id'])) {
+				$account_type = $this->doctrine->em->find('Entities\AccountType', $school_data['account_type_id']);
+			}
 			$old_obj = $school->getData();
 			$school->setData($school_data);
+			if ($account_type) {
+				$school->account_type = $account_type;
+			}
 			$this->doctrine->em->persist($school);
 			$new_obj = $school->getData();
 			$this->doctrine->em->flush();

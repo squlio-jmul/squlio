@@ -45,13 +45,19 @@
 		</div>
 		<div class="account-type-option">
 			<p>Account Type</p>
+
 			<select id="account_type" name="account_type">
 				<option  value="">Select One</option>
 	<?
+
 				if (isset($account_type)) {
 					foreach ($account_type as $at) {
+						$selected = "";
+						if ($at['id'] == $school[0]['account_type_id'] ){
+							$selected = 'selected="selected"';
+						}
 	?>
-						<option value="<?=$at['id']?>" data-num-principal="<?=$at['num_principal']?>" data-num-school-admin="<?=$at['num_school_admin']?>"><?=$at['display_name']?></option>
+						<option value="<?=$at['id']?>" data-num-principal="<?=$at['num_principal']?>" data-num-school-admin="<?=$at['num_school_admin']?>" <?= $selected;?>><?=$at['display_name']?></option>
 			<?
 					}
 				}
@@ -64,7 +70,7 @@
 		<div class="principal-form">
 			<div class="principal-header">
 				<p>School Principal</p>
-				 <button type="submit" class="add-principal">Edit</button>
+				 <button type="submit" class="add-principal">Add</button>
 		    </div>
 			<div class="form-group">
 				<input type="text" name="username" class="form-control" placeholder="Username" value="" style="width:99%;" required/>
@@ -110,7 +116,7 @@
 		<div class="school-admin-form">
 			<div class="school-admin-header">
 				<p>School Admin</p>
-				<button type="submit" class="add-school-admin">Edit</button>
+				<button type="submit" class="add-school-admin">Add</button>
 			</div>
 			<div class="form-group">
 				<input type="text" id="school_admin_username" name="username" class="form-control" placeholder="Username" value="" style="width:99%;" required />
