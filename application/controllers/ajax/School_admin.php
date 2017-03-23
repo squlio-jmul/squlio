@@ -62,6 +62,7 @@ class School_admin extends SQ_Controller {
 			if ($school_admin_id = $this->school_admin_library->add($add_school_admin_data)) {
 				$this->setResponseElement('success', true);
 				$this->setResponseElement('school_admin_id', $school_admin_id);
+				$this->setResponseElement('login_id', $login_id);
 			} else {
 				$this->setResponseElement('success', false);
 			}

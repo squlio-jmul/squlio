@@ -409,7 +409,7 @@ label.error {
 	display: block;
 	float: left;
 	padding: 12px;
-	width: 25%;
+	width: 30%;
 }
 .list-school-admin-data {
 	list-style-type: none;
@@ -425,11 +425,36 @@ label.error {
 	display: block;
 	float: left;
 	padding: 12px;
-	width: 25%;
+	width: 30%;
 }
 .principal-container,
 .school-admin-container {
 	padding: 20px;
 	margin-left: -20px;
-	width: 25%;
+	width: 30%;
+}
+.update-form {
+	display:table;
+	width: 75%;
+	margin-top: 20px;
+}
+.update-form .form-group {
+	width: 90%;
+	float: left;
+}
+.update-form .delete-btn {
+	float: right;
+	width: 40px;
+	height: 40px;
+	background-image: url(/public/img/icon-delete.png);
+	margin-top: -195px;
+}
+.update-form p {
+	font-weight: bold;
+}
+#update-form .btn.btn-primary,
+#update-form-principal {
+	margin-bottom: 30px;
+}
+
 

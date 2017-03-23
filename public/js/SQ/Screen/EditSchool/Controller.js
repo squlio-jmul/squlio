@@ -34,7 +34,11 @@ define([
 			_editSchoolForm.initialize($('.admin-main-content'));
 			_editSchoolForm.setListener('edit_school', _edit_school);
 			_editSchoolForm.setListener('delete_principal', _delete_principal);
+			_editSchoolForm.setListener('delete_principal_preview', _deletePrincipalPreview);
+			_editSchoolForm.setListener('delete_school_admin_preview', _deleteSchoolAdminPreview);
 			_editSchoolForm.setListener('delete_school_admin', _delete_school_admin);
+			_editSchoolForm.setListener('add_principal', _addPrincipal);
+			_editSchoolForm.setListener('add_school_admin', _addSchoolAdmin);
 		})();
 
 		function _edit_school(data) {
@@ -69,19 +73,68 @@ define([
 			);
 		};
 
+		function _addPrincipal(data) {
+			console.log(data);
+			_principalModel.addPrincipal(data.school_id, data.username, data.email, data.password, data.first_name, data.last_name).then(
+				function (response) {
+					if (response.success) {
+						var principal_data = [response.login_id, data];
+						console.log(principal_data);
+						_editSchoolForm.displayAddSuccessPrincipal(principal_data);
+						$.jGrowl('Principal successfully added', {header: 'Success'});
+					} else {
+						$.jGrowl('Principal could not be added', {header: 'Error'});
+					}
+				}
+			);
+		}
+
+		function _addSchoolAdmin(data) {
+			console.log(data);
+			_schoolAdminModel.addSchoolAdmin(data.school_id, data.username, data.email, data.password, data.first_name, data.last_name).then(
+				function (response) {
+					if (response.success) {
+						var school_admin_data = [response.login_id, data]
+						_editSchoolForm.displayAddSuccessSchoolAdmin(school_admin_data);
+						$.jGrowl('School Admin successfully added', {header: 'Success'});
+					} else {
+						$.jGrowl('School Admin could not be added', {header: 'Error'});
+					}
+				}
+			);
+		}
+
 		function _delete_principal(login_id) {
 			console.log(login_id);
 			_principalModel.deletePrincipal(login_id).then(
 				function(response) {
 					if (response.success) {
 						console.log('success');
+						_editSchoolForm.deletePrincipal(login_id);
 						$.jGrowl('Principal success deleted', {header: 'Success'});
 					} else {
 						$.jGrowl('Principal can not deleted', {header: 'Error'});
 					}
 				}
 			);
-		}
+		};
+
+		function _deletePrincipalPreview(data) {
+			console.log(data);
+			var login_id = data[0];
+			var username = data[1];
+			_principalModel.deletePrincipal(login_id).then(
+				function(response) {
+					if(response.success) {
+						console.log('success');
+						_editSchoolForm.deletePrincipalPreview(data);
+						$.jGrowl('Principal success deleted', {header: 'Success'});
+					} else {
+						$.jGrowl('Principal can not deleted', {header: 'Error'});
+					}
+				}
+			);
+		};
 
 		function _delete_school_admin(login_id) {
 			console.log(login_id);
@@ -89,12 +142,30 @@ define([
 				function(response) {
 					if (response.success) {
 						console.log('success');
+						_editSchoolForm.deleteSchoolAdmin(login_id);
 						$.jGrowl('School admin success deleted', {header: 'Success'});
 					} else {
 						$.jGrowl('School admin can not deleted', {header: 'Error'});
 					}
 				}
 			);
-		}
+		};
+
+		function _deleteSchoolAdminPreview(data) {
+			console.log(data);
+			var login_id = data[0];
+			var username = data[1];
+			_schoolAdminModel.deleteSchoolAdmin(login_id).then(
+				function(response) {
+					if (response.success) {
+						console.log('success');
+						_editSchoolForm.deleteSchoolAdminPreview(data);
+						$.jGrowl('School admin success deleted', {header: 'Success'});
+					} else {
+						$.jGrowl('School admin can not deleted', {header: 'Error'});
+					}
+				}
+			);
+		};
 	}
 });

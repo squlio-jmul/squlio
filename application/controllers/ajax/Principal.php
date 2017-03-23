@@ -51,6 +51,7 @@ class Principal extends SQ_Controller {
 			if ($principal_id = $this->principal_library->add($add_principal_data)) {
 				$this->setResponseElement('success', true);
 				$this->setResponseElement('principal_id', $principal_id);
+				$this->setResponseElement('login_id', $login_id);
 			} else {
 				$this->setResponseElement('success', false);
 			}

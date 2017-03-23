@@ -71,39 +71,67 @@
 			<div class="principal-header">
 				<p>School Principal</p>
 				 <button type="submit" class="add-principal">Add</button>
-		    </div>
-			<div class="form-group">
-				<input type="text" name="username" class="form-control" placeholder="Username" value="" style="width:99%;" required/>
 			</div>
 			<div class="form-group">
-				<input type="email" name="email" class="form-control" placeholder="Email" value="" style="width:99%;" required/>
+					<input type="hidden" name="school_id" class="form-control" placeholder="" value="<?=$s['id']?>"/>
 			</div>
 			<div class="form-group">
-				<input type="password" name="password" class="form-control" placeholder="password" value="" style="width:99%;" required/>
+				<input type="text" name="username" class="form-control" placeholder="Username" value="" style="width:99%;"/>
 			</div>
 			<div class="form-group">
-				<input type="text" name="first_name" class="form-control" placeholder="First Name" value="" style="width:99%;" required/>
+				<input type="email" name="email" class="form-control" placeholder="Email" value="" style="width:99%;"/>
 			</div>
 			<div class="form-group">
-				<input type="text" name="last_name" class="form-control" placeholder="Last Name" value="" style="width:99%;" required/>
+				<input type="password" name="password" class="form-control" placeholder="password" value="" style="width:99%;"/>
+			</div>
+			<div class="form-group">
+				<input type="text" name="first_name" class="form-control" placeholder="First Name" value="" style="width:99%;" />
+			</div>
+			<div class="form-group">
+				<input type="text" name="last_name" class="form-control" placeholder="Last Name" value="" style="width:99%;" />
 			</div>
 			<div class="clear">
 				<button type="reset" class="delete-btn"></button>
 			</div>
 		</div>
 	</form>
-	<div id="list-principal">
+	<form id="update-form-principal" class="hidden">
+		<div class="update-form">
+			<p>Edit Principal</p>
+			<div class="form-group">
+				<input type="text" name="username" class="form-control" placeholder="Username" value="" style="width:99%;" />
+			</div>
+			<div class="form-group">
+				<input type="email" name="email" class="form-control" placeholder="Email" value="" style="width:99%;" />
+			</div>
+			<div class="form-group">
+				<input type="password" name="password" class="form-control" placeholder="Password" value="" style="width:99%;" />
+			</div>
+			<div class="form-group">
+				<input type="text" name="first_name" class="form-control" placeholder="First Name" value="" style="width:99%;" />
+			</div>
+			<div class="form-group">
+				<input type="text" name="last_name" class="form-control" placeholder="Last Name" value="" style="width:99%;" />
+			</div>
+			<button type="reset" class="delete-btn"></button>
+		</div>
+		<button type="submit" class="btn btn-primary">Save</button>
+	</form>
+
+
+	<div class="list-principal">
 		<ul class="list-principal-data">
 	<?
 			if (isset($principal)){
 				foreach ($principal as $p) {
 	?>
-				<li class="principal" data-id="<?=$p['id']['active']?>">
+				<li class="principal" data-login-id="principal-<?=$p['login_id']?>" data-id="<?=$p['id']?>">
 					<p class="username"><?=$p['username']?></p>
 					<p class="email"><?=$p['email']?></p>
 					<p class="fullname"><?=$p['first_name']?> <?=$p['last_name']?></p>
-					<input type="hidden" id="principal_login_id" value="<?=$p['login_id']?>" />
-					<button type"button" class="btn btn-danger delete">Delete</button>
+					<input type="hidden" class="principal_login_id" value="<?=$p['login_id']?>" />
+					<button type="button" class="btn btn-danger delete">Delete</button>
+					<button type="button" class="btn btn-primary edit-principal">Edit</button>
 				</li>
 	<?
 				}
@@ -111,7 +139,6 @@
 	?>
 			</ul>
 	</div>
-
 	<form id="edit-school-admin-form">
 		<div class="school-admin-form">
 			<div class="school-admin-header">
@@ -119,37 +146,64 @@
 				<button type="submit" class="add-school-admin">Add</button>
 			</div>
 			<div class="form-group">
-				<input type="text" id="school_admin_username" name="username" class="form-control" placeholder="Username" value="" style="width:99%;" required />
+					<input type="hidden" name="school_id" class="form-control" placeholder="" value="<?=$s['id']?>"/>
 			</div>
 			<div class="form-group">
-				<input type="email" id="school_admin_email" name="email" class="form-control" placeholder="Email" value="" style="width:99%;" required/>
+				<input type="text" id="school_admin_username" name="username" class="form-control" placeholder="Username" value="" style="width:99%;" />
 			</div>
 			<div class="form-group">
-				<input type="password" id="school_admin_password" name="password" class="form-control" placeholder="Password" value="" style="width:99%;" required/>
+				<input type="email" id="school_admin_email" name="email" class="form-control" placeholder="Email" value="" style="width:99%;">
 			</div>
 			<div class="form-group">
-				<input type="text" id="school_admin_first_name" name="first_name" class="form-control" placeholder="First Name" value="" style="width:99%;" required/>
+				<input type="password" id="school_admin_password" name="password" class="form-control" placeholder="Password" value="" style="width:99%;">
 			</div>
 			<div class="form-group">
-				<input type="text" id="school_admin_last_name" name="last_name" class="form-control" placeholder="Last Name" value="" style="width:99%;" required/>
+				<input type="text" id="school_admin_first_name" name="first_name" class="form-control" placeholder="First Name" value="" style="width:99%;"/>
+			</div>
+			<div class="form-group">
+				<input type="text" id="school_admin_last_name" name="last_name" class="form-control" placeholder="Last Name" value="" style="width:99%;"/>
 			</div>
 			<div class="clear">
 				<button type="reset" class="delete-btn"></button>
 			</div>
 		</div>
 	 </form>
+	<form id="update-form" class="hidden">
+		<div class="update-form">
+			<p>Edit School Admin</p>
+			<div class="form-group">
+				<input type="text" name="username" class="form-control" placeholder="Username" value="" style="width:99%;" />
+			</div>
+			<div class="form-group">
+				<input type="email" name="email" class="form-control" placeholder="Email" value="" style="width:99%;" />
+			</div>
+			<div class="form-group">
+				<input type="password" name="password" class="form-control" placeholder="Password" value="" style="width:99%;" />
+			</div>
+			<div class="form-group">
+				<input type="text" name="first_name" class="form-control" placeholder="First Name" value="" style="width:99%;" />
+			</div>
+			<div class="form-group">
+				<input type="text" name="last_name" class="form-control" placeholder="Last Name" value="" style="width:99%;" />
+			</div>
+			<button type="reset" class="delete-btn"></button>
+		</div>
+		<button type="submit" class="btn btn-primary">Save</button>
+	</form>
 	<div id="list-school-admin">
 		<ul class="list-school-admin-data">
 	<?
 			if (isset($school_admin)){
 				foreach ($school_admin as $sa) {
 	?>
-				<li class="school-admin" data-id="<?=$sa['id']?>">
+				<li class="school-admin"  data-login-id="school-admin-<?=$sa['login_id']?>" data-id="<?=$sa['id']?>">
 					<p class="username"><?=$sa['username']?></p>
 					<p class="email"><?=$sa['email']?></p>
 					<p class="fullname"><?=$sa['first_name']?> <?=$sa['last_name']?></p>
 					<input type="hidden" id="school_admin_login_id" value="<?=$sa['login_id']?>" />
 					<button type"button" class="btn btn-danger delete">Delete</button>
+					<button type="button" class="btn btn-primary edit-school-admin">Edit</button>
+
 				</li>
 	<?
 				}
