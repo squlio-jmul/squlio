@@ -34,7 +34,7 @@ define([
 
 
 		SQ.mixin(_me, new Broadcaster(['edit_school', 'delete_principal', 'delete_principal_preview', 'delete_school_admin','delete_school_admin_preview',
-			'add_principal', 'add_school_admin', 'update_principal']));
+			'add_principal', 'add_school_admin', 'update_principal', 'update_school_admin']));
 
 		(function _init() {
 		})();
@@ -207,15 +207,55 @@ define([
 				}
 			});
 
+			_$edit_school_form.find('#update-form').validate({
+				rules: {
+					'username': {
+						required: true,
+						remote: {
+							url: '/ajax/login/usernameNotExist',
+							type: 'post'
+						}
+					},
+					'email': {
+						required: true,
+						remote: {
+							url: '/ajax/login/emailNotExist',
+							type: 'post'
+						}
+					},
+					'first_name': {
+						required: true
+					},
+					'last_name': {
+						required: true
+					}
+				},
+				messages: {
+					'username': {
+						remote: 'Username has been taken'
+					},
+					'email': {
+						remote: 'Email has been taken'
+					}
+				},
+				submitHandler: function(form) {
+					var _update_school_admin_data = _util.serializeJSON($(form));
+					console.log(_update_school_admin_data);
+					_me.broadcast('update_school_admin', _update_school_admin_data);
+					$(form).trigger('reset');
+				}
+			});
+
 			_$edit_school_form.find('.delete').on('click', function() {
 				var _$self = $(this);
 				var _delete_principal_data = _$self.closest('.principal').find('.principal_login_id').val();
+				console.log(_delete_principal_data);
 				_me.broadcast('delete_principal', _delete_principal_data);
 			});
 
 			_$edit_school_form.find('.delete').on('click', function() {
 				var _$self = $(this);
-				var _delete_school_admin_data = _$self.closest('.school-admin').find('#school_admin_login_id').val();
+				var _delete_school_admin_data = _$self.closest('.school-admin').find('.school_admin_login_id').val();
 				_me.broadcast('delete_school_admin', _delete_school_admin_data);
 			});
 
@@ -237,6 +277,20 @@ define([
 
 			});
 			_$edit_school_form.find('.edit-school-admin').on('click', function() {
+				var _$self= $(this);
+				var login_id = _$self.closest('.school-admin').find('.school_admin_login_id').val();
+				var school_admin_id = _$self.closest('.school-admin').find('.school_admin_id').val();
+				var username = _$self.closest('.school-admin').find('.username').text();
+				var email = _$self.closest('.school-admin').find('.email').text();
+				var first_name = _$self.closest('.school-admin').find('.first_name').text();
+				var last_name = _$self.closest('.school-admin').find('.last_name').text();
+				console.log(login_id);
+				_$edit_school_form.find('#update-form input[name="login_id"]').val(login_id);
+				_$edit_school_form.find('#update-form input[name="school_admin_id"]').val(school_admin_id);
+				_$edit_school_form.find('#update-form input[name="username"]').val(username);
+				_$edit_school_form.find('#update-form input[name="email"]').val(email);
+				_$edit_school_form.find('#update-form input[name="first_name"]').val(first_name);
+				_$edit_school_form.find('#update-form input[name="last_name"]').val(last_name);
 				_$edit_school_form.find('#update-form').removeClass('hidden');
 			});
 
@@ -246,8 +300,13 @@ define([
 		this.displayAddSuccessPrincipal = function(principal_data) {
 			var login_id = principal_data[0];
 			var data = principal_data[1];
+			var principal_id = principal_data[2];
+			data.principal_id = principal_id;
+			data.login_id = login_id;
 			var _$preview_principal = $(_.template(PrincipalTemplate, {principal: data}));
 			console.log(data);
+			console.log(login_id);
+			console.log(principal_id);
 			_$edit_school_form.find('.list-principal').append(_$preview_principal);
 
 			_$preview_principal.find('.delete').on('click', function() {
@@ -256,12 +315,29 @@ define([
 				console.log(_delete_principal_data);
 				_me.broadcast('delete_principal_preview', _delete_principal_data);
 			});
+
+			_$preview_principal.find('.edit').on('click', function() {
+				var username = _$preview_principal.find('.username').text();
+				var email = _$preview_principal.find('.email').text();
+				var first_name = _$preview_principal.find('.first_name').text();
+				var last_name = _$preview_principal.find('.last_name').text();
+				_$edit_school_form.find('#update-form-principal input[name="login_id"]').val(login_id);
+				_$edit_school_form.find('#update-form-principal input[name="principal_id"]').val(principal_id);
+				_$edit_school_form.find('#update-form-principal input[name="username"]').val(username);
+				_$edit_school_form.find('#update-form-principal input[name="email"]').val(email);
+				_$edit_school_form.find('#update-form-principal input[name="first_name"]').val(first_name);
+				_$edit_school_form.find('#update-form-principal input[name="last_name"]').val(last_name);
+				_$edit_school_form.find('#update-form-principal').removeClass('hidden');
+			});
 		}
 
 		this.displayAddSuccessSchoolAdmin = function(school_admin_data) {
 			var login_id = school_admin_data[0];
 			var data = school_admin_data[1];
-			var _$preview_school_admin = $(_.template(SchoolAdminTemplate, {school_admin: data, login_id: login_id}));
+			var school_admin_id = school_admin_data[2];
+			data.school_admin_id = school_admin_id;
+			data.login_id = login_id;
+			var _$preview_school_admin = $(_.template(SchoolAdminTemplate, {school_admin: data}));
 			console.log(data);
 			console.log(login_id);
 			_$edit_school_form.find('#list-school-admin').append(_$preview_school_admin);
@@ -271,6 +347,23 @@ define([
 				var _delete_school_admin_data = [login_id, data.username];
 				console.log(_delete_school_admin_data);
 				_me.broadcast('delete_school_admin_preview', _delete_school_admin_data);
+			});
+
+			_$preview_school_admin.find('.edit').on('click', function() {
+				console.log('test');
+				var username = _$preview_school_admin.find('.username').text();
+				var email = _$preview_school_admin.find('.email').text();
+				var first_name = _$preview_school_admin.find('.first_name').text();
+				var last_name = _$preview_school_admin.find('.last_name').text();
+				console.log(username);
+				_$edit_school_form.find('#update-form input[name="login_id"]').val(login_id);
+				_$edit_school_form.find('#update-form input[name="school_admin_id"]').val(school_admin_id);
+				_$edit_school_form.find('#update-form input[name="username"]').val(username);
+				_$edit_school_form.find('#update-form input[name="email"]').val(email);
+				_$edit_school_form.find('#update-form input[name="first_name"]').val(first_name);
+				_$edit_school_form.find('#update-form input[name="last_name"]').val(last_name);
+				_$edit_school_form.find('#update-form').removeClass('hidden');
+
 			});
 		}
 
@@ -285,9 +378,44 @@ define([
 				_login_id.find('p.email').replaceWith('<p>'+data.email+'</p>');
 				_login_id.find('p.first_name').replaceWith('<p>'+data.first_name+'</p>');
 				_login_id.find('p.last_name').replaceWith('<p>'+data.last_name+'</p>');
+			}
+		}
 
+		this.displayEditSchoolAdminSuccess = function(data) {
+			console.log(data);
+			var login_id = data.login_id;
+			console.log(login_id);
+			var _login_id = _$edit_school_form.find('li.school-admin[data-login-id="school-admin-'+login_id+'"]');
+			console.log(_login_id);
+			if (_login_id.length > 0) {
+				_login_id.find('p.username').replaceWith('<p>'+data.username+'</p>');
+				_login_id.find('p.email').replaceWith('<p>'+data.email+'</p>');
+				_login_id.find('p.first_name').replaceWith('<p>'+data.first_name+'</p>');
+				_login_id.find('p.last_name').replaceWith('<p>'+data.last_name+'</p>');
+			}
+		}
 
+		this.displayEditPrincipalPreviewSuccess = function(data) {
+			console.log(data);
+			var principal_id = data.principal_id;
+			console.log(principal_id);
+			var new_principal = $(_.template(PrincipalTemplate, {principal: data}));
+			var old_principal = _$edit_school_form.find('.principal-container[data-id="'+principal_id+'"]');
+			console.log(_old_principal);
+			if (_old_principal.length > 0) {
+				old_principal.html(new_principal);
+			}
+		}
 
+		this.displayEditSchoolAdminPreviewSuccess = function(data) {
+			console.log(data);
+			var school_admin_id = data.school_admin_id;
+			console.log(school_admin_id);
+			var new_principal = $(_.template(SchoolAdminTemplate, {school_admin: data}));
+			var old_principal = _$edit_school_form.find('.school-admin-container[data-id="'+school_admin_id+'"]');
+			console.log(_old_principal);
+			if (_old_principal.length > 0) {
+				old_principal.html(new_principal);
 			}
 		}
 

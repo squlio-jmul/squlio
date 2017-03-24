@@ -93,4 +93,14 @@ class School_admin_library extends SQ_Library {
 		return $this->_ci->School_admin_model->getActiveCountBySchoolId($school_id);
 	}
 
+	public function update($school_admin_id, $school_admin_data) {
+		try {
+			if ($school_admin = $this->_ci->School_admin_model->update($school_admin_id, $school_admin_data)) {
+				return $school_admin;
+			}
+			return false;
+		} catch(Exception $err) {
+			die($err->getMessage());
+		}
+	}
 }

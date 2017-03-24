@@ -40,6 +40,7 @@ define([
 			_editSchoolForm.setListener('add_principal', _addPrincipal);
 			_editSchoolForm.setListener('add_school_admin', _addSchoolAdmin);
 			_editSchoolForm.setListener('update_principal', _updatePrincipal);
+			_editSchoolForm.setListener('update_school_admin', _updateSchoolAdmin);
 		})();
 
 		function _edit_school(data) {
@@ -79,7 +80,7 @@ define([
 			_principalModel.addPrincipal(data.school_id, data.username, data.email, data.password, data.first_name, data.last_name).then(
 				function (response) {
 					if (response.success) {
-						var principal_data = [response.login_id, data];
+						var principal_data = [response.login_id, data, response.principal_id];
 						console.log(principal_data);
 						_editSchoolForm.displayAddSuccessPrincipal(principal_data);
 						$.jGrowl('Principal successfully added', {header: 'Success'});
@@ -95,9 +96,9 @@ define([
 			_schoolAdminModel.addSchoolAdmin(data.school_id, data.username, data.email, data.password, data.first_name, data.last_name).then(
 				function (response) {
 					if (response.success) {
-						var school_admin_data = [response.login_id, data];
+						var school_admin_data = [response.login_id, data, response.school_admin_id];
 						_editSchoolForm.displayAddSuccessSchoolAdmin(school_admin_data);
-						$.jGrowl('School Admin successfully added', {header: 'Success'});
+						$.jGrowl('School admin successfully added', {header: 'Success'});
 					} else {
 						$.jGrowl('School Admin could not be added', {header: 'Error'});
 					}
@@ -113,13 +114,32 @@ define([
 						console.log(data);
 						console.log(data.login_id);
 						_editSchoolForm.displayEditPrincipalSuccess(data);
-						$.jGrowl('Principal successfully added', {header: 'Success'});
+						_editSchoolForm.displayEditPrincipalPreviewSuccess(data);
+						$.jGrowl('Principal successfully updated', {header: 'Success'});
 					} else {
-						$.jGrowl('Principal could not be added', {header: 'Error'});
+						$.jGrowl('Principal could not be update', {header: 'Error'});
 					}
 				}
 			);
 		}
+
+		function _updateSchoolAdmin(data) {
+			console.log(data);
+			_schoolAdminModel.updateSchoolAdmin(data.school_id, data.login_id, data.school_admin_id, data.username, data.email, data.first_name, data.last_name).then(
+					function (response) {
+					if (response) {
+						console.log(data);
+						console.log(data.login_id);
+						_editSchoolForm.displayEditSchoolAdminSuccess(data);
+						_editSchoolForm.displayEditSchoolAdminPreviewSuccess(data);
+						$.jGrowl('School admin successfully updated', {header: 'Success'});
+					} else {
+						$.jGrowl('School admin could not be update', {header: 'Error'});
+					}
+				}
+			);
+		}
+
 
 		function _delete_principal(login_id) {
 			console.log(login_id);

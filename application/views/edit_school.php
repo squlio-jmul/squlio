@@ -107,7 +107,6 @@
 			<div class="form-group">
 				<input type="hidden" name="principal_id" class="form-control" placeholder="" value="" style="width:99%;" />
 			</div>
-
 			<div class="form-group">
 				<input type="text" name="username" class="form-control" placeholder="Username" value="" style="width:99%;" />
 			</div>
@@ -181,13 +180,19 @@
 		<div class="update-form">
 			<p>Edit School Admin</p>
 			<div class="form-group">
+					<input type="hidden" name="school_id" class="form-control" placeholder="" value="<?=$s['id']?>"/>
+			</div>
+			<div class="form-group">
+				<input type="hidden" name="login_id" class="form-control" placeholder="" value="" style="width:99%;" />
+			</div>
+			<div class="form-group">
+				<input type="hidden" name="school_admin_id" class="form-control" placeholder="" value="" style="width:99%;" />
+			</div>
+			<div class="form-group">
 				<input type="text" name="username" class="form-control" placeholder="Username" value="" style="width:99%;" />
 			</div>
 			<div class="form-group">
 				<input type="email" name="email" class="form-control" placeholder="Email" value="" style="width:99%;" />
-			</div>
-			<div class="form-group">
-				<input type="password" name="password" class="form-control" placeholder="Password" value="" style="width:99%;" />
 			</div>
 			<div class="form-group">
 				<input type="text" name="first_name" class="form-control" placeholder="First Name" value="" style="width:99%;" />
@@ -208,8 +213,10 @@
 				<li class="school-admin"  data-login-id="school-admin-<?=$sa['login_id']?>" data-id="<?=$sa['id']?>">
 					<p class="username"><?=$sa['username']?></p>
 					<p class="email"><?=$sa['email']?></p>
-					<p class="fullname"><?=$sa['first_name']?> <?=$sa['last_name']?></p>
-					<input type="hidden" id="school_admin_login_id" value="<?=$sa['login_id']?>" />
+					<p class="first_name"><?=$sa['first_name']?></p>
+					<p class="last_name"><?=$sa['last_name']?></p>
+					<input type="hidden" class="school_admin_id" value="<?=$sa['id']?>" />
+					<input type="hidden" class="school_admin_login_id" value="<?=$sa['login_id']?>" />
 					<button type"button" class="btn btn-danger delete">Delete</button>
 					<button type="button" class="btn btn-primary edit-school-admin">Edit</button>
 
