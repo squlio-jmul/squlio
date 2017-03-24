@@ -73,7 +73,7 @@
 				 <button type="submit" class="add-principal">Add</button>
 			</div>
 			<div class="form-group">
-					<input type="hidden" name="school_id" class="form-control" placeholder="" value="<?=$s['id']?>"/>
+				<input type="hidden" name="school_id" class="form-control" placeholder="" value="<?=$s['id']?>"/>
 			</div>
 			<div class="form-group">
 				<input type="text" name="username" class="form-control" placeholder="Username" value="" style="width:99%;"/>
@@ -99,13 +99,20 @@
 		<div class="update-form">
 			<p>Edit Principal</p>
 			<div class="form-group">
+					<input type="hidden" name="school_id" class="form-control" placeholder="" value="<?=$s['id']?>"/>
+			</div>
+			<div class="form-group">
+				<input type="hidden" name="login_id" class="form-control" placeholder="" value="" style="width:99%;" />
+			</div>
+			<div class="form-group">
+				<input type="hidden" name="principal_id" class="form-control" placeholder="" value="" style="width:99%;" />
+			</div>
+
+			<div class="form-group">
 				<input type="text" name="username" class="form-control" placeholder="Username" value="" style="width:99%;" />
 			</div>
 			<div class="form-group">
 				<input type="email" name="email" class="form-control" placeholder="Email" value="" style="width:99%;" />
-			</div>
-			<div class="form-group">
-				<input type="password" name="password" class="form-control" placeholder="Password" value="" style="width:99%;" />
 			</div>
 			<div class="form-group">
 				<input type="text" name="first_name" class="form-control" placeholder="First Name" value="" style="width:99%;" />
@@ -128,7 +135,9 @@
 				<li class="principal" data-login-id="principal-<?=$p['login_id']?>" data-id="<?=$p['id']?>">
 					<p class="username"><?=$p['username']?></p>
 					<p class="email"><?=$p['email']?></p>
-					<p class="fullname"><?=$p['first_name']?> <?=$p['last_name']?></p>
+					<p class="first_name"><?=$p['first_name']?></p>
+					<p class="last_name"> <?=$p['last_name']?></p>
+					<input type="hidden" class="principal_id" value="<?=$p['id']?>" />
 					<input type="hidden" class="principal_login_id" value="<?=$p['login_id']?>" />
 					<button type="button" class="btn btn-danger delete">Delete</button>
 					<button type="button" class="btn btn-primary edit-principal">Edit</button>

@@ -80,6 +80,32 @@ define(
 				return _deferred.promise;
 			};
 
+			this.updatePrincipal = function(school_id, login_id, principal_id, username, email, first_name, last_name) {
+				var _deferred = Q.defer();
+				var data = {
+					school_id: school_id,
+					login_id: login_id,
+					principal_id: principal_id,
+					username: username,
+					email: email,
+					first_name: first_name,
+					last_name: last_name
+				};
+				$.ajax({
+					url: '/ajax/principal/update',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(response, textStatus, jqXHR) {
+						_deferred.resolve(response.success);
+					},
+					error: function(response, textStatus, jqXHR) {
+						_deferred.reject(response);
+					}
+				});
+				return _deferred.promise;
+			}
+
 			this.deletePrincipal = function(login_id) {
 				var _deferred = Q.defer();
 				var data = {

@@ -33,7 +33,8 @@ define([
 		var _current_num_school_admin = 0;
 
 
-		SQ.mixin(_me, new Broadcaster(['edit_school', 'delete_principal', 'delete_principal_preview', 'delete_school_admin','delete_school_admin_preview', 'add_principal', 'add_school_admin']));
+		SQ.mixin(_me, new Broadcaster(['edit_school', 'delete_principal', 'delete_principal_preview', 'delete_school_admin','delete_school_admin_preview',
+			'add_principal', 'add_school_admin', 'update_principal']));
 
 		(function _init() {
 		})();
@@ -106,8 +107,6 @@ define([
 				submitHandler: function(form) {
 					_current_num_principal = parseInt(_$edit_school_form.find('.list-principal').find('.principal').length);
 					_allowed_num_principals = parseInt(_$edit_school_form.find('#account_type > option:selected').attr('data-num-principal'));
-					console.log(_current_num_principal);
-					console.log(_allowed_num_principals);
 					if (_current_num_principal >= _allowed_num_principals) {
 						$.jGrowl('You have exceeded the max number of principals', {header: 'Error'});
 						$(form).trigger('reset');
@@ -163,28 +162,77 @@ define([
 						return;
 					}
 					var _school_admin_data = _util.serializeJSON($(form));
-					console.log(_school_admin_data);
 					_me.broadcast('add_school_admin', _school_admin_data);
 					$(form).trigger('reset');
 
 				}
 			});
 
+			_$edit_school_form.find('#update-form-principal').validate({
+				rules: {
+					'username': {
+						required: true,
+						remote: {
+							url: '/ajax/login/usernameNotExist',
+							type: 'post'
+						}
+					},
+					'email': {
+						required: true,
+						remote: {
+							url: '/ajax/login/emailNotExist',
+							type: 'post'
+						}
+					},
+					'first_name': {
+						required: true
+					},
+					'last_name': {
+						required: true
+					}
+				},
+				messages: {
+					'username': {
+						remote: 'Username has been taken'
+					},
+					'email': {
+						remote: 'Email has been taken'
+					}
+				},
+				submitHandler: function(form) {
+					var _update_principal_data = _util.serializeJSON($(form));
+					console.log(_update_principal_data);
+					_me.broadcast('update_principal', _update_principal_data);
+					$(form).trigger('reset');
+				}
+			});
+
 			_$edit_school_form.find('.delete').on('click', function() {
 				var _$self = $(this);
 				var _delete_principal_data = _$self.closest('.principal').find('.principal_login_id').val();
-				console.log(_delete_principal_data);
 				_me.broadcast('delete_principal', _delete_principal_data);
 			});
 
 			_$edit_school_form.find('.delete').on('click', function() {
 				var _$self = $(this);
 				var _delete_school_admin_data = _$self.closest('.school-admin').find('#school_admin_login_id').val();
-				console.log(_delete_school_admin_data);
 				_me.broadcast('delete_school_admin', _delete_school_admin_data);
 			});
 
 			_$edit_school_form.find('.edit-principal').on('click', function() {
+				var _$self= $(this);
+				var login_id = _$self.closest('.principal').find('.principal_login_id').val();
+				var principal_id = _$self.closest('.principal').find('.principal_id').val();
+				var username = _$self.closest('.principal').find('.username').text();
+				var email = _$self.closest('.principal').find('.email').text();
+				var first_name = _$self.closest('.principal').find('.first_name').text();
+				var last_name = _$self.closest('.principal').find('.last_name').text();
+				_$edit_school_form.find('#update-form-principal input[name="login_id"]').val(login_id);
+				_$edit_school_form.find('#update-form-principal input[name="principal_id"]').val(principal_id);
+				_$edit_school_form.find('#update-form-principal input[name="username"]').val(username);
+				_$edit_school_form.find('#update-form-principal input[name="email"]').val(email);
+				_$edit_school_form.find('#update-form-principal input[name="first_name"]').val(first_name);
+				_$edit_school_form.find('#update-form-principal input[name="last_name"]').val(last_name);
 				_$edit_school_form.find('#update-form-principal').removeClass('hidden');
 
 			});
@@ -224,6 +272,23 @@ define([
 				console.log(_delete_school_admin_data);
 				_me.broadcast('delete_school_admin_preview', _delete_school_admin_data);
 			});
+		}
+
+		this.displayEditPrincipalSuccess = function(data) {
+			console.log(data);
+			var login_id = data.login_id;
+			console.log(login_id);
+			var _login_id = _$edit_school_form.find('li.principal[data-login-id="principal-'+login_id+'"]');
+			console.log(_login_id);
+			if (_login_id.length > 0) {
+				_login_id.find('p.username').replaceWith('<p>'+data.username+'</p>');
+				_login_id.find('p.email').replaceWith('<p>'+data.email+'</p>');
+				_login_id.find('p.first_name').replaceWith('<p>'+data.first_name+'</p>');
+				_login_id.find('p.last_name').replaceWith('<p>'+data.last_name+'</p>');
+
+
+
+			}
 		}
 
 		this.deletePrincipal = function(login_id) {

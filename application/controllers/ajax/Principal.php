@@ -87,6 +87,41 @@ class Principal extends SQ_Controller {
 			$this->setResponseElement('success', false);
 		}
 		$this->sendResponse();
+	}
 
+		public function update() {
+			$login_id = $this->input->post('login_id');
+			$principal_id = $this->input->post('principal_id');
+
+			$update_login_data = array (
+			'email' => $this->input->post('email'),
+			'username' => $this->input->post('username'),
+			'type' => 'principal',
+			'token' => 'blah',
+			'active' => 1,
+			'deleted' => 0,
+			'reset_password' => 0,
+			'created_on' => new \DateTime('now'),
+			'last_updated' => new \DateTime('now')
+		);
+		if ($login = $this->login_library->update($login_id, $update_login_data)) {
+			$update_principal_data = array (
+				'school_id' => $this->input->post('school_id'),
+				'first_name' => $this->input->post('first_name'),
+				'last_name' => $this->input->post('last_name'),
+				'created_on' => new \DateTime('now'),
+				'last_updated' => new \DateTime('now')
+			);
+			if ($principal = $this->principal_library->update($principal_id, $update_principal_data)){
+				$this->setResponseElement('success', true);
+				$this->setResponseElement('principal', $principal);
+				$this->setResponseElement('login', $login);
+			} else {
+				$this->setResponseElement('success', false);
+			}
+		} else {
+			$this->setResponseElement('success', false);
+		}
+		$this->sendResponse();
 	}
 }

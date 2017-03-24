@@ -39,6 +39,7 @@ define([
 			_editSchoolForm.setListener('delete_school_admin', _delete_school_admin);
 			_editSchoolForm.setListener('add_principal', _addPrincipal);
 			_editSchoolForm.setListener('add_school_admin', _addSchoolAdmin);
+			_editSchoolForm.setListener('update_principal', _updatePrincipal);
 		})();
 
 		function _edit_school(data) {
@@ -94,11 +95,27 @@ define([
 			_schoolAdminModel.addSchoolAdmin(data.school_id, data.username, data.email, data.password, data.first_name, data.last_name).then(
 				function (response) {
 					if (response.success) {
-						var school_admin_data = [response.login_id, data]
+						var school_admin_data = [response.login_id, data];
 						_editSchoolForm.displayAddSuccessSchoolAdmin(school_admin_data);
 						$.jGrowl('School Admin successfully added', {header: 'Success'});
 					} else {
 						$.jGrowl('School Admin could not be added', {header: 'Error'});
+					}
+				}
+			);
+		}
+
+		function _updatePrincipal(data) {
+			console.log(data);
+			_principalModel.updatePrincipal(data.school_id, data.login_id, data.principal_id, data.username, data.email, data.first_name, data.last_name).then(
+					function (response) {
+					if (response) {
+						console.log(data);
+						console.log(data.login_id);
+						_editSchoolForm.displayEditPrincipalSuccess(data);
+						$.jGrowl('Principal successfully added', {header: 'Success'});
+					} else {
+						$.jGrowl('Principal could not be added', {header: 'Error'});
 					}
 				}
 			);
