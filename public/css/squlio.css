@@ -456,5 +456,30 @@ label.error {
 #update-form-principal {
 	margin-bottom: 30px;
 }
+.principal-container,
+.school-admin-container {
+	border: solid 1px;
+	margin-left: 15px;
+	margin-top: 20px;
+	padding: 20px;
+}
+.principal-container .fullname 
+.school-admin-container .fullname{
+	margin-bottom: 10px;
+}
+#preview-principal-container,
+#preview-school-admin-container, {
+	width: 75%;
+}
+
+
+#school-admin-form,
+#school-admin-forget-password {
+	display:none;
+}
+#school-admin-form.form-active,
+#school-admin-forget-password.form-active{
+	display:block
+}
 
 

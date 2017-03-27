@@ -12,10 +12,10 @@ define([
 ) {
 	'use strict';
 
-	return function AdminForm() {
+	return function SchoolAdminForm() {
 		var _me = this;
 		var _util = new Util();
-		var _$admin_form = null;
+		var _$school_admin_form = null;
 
 		SQ.mixin(_me, new Broadcaster(['verify_login']));
 
@@ -23,13 +23,13 @@ define([
 		})();
 
 		this.initialize = function($e) {
-			_$admin_form = $e;
-			_$admin_form.find('#admin-form').validate({
+			_$school_admin_form = $e;
+			_$school_admin_form.find('#school-admin-form').validate({
 				rules: {
 					'email': {
 						required: true,
 						remote: {
-							url: '/ajax/login/emailExist',
+							url: 'ajax/admin/emailExist',
 							type: 'post'
 						}
 					},
@@ -47,7 +47,7 @@ define([
 					_me.broadcast('verify_login', _login_data);
 				}
 			});
-			_$admin_form.find('#admin-forget-password').validate({
+			_$school_admin_form.find('#school-admin-forget-password').validate({
 				rules: {
 					'email': {
 						required: true
@@ -58,22 +58,22 @@ define([
 					_me.broadcast('verify_login', _email);
 				}
 			});
-			_$admin_form.find("a.forget-password").click(function(){
-				_$admin_form.find("#admin-form").removeClass("form-active");
-				_$admin_form.find("#admin-forget-password").addClass("form-active");
+			_$school_admin_form.find("a.forget-password").click(function(){
+				_$school_admin_form.find("#school-admin-form").removeClass("form-active");
+				_$school_admin_form.find("#school-admin-forget-password").addClass("form-active");
 			});
-			_$admin_form.find("a.login-link").click(function(){
-				_$admin_form.find("#admin-forget-password").removeClass("form-active");
-				_$admin_form.find("#admin-form").addClass("form-active");
+			_$school_admin_form.find("a.login-link").click(function(){
+				_$school_admin_form.find("#school-admin-forget-password").removeClass("form-active");
+				_$school_admin_form.find("#school-admin-form").addClass("form-active");
 			});
 		};
 
 		this.clearError = function() {
-			_$admin_form.find('.error-container').empty();
+			_$school_admin_form.find('.error-container').empty();
 		};
 
 		this.displayError = function(error_msg) {
-			_$admin_form.find('.error-container').text(error_msg);
+			_$school_admin_form.find('.error-container').text(error_msg);
 		};
 	}
 });

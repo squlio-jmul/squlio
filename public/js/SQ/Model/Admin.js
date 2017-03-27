@@ -44,7 +44,7 @@ define(
 					password: password
 				};
 				$.ajax({
-					url: 'ajax/admin/verifyLogin',
+					url: 'ajax/login/verifyLogin',
 					type: 'post',
 					dataType: 'json',
 					data: data,

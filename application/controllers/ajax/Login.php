@@ -25,9 +25,9 @@ class Login extends SQ_Controller {
 	}
 
 	public function verifyLogin() {
-		$email = $this->input->post('username');
+		$email = $this->input->post('email');
 		$password = $this->input->post('password');
-		$login_response = $this->login_library->verifyLogin($username, $password);
+		$login_response = $this->login_library->verifyLogin($email, $password);
 
 		$this->setResponseElement('success', $login_response['success']);
 		if($login_response['success']){
@@ -46,6 +46,18 @@ class Login extends SQ_Controller {
 			echo 'true';
 		}
 		return;
+	}
+
+	public function emailExist() {
+		$email = $this->input->post('email');
+
+		$exist = $this->login_library->emailExist($email);
+		if ($exist) {
+			echo 'true';
+		} else {
+			echo 'false';
+		}
+		die();
 	}
 
 	public function emailNotExist() {
