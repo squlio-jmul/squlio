@@ -80,13 +80,14 @@ define(
 				return _deferred.promise;
 			};
 
-			this.updatePrincipal = function(school_id, login_id, principal_id, username, email, first_name, last_name) {
+			this.updatePrincipal = function(school_id, login_id, principal_id, username, password, email, first_name, last_name) {
 				var _deferred = Q.defer();
 				var data = {
 					school_id: school_id,
 					login_id: login_id,
 					principal_id: principal_id,
 					username: username,
+					password: password,
 					email: email,
 					first_name: first_name,
 					last_name: last_name

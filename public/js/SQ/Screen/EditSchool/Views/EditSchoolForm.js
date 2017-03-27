@@ -201,7 +201,6 @@ define([
 				},
 				submitHandler: function(form) {
 					var _update_principal_data = _util.serializeJSON($(form));
-					console.log(_update_principal_data);
 					_me.broadcast('update_principal', _update_principal_data);
 					$(form).trigger('reset');
 				}
@@ -240,7 +239,6 @@ define([
 				},
 				submitHandler: function(form) {
 					var _update_school_admin_data = _util.serializeJSON($(form));
-					console.log(_update_school_admin_data);
 					_me.broadcast('update_school_admin', _update_school_admin_data);
 					$(form).trigger('reset');
 				}
@@ -249,7 +247,6 @@ define([
 			_$edit_school_form.find('.delete').on('click', function() {
 				var _$self = $(this);
 				var _delete_principal_data = _$self.closest('.principal').find('.principal_login_id').val();
-				console.log(_delete_principal_data);
 				_me.broadcast('delete_principal', _delete_principal_data);
 			});
 
@@ -284,7 +281,6 @@ define([
 				var email = _$self.closest('.school-admin').find('.email').text();
 				var first_name = _$self.closest('.school-admin').find('.first_name').text();
 				var last_name = _$self.closest('.school-admin').find('.last_name').text();
-				console.log(login_id);
 				_$edit_school_form.find('#update-form input[name="login_id"]').val(login_id);
 				_$edit_school_form.find('#update-form input[name="school_admin_id"]').val(school_admin_id);
 				_$edit_school_form.find('#update-form input[name="username"]').val(username);
@@ -304,9 +300,6 @@ define([
 			data.principal_id = principal_id;
 			data.login_id = login_id;
 			var _$preview_principal = $(_.template(PrincipalTemplate, {principal: data}));
-			console.log(data);
-			console.log(login_id);
-			console.log(principal_id);
 			_$edit_school_form.find('#preview-principal').append(_$preview_principal);
 
 			_$preview_principal.find('.delete').on('click', function() {
@@ -343,7 +336,6 @@ define([
 			_$preview_school_admin.find('.delete').on('click', function() {
 				var _$self = $(this);
 				var _delete_school_admin_data = [login_id, data.username];
-				console.log(_delete_school_admin_data);
 				_me.broadcast('delete_school_admin_preview', _delete_school_admin_data);
 			});
 
@@ -353,7 +345,6 @@ define([
 				var email = _$preview_school_admin.find('.email').text();
 				var first_name = _$preview_school_admin.find('.first_name').text();
 				var last_name = _$preview_school_admin.find('.last_name').text();
-				console.log(username);
 				_$edit_school_form.find('#update-form input[name="login_id"]').val(login_id);
 				_$edit_school_form.find('#update-form input[name="school_admin_id"]').val(school_admin_id);
 				_$edit_school_form.find('#update-form input[name="username"]').val(username);
@@ -366,11 +357,8 @@ define([
 		}
 
 		this.displayEditPrincipalSuccess = function(data) {
-			console.log(data);
 			var login_id = data.login_id;
-			console.log(login_id);
 			var _login_id = _$edit_school_form.find('li.principal[data-login-id="principal-'+login_id+'"]');
-			console.log(_login_id);
 			if (_login_id.length > 0) {
 				_login_id.find('p.username').replaceWith('<p>'+data.username+'</p>');
 				_login_id.find('p.email').replaceWith('<p>'+data.email+'</p>');
@@ -380,11 +368,8 @@ define([
 		}
 
 		this.displayEditSchoolAdminSuccess = function(data) {
-			console.log(data);
 			var login_id = data.login_id;
-			console.log(login_id);
 			var _login_id = _$edit_school_form.find('li.school-admin[data-login-id="school-admin-'+login_id+'"]');
-			console.log(_login_id);
 			if (_login_id.length > 0) {
 				_login_id.find('p.username').replaceWith('<p>'+data.username+'</p>');
 				_login_id.find('p.email').replaceWith('<p>'+data.email+'</p>');
@@ -394,33 +379,24 @@ define([
 		}
 
 		this.displayEditPrincipalPreviewSuccess = function(data) {
-			console.log(data);
 			var principal_id = data.principal_id;
-			console.log(principal_id);
 			var new_principal = $(_.template(PrincipalTemplate, {principal: data}));
 			var old_principal = _$edit_school_form.find('.principal-container[data-id="'+principal_id+'"]');
-			console.log(_old_principal);
 			if (_old_principal.length > 0) {
 				old_principal.html(new_principal);
 			}
 		}
 
 		this.displayEditSchoolAdminPreviewSuccess = function(data) {
-			console.log(data);
 			var school_admin_id = data.school_admin_id;
-			console.log(school_admin_id);
-			var new_principal = $(_.template(SchoolAdminTemplate, {school_admin: data}));
 			var old_principal = _$edit_school_form.find('.school-admin-container[data-id="'+school_admin_id+'"]');
-			console.log(_old_principal);
 			if (_old_principal.length > 0) {
 				old_principal.html(new_principal);
 			}
 		}
 
 		this.deletePrincipal = function(login_id) {
-			console.log(login_id);
 			var _login_id = _$edit_school_form.find('li.principal[data-login-id="principal-'+login_id+'"]');
-			console.log(_login_id);
 			if (_login_id.length > 0){
 				_login_id.remove();
 			}
@@ -430,16 +406,13 @@ define([
 			var login_id = data[0];
 			var username = data[1];
 			var _username = _$edit_school_form.find('div[data-username="'+username+'"]');
-			console.log(_username);
 			if (_username.length > 0){
 				_username.remove();
 			}
 		}
 
 		this.deleteSchoolAdmin = function(login_id) {
-			console.log(login_id);
 			var _login_id = _$edit_school_form.find('li.school-admin[data-login-id="school-admin-'+login_id+'"]');
-			console.log(_login_id);
 			if (_login_id.length > 0) {
 				_login_id.remove();
 			}
@@ -449,7 +422,6 @@ define([
 			var login_id = data[0];
 			var username = data[1];
 			var _username = _$edit_school_form.find('div[data-username="'+username+'"]');
-			console.log(_username);
 			if (_username.length > 0) {
 				_username.remove();
 			}

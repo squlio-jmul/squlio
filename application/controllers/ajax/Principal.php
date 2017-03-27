@@ -96,6 +96,7 @@ class Principal extends SQ_Controller {
 			$update_login_data = array (
 			'email' => $this->input->post('email'),
 			'username' => $this->input->post('username'),
+			'password' => $this->input->post('password'),
 			'type' => 'principal',
 			'token' => 'blah',
 			'active' => 1,

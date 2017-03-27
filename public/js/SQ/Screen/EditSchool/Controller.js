@@ -107,12 +107,9 @@ define([
 		}
 
 		function _updatePrincipal(data) {
-			console.log(data);
-			_principalModel.updatePrincipal(data.school_id, data.login_id, data.principal_id, data.username, data.email, data.first_name, data.last_name).then(
+			_principalModel.updatePrincipal(data.school_id, data.login_id, data.principal_id, data.username, data.password, data.email, data.first_name, data.last_name).then(
 					function (response) {
 					if (response) {
-						console.log(data);
-						console.log(data.login_id);
 						_editSchoolForm.displayEditPrincipalSuccess(data);
 						_editSchoolForm.displayEditPrincipalPreviewSuccess(data);
 						$.jGrowl('Principal successfully updated', {header: 'Success'});
@@ -125,11 +122,9 @@ define([
 
 		function _updateSchoolAdmin(data) {
 			console.log(data);
-			_schoolAdminModel.updateSchoolAdmin(data.school_id, data.login_id, data.school_admin_id, data.username, data.email, data.first_name, data.last_name).then(
+			_schoolAdminModel.updateSchoolAdmin(data.school_id, data.login_id, data.school_admin_id, data.username, data.password, data.email, data.first_name, data.last_name).then(
 					function (response) {
 					if (response) {
-						console.log(data);
-						console.log(data.login_id);
 						_editSchoolForm.displayEditSchoolAdminSuccess(data);
 						_editSchoolForm.displayEditSchoolAdminPreviewSuccess(data);
 						$.jGrowl('School admin successfully updated', {header: 'Success'});

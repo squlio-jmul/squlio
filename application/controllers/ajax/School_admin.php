@@ -107,6 +107,7 @@ class School_admin extends SQ_Controller {
 		$update_login_data = array (
 			'email' => $this->input->post('email'),
 			'username' => $this->input->post('username'),
+			'password' => $this->input->post('password'),
 			'type' => 'school_admin',
 			'token' => 'blah',
 			'active' => 1,

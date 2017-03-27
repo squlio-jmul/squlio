@@ -57,4 +57,16 @@ class Login extends SQ_Controller {
 		}
 		return;
 	}
+
+	public function editEmailNotExist() {
+		$email = $this->input->post('email');
+		$user_obj = $this->login_library->get(['id' =>$login_id]);
+		var_dump($user_obj);
+		if ($user_obj['email'] != $email && $login_obj = $this->login_library->get(array('email'=>$email))) {
+			echo 'false';
+		} else {
+			echo 'true';
+		}
+		return;
+	}
 }
