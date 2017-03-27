@@ -12,9 +12,9 @@
 			<tr>
 				<th>Id</th>
 				<th>Name</th>
-				<th>Principle</th>
+				<th>Principals</th>
 				<th>Admins</th>
-				<th>Teacher</th>
+				<th>Teachers</th>
 				<th>Students</th>
 				<th>classroom</th>
 				<th>status</th>

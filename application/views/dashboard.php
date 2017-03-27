@@ -13,7 +13,7 @@
 		<li class="status">
 			<div class="status-content">
 				<h2><?=$principal_amount?></h2>
-				<p>PRINCIPLES</p>
+				<p>PRINCIPALS</p>
 			</div>
 		</li>
 		<li class="status">

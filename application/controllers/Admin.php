@@ -28,18 +28,16 @@ class Admin extends SQ_Controller{
 
 	public function dashboard() {
 		$data = array(
-			'headerCss' => array(
-				'/public/css/bootstrap.min.css'
-				),
+			'headerCss' => array('/public/css/bootstrap.min.css'),
 			'headerJs' => array(),
 			'footerJs' => array(),
 			'requireJsDataSource' => 'dashboard',
 			'jsControllerParam' => false
 		);
 
-		$school_admin_obj['school_admin'] = $this->School_admin_model->get();
+		$school_admin_obj['school_admin'] = $this->Login_model->get(array('type'=>'school_admin', 'active'=>true, 'deleted'=>false));
 		$school_obj['school'] = $this->School_model->get();
-		$principal_obj['principal'] = $this->Principal_model->get();
+		$principal_obj['principal'] = $this->Login_model->get(array('type'=>'principal', 'active'=>true, 'deleted'=>false));
 
 		foreach ($school_admin_obj as $sa) {
 			$school_admin_amount['school_admin_amount'] = count($sa);
