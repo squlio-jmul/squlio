@@ -51,6 +51,20 @@ class Login extends SQ_Controller {
 	public function emailNotExist() {
 		$email = $this->input->post('email');
 		if ($login_obj = $this->login_library->get(array('email'=>$email))) {
+			var_dump($login_obj);
+			echo 'false';
+		} else {
+			echo 'true';
+		}
+		return;
+	}
+
+	public function editUsernameNotExist() {
+		$username = $this->input->post('username');
+		$login_id = $this->input->post('login_id');
+		$username_obj  = $this->login_library->get(array('username'=>$username));
+		$login_obj = $this->login_library->get(array('id'=>$login_id));
+		if ($username_obj[0]['username'] == $username && $login_obj[0]['id'] !=$login_id){
 			echo 'false';
 		} else {
 			echo 'true';
@@ -60,13 +74,15 @@ class Login extends SQ_Controller {
 
 	public function editEmailNotExist() {
 		$email = $this->input->post('email');
-		$user_obj = $this->login_library->get(['id' =>$login_id]);
-		var_dump($user_obj);
-		if ($user_obj['email'] != $email && $login_obj = $this->login_library->get(array('email'=>$email))) {
+		$login_id = $this->input->post('login_id');
+		$email_obj = $this->login_library->get(array('email'=>$email));
+		$login_obj = $this->login_library->get(array('id'=>$login_id));
+		if ($email_obj[0]['email'] == $email && $login_obj[0]['id'] != $login_id) {
 			echo 'false';
 		} else {
 			echo 'true';
 		}
 		return;
 	}
+
 }

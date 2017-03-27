@@ -173,15 +173,25 @@ define([
 					'username': {
 						required: true,
 						remote: {
-							url: '/ajax/login/usernameNotExist',
-							type: 'post'
+							url: '/ajax/login/editUsernameNotExist',
+							type: 'post',
+							data: {
+								login_id: function() {
+									return $('.login_id').val();
+								}
+							}
 						}
 					},
 					'email': {
 						required: true,
 						remote: {
-							url: '/ajax/login/emailNotExist',
-							type: 'post'
+							url: '/ajax/login/editEmailNotExist',
+							type: 'post',
+							data: {
+								login_id: function() {
+									return $('.login_id').val();
+								}
+							}
 						}
 					},
 					'first_name': {
@@ -211,15 +221,25 @@ define([
 					'username': {
 						required: true,
 						remote: {
-							url: '/ajax/login/usernameNotExist',
-							type: 'post'
+							url: '/ajax/login/editUsernameNotExist',
+							type: 'post',
+							data: {
+								login_id: function() {
+									return $('.login_id').val();
+								}
+							}
 						}
 					},
 					'email': {
 						required: true,
 						remote: {
-							url: '/ajax/login/emailNotExist',
-							type: 'post'
+							url: '/ajax/login/editEmailNotExist',
+							type: 'post',
+							data: {
+								login_id: function() {
+									return $('.login_id').val();
+								}
+							}
 						}
 					},
 					'first_name': {

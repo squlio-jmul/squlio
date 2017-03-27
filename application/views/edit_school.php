@@ -102,7 +102,7 @@
 					<input type="hidden" name="school_id" class="form-control" placeholder="" value="<?=$s['id']?>"/>
 			</div>
 			<div class="form-group">
-				<input type="text" name="login_id" class="form-control" placeholder="" value="" style="width:99%;" />
+				<input type="hidden" name="login_id" class="login_id" placeholder="" value="" style="width:99%;" />
 			</div>
 			<div class="form-group">
 				<input type="hidden" name="principal_id" class="form-control" placeholder="" value="" style="width:99%;" />
@@ -161,7 +161,7 @@
 					<input type="hidden" name="school_id" class="form-control" placeholder="" value="<?=$s['id']?>"/>
 			</div>
 			<div class="form-group">
-				<input type="text" id="school_admin_username" name="username" class="form-control" placeholder="Username" value="" style="width:99%;" />
+				<input type="hidden" id="school_admin_username" name="username" class="form-control" placeholder="Username" value="" style="width:99%;" />
 			</div>
 			<div class="form-group">
 				<input type="email" id="school_admin_email" name="email" class="form-control" placeholder="Email" value="" style="width:99%;">
@@ -187,7 +187,7 @@
 					<input type="hidden" name="school_id" class="form-control" placeholder="" value="<?=$s['id']?>"/>
 			</div>
 			<div class="form-group">
-				<input type="hidden" name="login_id" class="form-control" placeholder="" value="" style="width:99%;" />
+				<input type="text" name="login_id" class="login_id" placeholder="" value="" style="width:99%;" />
 			</div>
 			<div class="form-group">
 				<input type="hidden" name="school_admin_id" class="form-control" placeholder="" value="" style="width:99%;" />
