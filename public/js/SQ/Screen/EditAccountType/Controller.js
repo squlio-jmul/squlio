@@ -5,14 +5,16 @@ define([
 	'SQ/Model/Account_type',
 	'SQ/Screen/EditAccountType/Views/EditAccountTypeForm',
 	'ThirdParty/q',
-	'ThirdParty/jquery.validate'
+	'ThirdParty/jquery.validate',
+	'jgrowl'
 ], function(
 	$,
 	SQ,
 	Util,
 	EditAccountTypeModel,
 	EditAccountTypeForm,
-	Q
+	Q,
+	jGrowl
 ) {
 	'use strict';
 
@@ -24,16 +26,17 @@ define([
 
 		(function _init() {
 			_editAccountTypeForm.initialize($('.admin-main-content'));
-			_editAccountTypeForm.setListener('edit_type', _edit_type);
+			_editAccountTypeForm.setListener('edit_type', _editType);
 		})();
 
-		function _edit_type(data) {
+		function _editType(data) {
+			console.log(data.num_guardian);
 			_editAccountTypeModel.editType(data.id, data.name, data.display_name, data.num_principal, data.num_school_admin, data.num_teacher, data.num_classroom, data.num_guardian, data.num_student).then(
 				function(response) {
 					if (response.success) {
-						_editAccountTypeForm.displaySuccess('Data successfully edited');
+						$.jGrowl('Account type successfull updated<br /><br /><a href="/admin/settings">Click here to view your school</a>', {header: 'Success'});
 					} else {
-						_editAccountTypeForm.displayError('data cannot be inserted');
+						$.jGrowl('Unable to update account type', {header: 'Error'});
 					}
 				}
 			);

@@ -37,7 +37,5 @@
 			<input type="text" name="num_student" class="form-control" placeholder="Number of Student" value="" />
 		</div>
 		<button type="submit" class="btn btn-primary">Save</button>
-		<div id="success-container"></div>
-		<div class="error-container"></div>
 	</form>
 </div>

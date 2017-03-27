@@ -32,18 +32,18 @@ define([
 
 		(function _init() {
 			_editSchoolForm.initialize($('.admin-main-content'));
-			_editSchoolForm.setListener('edit_school', _edit_school);
-			_editSchoolForm.setListener('delete_principal', _delete_principal);
+			_editSchoolForm.setListener('edit_school', _editSchool);
+			_editSchoolForm.setListener('delete_principal', _deletePrincipal);
 			_editSchoolForm.setListener('delete_principal_preview', _deletePrincipalPreview);
 			_editSchoolForm.setListener('delete_school_admin_preview', _deleteSchoolAdminPreview);
-			_editSchoolForm.setListener('delete_school_admin', _delete_school_admin);
+			_editSchoolForm.setListener('delete_school_admin', _deleteSchoolAdmin);
 			_editSchoolForm.setListener('add_principal', _addPrincipal);
 			_editSchoolForm.setListener('add_school_admin', _addSchoolAdmin);
 			_editSchoolForm.setListener('update_principal', _updatePrincipal);
 			_editSchoolForm.setListener('update_school_admin', _updateSchoolAdmin);
 		})();
 
-		function _edit_school(data) {
+		function _editSchool(data) {
 			console.log(data.account_type);
 			_schoolModel.editSchool(data.account_type, data.school.id, data.school.name, data.school.email, data.school.phone_1, data.school.address_1,
 				data.school.zipcode, data.school.city).then(
@@ -141,7 +141,7 @@ define([
 		}
 
 
-		function _delete_principal(login_id) {
+		function _deletePrincipal(login_id) {
 			console.log(login_id);
 			_principalModel.deletePrincipal(login_id).then(
 				function(response) {
@@ -173,7 +173,7 @@ define([
 			);
 		};
 
-		function _delete_school_admin(login_id) {
+		function _deleteSchoolAdmin(login_id) {
 			console.log(login_id);
 			_schoolAdminModel.deleteSchoolAdmin(login_id).then(
 				function(response) {

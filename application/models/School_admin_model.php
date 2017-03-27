@@ -105,5 +105,4 @@ class School_admin_model extends SQ_Model {
 		}
 		return $school_admins;
 	}
-
 }

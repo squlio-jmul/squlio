@@ -39,10 +39,10 @@ define([
 
 		(function _init(){
 			_addSchoolForm.initialize($('.admin-main-content'));
-			_addSchoolForm.setListener('add_school', _add_school);
+			_addSchoolForm.setListener('add_school', _addSchool);
 		})();
 
-		function _add_school(data) {
+		function _addSchool(data) {
 			_schoolModel.addSchool(data.school.account_type, data.school.school_name, data.school.school_email, data.school.phone_1, data.school.address_1, data.school.zipcode, data.school.city).then(
 				function(response) {
 					if (response.success && response.school_id) {
@@ -63,7 +63,6 @@ define([
 					}
 				}
 			);
-			console.log(data);
 			return;
 		}
 	}

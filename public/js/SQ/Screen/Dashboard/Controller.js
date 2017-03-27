@@ -23,11 +23,6 @@ define([
 
 		(function _init() {
 			_dashboardForm.initialize($('.admin-content-wrapper'));
-			//_dashboardForm.setLitener('data_amount', _dataAmount);
 		})();
-
-		/*function _dataAmount(data) {
-			_dashboardForm.clearError();
-		}*/
 	}
 });

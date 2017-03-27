@@ -54,16 +54,9 @@ define([
 				submitHandler: function(form) {
 					var _account_type_data = _util.serializeJSON($(form));
 					_me.broadcast('add_type', _account_type_data);
+					$(form).trigger('reset');
 				}
 			});
-		};
-
-		this.displaySuccess = function(success_msg) {
-			_$add_account_type_form.find('input[type="text"],textarea').val('');
-			_$add_account_type_form.find('#success-container').html(success_msg);
-		};
-		this.displayError = function(error_msg) {
-			_$add_account_type_form.find('.error-container').text(error_msg);
 		};
 	}
 });

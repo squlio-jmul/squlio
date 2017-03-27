@@ -17,7 +17,6 @@ define([
 		var _$settings_form = null;
 		var screenHeight =  $(window).height();
 
-		//SQ.mixin(_me, new Braodcaster(['data_amount']);
 
 		(function _init() {
 		})();

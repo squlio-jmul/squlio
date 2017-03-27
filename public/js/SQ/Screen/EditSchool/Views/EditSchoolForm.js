@@ -307,7 +307,7 @@ define([
 			console.log(data);
 			console.log(login_id);
 			console.log(principal_id);
-			_$edit_school_form.find('.list-principal').append(_$preview_principal);
+			_$edit_school_form.find('#preview-principal').append(_$preview_principal);
 
 			_$preview_principal.find('.delete').on('click', function() {
 				var _$self = $(this);
@@ -338,9 +338,7 @@ define([
 			data.school_admin_id = school_admin_id;
 			data.login_id = login_id;
 			var _$preview_school_admin = $(_.template(SchoolAdminTemplate, {school_admin: data}));
-			console.log(data);
-			console.log(login_id);
-			_$edit_school_form.find('#list-school-admin').append(_$preview_school_admin);
+			_$edit_school_form.find('#preview-school-admin').append(_$preview_school_admin);
 
 			_$preview_school_admin.find('.delete').on('click', function() {
 				var _$self = $(this);

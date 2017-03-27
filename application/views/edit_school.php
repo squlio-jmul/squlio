@@ -147,6 +147,7 @@
 	?>
 			</ul>
 	</div>
+	<div id="preview-principal" class="row"></div>
 	<form id="edit-school-admin-form">
 		<div class="school-admin-form">
 			<div class="school-admin-header">
@@ -227,4 +228,5 @@
 	?>
 		</ul>
 	</div>
+	<div id="preview-school-admin" class="row"></div>
 </div>

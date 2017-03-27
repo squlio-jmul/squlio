@@ -53,14 +53,10 @@ define([
 				},
 				submitHandler: function(form) {
 					var _account_type_data = _util.serializeJSON($(form));
+					console.log(_account_type_data);
 					_me.broadcast('edit_type', _account_type_data);
 				}
 			});
-		};
-
-		this.displaySuccess = function(success_msg) {
-			_$edit_account_type_form.find('input[type="text"],textarea').val('');
-			_$edit_account_type_form.find('#success-container').html(success_msg);
 		};
 	}
 });

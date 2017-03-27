@@ -71,7 +71,7 @@ define(
 					num_school_admin: num_school_admin,
 					num_teacher: num_teacher,
 					num_classroom: num_classroom,
-					nu_guardian: num_guardian,
+					num_guardian: num_guardian,
 					num_student: num_student
 				};
 				$.ajax({

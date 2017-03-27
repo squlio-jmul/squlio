@@ -5,14 +5,16 @@ define([
 	'SQ/Model/Account_type',
 	'SQ/Screen/AddAccountType/Views/AddAccountTypeForm',
 	'ThirdParty/q',
-	'ThirdParty/jquery.validate'
+	'ThirdParty/jquery.validate',
+	'jgrowl',
 ], function(
 	$,
 	SQ,
 	Util,
 	AddAccountTypeModel,
 	AddAccountTypeForm,
-	Q
+	Q,
+	jGrowl
 ) {
 	'use strict';
 
@@ -24,16 +26,16 @@ define([
 
 		(function _init() {
 			_addAccountTypeForm.initialize($('.admin-main-content'));
-			_addAccountTypeForm.setListener('add_type', _add_type);
+			_addAccountTypeForm.setListener('add_type', _addType);
 		})();
 
-		function _add_type(data) {
+		function _addType(data) {
 			_addAccountTypeModel.addAccountTypeData(data.name, data.display_name, data.num_principal, data.num_school_admin, data.num_teacher, data.num_classroom, data.num_guardian, data.num_student).then(
 				function(response) {
 					if (response.success) {
-						_addAccountTypeForm.displaySuccess('Data successfully inserted');
+						$.jGrowl('Account type is added successfully<br /><br /><a href="/admin/settings">Click here to view your account type</a>', {header: 'Success'});
 					} else {
-						_addAccountTypeForm.displayError('data cannot be inserted');
+						$.jGrowl('Unable to add account type', {header: 'Error'});
 					}
 				}
 			);
