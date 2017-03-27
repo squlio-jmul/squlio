@@ -410,6 +410,9 @@ label.error {
 	float: left;
 	padding: 12px;
 	width: 30%;
+	border: solid 1px;
+	margin-top: 20px;
+	margin-left: 12px;
 }
 .list-school-admin-data {
 	list-style-type: none;
@@ -426,11 +429,9 @@ label.error {
 	float: left;
 	padding: 12px;
 	width: 30%;
-}
-.principal-container,
-.school-admin-container {
-	padding: 20px;
-	width: 30%;
+	border: solid 1px;
+	margin-top: 20px;
+	margin-left: 12px;
 }
 .update-form {
 	display:table;
