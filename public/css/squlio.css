@@ -481,5 +481,79 @@ label.error {
 #school-admin-forget-password.form-active{
 	display:block
 }
-
-
+.school-admin-content-wrapper {
+	display: table;
+	width: 100%;
+	background-color: #eaeaea;
+}
+.school_admin_sidebar,
+.school-admin-content {
+	display: block;
+}
+.school-admin-sidebar {
+	float: left;
+	background-color: #eaeaea;
+	color: #000000;
+	width: 200px;
+	padding: 20px;
+}
+.school-admin-sidebar a {
+	color: #000000;
+}
+.school-admin-sidebar h3 {
+	text-transform: uppercase;
+	font-size: 18px;
+	margin-bottom: 30px;
+}
+.school-admin-sidebar .sidebar-nav {
+	padding: 0;
+	list-style-type: none;
+}
+.school-admin-content {
+	float: right;
+	width: calc(100% - 200px);
+	background-color: #fafafa;
+	position: relative;
+}
+.school-admin-page-header {
+	padding: 20px;
+	display: table;
+	width: 100%;
+	background-color: #808080;
+	box-shadow: 0 2px 2px rgba(0,0,0,0.2);
+	position: relative;
+	color: #fff;
+}
+.school-admin-logout {
+	float: right;
+	color: #fff;
+}
+.school-admin-page-header h4 {
+	font-size: 16px;
+	text-transform: uppercase;
+	float: left;
+	margin: 0;
+}
+.school-admin-main-content {
+	background-color: #fafafa;
+	padding: 20px;
+}
+.container-fluid {
+	margin: 0;
+	padding: 0;
+}
+.school-admin-footer {
+	padding: 20px;
+	background-color: #fafafa;
+	border-top: 1px solid #eaeaea;
+	width: 100%;
+	display: table;
+}
+.school-admin-footer p {
+	float: left;
+	margin-bottom: 0;
+}
+.school-admin-footer a {
+	float: right;
+	margin-bottom: 0;
+}

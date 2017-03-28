@@ -1,2 +1,7 @@
-<h1>Welcome!</h1>
-<a href="/logout">Click here to logout</a>
+<header class="school-admin-page-header">
+	<h4>DASHBOARD</h4>
+	<a class="school-admin-logout" href="/logout">Logout</a>
+</header>
+<div class="school-admin-main-content">
+</div>
+
