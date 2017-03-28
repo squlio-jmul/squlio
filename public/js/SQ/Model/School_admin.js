@@ -34,6 +34,28 @@ define(
 				return _deferred.promise;
 			};
 
+			this.verifyLogin = function(email, password) {
+				var _deferred = Q.defer();
+
+				var data = {
+					email: email,
+					password: password
+				};
+				$.ajax({
+					url: 'ajax/login/verifyLoginSchoolAdmin',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(response) {
+						_deferred.resolve(response);
+					},
+					error: function(response, textStatus, jqXHR) {
+						_deferred.reject(response);
+					}
+				});
+				return _deferred.promise;
+			};
+
 			this.addSchoolAdmin = function(school_id, username, email, password, first_name, last_name) {
 				var _deferred = Q.defer();
 				var data = {

@@ -38,6 +38,21 @@ class Login extends SQ_Controller {
 		$this->sendResponse();
 	}
 
+	public function verifyLoginSchoolAdmin() {
+		$email = $this->input->post('email');
+		$password = $this->input->post('password');
+		$login_response = $this->login_library->verifyLoginSchoolAdmin($email, $password);
+
+		$this->setResponseElement('success', $login_response['success']);
+		if($login_response['success']){
+			$this->setResponseElement('redirect_page', $login_response['redirect_page']);
+			$this->setResponseElement('id', $login_response['id']);
+			$this->cookie->set($login_response['cookie_obj']);
+		}
+		$this->sendResponse();
+	}
+
+
 	public function usernameNotExist() {
 		$username = $this->input->post('username');
 		if ($login_obj = $this->login_library->get(array('username'=>$username))) {

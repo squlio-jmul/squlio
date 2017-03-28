@@ -29,7 +29,7 @@ define([
 					'email': {
 						required: true,
 						remote: {
-							url: 'ajax/admin/emailExist',
+							url: '/ajax/login/emailExist',
 							type: 'post'
 						}
 					},

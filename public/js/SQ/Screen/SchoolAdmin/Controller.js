@@ -29,12 +29,12 @@ define([
 
 		function _verifyLogin(data) {
 			_schoolAdminForm.clearError();
-			_schoolAdminModel.verifyLogin(data.email, data.password).then(
+			_schoolAdminModel.verifyLogin (data.email, data.password).then(
 				function(response) {
 					if (response.success) {
 						window.location = response.redirect_page;
 					} else {
-						_adminForm.displayError('Ivalid email and password.');
+						_schoolAdminForm.displayError('Invalid email and password.');
 					}
 				}
 			);

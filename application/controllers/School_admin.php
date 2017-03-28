@@ -18,8 +18,26 @@ class School_admin extends SQ_Controller {
 		if (!$this->cookie->get('id')){
 			$this->page->show('default', 'Squlio - School Admin', 'school_admin', $data, $data);
 		} else {
-			redirect('/admin/dashboard');
+			redirect('/school_admin/schoolAdminDashboard');
 		}
-
 	}
+
+	public function schoolAdminDashboard() {
+		$data = array(
+			'headerCss' => array(),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => false,
+			'jsControllerParam' => false
+		);
+
+		if ($this->cookie->get('id')){
+			$this->page->show('admin_ui', 'Squlio - School Admin Dashboard', 'school_admin_dashboard', $data, $data);
+		} else {
+			redirect('/admin');
+		}
+	}
+
+
+
 }
