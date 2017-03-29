@@ -32,7 +32,7 @@ class School_admin extends SQ_Controller {
 			'headerCss' => array(),
 			'headerJs' => array(),
 			'footerJs' => array(),
-			'requireJsDataSource' => false,
+			'requireJsDataSource' => 'schoolAdminDashboard',
 			'jsControllerParam' => false
 		);
 
@@ -60,10 +60,7 @@ class School_admin extends SQ_Controller {
 		if ($login_id){
 			$this->page->show('school_admin_ui', 'Squlio - School Admin Dashboard', 'school_admin_dashboard', $pageData, $data);
 		} else {
-			redirect('/admin');
+			redirect('/school_admin');
 		}
 	}
-
-
-
 }

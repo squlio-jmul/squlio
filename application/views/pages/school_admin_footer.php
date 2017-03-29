@@ -48,4 +48,13 @@
 					deps: ['jquery']
 				}
             }
-        });
+		});
+
+		<? if (isset($requireJsDataSource) && $requireJsDataSource) : ?>
+			<? if ($minified_js) : ?>
+		require(['<?=$requireJsDataSource?>_optimized']);
+			<? else : ?>
+		require(['<?=$requireJsDataSource?>']);
+			<? endif; ?>
+		<? endif; ?>
+	</script>

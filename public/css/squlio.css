@@ -557,3 +557,64 @@ label.error {
 	float: right;
 	margin-bottom: 0;
 }
+.user {
+	list-style-type: none;
+	float: right;
+	padding: 0;
+}
+.user::after{
+	content: "";
+	clear: both;
+	display: table;
+}
+.user li{
+	width: 33.33333333333333%;
+	display: block;
+	float: left;
+}
+.user .user-avatar {
+	width: 30px;
+	height: 30px;
+	background-color: #fff;
+	border-radius: 20px;
+	margin-right: 20px;
+}
+.user .user-tag {
+	margin-right: 10px;
+}
+.school-photo {
+	margin-top: 30px;
+	display: block;
+	width: 100px;
+	height: 100px;
+	background-color: #eaeaea;
+}
+.school-tag {
+	margin-left: 120px;
+	margin-top: -120px;
+}
+.list-school-data {
+	margin: -12px;
+	margin-top: 100px;
+	list-style-type: none;
+	padding: 0;
+}
+.list-school-data::after {
+	content:"";
+	clear: both;
+	display: table;
+}
+.list-school-data .school-data {
+	display: block;
+	float: left;
+	width: 200px;
+	padding: 12px;
+}
+.list-school-data .school-content {
+	display: block;
+	text-align: center;
+	padding: 20px;
+	background-color: #eaeaea;
+	font-weight: bold;
+	text-transform: uppercase;
+}
