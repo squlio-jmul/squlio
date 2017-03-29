@@ -471,6 +471,24 @@ label.error {
 #preview-school-admin-container, {
 	width: 75%;
 }
+.add-classroom-grade {
+	margin-left: -12px;
+}
+.school-dropdown {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+.school-dropdown #school {
+	margin-left: 45px;
+	padding: 10px;
+}
+#add-classroom-grade-form {
+	width: 75%;
+}
+#add-classroom-grade-form #school {
+	margin-left: 20px;
+	padding: 5px;
+}
 
 
 #school-admin-form,

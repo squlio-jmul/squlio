@@ -10,5 +10,8 @@
 		<li>
 			<a href="/admin/settings">App Settings</a>
 		</li>
+		<li>
+			<a href="/admin/classroomGrade">Classroom Grade</a>
+		</li>
 	</ul>
 </div>

@@ -172,5 +172,40 @@ class Admin extends SQ_Controller{
 		}
 	}
 
+	public function classroomGrade() {
+		$data = array(
+			'headerCss' => array(),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'classroomGrade',
+			'jsControllerParam' => false
+		);
+
+		$school_obj['school'] = $this->School_model->get();
+		$pageData = $school_obj;
+		if ($this->cookie->get('id')) {
+			$this->page->show('admin_ui', 'Squlio - Classroom Grade', 'classroom_grade', $pageData, $data);
+		} else {
+			redirect('/admin');
+		}
+	}
+
+	public function addClassroomGrade() {
+		$data = array(
+			'headerCss' => array(),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'classroomGrade',
+			'jsControllerParam' => false
+		);
+
+		$school_obj['school'] = $this->School_model->get();
+		$pageData = $school_obj;
+		if ($this->cookie->get('id')) {
+			$this->page->show('admin_ui', 'Squlio - Classroom Grade', 'add_classroom_grade', $pageData, $data);
+		} else {
+			redirect('/admin');
+		}
+	}
 
 }
