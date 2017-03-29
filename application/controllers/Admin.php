@@ -195,7 +195,7 @@ class Admin extends SQ_Controller{
 			'headerCss' => array(),
 			'headerJs' => array(),
 			'footerJs' => array(),
-			'requireJsDataSource' => 'classroomGrade',
+			'requireJsDataSource' => 'addClassroomGrade',
 			'jsControllerParam' => false
 		);
 
