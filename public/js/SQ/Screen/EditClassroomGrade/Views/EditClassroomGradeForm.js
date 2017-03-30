@@ -18,7 +18,7 @@ define([
 		var _$edit_classroom_grade_form = null;
 		var screenHeight = $(window).height();
 
-		SQ.mixin(_me, new Broadcaster(['edit_classroom_grade']));
+		SQ.mixin(_me, new Broadcaster(['edit_classroom_grade', 'delete_classroom_grade']));
 
 		(function _init() {
 		})();
@@ -41,6 +41,11 @@ define([
 					var _classroom_grade_data = _util.serializeJSON($(form));
 					_me.broadcast('edit_classroom_grade', _classroom_grade_data);
 				}
+			});
+
+			_$edit_classroom_grade_form.find('.delete').on('click', function() {
+				var _classroom_grade_id = _$edit_classroom_grade_form.find('.classroom_grade_id').val();
+				_me.broadcast('delete_classroom_grade', _classroom_grade_id);
 			});
 		};
 	}

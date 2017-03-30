@@ -11,7 +11,7 @@
 			foreach ($classroom_grade as $cg) {
 ?>
 		<div class="form-group">
-		<input type="hidden" name="id" class="form-control" placeholder="" value="<?=$cg['id']?>"/>
+		<input type="hidden" name="id" class="classroom_grade_id" placeholder="" value="<?=$cg['id']?>"/>
 		</div>
 		<div class="form-group">
 			<label for="name">Name</label>
@@ -22,7 +22,7 @@
 			<input type="text" name="display_name" class="form-control" placeholder="Display Name" value="<?=$cg['display_name']?>" />
 		</div>
 		<button type="submit" class="btn btn-primary">Save</button>
-		<button type="button" class="btn btn-danger">Delete</button>
+		<button type="button" class="btn btn-danger delete">Delete</button>
 <?
 			}
 		}

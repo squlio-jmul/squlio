@@ -78,4 +78,11 @@ class Classroom_grade_model extends SQ_Model {
 		}
 		return true;
 	}
+
+	public function delete($classroom_grade_id) {
+		$params = array('classroom_grade_id' => $classroom_grade_id);
+		$query = $this->doctrine->em->createQuery('DELETE  FROM Entities\ClassroomGrade cg WHERE cg.id = :classroom_grade_id')->setParameters($params);
+		$result =  $query->getResult();
+		return true;
+	}
 }

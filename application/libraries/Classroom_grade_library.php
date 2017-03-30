@@ -49,4 +49,8 @@ class Classroom_grade_library extends SQ_Library {
 			die($err->getMessage());
 		}
 	}
+
+	public function delete($classroom_grade_id) {
+		return $this->_ci->Classroom_grade_model->delete($classroom_grade_id);
+	}
 }

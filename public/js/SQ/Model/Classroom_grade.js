@@ -96,6 +96,25 @@ define(
 				});
 				return _deferred.promise;
 			}
+
+			this.deleteClassroomGrade = function(classroom_grade_id) {
+				var _deferred = Q.defer();
+
+				var data = {classroom_grade_id: classroom_grade_id};
+				$.ajax({
+					url: '/ajax/classroom_grade/delete',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(response, textStatus, jqXHR) {
+						_deferred.resolve(response);
+					},
+					error: function(response, textStatus, jqXHR) {
+						_deferred.reject(response);
+					}
+				});
+				return _deferred.promise;
+			}
 		}
 	}
 );

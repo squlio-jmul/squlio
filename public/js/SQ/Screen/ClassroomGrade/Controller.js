@@ -5,14 +5,16 @@ define([
 	'SQ/Model/Classroom_grade',
 	'SQ/Screen/ClassroomGrade/Views/ClassroomGradeTable',
 	'ThirdParty/q',
-	'ThirdParty/jquery.dataTables.min'
+	'ThirdParty/jquery.dataTables.min',
+	'jgrowl'
 ], function(
 	$,
 	SQ,
 	Util,
 	ClassroomGradeModel,
 	ClassroomGradeTable,
-	Q
+	Q,
+	jGrowl
 ) {
 	'use strict';
 
@@ -28,14 +30,12 @@ define([
 		})();
 
 		function _displayTable(data) {
-			console.log(data);
 			_classroomGradeModel.getClassroomGradeData(data).then(
 				function(response) {
 					if (response.success) {
-						console.log(response.classroom_grade_data);
 						_classroomGradeTable.displayTable(response.classroom_grade_data);
 					} else {
-						console.log('failed');
+						$.jGrowl('No data available', {header: 'Error'});
 					}
 				}
 			);

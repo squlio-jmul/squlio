@@ -33,7 +33,6 @@ define([
 			_classroomGradeModel.addClassroomGrade(data.school_id, data.classroom_grade.name, data.classroom_grade.display_name).then(
 				function(response) {
 					if (response.success) {
-						console.log('success');
 						$.jGrowl('Classroom Grade is added successfully<br /><br /><a href="/admin/classroomGrade">Click here to view your Classroom grade</a>', {header: 'Success'});
 					} else {
 						$.jGrowl('Unable to add classroom grade', {header: 'Error'});

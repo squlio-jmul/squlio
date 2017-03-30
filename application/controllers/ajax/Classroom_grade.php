@@ -85,4 +85,13 @@ class Classroom_grade extends SQ_Controller {
 		}
 		$this->sendResponse();
 	}
+
+	public function delete() {
+		$classroom_grade_id = $this->input->post('classroom_grade_id');
+		$delete = $this->classroom_grade_library->delete($classroom_grade_id);
+
+		$this->setResponseElement('success', $delete['success']);
+		$this->sendResponse();
+
+	}
 }
