@@ -8,7 +8,7 @@
 			<a href="#">Classes</a>
 		</li>
 		<li>
-			<a href="#">Teachers</a>
+			<a href="/school_admin/teacher">Teachers</a>
 		</li>
 		<li>
 			<a href="#">Students</a>

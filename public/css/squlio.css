@@ -648,3 +648,7 @@ label.error {
 	font-weight: bold;
 	text-transform: uppercase;
 }
+.add-teacher .btn-primary {
+	margin-top: -60px;
+	margin-left: 140px;
+}

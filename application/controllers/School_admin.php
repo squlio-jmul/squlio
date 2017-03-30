@@ -63,4 +63,19 @@ class School_admin extends SQ_Controller {
 			redirect('/school_admin');
 		}
 	}
+
+	public function teacher () {
+		$data = array(
+			'headerCss' => array(),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'viewTeacher',
+			'jsControllerParam' => false
+		);
+		if ($this->cookie->get('id')){
+			$this->page->show('school_admin_ui', 'Squlio - School Admin', 'teacher', $data, $data);
+		} else {
+			redirect('/school_admin');
+		}
+	}
 }
