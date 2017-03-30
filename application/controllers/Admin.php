@@ -136,7 +136,7 @@ class Admin extends SQ_Controller{
 
 	public function addSchool() {
 		$data = array(
-			'headerCss' => array('/public/css/jquery-ui.css'),
+			'headerCss' => array(),
 			'headerJs' => array(),
 			'footerJs' => array(),
 			'requireJsDataSource' => 'addSchool',
@@ -174,7 +174,7 @@ class Admin extends SQ_Controller{
 
 	public function classroomGrade() {
 		$data = array(
-			'headerCss' => array(),
+			'headerCss' => array('/public/css/jquery.dataTables.min.css'),
 			'headerJs' => array(),
 			'footerJs' => array(),
 			'requireJsDataSource' => 'classroomGrade',

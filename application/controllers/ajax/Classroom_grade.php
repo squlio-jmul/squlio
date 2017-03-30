@@ -67,4 +67,29 @@ class Classroom_grade extends SQ_Controller {
 		}
 		$this->sendResponse();
 	}*/
+
+	public function displayTable() {
+		$school_id = $this->input->post('school_id');
+		$table_data = array();
+		if ($classroom_grade_obj = $this->classroom_grade_library->get(array('school'=>$school_id), array(), array(), null, null, array('school'=>true))){
+			foreach($classroom_grade_obj as $ca){
+
+				$data = array(
+					'id' => $ca['id'],
+					'school_name' => $ca['school']['name'],
+					'display_name' => $ca['display_name'],
+					'action' => $ca['id']
+				);
+				$table_data[] = $data;
+			}
+		}
+		//echo json_encode(array('data' => $table_data));
+		if ($table_data) {
+			$this->setResponseElement('success', true);
+			$this->setResponseElement('classroom_grade_data', $table_data);
+		} else {
+			$this->setResponseElement('success', false);
+		}
+		$this->sendResponse();
+	}
 }
