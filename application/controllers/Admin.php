@@ -9,6 +9,7 @@ class Admin extends SQ_Controller{
 		$this->load->model('Principal_model');
 		$this->load->model('Account_type_model');
 		$this->load->model('Login_model');
+		$this->load->model('Classroom_grade_model');
 	}
 
 	public function index() {
@@ -206,6 +207,29 @@ class Admin extends SQ_Controller{
 		} else {
 			redirect('/admin');
 		}
+	}
+
+	public function editClassroomGrade() {
+		$data = array(
+			'headerCss' => array(),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'editClassroomGrade',
+			'jsControllerParam' => false
+		);
+		if ($classroom_grade_obj = $this->Classroom_grade_model->get(array('id'=>$this->input->get('id')), array(), array(), null, null, array('school'=> true))) {
+			foreach ($classroom_grade_obj as $cg) {
+				$classroom_grade['classroom_grade'] = $classroom_grade_obj;
+				$school_name['school_name'] = $cg['school']['name'];
+			}
+		}
+		$pageData = array_merge($classroom_grade, $school_name);
+		if ($this->cookie->get('id')) {
+			$this->page->show('admin_ui', 'Squlio - Edit School', 'edit_classroom_grade', $pageData, $data);
+		} else {
+			redirect('/admin');
+		}
+
 	}
 
 }

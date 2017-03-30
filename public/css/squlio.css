@@ -489,6 +489,18 @@ label.error {
 	margin-left: 20px;
 	padding: 5px;
 }
+.edit-classroom-grade {
+	margin-left: -15px;
+}
+#edit-classroom-grade-form {
+	margin-top: 80px;
+	width: 75%;
+}
+#edit-classroom-grade-form .btn-primary,
+#edit-classroom-grade-form .btn-danger {
+	margin-top: 20px;
+	margin-right: 20px;
+}
 
 
 #school-admin-form,

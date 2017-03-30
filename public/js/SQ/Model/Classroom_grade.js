@@ -56,21 +56,15 @@ define(
 				return _deferred.promise;
 			};
 
-			/*this.editType = function(id, name, display_name, num_principal, num_school_admin, num_teacher, num_classroom, num_guardian, num_student) {
+			this.editClassroomGrade = function(id, name, display_name) {
 				var _deferred = Q.defer();
 				var data = {
 					id: id,
 					name: name,
 					display_name: display_name,
-					num_principal: num_principal,
-					num_school_admin: num_school_admin,
-					num_teacher: num_teacher,
-					num_classroom: num_classroom,
-					num_guardian: num_guardian,
-					num_student: num_student
 				};
 				$.ajax({
-					url: '/ajax/account_type/update',
+					url: '/ajax/classroom_grade/update',
 					type: 'post',
 					dataType: 'json',
 					data: data,
@@ -82,7 +76,7 @@ define(
 					}
 				});
 				return _deferred.promise;
-			};*/
+			};
 
 			this.getClassroomGradeData = function(school_id) {
 				var _deferred = Q.defer();
