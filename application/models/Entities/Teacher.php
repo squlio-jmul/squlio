@@ -103,6 +103,34 @@ class Teacher extends EntitySuperClass {
 	 */
 	protected $last_updated;
 
+	/**
+	 * @var string
+	 *
+	 * @Column(name="phone", type="string", nullable=false)
+	 */
+	protected $phone;
+
+	/**
+	 * @var string
+	 *
+	 * @Column(name="address", type="string", nullable=false)
+	 */
+	protected $address;
+
+	/**
+	 * @var string
+	 *
+	 * @Column(name="gender", type="string", nullable=false)
+	 */
+	protected $gender;
+
+	/**
+	 * @var string
+	 *
+	 * @Column(name="birthday", type="string", nullable=false)
+	 */
+	protected $birthday;
+
 	public function __construct() {
 		$this->created_on = new \DateTime('now');
 		$this->last_updated = new \DateTime('now');
@@ -124,7 +152,11 @@ class Teacher extends EntitySuperClass {
 			'push_notification_mute_weekends' => $this->push_notification_mute_weekends,
 			'allow_story_comments' => $this->allow_story_comments,
 			'created_on' => $this->created_on,
-			'last_updated' => $this->last_updated
+			'last_updated' => $this->last_updated,
+			'phone' => $this->phone,
+			'address' => $this->address,
+			'gender' => $this->gender,
+			'birthday' => $this->birthday
 		);
 	}
 }

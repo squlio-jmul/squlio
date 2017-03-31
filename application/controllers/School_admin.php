@@ -78,4 +78,20 @@ class School_admin extends SQ_Controller {
 			redirect('/school_admin');
 		}
 	}
+
+	public function addTeacher() {
+		$data  = array(
+			'headerCss' => array(),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => false,
+			'jsControllerParam' => false
+		);
+
+		if ($this->cookie->get('id')) {
+			$this->page->show('school_admin_ui', 'Squlio - Add Teacher', 'add_teacher', $data, $data);
+		} else {
+			redirect('/school_admin');
+		}
+	}
 }

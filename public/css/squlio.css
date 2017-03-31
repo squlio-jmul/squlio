@@ -652,3 +652,52 @@ label.error {
 	margin-top: -60px;
 	margin-left: 140px;
 }
+.avatar-container {
+	margin: 10px;
+	width: 25%;
+}
+.avatar-container .avatar {
+	width: 100px;
+	height: 100px;
+	background-color: #eaeaea;
+	margin-bottom: 20px;
+}
+.avatar-container .btn-file {
+	width: 100px;
+}
+#add-teacher-form {
+	width: 50%;
+	float: left;
+	margin-top: -170px;
+	margin-left: 150px;
+	display: table;
+}
+#add-teacher-form .form-left {
+	float: left;
+	width: 48%;
+}
+#add-teacher-form .form-right {
+	float: right;
+	width: 48%;
+}
+#status-teacher {
+	width: 15%;
+	float: right;
+	margin-top: -170px;
+	display: block;
+	position:relative;
+}
+#status-teacher #status {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+#status-teacher .save-btn,
+#status-teacher .reset-btn {
+	width: 100%;
+	padding: 10px;
+	background-color: #eaeaea;
+	margin-bottom: 10px;
+	border: none;
+	font-weight: bold;
+}
