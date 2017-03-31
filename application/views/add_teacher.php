@@ -1,6 +1,17 @@
 <header class="school-admin-page-header">
 	<h4>Add Classroom Grade</h4>
-	<a class="school-admin-logout" href="/logout">Logout</a>
+	<div class="user-section">
+		<ul class="user">
+			<li class="user-tag">
+			<p> Hello, <?=$username?> </p>
+			</li>
+			<li class="user-avatar">
+			</li>
+			<li class="logout">
+				<a class="school-admin-logout" href="/logout">Logout</a>
+			</li>
+		</ul>
+	</div>
 </header>
 <div class="school-admin-main-content">
 	<div class="avatar-container">
