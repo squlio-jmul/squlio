@@ -25,7 +25,7 @@ define(
 					dataType: 'json',
 					data: data,
 					success: function(response, textStatus, jqXHR) {
-						_deferred.resolve(response.account_types);
+						_deferred.resolve(response.classroom_grades);
 					},
 					error: function(response, textStatus, jqXHR) {
 						_deferred.reject(response);

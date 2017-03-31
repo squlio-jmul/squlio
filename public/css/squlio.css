@@ -666,11 +666,14 @@ label.error {
 	width: 100px;
 }
 #add-teacher-form {
-	width: 50%;
+	width: 75%;
 	float: left;
 	margin-top: -170px;
 	margin-left: 150px;
 	display: table;
+}
+#add-teacher-form .add-teacher {
+	width: 75%;
 }
 #add-teacher-form .form-left {
 	float: left;
@@ -680,20 +683,21 @@ label.error {
 	float: right;
 	width: 48%;
 }
-#status-teacher {
-	width: 15%;
+.status {
+	width: 25%;
 	float: right;
-	margin-top: -170px;
+	margin-top: -370px;
+	margin-right: -70px;
 	display: block;
 	position:relative;
 }
-#status-teacher #status {
+.status #status {
 	width: 100%;
 	padding: 10px;
 	margin-bottom: 10px;
 }
-#status-teacher .save-btn,
-#status-teacher .reset-btn {
+.status .save-btn,
+.status .reset-btn {
 	width: 100%;
 	padding: 10px;
 	background-color: #eaeaea;

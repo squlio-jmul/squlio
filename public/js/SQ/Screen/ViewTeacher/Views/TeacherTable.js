@@ -12,7 +12,7 @@ define([
 ) {
 	'use strict';
 
-	return function SchoolForm() {
+	return function TeacherTable() {
 		var _me = this;
 		var _util = new Util();
 		var _$teacher_table = null;

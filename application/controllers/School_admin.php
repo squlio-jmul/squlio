@@ -81,15 +81,21 @@ class School_admin extends SQ_Controller {
 
 	public function addTeacher() {
 		$data  = array(
-			'headerCss' => array(),
+			'headerCss' => array('/public/css/jquery-ui.css'),
 			'headerJs' => array(),
 			'footerJs' => array(),
-			'requireJsDataSource' => false,
+			'requireJsDataSource' => 'addTeacher',
 			'jsControllerParam' => false
 		);
 
+		if ($school_admin_obj = $this->school_admin_library->get(array('login' => $this->cookie->get('id')), array(), array(), null, null, array('school'=>true))) {
+			foreach ($school_admin_obj as $sa) {
+				$school['school'] = $sa['school']['id'];
+			}
+		}
+		$pageData = $school;
 		if ($this->cookie->get('id')) {
-			$this->page->show('school_admin_ui', 'Squlio - Add Teacher', 'add_teacher', $data, $data);
+			$this->page->show('school_admin_ui', 'Squlio - Add Teacher', 'add_teacher', $pageData, $data);
 		} else {
 			redirect('/school_admin');
 		}

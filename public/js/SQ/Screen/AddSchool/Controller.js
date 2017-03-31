@@ -18,7 +18,7 @@ define([
 	SchoolAdminModel,
 	AddSchoolForm,
 	Q,
-	jGrowl
+	jgrowl
 ) {
 	'use strict';
 

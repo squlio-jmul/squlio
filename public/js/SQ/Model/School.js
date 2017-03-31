@@ -79,7 +79,7 @@ define(
 			this.editSchool = function(account_type, id, name, email, phone_1, address_1, zipcode, city) {
 				var _deferred = Q.defer();
 				var data = {
-					account_type: account_type,
+					account_type: account_type_id,
 					id: id,
 					name: name,
 					email: email,
