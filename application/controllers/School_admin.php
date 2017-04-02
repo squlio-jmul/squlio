@@ -66,7 +66,7 @@ class School_admin extends SQ_Controller {
 
 	public function teacher () {
 		$data = array(
-			'headerCss' => array(),
+			'headerCss' => array('/public/css/jquery.dataTables.min.css'),
 			'headerJs' => array(),
 			'footerJs' => array(),
 			'requireJsDataSource' => 'viewTeacher',
@@ -76,9 +76,11 @@ class School_admin extends SQ_Controller {
 		if ($school_admin_obj = $this->school_admin_library->get(array('login' => $this->cookie->get('id')), array(), array(), null, null, array('school'=>true))) {
 			foreach ($school_admin_obj as $sa) {
 				$username['username'] = $sa['username'];
+				$teachers['teachers'] = $this->teacher_library->getActiveCountBySchoolId($sa['school']['id']);
+
 			}
 		}
-		$pageData = array_merge($username);
+		$pageData = array_merge($username, $teachers);
 
 		if ($this->cookie->get('id')){
 			$this->page->show('school_admin_ui', 'Squlio - School Admin', 'teacher', $pageData, $data);

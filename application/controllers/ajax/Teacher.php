@@ -68,5 +68,29 @@ class Teacher extends SQ_Controller {
 		}
 		$this->sendResponse();
 	}
+
+	public function displayTable() {
+
+		$table_data = array();
+		if ($teacher_obj = $this->teacher_library->get(array(), array(), array(), null, null, array('login'=>true))){
+			foreach($teacher_obj as $t){
+
+				if ($t['login']['active'] == 1) {
+					$status = "active";
+				} else {
+					$status = "inactive";
+				}
+				$data = array(
+					'id' => $t['id'],
+					'name' => $t['first_name'],
+					'class' => "-",
+					'status' => $status
+				);
+				$table_data[] = $data;
+			}
+		}
+		echo json_encode(array('data' => $table_data));
+	}
+
 }
 

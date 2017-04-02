@@ -30,6 +30,25 @@ define([
 				window.location.replace("addTeacher");
 			});
 
+			if (!_table) {
+				_table = _$teacher_table.find('#table').DataTable({
+					'ajax': '/ajax/teacher/displayTable',
+					'columns': [
+						{ 'data': 'id' },
+						{ 'data': 'name'},
+						{ 'data': 'class' },
+						{ 'data': 'status' },
+					],
+					'columnDefs': [ {
+						'targets': 1,
+						'data': 'name',
+						'render': function (data, type, row, meta ) {
+							return '<a href="/admin/editTeacher?id='+row.id+'">'+data+'</a>';
+						}
+					}]
+				});
+			}
+
 		}
 
 	}

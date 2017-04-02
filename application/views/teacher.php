@@ -1,6 +1,5 @@
 <header class="school-admin-page-header">
 	<h4>Teacher</h4>
-	<a class="school-admin-logout" href="/logout">Logout</a>
 	<div class="user-section">
 		<ul class="user">
 			<li class="user-tag">
@@ -16,7 +15,7 @@
 </header>
 <div class="school-admin-main-content">
 	<div class="add-teacher">
-		<h4>0 TEACHERS</h4>
+	<h4><?=$teachers?> TEACHERS</h4>
 		<button type=submit class="btn btn-primary">+ Add New</button>
 	</div>
 	<table id="table" class="display" cellspacing="0" width="100%" >
