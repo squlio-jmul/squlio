@@ -50,8 +50,8 @@
 					<!--<input type="text" name="gender" class="form-control" placeholder="Teacher gender" value="" />-->
 					<select id="gender" class="form-control">
 						<option value="">Select One</option>
-						<option value="male">Male</option>
-						<option value="female">Felame</option>
+						<option value="Male">Male</option>
+						<option value="Female">Female</option>
 					</select>
 				</div>
 			</div>

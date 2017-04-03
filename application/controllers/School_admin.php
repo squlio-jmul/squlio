@@ -111,4 +111,29 @@ class School_admin extends SQ_Controller {
 			redirect('/school_admin');
 		}
 	}
+
+	public function editTeacher() {
+		$data = array(
+			'headerCss' => array('/public/css/jquery-ui.css'),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'editTeacher',
+			'jsControllerParam' => false
+		);
+
+		if ($school_admin_obj = $this->school_admin_library->get(array('login' => $this->cookie->get('id')), array(), array(), null, null, array('school'=>true))) {
+			foreach ($school_admin_obj as $sa) {
+				$username['username'] = $sa['username'];
+				$school_id['school_id'] = $sa['school']['id'];
+			}
+		}
+
+		$teacher_obj['teacher'] = $this->teacher_library->get(array('id'=> $this->input->get('id')), array(), array(), null, null, array('login'=>true));
+		$pageData = array_merge($username, $school_id, $teacher_obj);
+		if ($this->cookie->get('id')) {
+			$this->page->show('school_admin_ui', 'Squlio - Edit Teacher', 'edit_teacher', $pageData, $data);
+		} else {
+			redirect('/school_admin');
+		}
+	}
 }

@@ -43,7 +43,7 @@ define([
 						'targets': 1,
 						'data': 'name',
 						'render': function (data, type, row, meta ) {
-							return '<a href="/admin/editTeacher?id='+row.id+'">'+data+'</a>';
+							return '<a href="/school_admin/editTeacher?id='+row.id+'">'+data+'</a>';
 						}
 					}]
 				});

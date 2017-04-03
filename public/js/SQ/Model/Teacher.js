@@ -64,6 +64,37 @@ define(
 				});
 				return _deferred.promise;
 			};
+
+			this.editTeacher = function(gender, login_id, id, school_id, username, email, password, first_name, last_name, phone, address, birthday) {
+				var _deferred = Q.defer();
+				var data = {
+					gender: gender,
+					login_id: login_id,
+					id: id,
+					school_id: school_id,
+					username: username,
+					email: email,
+					password: password,
+					first_name: first_name,
+					last_name: last_name,
+					phone: phone,
+					address: address,
+					birthday: birthday
+				};
+				$.ajax({
+					url: '/ajax/teacher/update',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(response, textStatus, jqXHR) {
+						_deferred.resolve(response);
+					},
+					error: function(response, textStatus, jqXHR) {
+						_deferred.reject(response);
+					}
+				});
+				return _deferred.promise;
+			};
 		}
 	}
 );

@@ -26,6 +26,7 @@ class Teacher extends SQ_Controller {
 	}
 
 	public function add() {
+		$birthday = $this->input->post('birthday');
 		$add_login_data = array (
 			'email' => $this->input->post('email'),
 			'username' => $this->input->post('username'),
@@ -54,7 +55,7 @@ class Teacher extends SQ_Controller {
 				'phone' => $this->input->post('phone'),
 				'address' => $this->input->post('address'),
 				'gender' => $this->input->post('gender'),
-				'birthday' => $this->input->post('birthday')
+				'birthday' => new \DateTime($birthday)
 			);
 			if ($teacher_id = $this->teacher_library->add($add_teacher_data)) {
 				$this->setResponseElement('success', true);
@@ -92,5 +93,39 @@ class Teacher extends SQ_Controller {
 		echo json_encode(array('data' => $table_data));
 	}
 
+	public function update() {
+		//$birthday = $this->input->post('birthday');
+		$login_id = $this->input->post('login_id');
+		$teacher_id = $this->input->post('id');
+		$update_login_data = array (
+			'email' => $this->input->post('email'),
+			'username' => $this->input->post('username'),
+			'password' => $this->input->post('password'),
+			'created_on' => new \DateTime('now'),
+			'last_updated' => new \DateTime('now')
+		);
+		if ($login = $this->login_library->update($login_id, $update_login_data)) {
+			$update_teacher_data = array (
+				'first_name' => $this->input->post('first_name'),
+				'last_name' => $this->input->post('last_name'),
+				'created_on' => new \DateTime('now'),
+				'last_updated' => new \DateTime('now'),
+				'phone' => $this->input->post('phone'),
+				'address' => $this->input->post('address'),
+				'gender' => $this->input->post('gender'),
+				'birthday' => new \DateTime($this->input->post('birthday'))
+			);
+			if ($teacher = $this->teacher_library->update($teacher_id, $update_teacher_data)) {
+				$this->setResponseElement('success', true);
+				$this->setResponseElement('teacher', $teacher);
+				$this->setResponseElement('login', $login);
+			} else {
+				$this->setResponseElement('success', false);
+			}
+		} else {
+			$this->setResponseElement('success', false);
+		}
+		$this->sendResponse();
+	}
 }
 

@@ -65,7 +65,6 @@ class Login extends SQ_Controller {
 
 	public function emailExist() {
 		$email = $this->input->post('email');
-
 		$exist = $this->login_library->emailExist($email);
 		if ($exist) {
 			echo 'true';
@@ -78,7 +77,6 @@ class Login extends SQ_Controller {
 	public function emailNotExist() {
 		$email = $this->input->post('email');
 		if ($login_obj = $this->login_library->get(array('email'=>$email))) {
-			var_dump($login_obj);
 			echo 'false';
 		} else {
 			echo 'true';
@@ -90,8 +88,7 @@ class Login extends SQ_Controller {
 		$username = $this->input->post('username');
 		$login_id = $this->input->post('login_id');
 		$username_obj  = $this->login_library->get(array('username'=>$username));
-		$login_obj = $this->login_library->get(array('id'=>$login_id));
-		if ($username_obj[0]['username'] == $username && $login_obj[0]['id'] !=$login_id){
+		if ($username_obj[0]['username'] == $username && $username_obj[0]['id'] !=$login_id){
 			echo 'false';
 		} else {
 			echo 'true';
@@ -103,8 +100,7 @@ class Login extends SQ_Controller {
 		$email = $this->input->post('email');
 		$login_id = $this->input->post('login_id');
 		$email_obj = $this->login_library->get(array('email'=>$email));
-		$login_obj = $this->login_library->get(array('id'=>$login_id));
-		if ($email_obj[0]['email'] == $email && $login_obj[0]['id'] != $login_id) {
+		if ($email_obj[0]['email'] == $email && $email_obj[0]['id'] != $login_id) {
 			echo 'false';
 		} else {
 			echo 'true';

@@ -45,4 +45,15 @@ class Teacher_library extends SQ_Library {
 	public function getActiveCountBySchoolId($school_id) {
 		return $this->_ci->Teacher_model->getActiveCountBySchoolId($school_id);
 	}
+
+	public function update($teacher_id, $teacher_data) {
+		try {
+			if ($teacher = $this->_ci->Teacher_model->update($teacher_id, $teacher_data)) {
+				return $teacher;
+			}
+			return false;
+		} catch(Exception $err) {
+			die($err->getMessage());
+		}
+	}
 }

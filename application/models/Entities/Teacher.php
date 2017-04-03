@@ -125,15 +125,16 @@ class Teacher extends EntitySuperClass {
 	protected $gender;
 
 	/**
-	 * @var string
+	 * @var \DateTime
 	 *
-	 * @Column(name="birthday", type="string", nullable=false)
+	 * @Column(name="birthday", type="datetime", nullable=false)
 	 */
 	protected $birthday;
 
 	public function __construct() {
 		$this->created_on = new \DateTime('now');
 		$this->last_updated = new \DateTime('now');
+		$this->birthday = new \DateTime;
 	}
 
 	public function getData() {
