@@ -225,7 +225,7 @@ define([
 							type: 'post',
 							data: {
 								login_id: function() {
-									return $('.login_id').val();
+									return $('#login_id').val();
 								}
 							}
 						}
@@ -237,7 +237,7 @@ define([
 							type: 'post',
 							data: {
 								login_id: function() {
-									return $('.login_id').val();
+									return $('#login_id').val();
 								}
 							}
 						}
