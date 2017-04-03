@@ -19,7 +19,7 @@ define([
 		var _$edit_teacher_form = null;
 		var screenHeight = $(window).height();
 
-		SQ.mixin(_me, new Broadcaster(['edit_teacher']));
+		SQ.mixin(_me, new Broadcaster(['edit_teacher', 'delete_teacher']));
 
 		(function _init() {
 		})();
@@ -85,6 +85,12 @@ define([
 			_$edit_teacher_form.find('#birthday').datepicker({
 				changeMonth: true,
 				changeYear: true,
+			});
+
+			_$edit_teacher_form.find('.delete-btn').on('click', function() {
+				var _login_id = _$edit_teacher_form.find('.login_id').val();
+				_me.broadcast('delete_teacher', _login_id);
+				_$edit_teacher_form.find('#edit-teacher-form').trigger('reset');
 			});
 		}
 	}

@@ -735,7 +735,7 @@ label.error {
 	margin-right: 20px;
 }
 .teacher-action .save-btn,
-.teacher-action .reset-btn {
+.teacher-action .delete-btn {
 	width: 100%;
 	padding: 10px;
 	background-color: #eaeaea;

@@ -28,6 +28,7 @@ define([
 		(function _init() {
 			_editTeacherForm.initialize($('.school-admin-content-wrapper'));
 			_editTeacherForm.setListener('edit_teacher', _editTeacher);
+			_editTeacherForm.setListener('delete_teacher', _deleteTeacher);
 		})();
 
 		function _editTeacher(data) {
@@ -41,6 +42,18 @@ define([
 					}
 				}
 			);
-		}
+		};
+
+		function _deleteTeacher(data) {
+			_teacherModel.deleteTeacher(data).then(
+				function(response) {
+					if (response.success) {
+						$.jGrowl('Teacher successfully deleted', {header: 'Success'});
+					} else {
+						$.jGrowl('Teacher unable to delete', {header: 'Error'});
+					}
+				}
+			);
+		};
 	}
 });

@@ -94,7 +94,6 @@ class Teacher extends SQ_Controller {
 	}
 
 	public function update() {
-		//$birthday = $this->input->post('birthday');
 		$login_id = $this->input->post('login_id');
 		$teacher_id = $this->input->post('id');
 		$update_login_data = array (
@@ -122,6 +121,24 @@ class Teacher extends SQ_Controller {
 			} else {
 				$this->setResponseElement('success', false);
 			}
+		} else {
+			$this->setResponseElement('success', false);
+		}
+		$this->sendResponse();
+	}
+
+	public function delete() {
+		$login_id = $this->input->post('login_id');
+		$delete_teacher_data = array (
+			'active' => 0,
+			'deleted' => 1,
+			'reset_password' => 0,
+			'created_on' => new \DateTime('now'),
+			'last_updated' => new \DateTime('now')
+		);
+		if ($login = $this->login_library->update($login_id, $delete_teacher_data)) {
+			$this->setResponseElement('success', true);
+			$this->setResponseElement('login', $login);
 		} else {
 			$this->setResponseElement('success', false);
 		}
