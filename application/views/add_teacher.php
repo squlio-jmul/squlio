@@ -24,9 +24,12 @@
         </div>
 	</div>
 	<form id="add-teacher-form">
-		<div class="add-teacher">
+	<div class="add-teacher" data-num-teacher="<?=$num_teacher?>" data-current-teachers="<?=$teachers?>">
 			<div class="form-group">
-				<input type="hidden" name="school_id"  class="form-control"  value="<?=$school?>" />
+				<input type="hidden" name="school_id"  class="form-control"  value="<?=$school_id?>" />
+			</div>
+			<div class="form-group">
+				<input type="hidden" name="num_teacher"  class="form-control num_teacher" value="<?=$num_teacher?>" />
 			</div>
 			<div class="form-group">
 				<label for="username">Username</label>

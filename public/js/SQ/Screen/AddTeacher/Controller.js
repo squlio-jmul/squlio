@@ -34,7 +34,7 @@ define([
 			_teacherModel.addTeacher(data.status, data.gender, data.teacher.school_id, data.teacher.username, data.teacher.email, data.teacher.password, data.teacher.first_name, data.teacher.last_name, data.teacher.phone, data.teacher.address, data.teacher.birthday).then(
 				function(response) {
 					if (response.success) {
-						$.jGrowl('Teacher  successfully added<br /><br /><a href="/school_admin/teacher">Click here to view your teacher</a>', {header: 'Success'});
+						window.location.reload();
 					} else {
 						$.jGrowl('Unable to add teacher', {header: 'Error'});
 					}

@@ -10,6 +10,7 @@ class School_admin extends SQ_Controller {
 		$this->load->library('Teacher_library');
 		$this->load->library('Student_library');
 		$this->load->library('Material_library');
+		$this->load->library('Account_type_library');
 	}
 
 	public function index() {
@@ -100,11 +101,17 @@ class School_admin extends SQ_Controller {
 
 		if ($school_admin_obj = $this->school_admin_library->get(array('login' => $this->cookie->get('id')), array(), array(), null, null, array('school'=>true))) {
 			foreach ($school_admin_obj as $sa) {
-				$school['school'] = $sa['school']['id'];
+				$school_id['school_id'] = $sa['school']['id'];
 				$username['username'] = $sa['username'];
+				$teachers['teachers'] = $this->teacher_library->getActiveCountBySchoolId($sa['school']['id']);
 			}
 		}
-		$pageData = array_merge($school, $username);
+		if ($school_obj = $this->school_library->get(array('id' => $school_id), array(), array(), null, null, array('account_type'=>true))) {
+			foreach ($school_obj as $s) {
+				$num_teacher['num_teacher'] = $s['account_type']['num_teacher'];
+			}
+		}
+		$pageData = array_merge($school_id, $username, $num_teacher, $teachers);
 		if ($this->cookie->get('id')) {
 			$this->page->show('school_admin_ui', 'Squlio - Add Teacher', 'add_teacher', $pageData, $data);
 		} else {
