@@ -11,7 +11,7 @@
 			<a href="/school_admin/teacher">Teachers</a>
 		</li>
 		<li>
-			<a href="#">Students</a>
+			<a href="/school_admin/student">Students</a>
 		</li>
 		<li>
 			<a href="#">Materials</a>

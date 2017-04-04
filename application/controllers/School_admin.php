@@ -84,7 +84,7 @@ class School_admin extends SQ_Controller {
 		$pageData = array_merge($username, $teachers);
 
 		if ($this->cookie->get('id')){
-			$this->page->show('school_admin_ui', 'Squlio - School Admin', 'teacher', $pageData, $data);
+			$this->page->show('school_admin_ui', 'Squlio - Teacher', 'teacher', $pageData, $data);
 		} else {
 			redirect('/school_admin');
 		}
@@ -142,5 +142,60 @@ class School_admin extends SQ_Controller {
 		} else {
 			redirect('/school_admin');
 		}
+	}
+
+	public function student() {
+		$data = array(
+			'headerCss' => array('/public/css/jquery.dataTables.min.css'),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'viewStudent',
+			'jsControllerParam' => false
+		);
+
+		if ($school_admin_obj = $this->school_admin_library->get(array('login' => $this->cookie->get('id')), array(), array(), null, null, array('school'=>true))) {
+			foreach ($school_admin_obj as $sa) {
+				$username['username'] = $sa['username'];
+				$students['students'] = $this->student_library->getActiveCountBySchoolId($sa['school']['id']);
+
+			}
+		}
+		$pageData = array_merge($username, $students);
+
+		if ($this->cookie->get('id')){
+			$this->page->show('school_admin_ui', 'Squlio - Student', 'student', $pageData, $data);
+		} else {
+			redirect('/school_admin');
+		}
+	}
+
+	public function addStudent() {
+		$data  = array(
+			'headerCss' => array('/public/css/jquery-ui.css'),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => false,
+			'jsControllerParam' => false
+		);
+
+		if ($school_admin_obj = $this->school_admin_library->get(array('login' => $this->cookie->get('id')), array(), array(), null, null, array('school'=>true))) {
+			foreach ($school_admin_obj as $sa) {
+				$school_id['school_id'] = $sa['school']['id'];
+				$username['username'] = $sa['username'];
+				$students['students'] = $this->student_library->getActiveCountBySchoolId($sa['school']['id']);
+			}
+		}
+		if ($school_obj = $this->school_library->get(array('id' => $school_id), array(), array(), null, null, array('account_type'=>true))) {
+			foreach ($school_obj as $s) {
+				$num_student['num_student'] = $s['account_type']['num_student'];
+			}
+		}
+		$pageData = array_merge($school_id, $username, $num_student, $students);
+		if ($this->cookie->get('id')) {
+			$this->page->show('school_admin_ui', 'Squlio - Add Student', 'add_student', $pageData, $data);
+		} else {
+			redirect('/school_admin');
+		}
+
 	}
 }

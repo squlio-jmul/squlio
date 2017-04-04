@@ -1,5 +1,5 @@
 <header class="school-admin-page-header">
-	<h4>Add Classroom Grade</h4>
+	<h4>Add Teacher</h4>
 	<div class="user-section">
 		<ul class="user">
 			<li class="user-tag">

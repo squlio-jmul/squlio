@@ -653,7 +653,8 @@ label.error {
 	font-weight: bold;
 	text-transform: uppercase;
 }
-.add-teacher .btn-primary {
+.add-teacher .btn-primary,
+.add-student .btn-primary {
 	margin-top: -60px;
 	margin-left: 140px;
 }
@@ -728,18 +729,69 @@ label.error {
 	margin-top: -180px;
 	margin-left: 140px;
 }
-.status-container {
+.status-teacher-container {
 	float: right;
 	width: 15%;
 	margin-top: -130px;
 	margin-right: 20px;
 }
-.teacher-action .save-btn,
-.teacher-action .delete-btn {
+.status-teacher-container .teacher-action .save-btn,
+.status-teacher-container .teacher-action .delete-btn {
 	width: 100%;
 	padding: 10px;
 	background-color: #eaeaea;
 	margin-bottom: 10px;
 	border: none;
 	font-weight: bold;
+}
+.student-form-container {
+	display: block;
+	width: 80%;
+}
+.add-student-container {
+	width: 65%;
+	float: left;
+	margin-top: -185px;
+	margin-left: 200px;
+	display: table;
+	margin-bottom: 50px;
+}
+.add-student-container .form-left {
+	float: left;
+	width: 48%;
+}
+.add-student-container .form-right {
+	float: right;
+	width: 48%;
+}
+.add-parents-container {
+	width: 85%;
+	display: table;
+}
+.add-parents-container h5 {
+	margin-bottom: 30px;
+}
+.add-parents-container .form-father {
+	float: left;
+	width: 48%;
+}
+.add-parents-container .form-mother {
+	float: right;
+	width: 48%;
+}
+.status-container {
+	width: 15%;
+	float: right;
+	margin-top: -800px;
+}
+.status-container #status {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+.status-container .save-btn,
+.status-container .reset-btn {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 20px;
 }

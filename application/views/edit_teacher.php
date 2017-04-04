@@ -87,7 +87,7 @@
 			}
 ?>
 		</div>
-		<div class="status-container">
+		<div class="status-teacher-container">
 			<div class="teacher-action">
 				<button type="submit" class="save-btn">Save</button>
 				<button type="button" class="delete-btn">Delete</button>
