@@ -59,6 +59,20 @@ class Guardian extends EntitySuperClass {
 	 */
 	protected $last_updated;
 
+	/**
+	 * @var string
+	 *
+	 * @Column(name="phone", type="string", nullable=false)
+	 */
+	protected $phone;
+
+	/**
+	 * @var string
+	 *
+	 * @Column(name="guardian_type", type="string", nullable=false)
+	 */
+	protected $guardian_type;
+
 	public function __construct() {
 		$this->created_on = new \DateTime('now');
 		$this->last_updated = new \DateTime('now');
@@ -74,7 +88,9 @@ class Guardian extends EntitySuperClass {
 			'first_name' => $this->first_name,
 			'last_name' => $this->last_name,
 			'created_on' => $this->created_on,
-			'last_updated' => $this->last_updated
+			'last_updated' => $this->last_updated,
+			'phone' => $this->phone,
+			'guardian_type' => $this->guardian_type
 		);
 	}
 }

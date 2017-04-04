@@ -84,9 +84,24 @@ class Student extends EntitySuperClass {
 	 */
 	protected $last_updated;
 
+	/**
+	 * @var string
+	 *
+	 * @Column(name="gender", type="string", nullable=false)
+	 */
+	protected $gender;
+
+	/**
+	 * @var \DateTime
+	 *
+	 * @Column(name="birthday", type="datetime". nullable=false)
+	 */
+	protected $birthday;
+
 	public function __construct() {
 		$this->created_on = new \DateTime('now');
 		$this->last_updated = new \DateTime('now');
+		$this->birthday = new \DateTime;
 	}
 
 	public function getData() {
@@ -102,7 +117,9 @@ class Student extends EntitySuperClass {
 			'last_name' => $this->last_name,
 			'code' => $this->code,
 			'created_on' => $this->created_on,
-			'last_updated' => $this->last_updated
+			'last_updated' => $this->last_updated,
+			'gender' => $this->gender,
+			'birthday' => $this->birthday
 		);
 	}
 }
