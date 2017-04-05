@@ -40,26 +40,20 @@ class School_admin extends SQ_Controller {
 		$login_id = $this->cookie->get('id');
 		if ($school_admin_obj = $this->school_admin_library->get(array('login' => $login_id), array(), array(), null, null, array('school'=>true))) {
 			foreach ($school_admin_obj as $sa) {
-				$username['username'] = $sa['username'];
-				$school['school'] = $sa['school']['name'];
-				$address['address'] = $sa['school']['address_1'];
-				$teachers['teachers'] = $this->teacher_library->getActiveCountBySchoolId($sa['school']['id']);
-				$students['students'] = $this->student_library->getActiveCountBySchoolId($sa['school']['id']);
-				if ($classroom_obj = $this->classroom_library->get(array('school' => $sa['school']['id']))){
-					$classes['classes'] = count($classroom_obj);
-				} else {
-					$classes['classes'] = "0";
-				}
-				if ($material_obj = $this->material_library->get(array('school' => $sa['school']['id']))) {
-					$materials['materials'] = count($material_obj);
-				} else {
-					$materials['materials'] = "0";
-				}
+				$material_obj = $this->material_library->get(array('school' => $sa['school']['id']));
+				$page_data = array(
+					'username' => $sa['username'],
+					'school' => $sa['school']['name'],
+					'address' => $sa['school']['address_1'],
+					'teachers'  => $this->teacher_library->getActiveCountBySchoolId($sa['school']['id']),
+					'students' => $this->student_library->getActiveCountBySchoolId($sa['school']['id']),
+					'classes' => count($this->classroom_library->get(array('school' => $sa['school']['id']))),
+					'materials' => isset($material_obj) && $material_obj ? count($material_obj) : 0
+				);
 			}
 		}
-		$pageData = array_merge($username, $school, $address, $teachers, $students, $classes, $materials); 
-		if ($login_id){
-			$this->page->show('school_admin_ui', 'Squlio - School Admin Dashboard', 'school_admin_dashboard', $pageData, $data);
+		if ($this->cookie->get('id')){
+			$this->page->show('school_admin_ui', 'Squlio - School Admin Dashboard', 'school_admin_dashboard', $page_data, $data);
 		} else {
 			redirect('/school_admin');
 		}
@@ -76,15 +70,17 @@ class School_admin extends SQ_Controller {
 
 		if ($school_admin_obj = $this->school_admin_library->get(array('login' => $this->cookie->get('id')), array(), array(), null, null, array('school'=>true))) {
 			foreach ($school_admin_obj as $sa) {
-				$username['username'] = $sa['username'];
-				$teachers['teachers'] = $this->teacher_library->getActiveCountBySchoolId($sa['school']['id']);
-
+				$page_data = array(
+					'username' => $sa['username'],
+					'teachers' => $this->teacher_library->getActiveCountBySchoolId($sa['school']['id']),
+					'school_id' => $sa['school']['id'],
+					'school' => $this->school_library->get(array('id'=>$sa['school']['id']))
+				);
 			}
 		}
-		$pageData = array_merge($username, $teachers);
 
 		if ($this->cookie->get('id')){
-			$this->page->show('school_admin_ui', 'Squlio - Teacher', 'teacher', $pageData, $data);
+			$this->page->show('school_admin_ui', 'Squlio - Teacher', 'teacher', $page_data, $data);
 		} else {
 			redirect('/school_admin');
 		}
@@ -111,9 +107,9 @@ class School_admin extends SQ_Controller {
 				$num_teacher['num_teacher'] = $s['account_type']['num_teacher'];
 			}
 		}
-		$pageData = array_merge($school_id, $username, $num_teacher, $teachers);
+		$page_data = array_merge($school_id, $username, $num_teacher, $teachers);
 		if ($this->cookie->get('id')) {
-			$this->page->show('school_admin_ui', 'Squlio - Add Teacher', 'add_teacher', $pageData, $data);
+			$this->page->show('school_admin_ui', 'Squlio - Add Teacher', 'add_teacher', $page_data, $data);
 		} else {
 			redirect('/school_admin');
 		}
@@ -130,15 +126,16 @@ class School_admin extends SQ_Controller {
 
 		if ($school_admin_obj = $this->school_admin_library->get(array('login' => $this->cookie->get('id')), array(), array(), null, null, array('school'=>true))) {
 			foreach ($school_admin_obj as $sa) {
-				$username['username'] = $sa['username'];
-				$school_id['school_id'] = $sa['school']['id'];
+				$page_data = array (
+					'username' => $sa['username'],
+					'school_id' => $sa['school']['id'],
+					'teacher' => $this->teacher_library->get(array('id'=> $this->input->get('id')), array(), array(), null, null, array('login'=>true))
+				);
 			}
 		}
 
-		$teacher_obj['teacher'] = $this->teacher_library->get(array('id'=> $this->input->get('id')), array(), array(), null, null, array('login'=>true));
-		$pageData = array_merge($username, $school_id, $teacher_obj);
 		if ($this->cookie->get('id')) {
-			$this->page->show('school_admin_ui', 'Squlio - Edit Teacher', 'edit_teacher', $pageData, $data);
+			$this->page->show('school_admin_ui', 'Squlio - Edit Teacher', 'edit_teacher', $page_data, $data);
 		} else {
 			redirect('/school_admin');
 		}

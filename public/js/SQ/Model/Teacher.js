@@ -116,6 +116,25 @@ define(
 				return _deferred.promise;
 			};
 
+			this.getTeacherData = function(school_id) {
+				var _deferred = Q.defer();
+
+				var data = {school_id: school_id};
+				$.ajax({
+					url: '/ajax/teacher/displayTable',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(response) {
+						_deferred.resolve(response);
+					},
+					error: function(response, textStatus, jqXHR) {
+						_deferred.reject(response);
+					}
+				});
+				return _deferred.promise;
+			}
+
 		}
 	}
 );

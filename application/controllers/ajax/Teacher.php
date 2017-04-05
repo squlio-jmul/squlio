@@ -6,6 +6,7 @@ class Teacher extends SQ_Controller {
 		parent::__construct();
 		$this->load->library('Teacher_library');
 		$this->load->library('Login_library');
+		$this->load->model('Teacher_model');
 	}
 
 	public function get() {
@@ -73,24 +74,32 @@ class Teacher extends SQ_Controller {
 	public function displayTable() {
 
 		$table_data = array();
-		if ($teacher_obj = $this->teacher_library->get(array(), array(), array(), null, null, array('login'=>true))){
+		if ($teacher_obj = $this->Teacher_model->getActiveTeacher($this->input->post('school_id'))){
 			foreach($teacher_obj as $t){
 
-				if ($t['login']['active'] == 1) {
+				/*if ($t['login']['active'] == 1) {
 					$status = "active";
 				} else {
 					$status = "inactive";
-				}
+				}*/
 				$data = array(
 					'id' => $t['id'],
 					'name' => $t['first_name'],
 					'class' => "-",
-					'status' => $status
+					'status' => "active"
 				);
 				$table_data[] = $data;
 			}
 		}
-		echo json_encode(array('data' => $table_data));
+		if ($table_data) {
+			$this->setResponseElement('success', true);
+			$this->setResponseElement('teacher_data', $table_data);
+		} else {
+			$this->setResponseElement('success', false);
+		}
+		$this->sendResponse();
+
+		//echo json_encode(array('data' => $table_data));
 	}
 
 	public function update() {

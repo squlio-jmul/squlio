@@ -14,9 +14,24 @@
 	</div>
 </header>
 <div class="school-admin-main-content">
-	<div class="add-teacher">
+	<div class="add-teacher" data-school-id="<?=$school_id?>">
 	<h4><?=$teachers?> TEACHERS</h4>
 		<button type=submit class="btn btn-primary">+ Add New</button>
+	</div>
+	<div class="school-dropdown">
+		<label for="School"> Select a School </label>
+		<select id="school">
+			<option value="">Select One</option>
+	<?
+				if (isset($school)) {
+					foreach($school as $s) {
+	?>
+						<option value="<?=$s['id']?>"><?=$s['name']?></option>
+	<?
+					}
+				}
+	?>
+		</select>
 	</div>
 	<table id="table" class="display" cellspacing="0" width="100%" >
 		<thead>

@@ -18,7 +18,7 @@ define([
 ) {
 	'use strict';
 
-	return function SchoolController(option) {
+	return function ClassroomGradeController(option) {
 		var _me = this;
 		var _util = new Util();
 		var _classroomGradeModel = new ClassroomGradeModel();
