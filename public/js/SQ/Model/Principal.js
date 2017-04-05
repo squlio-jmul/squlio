@@ -53,7 +53,7 @@ define(
 						_deferred.resolve(response);
 					},
 					error: function(response, textStatus, jqXHR) {
-						_deferred.reject(response);
+						_deferred.reject(response.success);
 					}
 				});
 				return _deferred.promise;

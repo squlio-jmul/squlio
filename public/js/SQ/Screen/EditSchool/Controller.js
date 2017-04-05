@@ -33,18 +33,17 @@ define([
 		(function _init() {
 			_editSchoolForm.initialize($('.admin-main-content'));
 			_editSchoolForm.setListener('edit_school', _editSchool);
-			_editSchoolForm.setListener('delete_principal', _deletePrincipal);
-			_editSchoolForm.setListener('delete_principal_preview', _deletePrincipalPreview);
-			_editSchoolForm.setListener('delete_school_admin_preview', _deleteSchoolAdminPreview);
-			_editSchoolForm.setListener('delete_school_admin', _deleteSchoolAdmin);
 			_editSchoolForm.setListener('add_principal', _addPrincipal);
 			_editSchoolForm.setListener('add_school_admin', _addSchoolAdmin);
 			_editSchoolForm.setListener('update_principal', _updatePrincipal);
 			_editSchoolForm.setListener('update_school_admin', _updateSchoolAdmin);
+			_editSchoolForm.setListener('delete_principal', _deletePrincipal);
+			_editSchoolForm.setListener('delete_principal_preview', _deletePrincipalPreview);
+			_editSchoolForm.setListener('delete_school_admin_preview', _deleteSchoolAdminPreview);
+			_editSchoolForm.setListener('delete_school_admin', _deleteSchoolAdmin);
 		})();
 
 		function _editSchool(data) {
-			console.log(data.account_type);
 			_schoolModel.editSchool(data.account_type, data.school.id, data.school.name, data.school.email, data.school.phone_1, data.school.address_1,
 				data.school.zipcode, data.school.city).then(
 				function(response) {
@@ -76,14 +75,12 @@ define([
 		};
 
 		function _addPrincipal(data) {
-			console.log(data);
 			_principalModel.addPrincipal(data.school_id, data.username, data.email, data.password, data.first_name, data.last_name).then(
 				function (response) {
 					if (response.success) {
 						var principal_data = [response.login_id, data, response.principal_id];
-						console.log(principal_data);
-						_editSchoolForm.displayAddSuccessPrincipal(principal_data);
 						$.jGrowl('Principal successfully added', {header: 'Success'});
+						_editSchoolForm.displayAddSuccessPrincipal(principal_data);
 					} else {
 						$.jGrowl('Principal could not be added', {header: 'Error'});
 					}
@@ -92,13 +89,12 @@ define([
 		}
 
 		function _addSchoolAdmin(data) {
-			console.log(data);
 			_schoolAdminModel.addSchoolAdmin(data.school_id, data.username, data.email, data.password, data.first_name, data.last_name).then(
 				function (response) {
 					if (response.success) {
 						var school_admin_data = [response.login_id, data, response.school_admin_id];
-						_editSchoolForm.displayAddSuccessSchoolAdmin(school_admin_data);
 						$.jGrowl('School admin successfully added', {header: 'Success'});
+						_editSchoolForm.displayAddSuccessSchoolAdmin(school_admin_data);
 					} else {
 						$.jGrowl('School Admin could not be added', {header: 'Error'});
 					}
@@ -112,7 +108,6 @@ define([
 					if (response) {
 						_editSchoolForm.displayEditPrincipalSuccess(data);
 						_editSchoolForm.displayEditPrincipalPreviewSuccess(data);
-						$.jGrowl('Principal successfully updated', {header: 'Success'});
 					} else {
 						$.jGrowl('Principal could not be update', {header: 'Error'});
 					}
@@ -121,13 +116,12 @@ define([
 		}
 
 		function _updateSchoolAdmin(data) {
-			console.log(data);
 			_schoolAdminModel.updateSchoolAdmin(data.school_id, data.login_id, data.school_admin_id, data.username, data.password, data.email, data.first_name, data.last_name).then(
 					function (response) {
 					if (response) {
+						$.jGrowl('School admin successfully updated', {header: 'Success'});
 						_editSchoolForm.displayEditSchoolAdminSuccess(data);
 						_editSchoolForm.displayEditSchoolAdminPreviewSuccess(data);
-						$.jGrowl('School admin successfully updated', {header: 'Success'});
 					} else {
 						$.jGrowl('School admin could not be update', {header: 'Error'});
 					}
@@ -137,11 +131,9 @@ define([
 
 
 		function _deletePrincipal(login_id) {
-			console.log(login_id);
 			_principalModel.deletePrincipal(login_id).then(
 				function(response) {
 					if (response.success) {
-						console.log('success');
 						_editSchoolForm.deletePrincipal(login_id);
 						$.jGrowl('Principal success deleted', {header: 'Success'});
 					} else {
@@ -152,13 +144,11 @@ define([
 		};
 
 		function _deletePrincipalPreview(data) {
-			console.log(data);
 			var login_id = data[0];
 			var username = data[1];
 			_principalModel.deletePrincipal(login_id).then(
 				function(response) {
 					if(response.success) {
-						console.log('success');
 						_editSchoolForm.deletePrincipalPreview(data);
 						$.jGrowl('Principal success deleted', {header: 'Success'});
 					} else {
@@ -169,11 +159,9 @@ define([
 		};
 
 		function _deleteSchoolAdmin(login_id) {
-			console.log(login_id);
 			_schoolAdminModel.deleteSchoolAdmin(login_id).then(
 				function(response) {
 					if (response.success) {
-						console.log('success');
 						_editSchoolForm.deleteSchoolAdmin(login_id);
 						$.jGrowl('School admin success deleted', {header: 'Success'});
 					} else {
@@ -184,13 +172,11 @@ define([
 		};
 
 		function _deleteSchoolAdminPreview(data) {
-			console.log(data);
 			var login_id = data[0];
 			var username = data[1];
 			_schoolAdminModel.deleteSchoolAdmin(login_id).then(
 				function(response) {
 					if (response.success) {
-						console.log('success');
 						_editSchoolForm.deleteSchoolAdminPreview(data);
 						$.jGrowl('School admin success deleted', {header: 'Success'});
 					} else {

@@ -174,7 +174,7 @@ class School_admin extends SQ_Controller {
 			'headerCss' => array('/public/css/jquery-ui.css'),
 			'headerJs' => array(),
 			'footerJs' => array(),
-			'requireJsDataSource' => false,
+			'requireJsDataSource' => 'addStudent',
 			'jsControllerParam' => false
 		);
 
@@ -190,12 +190,36 @@ class School_admin extends SQ_Controller {
 				$num_student['num_student'] = $s['account_type']['num_student'];
 			}
 		}
-		$pageData = array_merge($school_id, $username, $num_student, $students);
+		$classroom_obj['classroom'] = $this->classroom_library->get(array('school' => $school_id));
+		$pageData = array_merge($school_id, $username, $num_student, $students, $classroom_obj);
 		if ($this->cookie->get('id')) {
 			$this->page->show('school_admin_ui', 'Squlio - Add Student', 'add_student', $pageData, $data);
 		} else {
 			redirect('/school_admin');
 		}
+	}
 
+	public function classroom() {
+		$data = array(
+			'headerCss' => array('/public/css/jquery.dataTables.min.css'),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'viewClassroom',
+			'jsControllerParam' => false
+		);
+
+		if ($school_admin_obj = $this->school_admin_library->get(array('login' => $this->cookie->get('id')), array(), array(), null, null, array('school'=>true))) {
+			foreach ($school_admin_obj as $sa) {
+				$username['username'] = $sa['username'];
+				$school_id['school_id'] = $sa['school']['id'];
+			}
+		}
+
+		$pageData = array_merge($username, $school_id);
+		if ($this->cookie->get('id')){
+			$this->page->show('school_admin_ui', 'Squlio - Classes', 'classroom', $pageData, $data);
+		} else {
+			redirect('/school_admin');
+		}
 	}
 }

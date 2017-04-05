@@ -4,7 +4,7 @@
 </header>
 <div class="admin-main-content">
 	<div class="add-school">
-	<h4><?=$school_amount?> SCHOOLS</h4>
+	<h4><?=$school_count?> SCHOOLS</h4>
 		<button type=submit class="btn btn-primary">+ Add New</button>
 	</div>
 	<table id="table" class="display" cellspacing="0" width="100%" >

@@ -94,7 +94,7 @@ class Student extends EntitySuperClass {
 	/**
 	 * @var \DateTime
 	 *
-	 * @Column(name="birthday", type="datetime". nullable=false)
+	 * @Column(name="birthday", type="datetime", nullable=false)
 	 */
 	protected $birthday;
 

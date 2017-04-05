@@ -5,7 +5,7 @@
 			<a  href="/school_admin/schoolAdminDashboard">Dashboard</a>
 		</li>
 		<li>
-			<a href="#">Classes</a>
+			<a href="/school_admin/classroom">Classes</a>
 		</li>
 		<li>
 			<a href="/school_admin/teacher">Teachers</a>

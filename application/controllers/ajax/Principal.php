@@ -39,7 +39,6 @@ class Principal extends SQ_Controller {
 			'created_on' => new \DateTime('now'),
 			'last_updated' => new \DateTime('now')
 		);
-		var_dump($add_login_data);
 		if ($login_id = $this->login_library->add($add_login_data)) {
 			$add_principal_data = array(
 				'login_id' => $login_id,

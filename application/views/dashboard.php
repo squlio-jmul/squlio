@@ -6,19 +6,19 @@
 	<ul class="list-dashboard">
 		<li class="dashboard">
 			<div class="dashboard-content">
-				<h2><?=$school_amount?></h2>
+				<h2><?=$school_count?></h2>
 				<p>SCHOOLS</p>
 			</div>
 		</li>
 		<li class="dashboard">
 			<div class="dashboard-content">
-				<h2><?=$principal_amount?></h2>
+				<h2><?=$principal_count?></h2>
 				<p>PRINCIPALS</p>
 			</div>
 		</li>
 		<li class="dashboard">
 			<div class="dashboard-content">
-				<h2><?=$school_admin_amount?></h2>
+				<h2><?=$school_admin_count?></h2>
 				<p>ADMINS</p>
 			</div>
 		</li>

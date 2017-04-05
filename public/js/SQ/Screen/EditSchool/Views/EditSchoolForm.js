@@ -42,6 +42,9 @@ define([
 		this.initialize = function($e) {
 			_$edit_school_form = $e;
 			_current_account_type = _$edit_school_form.find('#account_type').val();
+			_$edit_school_form.find('.principal').removeClass('hidden');
+			_$edit_school_form.find('.school-admin').removeClass('hidden');
+
 			_$edit_school_form.find('#edit-school-form').validate({
 				rules: {
 					'name': {
@@ -69,7 +72,8 @@ define([
 					_me.broadcast('edit_school', {account_type, school: _school_data});
 				}
 			});
-			_$edit_school_form.find('#edit-principal-form').validate({
+
+			_$edit_school_form.find('#add-principal-form').validate({
 				rules: {
 					'username': {
 						required: true,
@@ -118,7 +122,7 @@ define([
 				}
 			});
 
-			_$edit_school_form.find('#edit-school-admin-form').validate({
+			_$edit_school_form.find('#add-school-admin-form').validate({
 				rules: {
 					'username': {
 						required: true,
@@ -216,7 +220,7 @@ define([
 				}
 			});
 
-			_$edit_school_form.find('#update-form').validate({
+			_$edit_school_form.find('#update-form-school-admin').validate({
 				rules: {
 					'username': {
 						required: true,
@@ -291,6 +295,7 @@ define([
 				_$edit_school_form.find('#update-form-principal input[name="first_name"]').val(first_name);
 				_$edit_school_form.find('#update-form-principal input[name="last_name"]').val(last_name);
 				_$edit_school_form.find('#update-form-principal').removeClass('hidden');
+				_$edit_school_form.find('.principal[data-id="'+principal_id+'"]').addClass('hidden');
 
 			});
 			_$edit_school_form.find('.edit-school-admin').on('click', function() {
@@ -301,13 +306,14 @@ define([
 				var email = _$self.closest('.school-admin').find('.email').text();
 				var first_name = _$self.closest('.school-admin').find('.first_name').text();
 				var last_name = _$self.closest('.school-admin').find('.last_name').text();
-				_$edit_school_form.find('#update-form input[name="login_id"]').val(login_id);
-				_$edit_school_form.find('#update-form input[name="school_admin_id"]').val(school_admin_id);
-				_$edit_school_form.find('#update-form input[name="username"]').val(username);
-				_$edit_school_form.find('#update-form input[name="email"]').val(email);
-				_$edit_school_form.find('#update-form input[name="first_name"]').val(first_name);
-				_$edit_school_form.find('#update-form input[name="last_name"]').val(last_name);
-				_$edit_school_form.find('#update-form').removeClass('hidden');
+				_$edit_school_form.find('#update-form-school-admin input[name="login_id"]').val(login_id);
+				_$edit_school_form.find('#update-form-school-admin input[name="school_admin_id"]').val(school_admin_id);
+				_$edit_school_form.find('#update-form-school-admin input[name="username"]').val(username);
+				_$edit_school_form.find('#update-form-school-admin input[name="email"]').val(email);
+				_$edit_school_form.find('#update-form-school-admin input[name="first_name"]').val(first_name);
+				_$edit_school_form.find('#update-form-school-admin input[name="last_name"]').val(last_name);
+				_$edit_school_form.find('#update-form-school-admin').removeClass('hidden');
+				_$edit_school_form.find('.school-admin[data-id="'+school_admin_id+'"]').addClass('hidden');
 			});
 
 			_setListeners($e);
@@ -320,12 +326,11 @@ define([
 			data.principal_id = principal_id;
 			data.login_id = login_id;
 			var _$preview_principal = $(_.template(PrincipalTemplate, {principal: data}));
-			_$edit_school_form.find('#preview-principal').append(_$preview_principal);
+			_$edit_school_form.find('.list-principal-data').append(_$preview_principal);
 
 			_$preview_principal.find('.delete').on('click', function() {
 				var _$self = $(this);
 				var _delete_principal_data = [login_id, data.username];
-				console.log(_delete_principal_data);
 				_me.broadcast('delete_principal_preview', _delete_principal_data);
 			});
 
@@ -351,7 +356,7 @@ define([
 			data.school_admin_id = school_admin_id;
 			data.login_id = login_id;
 			var _$preview_school_admin = $(_.template(SchoolAdminTemplate, {school_admin: data}));
-			_$edit_school_form.find('#preview-school-admin').append(_$preview_school_admin);
+			_$edit_school_form.find('.list-school-admin-data').append(_$preview_school_admin);
 
 			_$preview_school_admin.find('.delete').on('click', function() {
 				var _$self = $(this);
@@ -360,24 +365,25 @@ define([
 			});
 
 			_$preview_school_admin.find('.edit').on('click', function() {
-				console.log('test');
 				var username = _$preview_school_admin.find('.username').text();
 				var email = _$preview_school_admin.find('.email').text();
 				var first_name = _$preview_school_admin.find('.first_name').text();
 				var last_name = _$preview_school_admin.find('.last_name').text();
-				_$edit_school_form.find('#update-form input[name="login_id"]').val(login_id);
-				_$edit_school_form.find('#update-form input[name="school_admin_id"]').val(school_admin_id);
-				_$edit_school_form.find('#update-form input[name="username"]').val(username);
-				_$edit_school_form.find('#update-form input[name="email"]').val(email);
-				_$edit_school_form.find('#update-form input[name="first_name"]').val(first_name);
-				_$edit_school_form.find('#update-form input[name="last_name"]').val(last_name);
-				_$edit_school_form.find('#update-form').removeClass('hidden');
+				_$edit_school_form.find('#update-form-school-admin input[name="login_id"]').val(login_id);
+				_$edit_school_form.find('#update-form-school-admin input[name="school_admin_id"]').val(school_admin_id);
+				_$edit_school_form.find('#update-form-school-admin input[name="username"]').val(username);
+				_$edit_school_form.find('#update-form-school-admin input[name="email"]').val(email);
+				_$edit_school_form.find('#update-form-school-admin input[name="first_name"]').val(first_name);
+				_$edit_school_form.find('#update-form-school-admin input[name="last_name"]').val(last_name);
+				_$edit_school_form.find('#update-form-school-admin').removeClass('hidden');
 
 			});
 		}
 
 		this.displayEditPrincipalSuccess = function(data) {
 			var login_id = data.login_id;
+			_$edit_school_form.find('#update-form-principal').addClass('hidden');
+			_$edit_school_form.find('.principal').removeClass('hidden');
 			var _login_id = _$edit_school_form.find('li.principal[data-login-id="principal-'+login_id+'"]');
 			if (_login_id.length > 0) {
 				_login_id.find('p.username').replaceWith('<p>'+data.username+'</p>');
@@ -385,10 +391,14 @@ define([
 				_login_id.find('p.first_name').replaceWith('<p>'+data.first_name+'</p>');
 				_login_id.find('p.last_name').replaceWith('<p>'+data.last_name+'</p>');
 			}
+			$.jGrowl('Principal successfully updated', {header: 'Success'});
+
 		}
 
 		this.displayEditSchoolAdminSuccess = function(data) {
 			var login_id = data.login_id;
+			_$edit_school_form.find('#update-form-school-admin').addClass('hidden');
+			_$edit_school_form.find('.school-admin').removeClass('hidden');
 			var _login_id = _$edit_school_form.find('li.school-admin[data-login-id="school-admin-'+login_id+'"]');
 			if (_login_id.length > 0) {
 				_login_id.find('p.username').replaceWith('<p>'+data.username+'</p>');
@@ -396,6 +406,7 @@ define([
 				_login_id.find('p.first_name').replaceWith('<p>'+data.first_name+'</p>');
 				_login_id.find('p.last_name').replaceWith('<p>'+data.last_name+'</p>');
 			}
+
 		}
 
 		this.displayEditPrincipalPreviewSuccess = function(data) {
@@ -425,7 +436,7 @@ define([
 		this.deletePrincipalPreview = function(data) {
 			var login_id = data[0];
 			var username = data[1];
-			var _username = _$edit_school_form.find('div[data-username="'+username+'"]');
+			var _username = _$edit_school_form.find('.principal[data-username="'+username+'"]');
 			if (_username.length > 0){
 				_username.remove();
 			}
@@ -441,7 +452,7 @@ define([
 		this.deleteSchoolAdminPreview = function(data) {
 			var login_id = data[0];
 			var username = data[1];
-			var _username = _$edit_school_form.find('div[data-username="'+username+'"]');
+			var _username = _$edit_school_form.find('.school-admin[data-username="'+username+'"]');
 			if (_username.length > 0) {
 				_username.remove();
 			}

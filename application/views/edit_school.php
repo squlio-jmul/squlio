@@ -66,7 +66,7 @@
 			<button type="submit" class="btn btn-primary">Save</button>
 		</div>
 	</form>
-	<form id="edit-principal-form">
+	<form id="add-principal-form">
 		<div class="principal-form">
 			<div class="principal-header">
 				<p>School Principal</p>
@@ -126,15 +126,13 @@
 		</div>
 		<button type="submit" class="btn btn-primary">Save</button>
 	</form>
-
-
 	<div class="list-principal">
 		<ul class="list-principal-data">
 	<?
 			if (isset($principal)){
 				foreach ($principal as $p) {
 	?>
-				<li class="principal" data-login-id="principal-<?=$p['login_id']?>" data-id="<?=$p['id']?>">
+				<li class="principal hidden" data-login-id="principal-<?=$p['login_id']?>" data-id="<?=$p['id']?>">
 					<p class="username"><?=$p['username']?></p>
 					<p class="email"><?=$p['email']?></p>
 					<p class="first_name"><?=$p['first_name']?></p>
@@ -150,8 +148,7 @@
 	?>
 			</ul>
 	</div>
-	<div id="preview-principal" class="row"></div>
-	<form id="edit-school-admin-form">
+	<form id="add-school-admin-form">
 		<div class="school-admin-form">
 			<div class="school-admin-header">
 				<p>School Admin</p>
@@ -161,7 +158,7 @@
 					<input type="hidden" name="school_id" class="form-control" placeholder="" value="<?=$s['id']?>"/>
 			</div>
 			<div class="form-group">
-				<input type="hidden" id="school_admin_username" name="username" class="form-control" placeholder="Username" value="" style="width:99%;" />
+				<input type="text" id="school_admin_username" name="username" class="form-control" placeholder="Username" value="" style="width:99%;" />
 			</div>
 			<div class="form-group">
 				<input type="email" id="school_admin_email" name="email" class="form-control" placeholder="Email" value="" style="width:99%;">
@@ -180,7 +177,7 @@
 			</div>
 		</div>
 	 </form>
-	<form id="update-form" class="hidden">
+	<form id="update-form-school-admin" class="hidden">
 		<div class="update-form">
 			<p>Edit School Admin</p>
 			<div class="form-group">
@@ -217,7 +214,7 @@
 			if (isset($school_admin)){
 				foreach ($school_admin as $sa) {
 	?>
-				<li class="school-admin"  data-login-id="school-admin-<?=$sa['login_id']?>" data-id="<?=$sa['id']?>">
+				<li class="school-admin hidden"  data-login-id="school-admin-<?=$sa['login_id']?>" data-id="<?=$sa['id']?>">
 					<p class="username"><?=$sa['username']?></p>
 					<p class="email"><?=$sa['email']?></p>
 					<p class="first_name"><?=$sa['first_name']?></p>
@@ -234,5 +231,4 @@
 	?>
 		</ul>
 	</div>
-	<div id="preview-school-admin" class="row"></div>
 </div>
