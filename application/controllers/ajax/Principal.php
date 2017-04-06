@@ -27,6 +27,7 @@ class Principal extends SQ_Controller {
 	}
 
 	public function add() {
+
 		$add_login_data = array (
 			'email' => $this->input->post('email'),
 			'username' => $this->input->post('username'),
@@ -98,13 +99,13 @@ class Principal extends SQ_Controller {
 			'username' => $this->input->post('username'),
 			'password' => $this->input->post('password'),
 			'type' => 'principal',
-			'token' => 'blah',
-			'active' => 1,
-			'deleted' => 0,
-			'reset_password' => 0,
 			'created_on' => new \DateTime('now'),
 			'last_updated' => new \DateTime('now')
 		);
+		if (!$this->input->post('password') || $this->input->post('password') == '') {
+			unset($update_login_data['password']);
+		}
+
 		if ($login = $this->login_library->update($login_id, $update_login_data)) {
 			$update_principal_data = array (
 				'school_id' => $this->input->post('school_id'),

@@ -50,7 +50,6 @@
 				</div>
 				<div class="form-group">
 					<label for="gender">Gender</label>
-					<!--<input type="text" name="gender" class="form-control" placeholder="Teacher gender" value="" />-->
 					<select id="gender" class="form-control">
 						<option value="">Select One</option>
 						<option value="Male">Male</option>

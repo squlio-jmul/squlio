@@ -108,4 +108,15 @@ class Login extends SQ_Controller {
 		return;
 	}
 
+/*	public function parentUsernameNotExist() {
+		$father_username = $this->input->post('father_username');
+		$mother_username = $this->input->post('mother_username');
+		if ($login_obj = $this->login_library->get(array('username'=>$father_username)) || $login_obj = $this->login_library->get(array('username'=>$mother_username) {
+			echo 'false';
+		} else {
+			echo 'true';
+		}
+		return;
+}*/
+
 }

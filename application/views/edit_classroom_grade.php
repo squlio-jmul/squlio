@@ -6,12 +6,12 @@
 	<header class="edit-classroom-grade">
 		<h4><?=$school_name?></h4>
 	</header>
-	<form id="edit-classroom-grade-form">
+	<form id="edit-classroom-grade-form" data-classroom-amount="<?=$classroom_count?>">
 <?		if (isset($classroom_grade)) {
 			foreach ($classroom_grade as $cg) {
 ?>
 		<div class="form-group">
-		<input type="hidden" name="id" class="classroom_grade_id" placeholder="" value="<?=$cg['id']?>"/>
+			<input type="hidden" name="id" class="classroom_grade_id" placeholder="" value="<?=$cg['id']?>"/>
 		</div>
 		<div class="form-group">
 			<label for="name">Name</label>
@@ -28,4 +28,7 @@
 		}
 ?>
 	</form>
+	<div id="dialog-confirm" title="Delete Classroom Grade?" class="hidden">
+		<p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 12px 0;"></span>Are you usre want to delete this classroom?</p>
+	</div>
 </div>

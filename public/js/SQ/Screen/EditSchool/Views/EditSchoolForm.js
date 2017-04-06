@@ -268,15 +268,16 @@ define([
 				}
 			});
 
-			_$edit_school_form.find('.delete').on('click', function() {
-				var _$self = $(this);
-				var _delete_principal_data = _$self.closest('.principal').find('.principal_login_id').val();
+			_$edit_school_form.find('.delete-principal').on('click', function() {
+				//var _$self = $(this);
+				//var _delete_principal_data = _$self.closest('.principal').find('.principal_login_id').val();
+				var _delete_principal_data = _$edit_school_form.find('#delete-principal').attr('data-login-id');
 				_me.broadcast('delete_principal', _delete_principal_data);
 			});
 
-			_$edit_school_form.find('.delete').on('click', function() {
-				var _$self = $(this);
-				var _delete_school_admin_data = _$self.closest('.school-admin').find('.school_admin_login_id').val();
+			_$edit_school_form.find('.delete-school-admin').on('click', function() {
+				var _delete_school_admin_data = _$edit_school_form.find('#delete-school-admin').attr('data-login-id');
+				console.log(_delete_school_admin_data);
 				_me.broadcast('delete_school_admin', _delete_school_admin_data);
 			});
 
@@ -288,6 +289,7 @@ define([
 				var email = _$self.closest('.principal').find('.email').text();
 				var first_name = _$self.closest('.principal').find('.first_name').text();
 				var last_name = _$self.closest('.principal').find('.last_name').text();
+
 				_$edit_school_form.find('#update-form-principal input[name="login_id"]').val(login_id);
 				_$edit_school_form.find('#update-form-principal input[name="principal_id"]').val(principal_id);
 				_$edit_school_form.find('#update-form-principal input[name="username"]').val(username);
@@ -295,7 +297,7 @@ define([
 				_$edit_school_form.find('#update-form-principal input[name="first_name"]').val(first_name);
 				_$edit_school_form.find('#update-form-principal input[name="last_name"]').val(last_name);
 				_$edit_school_form.find('#update-form-principal').removeClass('hidden');
-				_$edit_school_form.find('.principal[data-id="'+principal_id+'"]').addClass('hidden');
+				_$edit_school_form.find('.principal').addClass('hidden');
 
 			});
 			_$edit_school_form.find('.edit-school-admin').on('click', function() {
@@ -313,9 +315,18 @@ define([
 				_$edit_school_form.find('#update-form-school-admin input[name="first_name"]').val(first_name);
 				_$edit_school_form.find('#update-form-school-admin input[name="last_name"]').val(last_name);
 				_$edit_school_form.find('#update-form-school-admin').removeClass('hidden');
-				_$edit_school_form.find('.school-admin[data-id="'+school_admin_id+'"]').addClass('hidden');
+				_$edit_school_form.find('.school-admin').addClass('hidden');
 			});
 
+			_$edit_school_form.find('.cancel-principal').on('click', function() {
+				_$edit_school_form.find('#update-form-principal').addClass('hidden');
+				_$edit_school_form.find('.principal').removeClass('hidden');
+			});
+
+			_$edit_school_form.find('.cancel-school-admin').on('click', function() {
+				_$edit_school_form.find('#update-form-school-admin').addClass('hidden');
+				_$edit_school_form.find('.school-admin').removeClass('hidden');
+			});
 			_setListeners($e);
 		};
 
@@ -381,18 +392,18 @@ define([
 		}
 
 		this.displayEditPrincipalSuccess = function(data) {
+			console.log(data);
 			var login_id = data.login_id;
 			_$edit_school_form.find('#update-form-principal').addClass('hidden');
 			_$edit_school_form.find('.principal').removeClass('hidden');
 			var _login_id = _$edit_school_form.find('li.principal[data-login-id="principal-'+login_id+'"]');
 			if (_login_id.length > 0) {
-				_login_id.find('p.username').replaceWith('<p>'+data.username+'</p>');
-				_login_id.find('p.email').replaceWith('<p>'+data.email+'</p>');
-				_login_id.find('p.first_name').replaceWith('<p>'+data.first_name+'</p>');
-				_login_id.find('p.last_name').replaceWith('<p>'+data.last_name+'</p>');
+				_login_id.find('p.username').replaceWith('<p class="username">'+data.username+'</p>');
+				_login_id.find('p.email').replaceWith('<p class="email">'+data.email+'</p>');
+				_login_id.find('p.first_name').replaceWith('<p class="first_name">'+data.first_name+'</p>');
+				_login_id.find('p.last_name').replaceWith('<p class="last_name">'+data.last_name+'</p>');
 			}
 			$.jGrowl('Principal successfully updated', {header: 'Success'});
-
 		}
 
 		this.displayEditSchoolAdminSuccess = function(data) {
@@ -401,12 +412,11 @@ define([
 			_$edit_school_form.find('.school-admin').removeClass('hidden');
 			var _login_id = _$edit_school_form.find('li.school-admin[data-login-id="school-admin-'+login_id+'"]');
 			if (_login_id.length > 0) {
-				_login_id.find('p.username').replaceWith('<p>'+data.username+'</p>');
-				_login_id.find('p.email').replaceWith('<p>'+data.email+'</p>');
-				_login_id.find('p.first_name').replaceWith('<p>'+data.first_name+'</p>');
-				_login_id.find('p.last_name').replaceWith('<p>'+data.last_name+'</p>');
+				_login_id.find('p.username').replaceWith('<p class="username">'+data.username+'</p>');
+				_login_id.find('p.email').replaceWith('<p class="email">'+data.email+'</p>');
+				_login_id.find('p.first_name').replaceWith('<p class="first_name">'+data.first_name+'</p>');
+				_login_id.find('p.last_name').replaceWith('<p class="last_name">'+data.last_name+'</p>');
 			}
-
 		}
 
 		this.displayEditPrincipalPreviewSuccess = function(data) {

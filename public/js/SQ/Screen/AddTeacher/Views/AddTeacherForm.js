@@ -64,7 +64,7 @@ define([
 					},
 					'address': {
 						required: true
-					},
+					}
 				},
 				messages: {
 					'username' : {

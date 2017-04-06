@@ -14,7 +14,7 @@
 	</div>
 </header>
 <div class="school-admin-main-content">
-	<div class="add-student">
+	<div class="add-student-header">
 	<h4><?=$students?> STUDENTS</h4>
 		<button type=submit class="btn btn-primary">+ Add New</button>
 	</div>

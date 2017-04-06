@@ -650,7 +650,7 @@ label.error {
 	text-transform: uppercase;
 }
 .add-teacher .btn-primary,
-.add-student .btn-primary,
+.add-student-header .btn-primary,
 .add-classroom .btn-primary {
 	margin-top: -60px;
 	margin-left: 140px;
@@ -741,46 +741,43 @@ label.error {
 	border: none;
 	font-weight: bold;
 }
-.student-form-container {
-	display: block;
-	width: 80%;
-}
-.add-student-container {
-	width: 65%;
+.add-student {
+	width: 60%;
 	float: left;
-	margin-top: -185px;
-	margin-left: 200px;
+	margin-top: -165px;
+	margin-left: 160px;
 	display: table;
 	margin-bottom: 50px;
 }
-.add-student-container .form-left {
+.add-student .form-left {
 	float: left;
 	width: 48%;
+	margin-bottom: 100px;
 }
-.add-student-container .form-right {
+.add-student .form-right {
 	float: right;
 	width: 48%;
 }
-.add-parents-container {
-	width: 85%;
+.add-parents {
+	width: 100%;
 	display: table;
 }
-.add-parents-container h5 {
+.add-parents h5 {
 	margin-bottom: 30px;
 }
-.add-parents-container .form-father {
+.add-parents .form-father {
 	float: left;
 	width: 48%;
 }
-.add-parents-container .form-mother {
+.add-parents .form-mother {
 	float: right;
 	width: 48%;
 }
 .student-status {
-	width: 15%;
+	width: 10%;
 	float: right;
-	margin-top: -800px;
-	margin-right: -100px;
+	margin-top: -150px;
+	margin-right: 20px;
 }
 .status-container #status {
 	width: 100%;

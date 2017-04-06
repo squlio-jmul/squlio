@@ -3,7 +3,8 @@ define([
 	'Global/SQ',
 	'SQ/Broadcaster',
 	'SQ/Util',
-	'ThirdParty/jquery.validate'
+	'ThirdParty/jquery.validate',
+	'ThirdParty/jquery-ui',
 ], function(
 	$,
 	SQ,
@@ -28,6 +29,8 @@ define([
 			var contentHeight = screenHeight - 125;
 			_$edit_classroom_grade_form.find('.admin-main-content').css('min-height', contentHeight);
 
+			var _classroom_amount = _$edit_classroom_grade_form.find('#edit-classroom-grade-form').attr('data-classroom-amount');
+			console.log(_classroom_amount);
 			_$edit_classroom_grade_form.find('#edit-classroom-grade-form').validate({
 				rules: {
 					'name': {
@@ -45,7 +48,25 @@ define([
 
 			_$edit_classroom_grade_form.find('.delete').on('click', function() {
 				var _classroom_grade_id = _$edit_classroom_grade_form.find('.classroom_grade_id').val();
-				_me.broadcast('delete_classroom_grade', _classroom_grade_id);
+				if (_classroom_amount >= 1) {
+					_$edit_classroom_grade_form.find('#dialog-confirm').dialog({
+						resizable: false,
+						height: 'auto',
+						width: 400,
+						modal: true,
+						buttons: {
+							"Close": function() {
+								//_me.broadcast('delete_classroom_grade', _classroom_grade_id);
+								$(this).dialog('close');
+							},
+							Cancel: function() {
+								$(this).dialog('close');
+							}
+						}
+					});
+				} else {
+					//_me.broadcast('delete_classroom_grade', _classroom_grade_id);
+				}
 			});
 		};
 	}

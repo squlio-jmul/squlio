@@ -157,10 +157,10 @@ class School_admin extends SQ_Controller {
 
 			}
 		}
-		$pageData = array_merge($username, $students);
+		$page_data = array_merge($username, $students);
 
 		if ($this->cookie->get('id')){
-			$this->page->show('school_admin_ui', 'Squlio - Student', 'student', $pageData, $data);
+			$this->page->show('school_admin_ui', 'Squlio - Student', 'student', $page_data, $data);
 		} else {
 			redirect('/school_admin');
 		}
@@ -188,9 +188,9 @@ class School_admin extends SQ_Controller {
 			}
 		}
 		$classroom_obj['classroom'] = $this->classroom_library->get(array('school' => $school_id));
-		$pageData = array_merge($school_id, $username, $num_student, $students, $classroom_obj);
+		$page_data = array_merge($school_id, $username, $num_student, $students, $classroom_obj);
 		if ($this->cookie->get('id')) {
-			$this->page->show('school_admin_ui', 'Squlio - Add Student', 'add_student', $pageData, $data);
+			$this->page->show('school_admin_ui', 'Squlio - Add Student', 'add_student', $page_data, $data);
 		} else {
 			redirect('/school_admin');
 		}
@@ -212,9 +212,9 @@ class School_admin extends SQ_Controller {
 			}
 		}
 
-		$pageData = array_merge($username, $school_id);
+		$page_data = array_merge($username, $school_id);
 		if ($this->cookie->get('id')){
-			$this->page->show('school_admin_ui', 'Squlio - Classes', 'classroom', $pageData, $data);
+			$this->page->show('school_admin_ui', 'Squlio - Classes', 'classroom', $page_data, $data);
 		} else {
 			redirect('/school_admin');
 		}

@@ -28,7 +28,7 @@ define([
 			var contentHeight = screenHeight - 125;
 			_$teacher_table.find('.school-admin-main-content').css('min-height', contentHeight);
 			_$teacher_table.find('.btn.btn-primary').click(function(){
-				window.location.replace("addClassroomGrade");
+				window.location.replace("addTeacher");
 			});
 
 			_$teacher_table.find('#school').on('change', function(){

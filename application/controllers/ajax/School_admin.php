@@ -116,6 +116,9 @@ class School_admin extends SQ_Controller {
 			'created_on' => new \DateTime('now'),
 			'last_updated' => new \DateTime('now')
 		);
+		if (!$this->input->post('password') || $this->input->post('password') == '') {
+			unset($update_login_data['password']);
+		}
 		if ($login = $this->login_library->update($login_id, $update_login_data)) {
 			$update_school_admin_data = array (
 				'school_id' => $this->input->post('school_id'),

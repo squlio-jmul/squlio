@@ -10,6 +10,7 @@ class Admin extends SQ_Controller{
 		$this->load->model('Account_type_model');
 		$this->load->model('Login_model');
 		$this->load->model('Classroom_grade_model');
+		$this->load->model('Classroom_model');
 	}
 
 	public function index() {
@@ -60,10 +61,10 @@ class Admin extends SQ_Controller{
 
 		$account_type_obj = $this->Account_type_model->get();
 		$account_type_data['account_type'] = $account_type_obj;
-		$pageData = $account_type_data;
+		$page_data = $account_type_data;
 
 		if ($this->cookie->get('id')) {
-			$this->page->show('admin_ui', 'Squlio - Apps Settings', 'settings', $pageData, $data);
+			$this->page->show('admin_ui', 'Squlio - Apps Settings', 'settings', $page_data, $data);
 		} else {
 			redirect('/admin');
 		}
@@ -94,10 +95,10 @@ class Admin extends SQ_Controller{
 		);
 
 		$account_type_obj['account_type'] = $this->Account_type_model->get(['id'=>$this->input->get('id')]);
-		$pageData = $account_type_obj;
+		$page_data = $account_type_obj;
 
 		if ($this->cookie->get('id')) {
-			$this->page->show('admin_ui', 'Squlio - Edit Account Type', 'edit_type', $pageData, $data);
+			$this->page->show('admin_ui', 'Squlio - Edit Account Type', 'edit_type', $page_data, $data);
 		} else {
 			redirect('/admin');
 		}
@@ -131,9 +132,9 @@ class Admin extends SQ_Controller{
 			'jsControllerParam' => false
 		);
 		$account_type_obj['account_type'] = $this->Account_type_model->get();
-		$pageData = $account_type_obj;
+		$page_data = $account_type_obj;
 		if ($this->cookie->get('id')) {
-			$this->page->show('admin_ui', 'Squlio - Add School', 'add_school', $pageData, $data);
+			$this->page->show('admin_ui', 'Squlio - Add School', 'add_school', $page_data, $data);
 		} else {
 			redirect('admin');
 		}
@@ -170,9 +171,9 @@ class Admin extends SQ_Controller{
 		);
 
 		$school_obj['school'] = $this->School_model->get();
-		$pageData = $school_obj;
+		$page_data = $school_obj;
 		if ($this->cookie->get('id')) {
-			$this->page->show('admin_ui', 'Squlio - Classroom Grade', 'classroom_grade', $pageData, $data);
+			$this->page->show('admin_ui', 'Squlio - Classroom Grade', 'classroom_grade', $page_data, $data);
 		} else {
 			redirect('/admin');
 		}
@@ -188,9 +189,9 @@ class Admin extends SQ_Controller{
 		);
 
 		$school_obj['school'] = $this->School_model->get();
-		$pageData = $school_obj;
+		$page_data = $school_obj;
 		if ($this->cookie->get('id')) {
-			$this->page->show('admin_ui', 'Squlio - Classroom Grade', 'add_classroom_grade', $pageData, $data);
+			$this->page->show('admin_ui', 'Squlio - Classroom Grade', 'add_classroom_grade', $page_data, $data);
 		} else {
 			redirect('/admin');
 		}
@@ -198,7 +199,7 @@ class Admin extends SQ_Controller{
 
 	public function editClassroomGrade() {
 		$data = array(
-			'headerCss' => array(),
+			'headerCss' => array('/public/css/jquery-ui.css'),
 			'headerJs' => array(),
 			'footerJs' => array(),
 			'requireJsDataSource' => 'editClassroomGrade',
@@ -208,11 +209,12 @@ class Admin extends SQ_Controller{
 			foreach ($classroom_grade_obj as $cg) {
 				$classroom_grade['classroom_grade'] = $classroom_grade_obj;
 				$school_name['school_name'] = $cg['school']['name'];
+				$classroom_count['classroom_count'] = count($this->Classroom_model->get(array('classroom_grade'=>$this->input->get('id'))));
 			}
 		}
-		$pageData = array_merge($classroom_grade, $school_name);
+		$page_data = array_merge($classroom_grade, $school_name, $classroom_count);
 		if ($this->cookie->get('id')) {
-			$this->page->show('admin_ui', 'Squlio - Edit School', 'edit_classroom_grade', $pageData, $data);
+			$this->page->show('admin_ui', 'Squlio - Edit School', 'edit_classroom_grade', $page_data, $data);
 		} else {
 			redirect('/admin');
 		}
