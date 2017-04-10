@@ -52,6 +52,13 @@ class Login extends SQ_Controller {
 		$this->sendResponse();
 	}
 
+	public function update() {
+		$login_id = $this->input->post('login_id');
+		$login_data = $this->input->post('login_data');
+		$success = $this->login_library->update($login_id, $login_data);
+		$this->setResponseElement('success', $success);
+		$this->sendResponse();
+	}
 
 	public function usernameNotExist() {
 		$username = $this->input->post('username');

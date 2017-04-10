@@ -122,17 +122,11 @@ define(
 				return _deferred.promise;
 			};
 
-			this.updateSchoolAdmin = function(school_id, login_id, school_admin_id, username,password, email, first_name, last_name) {
+			this.update = function(school_admin_id, school_admin_data) {
 				var _deferred = Q.defer();
 				var data = {
-					school_id: school_id,
-					login_id: login_id,
 					school_admin_id: school_admin_id,
-					username: username,
-					password: password,
-					email: email,
-					first_name: first_name,
-					last_name: last_name
+					school_admin_data: school_admin_data
 				};
 				$.ajax({
 					url: '/ajax/school_admin/update',

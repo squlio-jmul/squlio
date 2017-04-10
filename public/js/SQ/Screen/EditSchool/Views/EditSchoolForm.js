@@ -269,15 +269,14 @@ define([
 			});
 
 			_$edit_school_form.find('.delete-principal').on('click', function() {
-				//var _$self = $(this);
-				//var _delete_principal_data = _$self.closest('.principal').find('.principal_login_id').val();
-				var _delete_principal_data = _$edit_school_form.find('#delete-principal').attr('data-login-id');
+				var _$self = $(this);
+				var _delete_principal_data = _$self.closest('.popup-principal').attr('data-login-id');
 				_me.broadcast('delete_principal', _delete_principal_data);
 			});
 
 			_$edit_school_form.find('.delete-school-admin').on('click', function() {
-				var _delete_school_admin_data = _$edit_school_form.find('#delete-school-admin').attr('data-login-id');
-				console.log(_delete_school_admin_data);
+				var _$self = $(this);
+				var _delete_school_admin_data = _$self.closest('.popup-school-admin').attr('data-login-id');
 				_me.broadcast('delete_school_admin', _delete_school_admin_data);
 			});
 
@@ -392,7 +391,6 @@ define([
 		}
 
 		this.displayEditPrincipalSuccess = function(data) {
-			console.log(data);
 			var login_id = data.login_id;
 			_$edit_school_form.find('#update-form-principal').addClass('hidden');
 			_$edit_school_form.find('.principal').removeClass('hidden');
@@ -430,8 +428,9 @@ define([
 
 		this.displayEditSchoolAdminPreviewSuccess = function(data) {
 			var school_admin_id = data.school_admin_id;
-			var old_principal = _$edit_school_form.find('.school-admin-container[data-id="'+school_admin_id+'"]');
-			if (_old_principal.length > 0) {
+			var old_school_admin = _$edit_school_form.find('.school-admin-container[data-id="'+school_admin_id+'"]');
+			console.log(old_school_admin);
+			if (_old_school_admin.length > 0) {
 				old_principal.html(new_principal);
 			}
 		}

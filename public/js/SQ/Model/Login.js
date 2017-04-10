@@ -57,6 +57,28 @@ define(
 				});
 				return _deferred.promise;
 			};
+
+			this.update = function(login_id, login_data) {
+				var _deferred = Q.defer();
+
+				var data = {
+					login_id: login_id,
+					login_data: login_data
+				};
+				$.ajax({
+					url: '/ajax/login/update',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(response) {
+						_deferred.resolve(response);
+					},
+					error: function(response, textStatus, jqXHR) {
+						_deferred.reject(response);
+					}
+				});
+				return _deferred.promise;
+			};
 		}
 	}
 );

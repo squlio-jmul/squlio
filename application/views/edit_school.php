@@ -130,7 +130,7 @@
 	<div class="list-principal">
 		<ul class="list-principal-data">
 	<?
-			if (isset($principal)){
+		if (isset($principal)){
 				foreach ($principal as $p) {
 	?>
 				<li class="principal hidden" data-login-id="principal-<?=$p['login_id']?>" data-id="<?=$p['id']?>">
@@ -141,13 +141,31 @@
 					<input type="hidden" class="principal_id" value="<?=$p['id']?>" />
 					<input type="hidden" class="principal_login_id" value="<?=$p['login_id']?>" />
 					<button type="button" class="btn btn-primary edit-principal">Edit</button>
-					<button type"button" class="btn btn-danger delete" data-toggle="modal" data-target="#delete-principal">Delete</button>
+					<button type"button" class="btn btn-danger delete" data-toggle="modal" data-target="#delete-principal-modal-<?=$p['id']?>">Delete</button>
+
+					<div class="modal fade popup-principal" id="delete-principal-modal-<?=$p['id']?>" tabindex="-1" role="dialog" data-login-id=<?= $p['login_id']?>>
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"<span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title">Delete</h4>
+								</div>
+								<div class="modal-body">
+									<p>Are you sure want to delete this?</p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-danger delete-principal" data-dismiss="modal">Delete</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</li>
 	<?
 				}
 			}
 	?>
-			</ul>
+		</ul>
 	</div>
 	<form id="add-school-admin-form">
 		<div class="school-admin-form">
@@ -223,48 +241,30 @@
 					<p class="last_name"><?=$sa['last_name']?></p>
 					<input type="hidden" class="school_admin_id" value="<?=$sa['id']?>" />
 					<input type="hidden" class="school_admin_login_id" value="<?=$sa['login_id']?>" />
-					<button type"button" class="btn btn-danger delete" data-toggle="modal" data-target="#delete-school-admin">Delete</button>
+					<button type"button" class="btn btn-danger deletes" data-toggle="modal" data-target="#delete-school-admin-<?=$sa['id']?>">Delete</button>
 					<button type="button" class="btn btn-primary edit-school-admin">Edit</button>
-
 				</li>
+				<div class="modal fade popup-school-admin" id="delete-school-admin-<?=$sa['id']?>" tabindex="-1" role="dialog" data-login-id=<?=$sa['login_id']?>>
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"<span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title">Delete</h4>
+							</div>
+							<div class="modal-body">
+								<p>Are you sure want to delete this?</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-danger delete-school-admin" data-dismiss="modal">Delete</button>
+							</div>
+						</div>
+					</div>
+				</div>
 	<?
 				}
 			}
 	?>
 		</ul>
-		<div class="modal fade" id="delete-school-admin" tabindex="-1" role="dialog" data-login-id=<?=$sa['login_id']?>>
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"<span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title">Delete</h4>
-					</div>
-					<div class="modal-body">
-						<p>Are you sure want to delete this?</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-danger delete-school-admin" data-dismiss="modal">Delete</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="modal fade" id="delete-principal" tabindex="-1" role="dialog" data-login-id=<?=$p['login_id']?>>
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"<span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title">Delete</h4>
-					</div>
-					<div class="modal-body">
-						<p>Are you sure want to delete this?</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-danger delete-principal" data-dismiss="modal">Delete</button>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 </div>

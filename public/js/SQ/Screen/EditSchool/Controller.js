@@ -5,6 +5,7 @@ define([
 	'SQ/Model/School',
 	'SQ/Model/Principal',
 	'SQ/Model/School_admin',
+	'SQ/Model/Login',
 	'SQ/Screen/EditSchool/Views/EditSchoolForm',
 	'ThirdParty/q',
 	'jgrowl',
@@ -16,6 +17,7 @@ define([
 	SchoolModel,
 	PrincipalModel,
 	SchoolAdminModel,
+	LoginModel,
 	EditSchoolForm,
 	Q,
 	jGrowl
@@ -28,6 +30,7 @@ define([
 		var _schoolModel = new SchoolModel();
 		var _principalModel = new PrincipalModel();
 		var _schoolAdminModel = new SchoolAdminModel();
+		var _loginModel = new LoginModel();
 		var _editSchoolForm = new EditSchoolForm();
 
 		(function _init() {
@@ -103,11 +106,22 @@ define([
 		}
 
 		function _updatePrincipal(data) {
-			_principalModel.updatePrincipal(data.school_id, data.login_id, data.principal_id, data.username, data.password, data.email, data.first_name, data.last_name).then(
-					function (response) {
+			var login_data = {
+				username: data.username,
+				password: data.password,
+				email: data.email
+			};
+
+			var principal_data = {
+				first_name: data.first_name,
+				last_name: data.last_name
+			};
+
+			Q.all([_loginModel.update(data.login_id, login_data), _principalModel.update(data.principal_id, principal_data)]).done(
+				function (response) {
 					if (response) {
 						_editSchoolForm.displayEditPrincipalSuccess(data);
-						_editSchoolForm.displayEditPrincipalPreviewSuccess(data);
+						//_editSchoolForm.displayEditPrincipalPreviewSuccess(data);
 					} else {
 						$.jGrowl('Principal could not be update', {header: 'Error'});
 					}
@@ -116,19 +130,30 @@ define([
 		}
 
 		function _updateSchoolAdmin(data) {
-			_schoolAdminModel.updateSchoolAdmin(data.school_id, data.login_id, data.school_admin_id, data.username, data.password, data.email, data.first_name, data.last_name).then(
-					function (response) {
+
+			var login_data = {
+				username: data.username,
+				password: data.password,
+				email: data.email
+			};
+
+			var school_admin_data = {
+				first_name: data.first_name,
+				last_name: data.last_name
+			};
+
+			Q.all([_loginModel.update(data.login_id, login_data), _schoolAdminModel.update(data.school_admin_id, school_admin_data)]).done(
+				function (response) {
 					if (response) {
 						$.jGrowl('School admin successfully updated', {header: 'Success'});
 						_editSchoolForm.displayEditSchoolAdminSuccess(data);
-						_editSchoolForm.displayEditSchoolAdminPreviewSuccess(data);
+					//	_editSchoolForm.displayEditSchoolAdminPreviewSuccess(data);
 					} else {
 						$.jGrowl('School admin could not be update', {header: 'Error'});
 					}
 				}
 			);
 		}
-
 
 		function _deletePrincipal(login_id) {
 			_principalModel.deletePrincipal(login_id).then(
