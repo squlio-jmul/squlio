@@ -19,45 +19,28 @@ class School_admin extends SQ_Controller {
 			'headerCss' => array(),
 			'headerJs' => array(),
 			'footerJs' => array(),
-			'requireJsDataSource' => 'schoolAdminDashboard',
-			'jsControllerParam' => false
+			'requireJsDataSource' => 'default',
+			'jsControllerParam' => false,
+			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
+			'page_title' => 'Dashboard',
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
 		);
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
 			$login_id = $this->cookie->get('id');
-			$data['login_type'] = $this->cookie->get('type');
-			$data['left_panel_type'] = 'school-admin';
-			$data['page_title'] = 'Dashboard';
 			if ($school_admin_obj = $this->school_admin_library->get(array('login'=>$login_id), array(), array(), null, null, array('school'=>true))) {
 				$school_admin = $school_admin_obj[0];
 				$data['school_admin'] = $school_admin;
-				$data['user_obj'] = $school_admin;
-				$this->page->show('default', 'Squlio - School Admin Dashboard', 'school_admin_dashboard', $data, $data);
+				$data['classes_count'] = count($this->classroom_library->get(array('school'=>$school_admin['school_id']), array('id')));
+				$data['teachers_count'] = $this->teacher_library->getActiveCountBySchoolId($school_admin['school_id']);
+				$data['students_count'] = $this->student_library->getActiveCountBySchoolId($school_admin['school_id']);
+				$data['materials_count'] = 0;
+
+				$this->page->show('default', 'Squlio - Dashboard', 'school_admin_dashboard', $data, $data);
 				return;
 			}
 		}
 		redirect('/');
-
-		$login_id = $this->cookie->get('id');
-		if ($school_admin_obj = $this->school_admin_library->get(array('login' => $login_id), array(), array(), null, null, array('school'=>true))) {
-			foreach ($school_admin_obj as $sa) {
-				$material_obj = $this->material_library->get(array('school' => $sa['school']['id']));
-				$page_data = array(
-					'username' => $sa['username'],
-					'school' => $sa['school']['name'],
-					'address' => $sa['school']['address_1'],
-					'teachers'  => $this->teacher_library->getActiveCountBySchoolId($sa['school']['id']),
-					'students' => $this->student_library->getActiveCountBySchoolId($sa['school']['id']),
-					'classes' => count($this->classroom_library->get(array('school' => $sa['school']['id']))),
-					'materials' => isset($material_obj) && $material_obj ? count($material_obj) : 0
-				);
-			}
-		}
-		if ($this->cookie->get('id')){
-			$this->page->show('school_admin', 'Squlio - School Admin Dashboard', 'school_admin_dashboard', $page_data, $data);
-		} else {
-			redirect('/school_admin');
-		}
 	}
 
 	public function teacher () {

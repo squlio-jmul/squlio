@@ -1,56 +1,38 @@
-<h1>Dashboard</h1>
-<?
-/*
-<header class="school-admin-page-header">
-	<h4>DASHBOARD</h4>
-	<div class="user-section">
-		<ul class="user">
-			<li class="user-tag">
-			<p> Hello, <?=$username?> </p>
-			</li>
-			<li class="user-avatar">
-			</li>
-			<li class="logout">
-				<a class="school-admin-logout" href="/logout">Logout</a>
-			</li>
-		</ul>
-	</div>
-</header>
-<div class="school-admin-main-content">
-	<div class"school-section">
-		<div class="school-photo">
+<div id="sq-school-admin-dashboard-container" class="sq-container">
+	<div class="row school-info">
+		<div class="col-xs-1">
+			<img src="<?=$img_path?>/school.png" class="img-responsive" />
 		</div>
-		<div class="school-tag">
-			<h3> <?=$school?> </h3>
-			<h5> <?=$address?></h5> 
+		<div class="col-xs-10">
+			<div class="school-name">
+				<?=$school_admin['school']['name']?>
+			</div>
+			<div class="school-address">
+				<?=$school_admin['school']['address_1']?><br />
+				<?=$school_admin['school']['city']?> <?=$school_admin['school']['zipcode']?>
+			</div>
 		</div>
 	</div>
-	<ul class="list-school-data">
-		<li class="school-data">
-			<div class="school-content">
-				<h2><?=$classes?></h2>
-				<p>Classes</p>
+	<div class="row">
+		<div class="col-xs-3">
+			<div class="widget">
+				<?=number_format($classes_count)?> Classes
 			</div>
-		</li>
-		<li class="school-data">
-			<div class="school-content">
-				<h2><?=$teachers?></h2>
-				<p>Teachers</p>
+		</div>
+		<div class="col-xs-3">
+			<div class="widget">
+				<?=number_format($teachers_count)?> Teachers
 			</div>
-		</li>
-		<li class="school-data">
-			<div class="school-content">
-				<h2><?=$students?></h2>
-				<p>Students</p>
+		</div>
+		<div class="col-xs-3">
+			<div class="widget">
+				<?=number_format($students_count)?> Students
 			</div>
-		</li>
-		<li class="school-data">
-			<div class="school-content">
-				<h2><?=$materials?></h2>
-				<p>Materials</p>
+		</div>
+		<div class="col-xs-3">
+			<div class="widget">
+				<?=number_format($materials_count)?> Materials
 			</div>
-		</li>
-	</ul>
+		</div>
+	</div>
 </div>
- */
-?>

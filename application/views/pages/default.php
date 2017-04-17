@@ -15,7 +15,7 @@
 	<div id="wrapper">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-xs-1 left-panel <?=$left_panel_type?>">
+				<div class="col-xs-1 left-panel <?=$login_type?>">
 					<? require_once('left_navbar.php'); ?>
 				</div>
 				<div class="col-xs-11 right-panel">

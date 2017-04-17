@@ -59,7 +59,7 @@ class Login_library extends SQ_Library {
 						$success_obj['success'] = true;
 						$success_obj['redirect_page'] = $redirect_page;
 						$success_obj['id'] = $login['id'];
-						$success_obj['cookie_obj'] = array('id'=>$login['id'], 'type'=>$login['type']);
+						$success_obj['cookie_obj'] = array('id'=>$login['id'], 'type'=>$login['type'], 'type_info' => $type_info);
 					}
 				}
 			}

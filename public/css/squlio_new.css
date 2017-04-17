@@ -59,7 +59,7 @@ footer .right {
 	height: 100%;
 	padding: 0;
 }
-.left-panel.school-admin {
+.left-panel.school_admin {
 	background-color: #F0F1F4;
 }
 .right-panel {
@@ -118,6 +118,9 @@ footer .right {
 .right-panel #page-content {
 	margin-top: 60px;
 }
+.sq-container {
+	padding: 20px;
+}
 /** Login **/
 #sq-login-container {
 	width: 450px;
@@ -153,4 +156,25 @@ footer .right {
 	background-color: #F0F1F4;
 	height: 100%;
 }
-
+/** School Admin Dashboard **/
+#sq-school-admin-dashboard-container .school-info {
+	margin-bottom: 30px;
+}
+#sq-school-admin-dashboard-container .school-info .school-name {
+	font-size: 20px;
+	font-weight: bold;
+}
+#sq-school-admin-dashboard-container .school-info .school-address {
+	font-weight: bold;
+}
+#sq-school-admin-dashboard-container .widget {
+	text-align: center;
+	font-size: 28px;
+	font-weight: bold;
+	background-color: #DDDDDD;
+	height: 200px;
+	text-transform: uppercase;
+	vertical-align: middle;
+	width: inherit;
+	display: table-cell;
+}

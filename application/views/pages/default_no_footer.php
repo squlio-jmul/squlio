@@ -13,7 +13,6 @@
 
 <body class="page-index">
 	<div id="wrapper">
-		<? require_once('navbar.php'); ?>
 		<div class="container-fluid" id="page-content">
 			<?=$content?>
 		</div>
