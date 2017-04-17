@@ -1,3 +1,6 @@
+<h1>Dashboard</h1>
+<?
+/*
 <header class="school-admin-page-header">
 	<h4>DASHBOARD</h4>
 	<div class="user-section">
@@ -49,4 +52,5 @@
 		</li>
 	</ul>
 </div>
-
+ */
+?>

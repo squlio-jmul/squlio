@@ -1,4 +1,5 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class School_admin extends SQ_Controller {
@@ -18,24 +19,24 @@ class School_admin extends SQ_Controller {
 			'headerCss' => array(),
 			'headerJs' => array(),
 			'footerJs' => array(),
-			'requireJsDataSource' => 'school_admin',
-			'jsControllerParam' => false
-		);
-		if (!$this->cookie->get('id')){
-			$this->page->show('default', 'Squlio - School Admin', 'school_admin', $data, $data);
-		} else {
-			redirect('/school_admin/schoolAdminDashboard');
-		}
-	}
-
-	public function schoolAdminDashboard() {
-		$data = array(
-			'headerCss' => array(),
-			'headerJs' => array(),
-			'footerJs' => array(),
 			'requireJsDataSource' => 'schoolAdminDashboard',
 			'jsControllerParam' => false
 		);
+
+		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
+			$login_id = $this->cookie->get('id');
+			$data['login_type'] = $this->cookie->get('type');
+			$data['left_panel_type'] = 'school-admin';
+			$data['page_title'] = 'Dashboard';
+			if ($school_admin_obj = $this->school_admin_library->get(array('login'=>$login_id), array(), array(), null, null, array('school'=>true))) {
+				$school_admin = $school_admin_obj[0];
+				$data['school_admin'] = $school_admin;
+				$data['user_obj'] = $school_admin;
+				$this->page->show('default', 'Squlio - School Admin Dashboard', 'school_admin_dashboard', $data, $data);
+				return;
+			}
+		}
+		redirect('/');
 
 		$login_id = $this->cookie->get('id');
 		if ($school_admin_obj = $this->school_admin_library->get(array('login' => $login_id), array(), array(), null, null, array('school'=>true))) {
@@ -53,7 +54,7 @@ class School_admin extends SQ_Controller {
 			}
 		}
 		if ($this->cookie->get('id')){
-			$this->page->show('school_admin_ui', 'Squlio - School Admin Dashboard', 'school_admin_dashboard', $page_data, $data);
+			$this->page->show('school_admin', 'Squlio - School Admin Dashboard', 'school_admin_dashboard', $page_data, $data);
 		} else {
 			redirect('/school_admin');
 		}

@@ -13,7 +13,7 @@ body {
 a, a:hover {
 	cursor: pointer;
 	text-decoration: none;
-	color: #dddddd;
+	color: #00ACD3;
 }
 a.small {
 	font-size: 12px;
@@ -47,8 +47,76 @@ footer {
 	bottom: 0;
 	width: 100%;
 	height: 60px;
-	padding: 10px;
-	text-align: center;
+	padding: 20px;
+}
+footer .left {
+	text-align: left;
+}
+footer .right {
+	text-align: right;
+}
+.left-panel {
+	height: 100%;
+	padding: 0;
+}
+.left-panel.school-admin {
+	background-color: #F0F1F4;
+}
+.right-panel {
+	height: 100%;
+	padding: 0;
+	overflow-y: scroll;
+}
+.left-panel .header {
+	font-size: 16px;
+	font-weight: bold;
+	padding: 20px 0px 40px 15px;
+}
+.left-panel .nav li a {
+	color: #000000;
+	font-weight: bold;
+}
+.left-panel .nav li.active a {
+	color: #00ACD3;
+}
+.right-panel .navbar {
+	left: 8.33333333%;
+	color: #FFFFFF;
+	background-color: #8B9299;
+}
+.right-panel .navbar.navbar-default {
+	background-color: #8B9299;
+	color: #FFFFFF;
+	height: 60px;
+}
+.right-panel .navbar-fixed-top {
+	border-width: 0;
+}
+.right-panel .navbar .page-title {
+	text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 18px;
+    margin: 17px 20px;
+}
+.right-panel .navbar .navbar-nav {
+	height: 60px;
+}
+.right-panel .navbar .navbar-nav .hello {
+	font-size: 16px;
+	margin: 19px 10px 19px 0;
+}
+.right-panel .navbar .navbar-nav .dropdown {
+	height: 60px;
+}
+.right-panel .navbar .navbar-nav .dropdown .avatar {
+	height: 60px;
+	padding: 20px 15px
+}
+.right-panel .navbar .navbar-nav .dropdown .avatar .avatar-logo {
+	width: 20px;
+}
+.right-panel #page-content {
+	margin-top: 60px;
 }
 /** Login **/
 #sq-login-container {
@@ -68,6 +136,9 @@ footer {
 }
 #sq-login-container .form-container .login-button {
 	width: 100%;
+}
+#sq-login-container .form-container .forgot-password {
+	color: #cccccc;
 }
 #sq-login-container .copyright {
 	text-align: center;

@@ -24,7 +24,8 @@ class Page extends SQ_Library {
 		'default',
 		'default_no_footer',
 		'admin_ui',
-		'school_admin_ui'
+		'school_admin_ui',
+		'school_admin'
 	);
 
 	/**
@@ -149,7 +150,7 @@ class Page extends SQ_Library {
 		}else{
 			$data['headerCss'][] = $this->cssPath . '/jquery.jgrowl.min.css';
 			$data['headerCss'][] = $this->cssPath . '/bootstrap.css';
-			$data['headerCss'][] = $this->cssPath . '/squlio.css';
+//			$data['headerCss'][] = $this->cssPath . '/squlio.css';
 			$data['headerCss'][] = $this->cssPath . '/squlio_new.css';
 		}
 		$data['navs'] = array (
