@@ -15,21 +15,6 @@ class Admin extends SQ_Controller{
 
 	public function index() {
 		$data = array(
-			'headerCss' => array(),
-			'headerJs' => array(),
-			'footerJs' => array(),
-			'requireJsDataSource' => 'admin',
-			'jsControllerParam' => false
-		);
-		if (!$this->cookie->get('id')){
-			$this->page->show('default', 'Squlio - Admin', 'admin', $data, $data);
-		} else {
-			redirect('/admin/dashboard');
-		}
-	}
-
-	public function dashboard() {
-		$data = array(
 			'headerCss' => array('/public/css/bootstrap.min.css'),
 			'headerJs' => array(),
 			'footerJs' => array(),
@@ -43,10 +28,10 @@ class Admin extends SQ_Controller{
 			'principal_count' => count($this->Login_model->get(array('type'=>'principal', 'active'=>true, 'deleted'=>false)))
 		);
 
-		if ($this->cookie->get('id')){
+		if ($this->cookie->get('id') && $this->cookie->get('type') == 'admin'){
 			$this->page->show('admin_ui', 'Squlio - Dashboard', 'dashboard', $page_data, $data);
 		} else {
-			redirect('/admin');
+			redirect('/');
 		}
 	}
 

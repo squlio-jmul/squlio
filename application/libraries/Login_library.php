@@ -32,47 +32,24 @@ class Login_library extends SQ_Library {
 		}
 	}
 
-	public function verifyLogin($email, $password, $login_token = null) {
+	public function verifyLogin($username, $password, $login_token = null) {
 		$success_obj = array('success' => false, 'redirect_page' => null, 'id' => null, 'cookie_obj' => null);
 
 		try {
-			if ($login_obj = $this->_ci->Login_model->get(array('email'=>$email))) {
+			if ($login_obj = $this->_ci->Login_model->get(array('username'=>$username))) {
 				$login = $login_obj[0];
 				if ($login['password'] == $password && $login['active'] && !$login['deleted']) {
+					$redirect_page = '/';
 					switch($login['type']) {
 						case 'admin':
 							$type_info_obj = $this->_ci->Admin_model->get(array('login'=>$login['id']));
 							$type_info = $type_info_obj[0];
+							$redirect_page = '/admin';
 							break;
-						default:
-							$type_info = null;
-							break;
-					}
-					if ($type_info) {
-						$success_obj['success'] = true;
-						$success_obj['redirect_page'] = '/admin/dashboard';
-						$success_obj['id'] = $login['id'];
-						$success_obj['cookie_obj'] = array('id'=>$login['id'], 'type'=>$login['type']);
-					}
-				}
-			}
-			return $success_obj;
-		} catch(Exception $err) {
-			die($err->getMessage());
-		}
-	}
-
-	public function verifyLoginSchoolAdmin($email, $password, $login_token = null) {
-		$success_obj = array('success' => false, 'redirect_page' => null, 'id' => null, 'cookie_obj' => null);
-
-		try {
-			if ($login_obj = $this->_ci->Login_model->get(array('email'=>$email))) {
-				$login = $login_obj[0];
-				if ($login['password'] == $password && $login['active'] && !$login['deleted']) {
-					switch($login['type']) {
 						case 'school_admin':
 							$type_info_obj = $this->_ci->School_admin_model->get(array('login'=>$login['id']));
 							$type_info = $type_info_obj[0];
+							$redirect_page = '/school_admin';
 							break;
 						default:
 							$type_info = null;
@@ -80,7 +57,7 @@ class Login_library extends SQ_Library {
 					}
 					if ($type_info) {
 						$success_obj['success'] = true;
-						$success_obj['redirect_page'] = '/school_admin/SchoolAdminDashboard';
+						$success_obj['redirect_page'] = $redirect_page;
 						$success_obj['id'] = $login['id'];
 						$success_obj['cookie_obj'] = array('id'=>$login['id'], 'type'=>$login['type']);
 					}

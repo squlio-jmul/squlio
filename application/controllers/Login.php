@@ -12,10 +12,21 @@ class Login extends SQ_Controller {
 			'requireJsDataSource' => 'login',
 			'jsControllerParam' => false
 		);
-		if (!$this->cookie->get('id')) {
-			$this->page->show('default', 'Squlio - Login', 'login', $data, $data);
-		} else {
-			redirect('/home');
+		if ($this->cookie->get('id')) {
+			$id = $this->cookie->get('id');
+			$type = $this->cookie->get('type');
+			switch($type) {
+				case 'admin':
+					redirect('/admin');
+					break;
+				case 'school_admin':
+					redirect('/school_admin');
+					break;
+				default:
+					$this->cookie->destroy_all();
+					break;
+			}
 		}
+		$this->page->show('default_no_footer', 'Squlio - Login', 'login', $data, $data);
 	}
 }

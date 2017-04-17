@@ -25,23 +25,9 @@ class Login extends SQ_Controller {
 	}
 
 	public function verifyLogin() {
-		$email = $this->input->post('email');
+		$username = $this->input->post('username');
 		$password = $this->input->post('password');
-		$login_response = $this->login_library->verifyLogin($email, $password);
-
-		$this->setResponseElement('success', $login_response['success']);
-		if($login_response['success']){
-			$this->setResponseElement('redirect_page', $login_response['redirect_page']);
-			$this->setResponseElement('id', $login_response['id']);
-			$this->cookie->set($login_response['cookie_obj']);
-		}
-		$this->sendResponse();
-	}
-
-	public function verifyLoginSchoolAdmin() {
-		$email = $this->input->post('email');
-		$password = $this->input->post('password');
-		$login_response = $this->login_library->verifyLoginSchoolAdmin($email, $password);
+		$login_response = $this->login_library->verifyLogin($username, $password);
 
 		$this->setResponseElement('success', $login_response['success']);
 		if($login_response['success']){

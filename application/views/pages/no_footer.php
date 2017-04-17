@@ -1,6 +1,3 @@
-	<footer class="admin-footer">
-		<p class="copyright">Copyright &copy; 2016 - <?=date('Y')?>. Squl.io</p>
-	</footer>
 	<? if(!empty($footerJs)) : ?>
 		<? foreach($footerJs as $js) : ?>
 			<script type="text/javascript" src="<?=$js?>"></script>

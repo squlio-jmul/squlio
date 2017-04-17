@@ -22,6 +22,7 @@ class Page extends SQ_Library {
 	 */
 	static public $_validPageTypes = array(
 		'default',
+		'default_no_footer',
 		'admin_ui',
 		'school_admin_ui'
 	);
@@ -149,6 +150,7 @@ class Page extends SQ_Library {
 			$data['headerCss'][] = $this->cssPath . '/jquery.jgrowl.min.css';
 			$data['headerCss'][] = $this->cssPath . '/bootstrap.css';
 			$data['headerCss'][] = $this->cssPath . '/squlio.css';
+			$data['headerCss'][] = $this->cssPath . '/squlio_new.css';
 		}
 		$data['navs'] = array (
 			'admin' => array(

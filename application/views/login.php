@@ -1,15 +1,22 @@
-<div id="login-container">
-	<h2>Login to Your Account</h2>
-	<form id="login-form">
-		<div class="form-group">
-			<label for="username">Username</label>
-			<input type="text" name="username" class="form-control" placeholder="Username" value="" />
-		</div>
-		<div class="form-group">
-			<label for="password">Password</label>
-			<input type="password" name="password" class="form-control" placeholder="Password" value="" />
-		</div>
-		<button type="submit" class="btn btn-primary">Submit</button>
-		<div class="error-container"></div>
-	</form>
+<div id="sq-login-container">
+	<div class="logo-container">
+		<img class="img-responsive" src="<?=$img_path?>/logo-squlio.png" />
+	</div>
+	<div class="form-container">
+		<form id="login-form">
+			<div class="form-group">
+				<input type="text" name="username" class="form-control" placeholder="Username" value="" />
+			</div>
+			<div class="form-group">
+				<input type="password" name="password" class="form-control" placeholder="Password" value="" />
+			</div>
+			<button type="submit" class="button login-button">Login</button>
+			<div class="error-container"></div>
+			<div class="center margintop10">
+				<a href="" class="forgot-password small">Forgot password</a>
+			</div>
+		</form>
+	</div>
+	<p class="copyright">Copyright &copy; 2016 - <?=date('Y')?>. Squl.io</p>
+	<div class="bg-gray"></div>
 </div>
