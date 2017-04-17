@@ -28,19 +28,10 @@ define([
 			_$login_form.validate({
 				rules: {
 					'username': {
-						required: true,
-						remote: {
-							url: '/ajax/school_admin/usernameExist',
-							type: 'post'
-						}
+						required: true
 					},
 					'password': {
 						required: true
-					}
-				},
-				messages: {
-					'username': {
-						remote: $.validator.format('Unable to find this username.')
 					}
 				},
 				submitHandler: function(form) {

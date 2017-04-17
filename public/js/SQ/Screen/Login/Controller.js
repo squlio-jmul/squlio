@@ -4,6 +4,8 @@ define([
 	'SQ/Util',
 	'SQ/Model/Login',
 	'SQ/Screen/Login/Views/LoginForm',
+	'underscore',
+	'text!../../Template/loading.tmpl',
 	'ThirdParty/q',
 	'ThirdParty/jquery.validate'
 ], function(
@@ -12,6 +14,8 @@ define([
 	Util,
 	LoginModel,
 	LoginForm,
+	_,
+	loadingTemplate,
 	Q
 ) {
 	'use strict';
@@ -29,11 +33,13 @@ define([
 
 		function _verifyLogin(data) {
 			_loginForm.clearError();
+			$('body').append(_.template(loadingTemplate));
 			_loginModel.verifyLogin(data.username, data.password).then(
 				function(response) {
 					if (response.success) {
 						window.location = response.redirect_page;
 					} else {
+						$('body').find('.sq-loading-overlay').remove();
 						_loginForm.displayError('Invalid username and password.');
 					}
 				}
