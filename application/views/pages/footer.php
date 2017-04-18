@@ -51,6 +51,9 @@
                 },
 				'bootstrap': {
 					deps: ['jquery']
+				},
+				'jgrowl': {
+					deps: ['jquery']
 				}
             }
         });
@@ -62,4 +65,23 @@
 		require(['<?=$requireJsDataSource?>']);
 			<? endif; ?>
 		<? endif; ?>
+
+
+		require(['jquery'], function($) {
+			_fixedFooter();
+			$(window).resize(function() {
+				_fixedFooter();
+			});
+
+			function _fixedFooter() {
+				var _window_height = $(window).height();
+				var _sq_container_height = $('.sq-container').height();
+				var _navbar_height = $('nav.navbar').height();
+				if (_navbar_height + _sq_container_height > _window_height) {
+					$('footer').css('position', 'relative');
+				} else {
+					$('footer').css('position', 'absolute');
+				}
+			}
+		});
 	</script>

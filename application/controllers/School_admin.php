@@ -43,6 +43,32 @@ class School_admin extends SQ_Controller {
 		redirect('/');
 	}
 
+	public function school_settings() {
+		$data = array(
+			'headerCss' => array(),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'school_admin_school_settings',
+			'jsControllerParam' => false,
+			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
+			'page_title' => 'School Settings',
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+		);
+
+		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
+			$login_id = $this->cookie->get('id');
+			if ($school_admin_obj = $this->school_admin_library->get(array('login'=>$login_id), array(), array(), null, null, array('school'=>true))) {
+				$school_admin = $school_admin_obj[0];
+				$data['school'] = $school_admin['school'];
+				$data['jsControllerParam'] = json_encode(array('school_id'=>$school_admin['school_id']));
+
+				$this->page->show('default', 'Squlio - School Settings', 'school_admin_school_settings', $data, $data);
+				return;
+			}
+		}
+		redirect('/');
+	}
+
 	public function teacher () {
 		$data = array(
 			'headerCss' => array('/public/css/jquery.dataTables.min.css'),

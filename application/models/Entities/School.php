@@ -83,16 +83,16 @@ class School extends EntitySuperClass {
 	/**
 	 * @var string
 	 *
-	 * @Column(name="phone_1", type="string", nullable=false)
+	 * @Column(name="phone_1", type="string", nullable=true)
 	 */
 	protected $phone_1;
 
 	/**
 	 * @var string
 	 *
-	 * @Column(name="phone_2", type="string", nullable=true)
+	 * @Column(name="fax", type="string", nullable=true)
 	 */
-	protected $phone_2;
+	protected $fax;
 
 	/**
 	 * @var string
@@ -114,6 +114,13 @@ class School extends EntitySuperClass {
 	 * @Column(name="url", type="string", nullable=true)
 	 */
 	protected $url;
+
+	/**
+	 * @var string
+	 *
+	 * @Column(name="photo_url", type="string", nullable=true)
+	 */
+	protected $photo_url;
 
 	/**
 	 * @var string
@@ -167,10 +174,11 @@ class School extends EntitySuperClass {
 			'zipcode' => $this->zipcode,
 			'country' => $this->country,
 			'phone_1' => $this->phone_1,
-			'phone_2' => $this->phone_2,
+			'fax' => $this->fax,
 			'branch' => $this->branch,
 			'email' => $this->email,
 			'url' => $this->url,
+			'photo_url' => $this->photo_url,
 			'code' => $this->code,
 			'active' => $this->active,
 			'deleted' => $this->deleted,

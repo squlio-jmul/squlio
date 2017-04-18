@@ -15,3 +15,5 @@ $config['minified_css'] = 0;
 $config['is_production'] = 0;
 $config['debug'] = 0;
 $config['default_page_title'] = 'Welcome to Squlio';
+
+$config['upload_img_dir'] = 'public/img/upload';

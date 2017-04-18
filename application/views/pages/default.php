@@ -12,20 +12,16 @@
 </head>
 
 <body class="page-index">
-	<div id="wrapper">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-xs-1 left-panel <?=$login_type?>">
-					<? require_once('left_navbar.php'); ?>
-				</div>
-				<div class="col-xs-11 right-panel">
-					<? require_once('right_navbar.php'); ?>
-					<div id="page-content">
-						<?=$content?>
-					</div>
-					<? require_once('footer.php'); ?>
-				</div>
+	<div class="container-fluid row">
+		<div class="col-xs-2 left-panel <?=$login_type?>">
+			<? require_once('left_navbar.php'); ?>
+		</div>
+		<div class="col-xs-10 right-panel">
+			<? require_once('right_navbar.php'); ?>
+			<div id="page-content">
+				<?=$content?>
 			</div>
+			<? require_once('footer.php'); ?>
 		</div>
 	</div>
 </body>

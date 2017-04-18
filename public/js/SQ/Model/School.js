@@ -35,6 +35,49 @@ define(
 				return _deferred.promise;
 			};
 
+			this.update = function(school_id, school_data) {
+				var _deferred = Q.defer();
+
+				var data = {
+					school_id: school_id,
+					school_data: school_data
+				};
+				$.ajax({
+					url: '/ajax/school/update',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(response) {
+						_deferred.resolve(response);
+					},
+					error: function(response, textStatus, jqXHR) {
+						_deferred.reject(response);
+					}
+				});
+				return _deferred.promise;
+			};
+
+			this.uploadImage = function(data){
+				var _deferred = Q.defer();
+				$.ajax({
+					url: '/ajax/school/upload_image',
+					type: 'post',
+					data: data,
+					contentType: false,
+					cache: false,
+					processData: false,
+					success: function(response, textStatus, jqXHR) {
+						response = JSON.parse(response);
+						_deferred.resolve(response);
+					},
+					error: function(response, textStatus, jqXHR) {
+						response = JSON.parse(response);
+						_deferred.reject(response);
+					}
+				});
+				return _deferred.promise;
+			};
+
 			this.addSchool = function(account_type_id, school_name, school_email, phone_1, address_1, zipcode, city) {
 				var _deferred = Q.defer();
 				var data = {

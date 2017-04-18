@@ -31,6 +31,22 @@ class School extends SQ_Controller {
 		$this->sendResponse();
 	}
 
+	public function update() {
+		$school_id = $this->input->post('school_id');
+		$school_data = $this->input->post('school_data');
+		$success = $this->school_library->update($school_id, $school_data);
+		$this->setResponseElement('success', $success);
+		$this->sendResponse();
+	}
+
+	public function upload_image() {
+		$response = $this->school_library->uploadImage($_FILES['file']);
+		$this->setResponseElement('success', $response['success']);
+		$this->setResponseElement('error_msg', $response['error_msg']);
+		$this->setResponseElement('url_path', $response['url_path']);
+		$this->sendResponse();
+	}
+
 	public function addSchool(){
 		$add_school_data = array(
 			'account_type_id' => $this->input->post('account_type_id'),
@@ -61,6 +77,7 @@ class School extends SQ_Controller {
 		$this->sendResponse();
 	}
 
+	/*
 	public function update(){
 		$school_id = $this->input->post('id');
 		$update_school_data = array(
@@ -91,6 +108,7 @@ class School extends SQ_Controller {
 		}
 		$this->sendResponse();
 	}
+	 */
 
 
 	public function displayTable() {
