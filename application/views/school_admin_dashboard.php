@@ -21,17 +21,17 @@
 		</div>
 		<div class="col-xs-3">
 			<div class="widget">
-				<?=number_format($teachers_count)?> Teacher<?=($teachers_count > 1 ) ? 'es' : ''?>
+				<?=number_format($teachers_count)?> Teacher<?=($teachers_count > 1 ) ? 's' : ''?>
 			</div>
 		</div>
 		<div class="col-xs-3">
 			<div class="widget">
-				<?=number_format($students_count)?> Student<?=($students_count > 1 ) ? 'es' : ''?>
+				<?=number_format($students_count)?> Student<?=($students_count > 1 ) ? 's' : ''?>
 			</div>
 		</div>
 		<div class="col-xs-3">
 			<div class="widget">
-				<?=number_format($materials_count)?> Material<?=($materials_count > 1 ) ? 'es' : ''?>
+				<?=number_format($materials_count)?> Material<?=($materials_count > 1 ) ? 's' : ''?>
 			</div>
 		</div>
 	</div>
