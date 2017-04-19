@@ -92,7 +92,7 @@ class Teacher extends EntitySuperClass {
 	/**
 	 * @var \DateTime
 	 *
-	 * @Column(name="birthday", type="time", nullable=false)
+	 * @Column(name="birthday", type="datetime", nullable=false)
 	 */
 	protected $birthday;
 
