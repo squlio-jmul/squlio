@@ -23,6 +23,7 @@ class School_admin extends SQ_Controller {
 			'jsControllerParam' => false,
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'Dashboard',
+			'page_subtitle' => null,
 			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
 		);
 
@@ -32,8 +33,8 @@ class School_admin extends SQ_Controller {
 				$school_admin = $school_admin_obj[0];
 				$data['school_admin'] = $school_admin;
 				$data['classes_count'] = count($this->classroom_library->get(array('school'=>$school_admin['school_id']), array('id')));
-				$data['teachers_count'] = $this->teacher_library->getActiveCountBySchoolId($school_admin['school_id']);
-				$data['students_count'] = $this->student_library->getActiveCountBySchoolId($school_admin['school_id']);
+				$data['teachers_count'] = count($this->teacher_library->get(array('school'=>$school_admin['school_id'])));
+				$data['students_count'] = count($this->student_library->get(array('school'=>$school_admin['school_id'])));
 				$data['materials_count'] = 0;
 
 				$this->page->show('default', 'Squlio - Dashboard', 'school_admin_dashboard', $data, $data);
@@ -52,6 +53,7 @@ class School_admin extends SQ_Controller {
 			'jsControllerParam' => false,
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'School Settings',
+			'page_subtitle' => null,
 			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
 		);
 
@@ -63,6 +65,33 @@ class School_admin extends SQ_Controller {
 				$data['jsControllerParam'] = json_encode(array('school_id'=>$school_admin['school_id']));
 
 				$this->page->show('default', 'Squlio - School Settings', 'school_admin_school_settings', $data, $data);
+				return;
+			}
+		}
+		redirect('/');
+	}
+
+	public function add_teacher() {
+		$data = array(
+			'headerCss' => array($this->config->item('static_css') . '/jquery-ui.css'),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'school_admin_add_teacher',
+			'jsControllerParam' => false,
+			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
+			'page_title' => 'Teachers',
+			'page_subtitle' => 'Add Teacher',
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+		);
+
+		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
+			$login_id = $this->cookie->get('id');
+			if ($school_admin_obj = $this->school_admin_library->get(array('login'=>$login_id), array(), array(), null, null, array('school'=>true))) {
+				$school_admin = $school_admin_obj[0];
+				$data['school'] = $school_admin['school'];
+				$data['jsControllerParam'] = json_encode(array('school_id'=>$school_admin['school_id']));
+
+				$this->page->show('default', 'Squlio - Add Teacher', 'school_admin_add_teacher', $data, $data);
 				return;
 			}
 		}

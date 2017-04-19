@@ -36,6 +36,7 @@
 				'bootstrap': '<?=$js_path?>/third_party/bootstrap',
                 'underscore': '<?=$js_path?>/third_party/underscore',
 				'jgrowl': '<?=$js_path?>/third_party/jquery.jgrowl.min',
+				'jqueryui': '<?=$js_path?>/third_party/jquery-ui',
                 'text': '<?=$js_path?>/third_party/text',
 				<? if (isset($requireJsDataSource) && $requireJsDataSource) : ?>
 					<? if ($minified_js) : ?>
@@ -53,6 +54,9 @@
 					deps: ['jquery']
 				},
 				'jgrowl': {
+					deps: ['jquery']
+				},
+				'jqueryui': {
 					deps: ['jquery']
 				}
             }

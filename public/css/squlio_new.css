@@ -169,6 +169,21 @@ footer .right {
 .error-container, label.error {
 	color: #FF0000;
 }
+/* jGrowl */
+div.jGrowl div.ui-state-highlight {
+	color: #FFFFFF;
+}
+div.jGrowl div.jGrowl-notification div.jGrowl-message a {
+	color: #FFFFFF;
+	font-weight: bold;
+}
+.jGrowl-notification .jGrowl-close {
+	background-color: transparent;
+	border: none;
+	float: right;
+	font-weight: bold;
+	padding: 0px;
+}
 /** Login **/
 #sq-login-container {
 	width: 450px;
@@ -226,5 +241,5 @@ footer .right {
 	width: inherit;
 	display: table-cell;
 }
-/** School Admin School Settings **/
+/** School Admin Add Teacher **/
 

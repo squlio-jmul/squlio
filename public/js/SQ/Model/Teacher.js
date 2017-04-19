@@ -35,6 +35,71 @@ define(
 				return _deferred.promise;
 			};
 
+			this.add = function(teacher_data) {
+				var _deferred = Q.defer();
+
+				var data = {
+					teacher_data: teacher_data
+				};
+				$.ajax({
+					url: '/ajax/teacher/add',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(response) {
+						_deferred.resolve(response.teacher_id);
+					},
+					error: function(response, textStatus, jqXHR) {
+						_deferred.reject(response);
+					}
+				});
+				return _deferred.promise;
+			};
+
+			this.update = function(teacher_id, teacher_data) {
+				var _deferred = Q.defer();
+
+				var data = {
+					teacher_id: teacher_id,
+					teacher_data: teacher_data
+				};
+				$.ajax({
+					url: '/ajax/teacher/update',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(response) {
+						_deferred.resolve(response.success);
+					},
+					error: function(response, textStatus, jqXHR) {
+						_deferred.reject(response);
+					}
+				});
+				return _deferred.promise;
+			};
+
+			this.uploadImage = function(data){
+				var _deferred = Q.defer();
+				$.ajax({
+					url: '/ajax/teacher/upload_image',
+					type: 'post',
+					data: data,
+					contentType: false,
+					cache: false,
+					processData: false,
+					success: function(response, textStatus, jqXHR) {
+						response = JSON.parse(response);
+						_deferred.resolve(response);
+					},
+					error: function(response, textStatus, jqXHR) {
+						response = JSON.parse(response);
+						_deferred.reject(response);
+					}
+				});
+				return _deferred.promise;
+			};
+
+			/*
 			this.addTeacher = function(status, gender, school_id, username, email, password, first_name, last_name, phone, address, birthday) {
 				var _deferred = Q.defer();
 				var data = {
@@ -134,6 +199,7 @@ define(
 				});
 				return _deferred.promise;
 			}
+			*/
 
 		}
 	}

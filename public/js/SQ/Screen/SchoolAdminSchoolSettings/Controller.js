@@ -42,9 +42,9 @@ define([
 		function _updateSchool(data) {
 			$('body').append(_.template(loadingTemplate));
 			_schoolModel.update(_school_id, data).then(
-				function(response) {
+				function(success) {
 					$('body').find('.sq-loading-overlay').remove();
-					if (response.success) {
+					if (success) {
 						$.jGrowl('School is updated successfully', {header: 'Success'});
 					} else {
 						$.jGrowl('Unable to update this school', {header: 'Error'});
@@ -59,8 +59,8 @@ define([
 				function(response) {
 					if (response.success && response.url_path) {
 						_schoolModel.update(_school_id, {photo_url: response.url_path}).then(
-							function(update_response) {
-								if (update_response.success) {
+							function(success) {
+								if (success) {
 									$('body').find('.sq-loading-overlay').remove();
 									_uploadImageForm.updateImage(response.url_path);
 									$.jGrowl('Your school image is updated successfully', {header: 'Success'});

@@ -55,6 +55,62 @@ class Teacher extends EntitySuperClass {
 	protected $last_name;
 
 	/**
+	 * @var string
+	 *
+	 * @Column(name="address", type="string", nullable=false)
+	 */
+	protected $address;
+
+	/**
+	 * @var string
+	 *
+	 * @Column(name="city", type="string", nullable=false)
+	 */
+	protected $city;
+
+	/**
+	 * @var string
+	 *
+	 * @Column(name="state", type="string", nullable=false)
+	 */
+	protected $state;
+
+	/**
+	 * @var string
+	 *
+	 * @Column(name="zipcode", type="string", nullable=false)
+	 */
+	protected $zipcode;
+
+	/**
+	 * @var string
+	 *
+	 * @Column(name="gender", type="string", nullable=false)
+	 */
+	protected $gender;
+
+	/**
+	 * @var \DateTime
+	 *
+	 * @Column(name="birthday", type="time", nullable=false)
+	 */
+	protected $birthday;
+
+	/**
+	 * @var string
+	 *
+	 * @Column(name="photo_url", type="string", nullable=true)
+	 */
+	protected $photo_url;
+
+	/**
+	 * @var string
+	 *
+	 * @Column(name="phone", type="string", nullable=false)
+	 */
+	protected $phone;
+
+	/**
 	 * @var boolean
 	 *
 	 * @Column(name="push_notification_quiet_hours", type="boolean", nullable=false)
@@ -103,38 +159,9 @@ class Teacher extends EntitySuperClass {
 	 */
 	protected $last_updated;
 
-	/**
-	 * @var string
-	 *
-	 * @Column(name="phone", type="string", nullable=false)
-	 */
-	protected $phone;
-
-	/**
-	 * @var string
-	 *
-	 * @Column(name="address", type="string", nullable=false)
-	 */
-	protected $address;
-
-	/**
-	 * @var string
-	 *
-	 * @Column(name="gender", type="string", nullable=false)
-	 */
-	protected $gender;
-
-	/**
-	 * @var \DateTime
-	 *
-	 * @Column(name="birthday", type="datetime", nullable=false)
-	 */
-	protected $birthday;
-
 	public function __construct() {
 		$this->created_on = new \DateTime('now');
 		$this->last_updated = new \DateTime('now');
-		$this->birthday = new \DateTime;
 	}
 
 	public function getData() {
@@ -147,17 +174,21 @@ class Teacher extends EntitySuperClass {
 			'school_id' => $this->school->__get('id'),
 			'first_name' => $this->first_name,
 			'last_name' => $this->last_name,
+			'address' => $this->address,
+			'city' => $this->city,
+			'state' => $this->state,
+			'zipcode' => $this->zipcode,
+			'gender' => $this->gender,
+			'birthday' => $this->birthday,
+			'photo_url' => $this->photo_url,
+			'phone' => $this->phone,
 			'push_notification_quiet_hours' => $this->push_notification_quiet_hours,
 			'push_notification_quiet_hours_from' => $this->push_notification_quiet_hours_from,
 			'push_notification_quiet_hours_to' => $this->push_notification_quiet_hours_from,
 			'push_notification_mute_weekends' => $this->push_notification_mute_weekends,
 			'allow_story_comments' => $this->allow_story_comments,
 			'created_on' => $this->created_on,
-			'last_updated' => $this->last_updated,
-			'phone' => $this->phone,
-			'address' => $this->address,
-			'gender' => $this->gender,
-			'birthday' => $this->birthday
+			'last_updated' => $this->last_updated
 		);
 	}
 }

@@ -27,6 +27,25 @@ class Teacher extends SQ_Controller {
 	}
 
 	public function add() {
+		$teacher_data = $this->input->post('teacher_data');
+		if ($teacher_id = $this->teacher_library->add($teacher_data)) {
+			$this->setResponseElement('teacher_id', $teacher_id);
+		} else {
+			$this->setResponseElement('teacher_id', null);
+		}
+		$this->sendResponse();
+	}
+
+	public function upload_image() {
+		$response = $this->teacher_library->uploadImage($_FILES['file']);
+		$this->setResponseElement('success', $response['success']);
+		$this->setResponseElement('error_msg', $response['error_msg']);
+		$this->setResponseElement('url_path', $response['url_path']);
+		$this->sendResponse();
+	}
+
+	/*
+	public function add() {
 		$birthday = $this->input->post('birthday');
 		$add_login_data = array (
 			'email' => $this->input->post('email'),
@@ -77,11 +96,11 @@ class Teacher extends SQ_Controller {
 		if ($teacher_obj = $this->Teacher_model->getActiveTeacher($this->input->post('school_id'))){
 			foreach($teacher_obj as $t){
 
-				/*if ($t['login']['active'] == 1) {
-					$status = "active";
-				} else {
-					$status = "inactive";
-				}*/
+				//if ($t['login']['active'] == 1) {
+				//	$status = "active";
+				//} else {
+				//	$status = "inactive";
+				//}
 				$data = array(
 					'id' => $t['id'],
 					'name' => $t['first_name'],
@@ -153,5 +172,5 @@ class Teacher extends SQ_Controller {
 		}
 		$this->sendResponse();
 	}
+	 */
 }
-
