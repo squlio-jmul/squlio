@@ -27,38 +27,45 @@ define([
 			_$settings_form = $e;
 			_$settings_form.validate({
 				rules: {
-					'name': {
+					name: {
 						required: true
 					},
-					'address_1': {
+					address_1: {
 						required: true
 					},
-					'city': {
+					city: {
 						required: true
 					},
-					'state': {
+					state: {
 						required: true
 					},
-					'zipcode': {
+					zipcode: {
 						required: true,
 						number: true
 					},
-					'email': {
+					email: {
 						email: true
 					},
-					'phone_1': {
+					phone_1: {
 						required: true,
 						number: true
 					},
-					'fax': {
+					fax: {
 						number: true
 					},
-					'url': {
+					url: {
 						url: true
+					},
+					primary_language: {
+						required: true
+					},
+					display_score: {
+						required: true
 					}
 				},
 				submitHandler: function(form) {
 					var _settings_data = _util.serializeJSON($(form));
+					_settings_data.display_score = _$settings_form.find("[name='display_score']:checked").val() == 'y' ? true : false;
 					_me.broadcast('update_school', _settings_data);
 				}
 			});

@@ -125,6 +125,20 @@ class School extends EntitySuperClass {
 	/**
 	 * @var string
 	 *
+	 * @Column(name="primary_language", type="string", nullable=false)
+	 */
+	protected $primary_language;
+
+	/**
+	 * @var boolean
+	 *
+	 * @Column(name="display_score", type="boolean", nullable=false)
+	 */
+	protected $display_score;
+
+	/**
+	 * @var string
+	 *
 	 * @Column(name="code", type="string", nullable=false)
 	 */
 	protected $code;
@@ -179,6 +193,8 @@ class School extends EntitySuperClass {
 			'email' => $this->email,
 			'url' => $this->url,
 			'photo_url' => $this->photo_url,
+			'primary_language' => $this->primary_language,
+			'display_score' => $this->display_score,
 			'code' => $this->code,
 			'active' => $this->active,
 			'deleted' => $this->deleted,

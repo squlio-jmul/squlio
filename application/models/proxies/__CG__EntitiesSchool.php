@@ -83,10 +83,10 @@ class School extends \Entities\School implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'id', 'account_type', 'name', 'address_1', 'address_2', 'city', 'state', 'zipcode', 'country', 'phone_1', 'fax', 'branch', 'email', 'url', 'photo_url', 'code', 'active', 'deleted', 'created_on', 'last_updated'];
+            return ['__isInitialized__', 'id', 'account_type', 'name', 'address_1', 'address_2', 'city', 'state', 'zipcode', 'country', 'phone_1', 'fax', 'branch', 'email', 'url', 'photo_url', 'primary_language', 'display_score', 'code', 'active', 'deleted', 'created_on', 'last_updated'];
         }
 
-        return ['__isInitialized__', 'id', 'account_type', 'name', 'address_1', 'address_2', 'city', 'state', 'zipcode', 'country', 'phone_1', 'fax', 'branch', 'email', 'url', 'photo_url', 'code', 'active', 'deleted', 'created_on', 'last_updated'];
+        return ['__isInitialized__', 'id', 'account_type', 'name', 'address_1', 'address_2', 'city', 'state', 'zipcode', 'country', 'phone_1', 'fax', 'branch', 'email', 'url', 'photo_url', 'primary_language', 'display_score', 'code', 'active', 'deleted', 'created_on', 'last_updated'];
     }
 
     /**

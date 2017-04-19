@@ -51,6 +51,29 @@
 					<input type="text" name="url" class="form-control" placeholder="Website URL" value="<?=$school['url']?>" />
 				</div>
 				<div class="form-group">
+					<label for="primary_language">Primary Language</label>
+					<select name="primary_language" class="form-control">
+						<option value="bahasa_indonesia" <?=$school['primary_language'] == 'bahasa_indonesia' ? 'selected':''?>>Bahasa Indonesia</option>
+						<option value="english" <?=$school['primary_language'] == 'english' ? 'selected':''?>>English</option>
+						<option value="mandarin" <?=$school['primary_language'] == 'mandarin' ? 'selected':''?>>Mandarin</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="display_score">Scoring System</label>
+					<div class="radio">
+						<label>
+							<input type="radio" name="display_score" id="display_score" value="y" <?=$school['display_score'] ? 'checked':''?>>
+							Display Score
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input type="radio" name="display_score" id="hide_score" value="n" <?=!$school['display_score'] ? 'checked':''?>>
+							Hide Score
+						</label>
+					</div>
+				</div>
+				<div class="form-group">
 					<button type="submit" class="button">Save</button>
 				</div>
 			</form>
