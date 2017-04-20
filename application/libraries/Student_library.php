@@ -20,11 +20,8 @@ class Student_library extends SQ_Library {
 		try {
 			$modules['all'] = (isset($modules['all']) && filter_var($modules['all'], FILTER_VALIDATE_BOOLEAN)) ? true : false;
 
-			if($students = $this->_ci->Student_model->get($filters, $fields, $order_by, $limit, $offset, $modules)){
-				return $students;
-			}else{
-				return false;
-			}
+			$students = $this->_ci->Student_model->get($filters, $fields, $order_by, $limit, $offset, $modules);
+			return $students;
 		} catch(Exception $err) {
 			die($err->getMessage());
 		}

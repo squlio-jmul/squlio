@@ -37,6 +37,7 @@
                 'underscore': '<?=$js_path?>/third_party/underscore',
 				'jgrowl': '<?=$js_path?>/third_party/jquery.jgrowl.min',
 				'jqueryui': '<?=$js_path?>/third_party/jquery-ui',
+				'datatables': '<?=$js_path?>/third_party/jquery.dataTables.min',
                 'text': '<?=$js_path?>/third_party/text',
 				<? if (isset($requireJsDataSource) && $requireJsDataSource) : ?>
 					<? if ($minified_js) : ?>
@@ -58,7 +59,11 @@
 				},
 				'jqueryui': {
 					deps: ['jquery']
+				},
+				'datatables': {
+					deps: ['jquery']
 				}
+
             }
         });
 

@@ -10,12 +10,12 @@ class Teacher extends SQ_Controller {
 	}
 
 	public function get() {
-		$filters = ($this->getInputPost('filters')) ? $this->getInputPost('filters') : array();
-		$fields = ($this->getInputPost('fields')) ? $this->getInputPost('fields') : array();
-		$order_by = ($this->getInputPost('order_by')) ? $this->getInputPost('order_by') : array();
-		$limit = ($this->getInputPost('limit')) ? $this->getInputPost('limit') : null;
-		$offset = ($this->getInputPost('offset')) ? $this->getInputPost('offset') : null;
-		$modules = ($this->getInputPost('modules')) ? $this->getInputPost('modules') : array();
+		$filters = ($this->input->post('filters')) ? $this->input->post('filters') : array();
+		$fields = ($this->input->post('fields')) ? $this->input->post('fields') : array();
+		$order_by = ($this->input->post('order_by')) ? $this->input->post('order_by') : array();
+		$limit = ($this->input->post('limit')) ? $this->input->post('limit') : null;
+		$offset = ($this->input->post('offset')) ? $this->input->post('offset') : null;
+		$modules = ($this->input->post('modules')) ? $this->input->post('modules') : array();
 
 		if($teachers = $this->teacher_library->get($filters, $fields, $order_by, $limit, $offset, $modules)){
 			$this->setResponseElement('success', true);

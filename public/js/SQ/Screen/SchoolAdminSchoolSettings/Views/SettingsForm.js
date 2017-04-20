@@ -65,7 +65,7 @@ define([
 				},
 				submitHandler: function(form) {
 					var _settings_data = _util.serializeJSON($(form));
-					_settings_data.display_score = _$settings_form.find("[name='display_score']:checked").val() == 'y' ? true : false;
+					_settings_data.display_score = _$settings_form.find("[name='display_score']:checked").val() == 'y' ? 1 : 0;
 					_me.broadcast('update_school', _settings_data);
 				}
 			});

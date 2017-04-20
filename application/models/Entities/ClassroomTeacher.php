@@ -7,15 +7,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 require_once(APPPATH."models/Entities/EntitySuperClass.php");
 require_once(APPPATH."models/Entities/Classroom.php");
 require_once(APPPATH."models/Entities/Teacher.php");
-require_once(APPPATH."models/Entities/ClassroomSubject.php");
 
 /**
- * ClassroomTeacherClassroomSubject
+ * ClassroomTeacher
  *
- * @Table(name="classroom_teacher_classroom_subject")
+ * @Table(name="classroom_teacher")
  * @Entity
  */
-class ClassroomTeacherClassroomSubject extends EntitySuperClass {
+class ClassroomTeacher extends EntitySuperClass {
 	/**
 	 * @var integer
 	 *
@@ -41,14 +40,6 @@ class ClassroomTeacherClassroomSubject extends EntitySuperClass {
 	 **/
 	protected $teacher;
 
-	/**
-	 * @var integer
-	 *
-	 * @OneToOne(targetEntity="ClassroomSubject", cascade={"persist"})
-	 * @JoinColumn(name="classroom_subject_id", referencedColumnName="id", nullable=false)
-	 **/
-	protected $classroom_subject;
-
 	public function __construct() {
 	}
 
@@ -56,8 +47,7 @@ class ClassroomTeacherClassroomSubject extends EntitySuperClass {
 		return array(
 			'id' => $this->id,
 			'classroom_id' => $this->classroom->__get('id'),
-			'teacher_id' => $this->teacher->__get('id'),
-			'classroom_subject_id' => $this->classroom_subject->__get('id')
+			'teacher_id' => $this->teacher->__get('id')
 		);
 	}
 }

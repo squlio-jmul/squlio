@@ -88,7 +88,7 @@ define([
 				},
 				submitHandler: function(form) {
 					_add_teacher_data = _util.serializeJSON($(form));
-					_add_teacher_data.active = _$add_teacher_form.find("[name='active']").prop('checked') ? true : false;
+					_add_teacher_data.active = _$add_teacher_form.find("[name='active']").prop('checked') ? 1 : 0;
 					_me.broadcast('add_teacher', _add_teacher_data);
 				}
 			});
