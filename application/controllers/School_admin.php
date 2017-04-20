@@ -128,62 +128,6 @@ class School_admin extends SQ_Controller {
 	}
 
 
-	public function teacher () {
-		$data = array(
-			'headerCss' => array('/public/css/jquery.dataTables.min.css'),
-			'headerJs' => array(),
-			'footerJs' => array(),
-			'requireJsDataSource' => 'viewTeacher',
-			'jsControllerParam' => false
-		);
-
-		if ($school_admin_obj = $this->school_admin_library->get(array('login' => $this->cookie->get('id')), array(), array(), null, null, array('school'=>true))) {
-			foreach ($school_admin_obj as $sa) {
-				$page_data = array(
-					'username' => $sa['username'],
-					'teachers' => $this->teacher_library->getActiveCountBySchoolId($sa['school']['id']),
-					'school_id' => $sa['school']['id'],
-					'school' => $this->school_library->get(array('id'=>$sa['school']['id']))
-				);
-			}
-		}
-
-		if ($this->cookie->get('id')){
-			$this->page->show('school_admin_ui', 'Squlio - Teacher', 'teacher', $page_data, $data);
-		} else {
-			redirect('/school_admin');
-		}
-	}
-
-	public function addTeacher() {
-		$data  = array(
-			'headerCss' => array('/public/css/jquery-ui.css'),
-			'headerJs' => array(),
-			'footerJs' => array(),
-			'requireJsDataSource' => 'addTeacher',
-			'jsControllerParam' => false
-		);
-
-		if ($school_admin_obj = $this->school_admin_library->get(array('login' => $this->cookie->get('id')), array(), array(), null, null, array('school'=>true))) {
-			foreach ($school_admin_obj as $sa) {
-				$school_id['school_id'] = $sa['school']['id'];
-				$username['username'] = $sa['username'];
-				$teachers['teachers'] = $this->teacher_library->getActiveCountBySchoolId($sa['school']['id']);
-			}
-		}
-		if ($school_obj = $this->school_library->get(array('id' => $school_id), array(), array(), null, null, array('account_type'=>true))) {
-			foreach ($school_obj as $s) {
-				$num_teacher['num_teacher'] = $s['account_type']['num_teacher'];
-			}
-		}
-		$page_data = array_merge($school_id, $username, $num_teacher, $teachers);
-		if ($this->cookie->get('id')) {
-			$this->page->show('school_admin_ui', 'Squlio - Add Teacher', 'add_teacher', $page_data, $data);
-		} else {
-			redirect('/school_admin');
-		}
-	}
-
 	public function editTeacher() {
 		$data = array(
 			'headerCss' => array('/public/css/jquery-ui.css'),
