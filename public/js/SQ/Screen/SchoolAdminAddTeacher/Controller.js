@@ -52,6 +52,7 @@ define([
 					$('body').find('.sq-loading-overlay').remove();
 					if (teacher_id) {
 						$.jGrowl('Teacher is added successfully', {header: 'Success'});
+						window.location = '/school_admin/edit_teacher/' + teacher_id;
 					} else {
 						$.jGrowl('Unable to add this teacher', {header: 'Error'});
 					}
