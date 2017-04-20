@@ -127,6 +127,36 @@ class School_admin extends SQ_Controller {
 		redirect('/');
 	}
 
+	public function edit_teacher($teacher_id) {
+		$data = array(
+			'headerCss' => array($this->config->item('static_css') . '/jquery-ui.css'),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'school_admin_edit_teacher',
+			'jsControllerParam' => false,
+			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
+			'page_title' => 'Teachers',
+			'page_subtitle' => 'Edit Teacher',
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+		);
+
+		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
+			$login_id = $this->cookie->get('id');
+			$school_admin = $data['user_obj'];
+			$school_id = $school_admin['school_id'];
+			if ($school_id) {
+				if ($teacher_obj = $this->teacher_library->get(array('id'=>$teacher_id, 'school'=>$school_id))) {
+					$teacher = $teacher_obj[0];
+					$data['teacher'] = $teacher;
+					$data['jsControllerParam'] = json_encode(array('teacher_id' => $teacher_id));
+					$this->page->show('default', 'Squlio - Edit Teacher', 'school_admin_edit_teacher', $data, $data);
+					return;
+				}
+			}
+		}
+		redirect('/');
+	}
+
 
 	public function editTeacher() {
 		$data = array(

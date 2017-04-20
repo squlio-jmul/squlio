@@ -259,4 +259,10 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 #sq-school-admin-teachers-container .header .bulk-actions-container {
 	margin-top: 3px;
 }
-
+/** School Admin Edit Teacher **/
+#sq-school-admin-edit-teacher-container .tab-pane {
+	padding-top: 20px;
+}
+#co-user-settings-container #password {
+	width: 600px;
+}

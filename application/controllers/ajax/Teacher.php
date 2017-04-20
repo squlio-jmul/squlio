@@ -36,6 +36,14 @@ class Teacher extends SQ_Controller {
 		$this->sendResponse();
 	}
 
+	public function update() {
+		$teacher_id = $this->input->post('teacher_id');
+		$teacher_data = $this->input->post('teacher_data');
+		$success = $this->teacher_library->update($teacher_id, $teacher_data);
+		$this->setResponseElement('success', $success);
+		$this->sendResponse();
+	}
+
 	public function upload_image() {
 		$response = $this->teacher_library->uploadImage($_FILES['file']);
 		$this->setResponseElement('success', $response['success']);

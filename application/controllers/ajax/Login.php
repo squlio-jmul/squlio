@@ -101,6 +101,19 @@ class Login extends SQ_Controller {
 		return;
 	}
 
+	public function passwordMatch() {
+		$old_password = $this->input->post('old_password');
+		$login_id = $this->input->post('login_id');
+		$login_obj = $this->login_library->get(array('id'=>$login_id));
+		if ($old_password == $login_obj[0]['password']) {
+			echo 'true';
+		} else {
+			echo 'false';
+		}
+		return;
+	}
+
+
 /*	public function parentUsernameNotExist() {
 		$father_username = $this->input->post('father_username');
 		$mother_username = $this->input->post('mother_username');

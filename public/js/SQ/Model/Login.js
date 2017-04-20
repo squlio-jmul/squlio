@@ -71,7 +71,7 @@ define(
 					dataType: 'json',
 					data: data,
 					success: function(response) {
-						_deferred.resolve(response);
+						_deferred.resolve(response.success);
 					},
 					error: function(response, textStatus, jqXHR) {
 						_deferred.reject(response);
