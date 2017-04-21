@@ -61,4 +61,16 @@ class Classroom extends SQ_Controller {
 		return;
 	}
 
+	public function editNameNotExist() {
+		$name = $this->input->post('name');
+		$school_id = $this->input->post('school_id');
+		$classroom_id = $this->input->post('classroom_id');
+		$classroom_obj = $this->classroom_library->get(array('name'=>$name, 'school'=>$school_id));
+		if ($classroom_obj && $classroom_obj[0]['id'] != $classroom_id) {
+			echo 'false';
+		} else {
+			echo 'true';
+		}
+		return;
+	}
 }

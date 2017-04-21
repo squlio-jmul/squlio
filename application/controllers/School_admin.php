@@ -216,6 +216,38 @@ class School_admin extends SQ_Controller {
 		redirect('/');
 	}
 
+	public function edit_classroom($classroom_id) {
+		$data = array(
+			'headerCss' => array($this->config->item('static_css') . '/jquery-ui.css'),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'school_admin_edit_classroom',
+			'jsControllerParam' => false,
+			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
+			'page_title' => 'Classes',
+			'page_subtitle' => 'Edit Class',
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+		);
+
+		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
+			$login_id = $this->cookie->get('id');
+			$school_admin = $data['user_obj'];
+			$school_id = $school_admin['school_id'];
+			if ($school_id) {
+				if ($classroom_obj = $this->classroom_library->get(array('id'=>$classroom_id, 'school'=>$school_id))) {
+					$classroom = $classroom_obj[0];
+					$classroom_grade_obj = $this->Classroom_grade_model->get(array('school'=>$school_id));
+					$data['classroom'] = $classroom;
+					$data['classroom_grade'] = $classroom_grade_obj;
+					$data['jsControllerParam'] = json_encode(array('classroom_id' => $classroom_id));
+					$this->page->show('default', 'Squlio - Edit Classroom', 'school_admin_edit_classroom', $data, $data);
+					return;
+				}
+			}
+		}
+		redirect('/');
+	}
+
 
 	/*
 	public function student() {

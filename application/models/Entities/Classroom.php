@@ -48,6 +48,13 @@ class Classroom extends EntitySuperClass {
 	protected $name;
 
 	/**
+	 * @var string
+	 *
+	 * @Column(name="photo_url", type="string", nullable=true)
+	 */
+	protected $photo_url;
+
+	/**
 	 * @var boolean
 	 *
 	 * @Column(name="active", type="boolean", nullable=false)
@@ -86,6 +93,7 @@ class Classroom extends EntitySuperClass {
 			'school_id' => $this->school->__get('id'),
 			'classroom_grade_id' => $this->classroom_grade->__get('id'),
 			'name' => $this->name,
+			'photo_url' => $this->photo_url,
 			'active' => $this->active,
 			'deleted' => $this->deleted,
 			'created_on' => $this->created_on,

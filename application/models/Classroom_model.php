@@ -72,7 +72,7 @@ class Classroom_model extends SQ_Model {
 			$old_obj = $classroom->getData();
 			$classroom->setData($classroom_data);
 
-			if ($classroom_data['classroom_grade_id']) {
+			if (isset($classroom_data['classroom_grade_id'])) {
 				$classroom_grade_obj = $this->doctrine->em->getRepository('Entities\ClassroomGrade')->findBy(array('id' => $classroom_data['classroom_grade_id']));
 				$classroom_grade = $classroom_grade_obj[0];
 				$classroom->classroom_grade = $classroom_grade;
