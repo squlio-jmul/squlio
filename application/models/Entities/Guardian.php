@@ -46,6 +46,27 @@ class Guardian extends EntitySuperClass {
 	protected $last_name;
 
 	/**
+	 * @var string
+	 *
+	 * @Column(name="phone", type="string", nullable=false)
+	 */
+	protected $phone;
+
+	/**
+	 * @var string
+	 *
+	 * @Column(name="guardian_type", type="string", nullable=false)
+	 */
+	protected $type;
+
+	/**
+	 * @var boolean
+	 *
+	 * @Column(name="app_connected", type="boolean", nullable=false)
+	 */
+	protected $app_connected;
+
+	/**
 	 * @var \DateTime
 	 *
 	 * @Column(name="created_on", type="datetime", nullable=false)
@@ -58,20 +79,6 @@ class Guardian extends EntitySuperClass {
 	 * @Column(name="last_updated", type="datetime", nullable=false)
 	 */
 	protected $last_updated;
-
-	/**
-	 * @var string
-	 *
-	 * @Column(name="phone", type="string", nullable=false)
-	 */
-	protected $phone;
-
-	/**
-	 * @var string
-	 *
-	 * @Column(name="guardian_type", type="string", nullable=false)
-	 */
-	protected $guardian_type;
 
 	public function __construct() {
 		$this->created_on = new \DateTime('now');
@@ -88,10 +95,11 @@ class Guardian extends EntitySuperClass {
 			'token' => $this->login->__get('token'),
 			'first_name' => $this->first_name,
 			'last_name' => $this->last_name,
-			'created_on' => $this->created_on,
-			'last_updated' => $this->last_updated,
 			'phone' => $this->phone,
-			'guardian_type' => $this->guardian_type
+			'type' => $this->type,
+			'app_connected' => $this->app_connected,
+			'created_on' => $this->created_on,
+			'last_updated' => $this->last_updated
 		);
 	}
 }

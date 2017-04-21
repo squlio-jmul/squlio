@@ -40,6 +40,13 @@ class ClassroomTeacher extends EntitySuperClass {
 	 **/
 	protected $teacher;
 
+	/**
+	 * @var boolean
+	 *
+	 * @Column(name="is_primary", type="boolean", nullable=false)
+	 */
+	protected $is_primary;
+
 	public function __construct() {
 	}
 
@@ -47,7 +54,8 @@ class ClassroomTeacher extends EntitySuperClass {
 		return array(
 			'id' => $this->id,
 			'classroom_id' => $this->classroom->__get('id'),
-			'teacher_id' => $this->teacher->__get('id')
+			'teacher_id' => $this->teacher->__get('id'),
+			'is_primary' => $this->is_primary
 		);
 	}
 }

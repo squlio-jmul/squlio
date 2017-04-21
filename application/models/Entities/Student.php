@@ -8,6 +8,7 @@ require_once(APPPATH."models/Entities/EntitySuperClass.php");
 require_once(APPPATH."models/Entities/Login.php");
 require_once(APPPATH."models/Entities/School.php");
 require_once(APPPATH."models/Entities/Classroom.php");
+require_once(APPPATH."models/Entities/ClassroomGrade.php");
 
 /**
  * Student
@@ -44,8 +45,16 @@ class Student extends EntitySuperClass {
 	/**
 	 * @var integer
 	 *
+	 * @ManyToOne(targetEntity="ClassroomGrade", inversedBy="student", cascade={"persist"})
+	 * @JoinColumn(name="classroom_grade_id", referencedColumnName="id", nullable=false)
+	 **/
+	protected $classroom_grade;
+
+	/**
+	 * @var integer
+	 *
 	 * @ManyToOne(targetEntity="Classroom", inversedBy="student", cascade={"persist"})
-	 * @JoinColumn(name="classroom_id", referencedColumnName="id", nullable=false)
+	 * @JoinColumn(name="classroom_id", referencedColumnName="id", nullable=true)
 	 **/
 	protected $classroom;
 
@@ -62,6 +71,27 @@ class Student extends EntitySuperClass {
 	 * @Column(name="last_name", type="string", nullable=true)
 	 */
 	protected $last_name;
+
+	/**
+	 * @var string
+	 *
+	 * @Column(name="gender", type="string", nullable=false)
+	 */
+	protected $gender;
+
+	/**
+	 * @var \DateTime
+	 *
+	 * @Column(name="birthday", type="datetime", nullable=false)
+	 */
+	protected $birthday;
+
+	/**
+	 * @var string
+	 *
+	 * @Column(name="photo_url", type="string", nullable=true)
+	 */
+	protected $photo_url;
 
 	/**
 	 * @var string
@@ -84,20 +114,6 @@ class Student extends EntitySuperClass {
 	 */
 	protected $last_updated;
 
-	/**
-	 * @var string
-	 *
-	 * @Column(name="gender", type="string", nullable=false)
-	 */
-	protected $gender;
-
-	/**
-	 * @var \DateTime
-	 *
-	 * @Column(name="birthday", type="datetime", nullable=false)
-	 */
-	protected $birthday;
-
 	public function __construct() {
 		$this->created_on = new \DateTime('now');
 		$this->last_updated = new \DateTime('now');
@@ -113,14 +129,16 @@ class Student extends EntitySuperClass {
 			'username' => $this->login->__get('username'),
 			'token' => $this->login->__get('token'),
 			'school_id' => $this->school->__get('id'),
-			'classroom_id' => $this->classroom->__get('id'),
+			'classroom_grade_id' => $this->classroom_grade->__get('id'),
+			'classroom_id' => ($this->classroom) ? $this->classroom->__get('id') : null,
 			'first_name' => $this->first_name,
 			'last_name' => $this->last_name,
+			'gender' => $this->gender,
+			'birthday' => $this->birthday,
+			'photo_url' => $this->photo_url,
 			'code' => $this->code,
 			'created_on' => $this->created_on,
-			'last_updated' => $this->last_updated,
-			'gender' => $this->gender,
-			'birthday' => $this->birthday
+			'last_updated' => $this->last_updated
 		);
 	}
 }
