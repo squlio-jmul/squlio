@@ -1,12 +1,12 @@
-<div id="sq-school-admin-teachers-container" class="sq-container">
+<div id="sq-school-admin-classrooms-container" class="sq-container">
 	<div class="header">
 		<div class="row">
 			<div class="col-xs-6">
-				<div class="teachers-count">
-					<?=number_format($teachers_count)?> Teacher<?=($teachers_count > 1) ? 's' : ''?>
+				<div class="classrooms-count">
+					<?=number_format($classrooms_count)?> Classroom<?=($classrooms_count > 1) ? 's' : ''?>
 				</div>
-				<div class="add-teacher-container">
-					<a href="/school_admin/add_teacher" class="button">+ Add New</a>
+				<div class="add-classroom-container">
+					<a href="/school_admin/add_classroom" class="button">+ Add New</a>
 				</div>
 			</div>
 			<div class="col-xs-6 right">
@@ -24,5 +24,5 @@
 			</div>
 		</div>
 	</div>
-	<div id="teachers-table-container"></div>
+	<div id="classrooms-table-container"></div>
 </div>

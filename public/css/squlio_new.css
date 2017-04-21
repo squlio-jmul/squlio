@@ -51,6 +51,9 @@ a.button, a.button:hover {
 .hidden {
 	display: none;
 }
+.row.container-fluid {
+	margin-right: 0px;
+}
 footer {
 	position: absolute;
 	bottom: 0;
@@ -174,6 +177,10 @@ footer .right {
 }
 .error-container, label.error {
 	color: #FF0000;
+}
+.right {
+	text-align: right;
+
 }
 /* jGrowl */
 div.jGrowl div.ui-state-highlight {
@@ -301,14 +308,24 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 }
 #sq-school-admin-teachers-container .header .teachers-count {
 	font-size: 32px;
-    margin-top: -2px;
     font-weight: normal;
+	display: inline-block;
+	vertical-align: middle;
 }
 #sq-school-admin-teachers-container .header .add-teacher-container {
-	margin-top: 11px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 20px;
 }
 #sq-school-admin-teachers-container .header .bulk-actions-container {
-	margin-top: 3px;
+	display: inline-block;
+	vertical-align: middle;
+	width: 150px;
+}
+#sq-school-admin-teachers-container .header .apply-button-container {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 20px;
 }
 /** School Admin Edit Teacher **/
 #sq-school-admin-edit-teacher-container .tab-pane {
@@ -354,4 +371,28 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	background-position: center;
 	cursor: pointer;
 }
-
+/** School Admin Classrooms **/
+#sq-school-admin-classrooms-container .header {
+	margin-bottom: 40px;
+}
+#sq-school-admin-classrooms-container .header .classrooms-count {
+	font-size: 32px;
+    font-weight: normal;
+	display: inline-block;
+	vertical-align: middle;
+}
+#sq-school-admin-classrooms-container .header .add-classroom-container {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 20px;
+}
+#sq-school-admin-classrooms-container .header .bulk-actions-container {
+	display: inline-block;
+	vertical-align: middle;
+	width: 150px;
+}
+#sq-school-admin-classrooms-container .header .apply-button-container {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 20px;
+}

@@ -167,7 +167,7 @@ class School_admin extends SQ_Controller {
 			'jsControllerParam' => false,
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'Classes',
-			'page_subtitle' => 'Add Classroom',
+			'page_subtitle' => 'Add Class',
 			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
 		);
 
@@ -187,6 +187,35 @@ class School_admin extends SQ_Controller {
 		}
 		redirect('/');
 	}
+
+	public function classes() {
+		$data = array(
+			'headerCss' => array($this->config->item('static_css') . '/jquery.dataTables.min.css'),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'school_admin_classrooms',
+			'jsControllerParam' => false,
+			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
+			'page_title' => 'Classes',
+			'page_subtitle' => null,
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+		);
+
+		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
+			$login_id = $this->cookie->get('id');
+			$school_admin = $data['user_obj'];
+			$school_id = $school_admin['school_id'];
+			if ($school_id) {
+				$classrooms_count = count($this->classroom_library->get(array('school'=>$school_id), array('id')));
+				$data['classrooms_count'] = $classrooms_count;
+				$data['jsControllerParam'] = json_encode(array('school_id' => $school_id));
+				$this->page->show('default', 'Squlio - Classrooms', 'school_admin_classrooms', $data, $data);
+				return;
+			}
+		}
+		redirect('/');
+	}
+
 
 	/*
 	public function student() {
@@ -244,28 +273,5 @@ class School_admin extends SQ_Controller {
 		}
 	}
 
-	public function classroom() {
-		$data = array(
-			'headerCss' => array('/public/css/jquery.dataTables.min.css'),
-			'headerJs' => array(),
-			'footerJs' => array(),
-			'requireJsDataSource' => 'viewClassroom',
-			'jsControllerParam' => false
-		);
-
-		if ($school_admin_obj = $this->school_admin_library->get(array('login' => $this->cookie->get('id')), array(), array(), null, null, array('school'=>true))) {
-			foreach ($school_admin_obj as $sa) {
-				$username['username'] = $sa['username'];
-				$school_id['school_id'] = $sa['school']['id'];
-			}
-		}
-
-		$page_data = array_merge($username, $school_id);
-		if ($this->cookie->get('id')){
-			$this->page->show('school_admin_ui', 'Squlio - Classes', 'classroom', $page_data, $data);
-		} else {
-			redirect('/school_admin');
-		}
-	}
 	 */
 }
