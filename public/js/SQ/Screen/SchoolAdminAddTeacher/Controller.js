@@ -41,10 +41,6 @@ define([
 		})();
 
 		function _addTeacher(data) {
-			if (!_photo_url) {
-				$.jGrowl('Please upload this teacher avatar in order to continue', {header: 'Error'});
-				return false;
-			}
 			data.photo_url = _photo_url;
 			$('body').append(_.template(loadingTemplate));
 			_teacherModel.add(data).then(

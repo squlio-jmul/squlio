@@ -6,21 +6,24 @@
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active" id="details">
 			<div class="row">
-				<div class="col-xs-2 upload-image-container">
-					<div class="image-preview-container marginbottom30">
-						<img src="<?=($teacher['photo_url']) ? $teacher['photo_url'] : $img_path . '/no_image.png'?>" class="img-responsive" />
+				<div class="col-xs-3 upload-image-container">
+					<? if (!$teacher['photo_url']) : ?>
+					<div class="add-image-container">
+						+<br />Add Image
 					</div>
-					<div class="upload-image-form-container">
+					<? endif; ?>
+					<div class="image-preview-container marginbottom30" style="<?=($teacher['photo_url']) ? 'background-image: url(' . $teacher['photo_url'] . ')' : 'display:none'?>"></div>
+					<div class="upload-image-form-container hidden">
 						<div class="form-group">
 							<label for="image_file">Teacher Avatar</label>
 							<input type="file" name="image_file" class="form-control" />
 						</div>
 						<div class="form-group">
-							<button class="button upload" type="button">Upload</button>
+							<button class="button upload" type="button">Upload</button><br /><a class="cancel">Cancel</a>
 						</div>
 					</div>
 				</div>
-				<div class="col-xs-9 col-xs-offset-1">
+				<div class="col-xs-9">
 					<form id="edit-teacher-form">
 						<input type="hidden" name="teacher_id" value="<?=$teacher['id']?>" />
 						<input type="hidden" name="login_id" value="<?=$teacher['login_id']?>" />

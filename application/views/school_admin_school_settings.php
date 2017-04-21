@@ -1,6 +1,23 @@
 <div id="sq-school-admin-school-settings-container" class="sq-container">
 	<div class="row">
-		<div class="col-xs-8">
+		<div class="col-xs-3 upload-image-container">
+			<? if (!$school['photo_url']) : ?>
+			<div class="add-image-container">
+				+<br />Add Image
+			</div>
+			<? endif; ?>
+			<div class="image-preview-container marginbottom30" style="<?=($school['photo_url']) ? 'background-image: url(' . $school['photo_url'] . ')' : 'display:none'?>"></div>
+			<div class="upload-image-form-container hidden">
+				<div class="form-group">
+					<label for="image_file">School Avatar</label>
+					<input type="file" name="image_file" class="form-control" />
+				</div>
+				<div class="form-group">
+					<button class="button upload" type="button">Upload</button><br /><a class="cancel">Cancel</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-9">
 			<form id="school-settings-form">
 				<div class="form-group">
 					<label for="name">Name</label>
@@ -77,20 +94,6 @@
 					<button type="submit" class="button">Save</button>
 				</div>
 			</form>
-		</div>
-		<div class="col-xs-3 col-xs-offset-1 upload-image-container">
-			<div class="image-preview-container marginbottom30">
-				<img src="<?=($school['photo_url']) ? $school['photo_url'] : $img_path . '/no_image.png'?>" class="img-responsive" />
-			</div>
-			<div class="upload-image-form-container">
-				<div class="form-group">
-					<label for="image_file">Add New School Image</label>
-					<input type="file" name="image_file" class="form-control" />
-				</div>
-				<div class="form-group">
-					<button class="button upload" type="button">Upload</button>
-				</div>
-			</div>
 		</div>
 	</div>
 </div>

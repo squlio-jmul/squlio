@@ -48,6 +48,9 @@ a.button, a.button:hover {
 .marginbottom30 {
 	margin-bottom: 30px;
 }
+.hidden {
+	display: none;
+}
 footer {
 	position: absolute;
 	bottom: 0;
@@ -226,6 +229,11 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 #sq-school-admin-dashboard-container .school-info {
 	margin-bottom: 30px;
 }
+#sq-school-admin-dashboard-container .school-info .avatar-container {
+	height: 250px;
+	background-size: cover;
+	background-position: center;
+}
 #sq-school-admin-dashboard-container .school-info .school-name {
 	font-size: 20px;
 	font-weight: bold;
@@ -233,7 +241,12 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 #sq-school-admin-dashboard-container .school-info .school-address {
 	font-weight: bold;
 }
-#sq-school-admin-dashboard-container .widget {
+
+#sq-school-admin-dashboard-container .redirect {
+	width: inherit;
+	color: #FFFFFF;
+}
+#sq-school-admin-dashboard-container .redirect .widget {
 	text-align: center;
 	font-size: 28px;
 	font-weight: bold;
@@ -243,6 +256,44 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	vertical-align: middle;
 	width: inherit;
 	display: table-cell;
+}
+/** School Admin School Settings **/
+#sq-school-admin-school-settings-container .add-image-container {
+	height: 250px;
+    background: #b7b9bc;
+    text-align: center;
+    display: table-cell;
+    width: inherit;
+    vertical-align: middle;
+    font-size: 20px;
+    cursor: pointer;
+    color: #FFF;
+}
+#sq-school-admin-school-settings-container .image-preview-container {
+	height: 250px;
+    width: 100%;
+	background-size: cover;
+	background-position: center;
+	cursor: pointer;
+}
+/** School Admin Add Teacher **/
+#sq-school-admin-add-teacher-container .add-image-container {
+	height: 250px;
+    background: #b7b9bc;
+    text-align: center;
+    display: table-cell;
+    width: inherit;
+    vertical-align: middle;
+    font-size: 20px;
+    cursor: pointer;
+    color: #FFF;
+}
+#sq-school-admin-add-teacher-container .image-preview-container {
+	height: 250px;
+    width: 100%;
+	background-size: cover;
+	background-position: center;
+	cursor: pointer;
 }
 /** School Admin Teachers **/
 #sq-school-admin-teachers-container .header {
@@ -266,3 +317,41 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 #sq-school-admin-edit-teacher-container #password {
 	width: 600px;
 }
+#sq-school-admin-edit-teacher-container .add-image-container {
+	height: 250px;
+    background: #b7b9bc;
+    text-align: center;
+    display: table-cell;
+    width: inherit;
+    vertical-align: middle;
+    font-size: 20px;
+    cursor: pointer;
+    color: #FFF;
+}
+#sq-school-admin-edit-teacher-container .image-preview-container {
+	height: 250px;
+    width: 100%;
+	background-size: cover;
+	background-position: center;
+	cursor: pointer;
+}
+/** School Admin Add Classroom **/
+#sq-school-admin-add-classroom-container .add-image-container {
+	height: 250px;
+    background: #b7b9bc;
+    text-align: center;
+    display: table-cell;
+    width: inherit;
+    vertical-align: middle;
+    font-size: 20px;
+    cursor: pointer;
+    color: #FFF;
+}
+#sq-school-admin-add-classroom-container .image-preview-container {
+	height: 250px;
+    width: 100%;
+	background-size: cover;
+	background-position: center;
+	cursor: pointer;
+}
+

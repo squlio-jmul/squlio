@@ -36,7 +36,7 @@
 				'bootstrap': '<?=$js_path?>/third_party/bootstrap',
                 'underscore': '<?=$js_path?>/third_party/underscore',
 				'jgrowl': '<?=$js_path?>/third_party/jquery.jgrowl.min',
-				'jqueryui': '<?=$js_path?>/third_party/jquery-ui',
+				'jqueryui': '<?=$js_path?>/third_party/jquery-ui.min',
 				'datatables': '<?=$js_path?>/third_party/jquery.dataTables.min',
                 'text': '<?=$js_path?>/third_party/text',
 				<? if (isset($requireJsDataSource) && $requireJsDataSource) : ?>
@@ -86,7 +86,7 @@
 				var _window_height = $(window).height();
 				var _sq_container_height = $('.sq-container').height();
 				var _navbar_height = $('nav.navbar').height();
-				if (_navbar_height + _sq_container_height > _window_height) {
+				if (_navbar_height + _sq_container_height + 100 > _window_height) {
 					$('footer').css('position', 'relative');
 				} else {
 					$('footer').css('position', 'absolute');

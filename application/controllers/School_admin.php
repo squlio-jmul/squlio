@@ -13,6 +13,7 @@ class School_admin extends SQ_Controller {
 		$this->load->library('Material_library');
 		$this->load->library('Account_type_library');
 		$this->load->model('Classroom_teacher_model');
+		$this->load->model('Classroom_grade_model');
 	}
 
 	public function index() {
@@ -157,6 +158,37 @@ class School_admin extends SQ_Controller {
 		redirect('/');
 	}
 
+	public function add_classroom() {
+		$data = array(
+			'headerCss' => array($this->config->item('static_css') . '/jquery-ui.css'),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'school_admin_add_classroom',
+			'jsControllerParam' => false,
+			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
+			'page_title' => 'Classes',
+			'page_subtitle' => 'Add Classroom',
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+		);
+
+		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
+			$login_id = $this->cookie->get('id');
+			$school_admin = $data['user_obj'];
+			$school_id = $school_admin['school_id'];
+			if ($school_id) {
+				$classroom_grade_obj = $this->Classroom_grade_model->get(array('school'=>$school_id));
+				$data['school_id'] = $school_id;
+				$data['classroom_grade'] = $classroom_grade_obj;
+				$data['jsControllerParam'] = json_encode(array('school_id'=>$school_id));
+
+				$this->page->show('default', 'Squlio - Add Classroom', 'school_admin_add_classroom', $data, $data);
+				return;
+			}
+		}
+		redirect('/');
+	}
+
+	/*
 	public function student() {
 		$data = array(
 			'headerCss' => array('/public/css/jquery.dataTables.min.css'),
@@ -235,4 +267,5 @@ class School_admin extends SQ_Controller {
 			redirect('/school_admin');
 		}
 	}
+	 */
 }
