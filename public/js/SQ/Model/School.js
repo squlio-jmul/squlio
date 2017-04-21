@@ -18,6 +18,7 @@ define(
 				data.offset = offset || null;
 				data.modules = modules || {};
 				data.modules.all = data.modules.all || false;
+				data.modules.account_type = data.modules.account_type || false;
 
 				var _deferred = Q.defer();
 				$.ajax({

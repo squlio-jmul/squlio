@@ -6,7 +6,7 @@
 					<?=number_format($classrooms_count)?> Classroom<?=($classrooms_count > 1) ? 's' : ''?>
 				</div>
 				<div class="add-classroom-container">
-					<a href="/school_admin/add_classroom" class="button">+ Add New</a>
+					<a href="/school_admin/add_classroom" class="button add-classroom">+ Add New</a>
 				</div>
 			</div>
 			<div class="col-xs-6 right">

@@ -88,10 +88,20 @@ class School_admin extends SQ_Controller {
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
 			$login_id = $this->cookie->get('id');
-			if ($school_admin_obj = $this->school_admin_library->get(array('login'=>$login_id), array(), array(), null, null, array('school'=>true))) {
-				$school_admin = $school_admin_obj[0];
-				$data['school'] = $school_admin['school'];
-				$data['jsControllerParam'] = json_encode(array('school_id'=>$school_admin['school_id']));
+			$school_admin = $data['user_obj'];
+			$school_id = $school_admin['school_id'];
+			if ($school_id) {
+				$teacher_limit = 0;
+				if ($school_obj = $this->school_library->get(array('id'=>$school_id), array(), array(), null, null, array('account_type'=>true))) {
+					$school = $school_obj[0];
+					$teacher_limit = $school['account_type']['num_teacher'];
+				}
+				$teachers_count = count($this->teacher_library->get(array('school'=>$school_id), array('id')));
+				if ($teachers_count >= $teacher_limit) {
+					redirect('/school_admin/teachers');
+				}
+				$data['school'] = $school;
+				$data['jsControllerParam'] = json_encode(array('school_id'=>$school_id));
 
 				$this->page->show('default', 'Squlio - Add Teacher', 'school_admin_add_teacher', $data, $data);
 				return;
@@ -118,9 +128,13 @@ class School_admin extends SQ_Controller {
 			$school_admin = $data['user_obj'];
 			$school_id = $school_admin['school_id'];
 			if ($school_id) {
+				$teacher_limit = 0;
+				if ($school_obj = $this->school_library->get(array('id'=>$school_id), array(), array(), null, null, array('account_type'=>true))) {
+					$teacher_limit = $school_obj[0]['account_type']['num_teacher'];
+				}
 				$teachers_count = count($this->teacher_library->get(array('school'=>$school_id), array('id')));
 				$data['teachers_count'] = $teachers_count;
-				$data['jsControllerParam'] = json_encode(array('school_id' => $school_id));
+				$data['jsControllerParam'] = json_encode(array('school_id' => $school_id, 'teacher_limit' => $teacher_limit));
 				$this->page->show('default', 'Squlio - Teachers', 'school_admin_teachers', $data, $data);
 				return;
 			}
@@ -176,6 +190,16 @@ class School_admin extends SQ_Controller {
 			$school_admin = $data['user_obj'];
 			$school_id = $school_admin['school_id'];
 			if ($school_id) {
+				$classroom_limit = 0;
+				if ($school_obj = $this->school_library->get(array('id'=>$school_id), array(), array(), null, null, array('account_type'=>true))) {
+					$school = $school_obj[0];
+					$classroom_limit = $school['account_type']['num_classroom'];
+				}
+				$classrooms_count = count($this->classroom_library->get(array('school'=>$school_id), array('id')));
+				if ($classrooms_count >= $classroom_limit) {
+					redirect('/school_admin/classes');
+				}
+
 				$classroom_grade_obj = $this->Classroom_grade_model->get(array('school'=>$school_id));
 				$data['school_id'] = $school_id;
 				$data['classroom_grade'] = $classroom_grade_obj;
@@ -206,9 +230,14 @@ class School_admin extends SQ_Controller {
 			$school_admin = $data['user_obj'];
 			$school_id = $school_admin['school_id'];
 			if ($school_id) {
+				$classroom_limit = 0;
+				if ($school_obj = $this->school_library->get(array('id'=>$school_id), array(), array(), null, null, array('account_type'=>true))) {
+					$school = $school_obj[0];
+					$classroom_limit = $school['account_type']['num_classroom'];
+				}
 				$classrooms_count = count($this->classroom_library->get(array('school'=>$school_id), array('id')));
 				$data['classrooms_count'] = $classrooms_count;
-				$data['jsControllerParam'] = json_encode(array('school_id' => $school_id));
+				$data['jsControllerParam'] = json_encode(array('school_id' => $school_id, 'classroom_limit' => $classroom_limit));
 				$this->page->show('default', 'Squlio - Classrooms', 'school_admin_classrooms', $data, $data);
 				return;
 			}
