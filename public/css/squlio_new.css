@@ -399,6 +399,9 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	margin-left: 20px;
 }
 /** School Admin Edit Classroom **/
+#sq-school-admin-edit-classroom-container .tab-pane {
+	padding-top: 20px;
+}
 #sq-school-admin-edit-classroom-container .add-image-container {
 	height: 250px;
     background: #b7b9bc;

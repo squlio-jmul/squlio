@@ -4,7 +4,7 @@
 		<li role="presentation"><a href="#password" aria-controls="password" role="tab" data-toggle="tab">Password</a></li>
 	</ul>
 	<div class="tab-content">
-		<div role="tabpanel" class="tab-pane active" id="details">
+		<div role="tabpanel" class="tab-pane fade inactive" id="details">
 			<div class="row">
 				<div class="col-xs-3 upload-image-container">
 					<? if (!$teacher['photo_url']) : ?>
@@ -111,7 +111,7 @@
 				</div>
 			</div>
 		</div>
-		<div role="tabpanel" class="tab-pane" id="password">
+		<div role="tabpanel" class="tab-pane fade" id="password">
 			<form class="sq-change-password-form">
 				<input type="hidden" name="login_id" value="<?=$teacher['login_id']?>" />
 				<div class="form-group">
