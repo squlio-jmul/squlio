@@ -4,7 +4,7 @@ define(
 
 		'use strict';
 
-		return function Teacher() {
+		return function Classroom() {
 			var _me = this;
 
 			(function _init() {})();
@@ -18,17 +18,17 @@ define(
 				data.offset = offset || null;
 				data.modules = modules || {};
 				data.modules.all = data.modules.all || false;
-				data.modules.login = data.modules.login || false;
 				data.modules.school = data.modules.school || false;
+				data.modules.classroom_grade = data.modules.classroom_grade || false;
 
 				var _deferred = Q.defer();
 				$.ajax({
-					url: '/ajax/teacher/get',
+					url: '/ajax/classroom/get',
 					type: 'post',
 					dataType: 'json',
 					data: data,
 					success: function(response, textStatus, jqXHR) {
-						_deferred.resolve(response.teachers);
+						_deferred.resolve(response.classrooms);
 					},
 					error: function(response, textStatus, jqXHR) {
 						_deferred.reject(response);
@@ -37,19 +37,19 @@ define(
 				return _deferred.promise;
 			};
 
-			this.add = function(teacher_data) {
+			this.add = function(classroom_data) {
 				var _deferred = Q.defer();
 
 				var data = {
-					teacher_data: teacher_data
+					classroom_data: classroom_data
 				};
 				$.ajax({
-					url: '/ajax/teacher/add',
+					url: '/ajax/classroom/add',
 					type: 'post',
 					dataType: 'json',
 					data: data,
 					success: function(response) {
-						_deferred.resolve(response.teacher_id);
+						_deferred.resolve(response.classroom_id);
 					},
 					error: function(response, textStatus, jqXHR) {
 						_deferred.reject(response);
@@ -58,15 +58,15 @@ define(
 				return _deferred.promise;
 			};
 
-			this.update = function(teacher_id, teacher_data) {
+			this.update = function(classroom_id, classroom_data) {
 				var _deferred = Q.defer();
 
 				var data = {
-					teacher_id: teacher_id,
-					teacher_data: teacher_data
+					classroom_id: classroom_id,
+					classroom_data: classroom_data
 				};
 				$.ajax({
-					url: '/ajax/teacher/update',
+					url: '/ajax/classroom/update',
 					type: 'post',
 					dataType: 'json',
 					data: data,
@@ -83,7 +83,7 @@ define(
 			this.uploadImage = function(data){
 				var _deferred = Q.defer();
 				$.ajax({
-					url: '/ajax/teacher/upload_image',
+					url: '/ajax/classroom/upload_image',
 					type: 'post',
 					data: data,
 					contentType: false,
