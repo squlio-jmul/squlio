@@ -4,7 +4,7 @@
 		<li role="presentation"><a href="#password" aria-controls="password" role="tab" data-toggle="tab">Password</a></li>
 	</ul>
 	<div class="tab-content">
-		<div role="tabpanel" class="tab-pane fade inactive" id="details">
+		<div role="tabpanel" class="tab-pane fade in active" id="details">
 			<div class="row">
 				<div class="col-xs-3 upload-image-container">
 					<? if (!$teacher['photo_url']) : ?>

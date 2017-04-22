@@ -263,12 +263,21 @@ class School_admin extends SQ_Controller {
 			$school_admin = $data['user_obj'];
 			$school_id = $school_admin['school_id'];
 			if ($school_id) {
-				if ($classroom_obj = $this->classroom_library->get(array('id'=>$classroom_id, 'school'=>$school_id))) {
+				if ($classroom_obj = $this->classroom_library->get(array('id'=>$classroom_id, 'school'=>$school_id), array(), array(), null, null, array('classroom_teacher'=>true))) {
 					$classroom = $classroom_obj[0];
 					$classroom_grade_obj = $this->Classroom_grade_model->get(array('school'=>$school_id));
+					$teacher_obj = $this->teacher_library->get(array('school'=>$school_id), array(), array('first_name'=>'asc', 'last_name'=>'asc'));
+					$selected_teacher_ids = array_map(function ($obj) {return $obj['teacher_id'];}, $classroom['classroom_teacher']);
+					$primary_teacher_id = null;
+					foreach ($classroom['classroom_teacher'] as $ct) {
+						if ($ct['is_primary']) {
+							$primary_teacher_id = $ct['teacher_id'];
+							break;
+						}
+					}
 					$data['classroom'] = $classroom;
 					$data['classroom_grade'] = $classroom_grade_obj;
-					$data['jsControllerParam'] = json_encode(array('classroom_id' => $classroom_id));
+					$data['jsControllerParam'] = json_encode(array('classroom_id' => $classroom_id, 'teachers'=>$teacher_obj, 'selected_teacher_ids'=>$selected_teacher_ids, 'primary_teacher_id'=>$primary_teacher_id));
 					$this->page->show('default', 'Squlio - Edit Classroom', 'school_admin_edit_classroom', $data, $data);
 					return;
 				}

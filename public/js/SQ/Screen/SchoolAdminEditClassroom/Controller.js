@@ -3,8 +3,10 @@ define([
 	'Global/SQ',
 	'SQ/Util',
 	'SQ/Model/Classroom',
+	'SQ/Model/ClassroomTeacher',
 	'SQ/Screen/SchoolAdminEditClassroom/Views/EditClassroomForm',
 	'SQ/Screen/SchoolAdminEditClassroom/Views/UploadImageForm',
+	'SQ/Screen/SchoolAdminEditClassroom/Views/TeachersTab',
 	'underscore',
 	'text!../../Template/loading.tmpl',
 	'ThirdParty/q',
@@ -14,8 +16,10 @@ define([
 	SQ,
 	Util,
 	ClassroomModel,
+	ClassroomTeacherModel,
 	EditClassroomForm,
 	UploadImageForm,
+	TeachersTab,
 	_,
 	loadingTemplate,
 	Q,
@@ -27,9 +31,15 @@ define([
 		var _me = this;
 		var _util = new Util();
 		var _classroom_id = options.classroom_id;
+		var _teachers = options.teachers;
+		var _selected_teacher_ids = options.selected_teacher_ids;
+		var _primary_teacher_id = options.primary_teacher_id;
+
 		var _classroomModel = new ClassroomModel();
+		var _classroomTeacherModel = new ClassroomTeacherModel();
 		var _editClassroomForm = new EditClassroomForm();
 		var _uploadImageForm = new UploadImageForm();
+		var _teachersTab = new TeachersTab(_teachers, _selected_teacher_ids);
 
 		(function _init() {
 			_editClassroomForm.initialize($('#edit-classroom-form'));
@@ -37,6 +47,9 @@ define([
 
 			_uploadImageForm.initialize($('.upload-image-container'));
 			_uploadImageForm.setListener('upload_image', _uploadImage);
+
+			_teachersTab.initialize($('#teachers'));
+			_teachersTab.setListener('add_teacher', _addTeacher);
 
 		})();
 
@@ -73,6 +86,33 @@ define([
 					} else {
 						$('body').find('.sq-loading-overlay').remove();
 						$.jGrowl(response.error_msg, {header: 'Error'});
+					}
+				}
+			);
+		}
+
+		function _addTeacher(data) {
+			$('body').append(_.template(loadingTemplate));
+			data.classroom_id = _classroom_id;
+			_classroomTeacherModel.add(data).then(
+				function(classroom_teacher_id) {
+					if (classroom_teacher_id) {
+						_classroomTeacherModel.get({id: classroom_teacher_id}, [], [], null, null, {teacher: true}).then(
+							function(classroom_teachers) {
+								$('body').find('.sq-loading-overlay').remove();
+								if (classroom_teachers.length) {
+									_selected_teacher_ids.push(parseInt(data.teacher_id));
+									_teachersTab.setSelectedTeacherIds(_selected_teacher_ids);
+									$.jGrowl('Teacher is added successfully', {header: 'Success'});
+									_teachersTab.appendNewTeacher(classroom_teachers[0]);
+								} else {
+									$.jGrowl('Unable to add teacher to this class', {header: 'Error'});
+								}
+							}
+						);
+					} else {
+						$('body').find('.sq-loading-overlay').remove();
+						$.jGrowl('Unable to add teacher to this class', {header: 'Error'});
 					}
 				}
 			);

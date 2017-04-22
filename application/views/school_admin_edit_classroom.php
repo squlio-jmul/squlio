@@ -62,6 +62,16 @@
 			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane fade" id="teachers">
+			<div class="add-teacher-container">
+				<button class="button add-teacher">+ Add New Teacher</button>
+			</div>
+			<? if (!$classroom['classroom_teacher']) : ?>
+			<div class="no-teacher-container">
+				Currently, there is no teacher assigned to this classroom.
+			</div>
+			<? endif; ?>
+			<div class="teachers-list-container">
+			</div>
 		</div>
 	</div>
 </div>

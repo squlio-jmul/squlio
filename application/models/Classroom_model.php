@@ -32,6 +32,7 @@ class Classroom_model extends SQ_Model {
 			if(!isset($modules['all'])) $modules['all'] = false;
 			if((isset($modules['school']) && $modules['school']) || $modules['all']) $classroom['school'] = $obj->getFormattedObject('school');
 			if((isset($modules['classroom_grade']) && $modules['classroom_grade']) || $modules['all']) $classroom['classroom_grade'] = $obj->getFormattedObject('classroom_grade');
+			if((isset($modules['classroom_teacher']) && $modules['classroom_teacher']) || $modules['all']) $classroom['classroom_teacher'] = $obj->getFormattedObject('classroom_teacher');
 
 			$classrooms[] = $classroom;
 		}

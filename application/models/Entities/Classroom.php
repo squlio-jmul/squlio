@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 require_once(APPPATH."models/Entities/EntitySuperClass.php");
 require_once(APPPATH."models/Entities/School.php");
 require_once(APPPATH."models/Entities/ClassroomGrade.php");
+require_once(APPPATH."models/Entities/ClassroomTeacher.php");
 
 /**
  * Classroom
@@ -81,6 +82,13 @@ class Classroom extends EntitySuperClass {
 	 * @Column(name="last_updated", type="datetime", nullable=false)
 	 */
 	protected $last_updated;
+
+	/**
+	 * @var ClassroomTeacher
+	 *
+	 * @OneToMany(targetEntity="ClassroomTeacher", mappedBy="classroom", cascade={"persist", "remove"})
+	 */
+	protected $classroom_teacher;
 
 	public function __construct() {
 		$this->created_on = new \DateTime('now');

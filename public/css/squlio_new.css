@@ -29,8 +29,14 @@ a.small {
 	text-transform: uppercase;
 	letter-spacing: 1px;
 }
+.button.red {
+	background-color: #FF0000;
+}
 .button:hover {
 	background-color: #00b3db;
+}
+.button.red:hover {
+	background-color: #ba2c2c;
 }
 a.button, a.button:hover {
 	color: #FFFFFF;
@@ -196,6 +202,9 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	float: right;
 	font-weight: bold;
 	padding: 0px;
+}
+.nav-tabs > li > a {
+	font-size: 18px;
 }
 /** Login **/
 #sq-login-container {
@@ -402,7 +411,7 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 #sq-school-admin-edit-classroom-container .tab-pane {
 	padding-top: 20px;
 }
-#sq-school-admin-edit-classroom-container .add-image-container {
+#sq-school-admin-edit-classroom-container #details .add-image-container {
 	height: 250px;
     background: #b7b9bc;
     text-align: center;
@@ -413,11 +422,32 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
     cursor: pointer;
     color: #FFF;
 }
-#sq-school-admin-edit-classroom-container .image-preview-container {
+#sq-school-admin-edit-classroom-container #details .image-preview-container {
 	height: 250px;
     width: 100%;
 	background-size: cover;
 	background-position: center;
 	cursor: pointer;
 }
-
+#sq-school-admin-edit-classroom-container #teachers .add-teacher-container {
+	margin-bottom: 20px;
+}
+#sq-school-admin-edit-classroom-container #teachers .no-teacher-container {
+	font-size: 18px;
+}
+#sq-school-admin-edit-classroom-container #teachers .teachers-list-container .new-teacher-container {
+	margin-bottom: 20px;
+}
+#sq-school-admin-edit-classroom-container #teachers .teachers-list-container .new-teacher-container .teacher-name {
+	font-size: 20px;
+	border: 1px solid #DDD;
+    padding: 6px 10px;
+}
+#sq-school-admin-edit-classroom-container #teachers .teachers-list-container .new-teacher-container .remove-teacher {
+	margin-right: 10px;
+}
+#sq-school-admin-edit-classroom-container #teachers .teachers-list-container .new-teacher-container .is-primary {
+	font-size: 20px;
+    color: #50b27c;
+    font-weight: bold;
+}

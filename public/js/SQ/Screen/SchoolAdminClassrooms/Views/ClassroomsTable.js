@@ -3,6 +3,7 @@ define([
 	'Global/SQ',
 	'SQ/Broadcaster',
 	'SQ/Util',
+	'underscore',
 	'text!./template/classrooms_table.tmpl',
 	'datatables'
 ], function(
@@ -10,6 +11,7 @@ define([
 	SQ,
 	Broadcaster,
 	Util,
+	_,
 	ClassroomsTableTemplate
 ) {
 	'use strict';

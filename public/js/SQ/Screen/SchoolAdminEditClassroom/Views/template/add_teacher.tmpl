@@ -1,0 +1,22 @@
+<div class="row add-teacher-to-class-container">
+	<form class="add-teacher-form">
+		<input type="hidden" name="is_primary" value="<%= !selected_teacher_ids.length ? 'y':'n' %>" />
+		<div class="col-xs-3">
+			<div class="form-group">
+				<select name="teacher_id" class="form-control">
+					<option value=""> Select Teacher</option>
+					<% _.each(teachers, function(teacher) { %>
+						<% if (teacher.active && selected_teacher_ids.indexOf(teacher.id) < 0) { %>
+							<option value="<%= teacher.id %>"><%= teacher.first_name + ' ' + teacher.last_name %></option>
+						<% } %>
+					<% }); %>
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-9">
+			<div class="add-teacher-button-container">
+				<button class="button add-teacher-to-class">Save</button>&nbsp;&nbsp;&nbsp;<a class="cancel">Cancel</a>
+			</div>
+		</div>
+	</form>
+</div>
