@@ -407,6 +407,10 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	vertical-align: middle;
 	margin-left: 20px;
 }
+#sq-school-admin-classrooms-container #classrooms-table .is-primary {
+	font-weight: bold;
+	color: #2bad8c;
+}
 /** School Admin Edit Classroom **/
 #sq-school-admin-edit-classroom-container .tab-pane {
 	padding-top: 20px;
@@ -448,6 +452,6 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 }
 #sq-school-admin-edit-classroom-container #teachers .teachers-list-container .existing-teacher-container .is-primary {
 	font-size: 20px;
-    color: #50b27c;
+    color: #2bad8c;
     font-weight: bold;
 }

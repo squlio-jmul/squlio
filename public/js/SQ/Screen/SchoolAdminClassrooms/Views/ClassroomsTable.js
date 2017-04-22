@@ -41,13 +41,17 @@ define([
 		this.populate = function(classrooms) {
 			var _table_data = [];
 			$.each(classrooms || [], function(index, classroom) {
+				var _teachers = [];
+				$.each(classroom.classroom_teacher || [], function(index, ct) {
+					_teachers.push('<span class="' + ((ct.is_primary) ? 'is-primary':'') + '">' + ct.teacher_first_name + ' ' + ct.teacher_last_name + '</span>');
+				});
 				_table_data.push(
 					[
 						'<input type="checkbox" name="check-classroom[]" value="' + classroom.id + '" />',
 						classroom.id,
 						classroom.name,
 						classroom.classroom_grade.display_name,
-						'',
+						_teachers.join(', '),
 						'',
 						(classroom.active) ? 'Active' : 'Inactive',
 						'<a href="/school_admin/edit_classroom/' + classroom.id + '">Edit</a>'

@@ -32,7 +32,7 @@ define([
 		(function _init() {
 			_classroomsTable.initialize($('#classrooms-table-container'));
 			$('body').append(_.template(loadingTemplate));
-			_classroomModel.get({school: _school_id}, {}, {}, null, null, {classroom_grade: true}).then(
+			_classroomModel.get({school: _school_id}, {}, {}, null, null, {classroom_grade: true, classroom_teacher: true}).then(
 				function(classrooms) {
 					$('body').find('.sq-loading-overlay').remove();
 					_classroomsTable.populate(classrooms);
