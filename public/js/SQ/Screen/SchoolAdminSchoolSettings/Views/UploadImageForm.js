@@ -33,14 +33,14 @@ define([
 			_$upload_image_form.find('.image-preview-container').css('background-image', 'url(' + url_path + ')');
 			_$upload_image_form.find('label.error').remove();
 			_$upload_image_form.find('[name="image_file"]').val('');
-			_$upload_image_form.find('.image-preview-container').removeClass('hidden').fadeIn(300);
+			_$upload_image_form.find('.image-preview-container').fadeIn(300);
 			_$upload_image_form.find('.add-image-container, .upload-image-form-container').hide();
 			_has_uploaded = true;
 		};
 
 		function _setListeners($e) {
 			$e.find('.add-image-container, .image-preview-container').on('click', function() {
-				$e.find('.upload-image-form-container').removeClass('hidden').fadeIn(300);
+				$e.find('.upload-image-form-container').fadeIn(300);
 				$(this).hide();
 			});
 

@@ -7,7 +7,7 @@
 			</div>
 			<? endif; ?>
 			<div class="image-preview-container marginbottom30" style="<?=($school['photo_url']) ? 'background-image: url(' . $school['photo_url'] . ')' : 'display:none'?>"></div>
-			<div class="upload-image-form-container hidden">
+			<div class="upload-image-form-container sq-hidden">
 				<div class="form-group">
 					<label for="image_file">School Avatar</label>
 					<input type="file" name="image_file" class="form-control" />

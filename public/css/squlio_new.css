@@ -54,7 +54,7 @@ a.button, a.button:hover {
 .marginbottom30 {
 	margin-bottom: 30px;
 }
-.hidden {
+.sq-hidden {
 	display: none;
 }
 .row.container-fluid {
@@ -435,18 +435,18 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 #sq-school-admin-edit-classroom-container #teachers .no-teacher-container {
 	font-size: 18px;
 }
-#sq-school-admin-edit-classroom-container #teachers .teachers-list-container .new-teacher-container {
+#sq-school-admin-edit-classroom-container #teachers .teachers-list-container .existing-teacher-container {
 	margin-bottom: 20px;
 }
-#sq-school-admin-edit-classroom-container #teachers .teachers-list-container .new-teacher-container .teacher-name {
+#sq-school-admin-edit-classroom-container #teachers .teachers-list-container .existing-teacher-container .teacher-name {
 	font-size: 20px;
 	border: 1px solid #DDD;
     padding: 6px 10px;
 }
-#sq-school-admin-edit-classroom-container #teachers .teachers-list-container .new-teacher-container .remove-teacher {
+#sq-school-admin-edit-classroom-container #teachers .teachers-list-container .existing-teacher-container .remove-teacher {
 	margin-right: 10px;
 }
-#sq-school-admin-edit-classroom-container #teachers .teachers-list-container .new-teacher-container .is-primary {
+#sq-school-admin-edit-classroom-container #teachers .teachers-list-container .existing-teacher-container .is-primary {
 	font-size: 20px;
     color: #50b27c;
     font-weight: bold;

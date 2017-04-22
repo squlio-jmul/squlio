@@ -13,7 +13,7 @@
 					</div>
 					<? endif; ?>
 					<div class="image-preview-container marginbottom30" style="<?=($classroom['photo_url']) ? 'background-image: url(' . $classroom['photo_url'] . ')' : 'display:none'?>"></div>
-					<div class="upload-image-form-container hidden">
+					<div class="upload-image-form-container sq-hidden">
 						<div class="form-group">
 							<label for="image_file">Classroom Avatar</label>
 							<input type="file" name="image_file" class="form-control" />
@@ -71,6 +71,20 @@
 			</div>
 			<? endif; ?>
 			<div class="teachers-list-container">
+				<? foreach($classroom['classroom_teacher'] as $ct) : ?>
+					<div class="row existing-teacher-container existing-teacher-container-<?=$ct['id']?>">
+						<div class="col-xs-3">
+							<div class="teacher-name">
+								<?=$ct['teacher_first_name'] . ' ' . $ct['teacher_last_name']?>
+							</div>
+						</div>
+						<div class="col-xs-9">
+							<button class="button red remove-teacher" data-classroom-teacher-id="<?=$ct['id']?>">Remove</button>
+							<button class="button set-primary set-primary-<?=$ct['id']?> <?=($ct['is_primary']) ? 'sq-hidden':'' ?>" data-classroom-teacher-id="<?=$ct['id']?>">Set Primary</button>
+							<span class="is-primary is-primary-<?=$ct['id']?> <?=($ct['is_primary']) ? '':'sq-hidden' ?>" data-classroom-teacher-id="<?=$ct['id']?>">Primary</button>
+						</div>
+					</div>
+				<? endforeach; ?>
 			</div>
 		</div>
 	</div>

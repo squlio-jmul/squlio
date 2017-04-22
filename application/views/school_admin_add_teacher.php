@@ -4,8 +4,8 @@
 			<div class="add-image-container">
 				+<br />Add Image
 			</div>
-			<div class="image-preview-container marginbottom30 hidden"></div>
-			<div class="upload-image-form-container hidden">
+			<div class="image-preview-container marginbottom30 sq-hidden"></div>
+			<div class="upload-image-form-container sq-hidden">
 				<div class="form-group">
 					<label for="image_file">Teacher Avatar</label>
 					<input type="file" name="image_file" class="form-control" />

@@ -54,7 +54,10 @@ class ClassroomTeacher extends EntitySuperClass {
 		return array(
 			'id' => $this->id,
 			'classroom_id' => $this->classroom->__get('id'),
+			'classroom_name' => $this->classroom->__get('name'),
 			'teacher_id' => $this->teacher->__get('id'),
+			'teacher_first_name' => $this->teacher->__get('first_name'),
+			'teacher_last_name' => $this->teacher->__get('last_name'),
 			'is_primary' => $this->is_primary
 		);
 	}

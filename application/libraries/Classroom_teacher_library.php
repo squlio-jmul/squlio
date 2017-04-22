@@ -52,4 +52,16 @@ class Classroom_teacher_library extends SQ_Library {
 			die($err->getMessage());
 		}
 	}
+
+	public function setPrimary($classroom_teacher_id) {
+		try {
+			if ($classroom_teacher = $this->_ci->Classroom_teacher_model->setPrimary($classroom_teacher_id)) {
+				return $classroom_teacher;
+			}
+			return false;
+		} catch(Exception $err) {
+			die($err->getMessage());
+		}
+	}
+
 }

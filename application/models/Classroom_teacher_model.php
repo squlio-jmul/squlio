@@ -83,4 +83,29 @@ class Classroom_teacher_model extends SQ_Model {
 		}
 		return true;
 	}
+
+
+	public function setPrimary($classroom_teacher_id){
+		try {
+			if ($classroom_teacher_obj = $this->get(array('id'=>$classroom_teacher_id), array('classroom_id'))) {
+				$classroom_id = $classroom_teacher_obj[0]['classroom_id'];
+				if ($classroom_teacher_obj = $this->doctrine->em->getRepository('Entities\ClassroomTeacher')->findBy(array('classroom' => $classroom_id))) {
+					foreach($classroom_teacher_obj as $ct) {
+						if ($ct->id == $classroom_teacher_id) {
+							$ct->__set('is_primary', true);
+						} else {
+							$ct->__set('is_primary', false);
+						}
+						$this->doctrine->em->persist($ct);
+					}
+					$this->doctrine->em->flush();
+					$this->doctrine->em->clear();
+				}
+			}
+		}catch(Exception $err){
+			//return false;
+			die($err->getMessage());
+		}
+		return true;
+	}
 }

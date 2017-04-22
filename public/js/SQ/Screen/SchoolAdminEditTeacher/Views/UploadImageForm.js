@@ -41,7 +41,7 @@ define([
 
 		function _setListeners($e) {
 			$e.find('.add-image-container, .image-preview-container').on('click', function() {
-				$e.find('.upload-image-form-container').removeClass('hidden').fadeIn(300);
+				$e.find('.upload-image-form-container').fadeIn(300);
 				$(this).hide();
 			});
 

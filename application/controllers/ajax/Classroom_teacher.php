@@ -41,4 +41,12 @@ class Classroom_teacher extends SQ_Controller {
 		$this->setResponseElement('success', $success);
 		$this->sendResponse();
 	}
+
+	public function setPrimary() {
+		$classroom_teacher_id = $this->input->post('classroom_teacher_id');
+		$success = $this->classroom_teacher_library->setPrimary($classroom_teacher_id);
+		$this->setResponseElement('success', $success);
+		$this->sendResponse();
+	}
+
 }

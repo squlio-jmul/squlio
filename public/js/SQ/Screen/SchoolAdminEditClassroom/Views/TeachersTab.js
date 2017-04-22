@@ -5,7 +5,7 @@ define([
 	'SQ/Util',
 	'underscore',
 	'text!./template/add_teacher.tmpl',
-	'text!./template/new_teacher.tmpl',
+	'text!./template/existing_teacher.tmpl',
 	'jgrowl',
 	'ThirdParty/jquery.validate'
 ], function(
@@ -15,7 +15,7 @@ define([
 	Util,
 	_,
 	AddTeacherTemplate,
-	NewTeacherTemplate,
+	ExistingTeacherTemplate,
 	jGrowl
 ) {
 	'use strict';
@@ -29,7 +29,7 @@ define([
 		var _selected_teacher_ids = selected_teacher_ids;
 		var _add_teacher_form_opened = false;
 
-		SQ.mixin(_me, new Broadcaster(['add_teacher', 'delete_teacher', 'set_primary_teacher']));
+		SQ.mixin(_me, new Broadcaster(['add_teacher', 'delete_teacher', 'set_primary']));
 
 		(function _init() {
 		})();
@@ -37,18 +37,27 @@ define([
 		this.initialize = function($e) {
 			_$teachers_tab = $e;
 			_setListeners($e);
+			_setTeacherListener($e);
 		};
 
 		this.setSelectedTeacherIds = function(selected_teacher_ids) {
 			_selected_teacher_ids = selected_teacher_ids;
 		};
 
-		this.appendNewTeacher = function(classroom_teacher) {
-			var _$new_teacher_template = $(_.template(NewTeacherTemplate, {classroom_teacher: classroom_teacher}));
+		this.appendTeacher = function(classroom_teacher) {
+			var _$existing_teacher_template = $(_.template(ExistingTeacherTemplate, {classroom_teacher: classroom_teacher}));
 			_$teachers_tab.find('.teachers-list-container').find('.add-teacher-to-class-container').remove();
-			_$teachers_tab.find('.teachers-list-container').append(_$new_teacher_template);
+			_$teachers_tab.find('.teachers-list-container').append(_$existing_teacher_template);
 			_$teachers_tab.find('.no-teacher-container').hide();
 			_add_teacher_form_opened = false;
+			_setTeacherListener(_$existing_teacher_template);
+		};
+
+		this.displayAsPrimary = function(classroom_teacher_id) {
+			_$teachers_tab.find('.set-primary').show();
+			_$teachers_tab.find('.is-primary').hide();
+			_$teachers_tab.find('.set-primary-' + classroom_teacher_id).hide();
+			_$teachers_tab.find('.is-primary-' + classroom_teacher_id).show();
 		};
 
 		function _setListeners($e) {
@@ -90,6 +99,13 @@ define([
 						_me.broadcast('add_teacher', _add_teacher_data);
 					}
 				});
+			});
+		}
+
+		function _setTeacherListener($e) {
+			$e.find('.set-primary').on('click', function() {
+				var _classroom_teacher_id = $(this).attr('data-classroom-teacher-id');
+				_me.broadcast('set_primary', _classroom_teacher_id);
 			});
 		}
 	}

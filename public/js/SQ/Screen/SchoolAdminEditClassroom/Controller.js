@@ -50,7 +50,7 @@ define([
 
 			_teachersTab.initialize($('#teachers'));
 			_teachersTab.setListener('add_teacher', _addTeacher);
-
+			_teachersTab.setListener('set_primary', _setPrimary);
 		})();
 
 		function _editClassroom(data) {
@@ -104,7 +104,7 @@ define([
 									_selected_teacher_ids.push(parseInt(data.teacher_id));
 									_teachersTab.setSelectedTeacherIds(_selected_teacher_ids);
 									$.jGrowl('Teacher is added successfully', {header: 'Success'});
-									_teachersTab.appendNewTeacher(classroom_teachers[0]);
+									_teachersTab.appendTeacher(classroom_teachers[0]);
 								} else {
 									$.jGrowl('Unable to add teacher to this class', {header: 'Error'});
 								}
@@ -113,6 +113,21 @@ define([
 					} else {
 						$('body').find('.sq-loading-overlay').remove();
 						$.jGrowl('Unable to add teacher to this class', {header: 'Error'});
+					}
+				}
+			);
+		}
+
+		function _setPrimary(classroom_teacher_id) {
+			$('body').append(_.template(loadingTemplate));
+			_classroomTeacherModel.setPrimary(classroom_teacher_id).then(
+				function(success) {
+					$('body').find('.sq-loading-overlay').remove();
+					if (success) {
+						$.jGrowl('Teacher is set to primary successfully', {header: 'Success'});
+						_teachersTab.displayAsPrimary(classroom_teacher_id);
+					} else {
+						$.jGrowl('Unable to set this teacher as primary', {header: 'Error'});
 					}
 				}
 			);

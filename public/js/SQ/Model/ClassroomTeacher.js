@@ -79,6 +79,28 @@ define(
 				});
 				return _deferred.promise;
 			};
+
+			this.setPrimary = function(classroom_teacher_id) {
+				var _deferred = Q.defer();
+
+				var data = {
+					classroom_teacher_id: classroom_teacher_id
+				};
+				$.ajax({
+					url: '/ajax/classroom_teacher/setPrimary',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(response) {
+						_deferred.resolve(response.success);
+					},
+					error: function(response, textStatus, jqXHR) {
+						_deferred.reject(response);
+					}
+				});
+				return _deferred.promise;
+			};
+
 		}
 	}
 );
