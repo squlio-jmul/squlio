@@ -84,6 +84,24 @@ class Classroom_teacher_model extends SQ_Model {
 		return true;
 	}
 
+	public function delete($filters = array()){
+		if(!$filters){
+			return false;
+		}
+
+		try{
+			$delete_classroom_teacher_arr = $this->doctrine->em->getRepository('Entities\ClassroomTeacher')->findBy($filters);
+			foreach($delete_classroom_teacher_arr as $index => $classroom_teacher){
+				$this->doctrine->em->remove($classroom_teacher);
+			}
+			$this->doctrine->em->flush();
+			$this->doctrine->em->clear();
+		}catch(Exception $err){
+			//return false;
+			die($err->getMessage());
+		}
+		return true;
+	}
 
 	public function setPrimary($classroom_teacher_id){
 		try {

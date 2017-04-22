@@ -101,6 +101,26 @@ define(
 				return _deferred.promise;
 			};
 
+			this.delete = function(filters) {
+				var data = {};
+				data.filters = filters || {};
+
+				var _deferred = Q.defer();
+				$.ajax({
+					url: '/ajax/classroom_teacher/delete',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(response, textStatus, jqXHR) {
+						_deferred.resolve(response.success);
+					},
+					error: function(response, textStatus, jqXHR) {
+						_deferred.reject(response);
+					}
+				});
+				return _deferred.promise;
+			};
+
 		}
 	}
 );

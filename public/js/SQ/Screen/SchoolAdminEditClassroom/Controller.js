@@ -51,6 +51,7 @@ define([
 			_teachersTab.initialize($('#teachers'));
 			_teachersTab.setListener('add_teacher', _addTeacher);
 			_teachersTab.setListener('set_primary', _setPrimary);
+			_teachersTab.setListener('remove_teacher', _removeTeacher);
 		})();
 
 		function _editClassroom(data) {
@@ -132,5 +133,24 @@ define([
 				}
 			);
 		}
+
+		function _removeTeacher(classroom_teacher_id) {
+			$('body').append(_.template(loadingTemplate));
+			_classroomTeacherModel.delete({id: classroom_teacher_id}).then(
+				function(success) {
+					$('body').find('.sq-loading-overlay').remove();
+					if (success) {
+						var _index = _selected_teacher_ids.indexOf(parseInt(classroom_teacher_id));
+						_selected_teacher_ids.splice(_index, 1);
+						$.jGrowl('Teacher is set to primary successfully', {header: 'Success'});
+						_teachersTab.setSelectedTeacherIds(_selected_teacher_ids);
+						_teachersTab.removeTeacher(classroom_teacher_id);
+					} else {
+						$.jGrowl('Unable to set this teacher as primary', {header: 'Error'});
+					}
+				}
+			);
+		}
+
 	}
 });

@@ -42,6 +42,13 @@ class Classroom_teacher extends SQ_Controller {
 		$this->sendResponse();
 	}
 
+	public function delete() {
+		$filters = $this->input->post('filters') ? $this->input->post('filters') : array();
+		$success = $this->classroom_teacher_library->delete($filters);
+		$this->setResponseElement('success', $success);
+		$this->sendResponse();
+	}
+
 	public function setPrimary() {
 		$classroom_teacher_id = $this->input->post('classroom_teacher_id');
 		$success = $this->classroom_teacher_library->setPrimary($classroom_teacher_id);
