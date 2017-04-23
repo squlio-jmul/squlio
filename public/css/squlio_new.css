@@ -338,6 +338,10 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	vertical-align: middle;
 	margin-left: 20px;
 }
+#sq-school-admin-teachers-container #teachers-table .is-primary {
+	font-weight: bold;
+	color: #2bad8c;
+}
 /** School Admin Edit Teacher **/
 #sq-school-admin-edit-teacher-container .tab-pane {
 	padding-top: 20px;
@@ -454,4 +458,37 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	font-size: 20px;
     color: #2bad8c;
     font-weight: bold;
+}
+/** School Admin Add Student **/
+#sq-school-admin-add-student-container .add-image-container {
+	height: 250px;
+    background: #b7b9bc;
+    text-align: center;
+    display: table-cell;
+    width: inherit;
+    vertical-align: middle;
+    font-size: 20px;
+    cursor: pointer;
+    color: #FFF;
+}
+#sq-school-admin-add-student-container .image-preview-container {
+	height: 250px;
+    width: 100%;
+	background-size: cover;
+	background-position: center;
+	cursor: pointer;
+}
+#sq-school-admin-add-student-container .add-student-container {
+	margin-bottom: 20px;
+}
+#sq-school-admin-add-student-container .add-parents-container .header {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+#sq-school-admin-add-student-container .add-parents-container .add-father-container .header,
+#sq-school-admin-add-student-container .add-parents-container .add-mother-container .header {
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 10px;
 }

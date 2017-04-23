@@ -5,7 +5,6 @@ namespace Entities;
 use Doctrine\Common\Collections\ArrayCollection;
 
 require_once(APPPATH."models/Entities/EntitySuperClass.php");
-require_once(APPPATH."models/Entities/Login.php");
 require_once(APPPATH."models/Entities/School.php");
 require_once(APPPATH."models/Entities/Classroom.php");
 require_once(APPPATH."models/Entities/ClassroomGrade.php");
@@ -25,14 +24,6 @@ class Student extends EntitySuperClass {
 	 * @GeneratedValue(strategy="IDENTITY")
 	 */
 	protected $id;
-
-	/**
-	 * @var integer
-	 *
-	 * @OneToOne(targetEntity="Login", cascade={"persist", "remove"})
-	 * @JoinColumn(name="login_id", referencedColumnName="id")
-	 */
-	protected $login;
 
 	/**
 	 * @var integer
@@ -101,6 +92,20 @@ class Student extends EntitySuperClass {
 	protected $code;
 
 	/**
+	 * @var boolean
+	 *
+	 * @Column(name="active", type="boolean", nullable=false)
+	 */
+	protected $active;
+
+	/**
+	 * @var boolean
+	 *
+	 * @Column(name="deleted", type="boolean", nullable=false)
+	 */
+	protected $deleted;
+
+	/**
 	 * @var \DateTime
 	 *
 	 * @Column(name="created_on", type="datetime", nullable=false)
@@ -123,11 +128,6 @@ class Student extends EntitySuperClass {
 	public function getData() {
 		return array(
 			'id' => $this->id,
-			'login_id' => $this->login->__get('id'),
-			'active' => $this->login->__get('active'),
-			'email' => $this->login->__get('email'),
-			'username' => $this->login->__get('username'),
-			'token' => $this->login->__get('token'),
 			'school_id' => $this->school->__get('id'),
 			'classroom_grade_id' => $this->classroom_grade->__get('id'),
 			'classroom_id' => ($this->classroom) ? $this->classroom->__get('id') : null,
@@ -137,6 +137,8 @@ class Student extends EntitySuperClass {
 			'birthday' => $this->birthday,
 			'photo_url' => $this->photo_url,
 			'code' => $this->code,
+			'active' => $this->active,
+			'deleted' => $this->deleted,
 			'created_on' => $this->created_on,
 			'last_updated' => $this->last_updated
 		);
