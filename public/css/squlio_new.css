@@ -525,7 +525,8 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	background-position: center;
 	cursor: pointer;
 }
-#sq-school-admin-edit-student-container #parents .add-parent-container {
+#sq-school-admin-edit-student-container #parents .header {
+	font-size: 20px;
 	margin-bottom: 20px;
 }
 

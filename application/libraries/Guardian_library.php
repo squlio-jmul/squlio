@@ -48,7 +48,6 @@ class Guardian_library extends SQ_Library {
 				$default_guardian_data = array(
 					'login_id' => $login_id,
 					'app_connected' => 0,
-					'birthday' => new \DateTime($guardian_data['birthday']),
 					'created_on' => new \DateTime('now'),
 					'last_updated' => new \DateTime('now')
 				);

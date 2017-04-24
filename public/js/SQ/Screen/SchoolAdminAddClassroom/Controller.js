@@ -4,7 +4,7 @@ define([
 	'SQ/Util',
 	'SQ/Model/Classroom',
 	'SQ/Screen/SchoolAdminAddClassroom/Views/AddClassroomForm',
-	'SQ/Screen/SchoolAdminAddClassroom/Views/UploadImageForm',
+	'SQ/Module/UploadImageForm',
 	'underscore',
 	'text!../../Template/loading.tmpl',
 	'ThirdParty/q',

@@ -55,7 +55,7 @@ class Guardian extends EntitySuperClass {
 	/**
 	 * @var string
 	 *
-	 * @Column(name="guardian_type", type="string", nullable=false)
+	 * @Column(name="type", type="string", nullable=false)
 	 */
 	protected $type;
 

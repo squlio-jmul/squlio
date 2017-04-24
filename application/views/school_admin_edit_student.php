@@ -97,6 +97,70 @@
 			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane fade" id="parents">
+			<div class="row">
+				<? foreach(array('father', 'mother') as $parent_type) : ?>
+					<div class="col-xs-6">
+						<div class="header"><?=ucfirst($parent_type)?></div>
+						<form id="<?=$parent_type?>-form">
+							<input type="hidden" name="login_id" value="<?=($$parent_type) ? ${$parent_type}['login_id'] : 0?>" />
+							<input type="hidden" name="guardian_id" value="<?=($$parent_type) ? ${$parent_type}['id'] : 0?>" />
+							<div class="form-group">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" name="active" value="y" <?=($$parent_type && ${$parent_type}['active']) ? 'checked':''?>>
+										Active
+									</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-6">
+									<div class="form-group">
+										<label for="username">Username</label>
+										<input type="text" name="username" class="form-control" placeholder="Username" value="<?=($$parent_type && ${$parent_type}['username']) ? ${$parent_type}['username'] : ''?>" />
+									</div>
+								</div>
+								<div class="col-xs-6">
+									<div class="form-group">
+										<label for="password">Password</label>
+										<input type="password" name="password" class="form-control" value="<?=($$parent_type && ${$parent_type}['login']['password']) ? ${$parent_type}['login']['password'] : ''?>"/>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-6">
+									<div class="form-group">
+										<label for="first_name">First Name</label>
+										<input type="text" name="first_name" class="form-control" placeholder="First Name" value="<?=($$parent_type && ${$parent_type}['first_name']) ? ${$parent_type}['first_name'] : ''?>"/>
+									</div>
+								</div>
+								<div class="col-xs-6">
+									<div class="form-group">
+										<label for="last_name">Last Name</label>
+										<input type="text" name="last_name" class="form-control" placeholder="Last Name" value="<?=($$parent_type && ${$parent_type}['last_name']) ? ${$parent_type}['last_name'] : ''?>"/>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-6">
+									<div class="form-group">
+										<label for="email">Email</label>
+										<input type="text" name="email" class="form-control" placeholder="Email" value="<?=($$parent_type && ${$parent_type}['email']) ? ${$parent_type}['email'] : ''?>"/>
+									</div>
+								</div>
+								<div class="col-xs-6">
+									<div class="form-group">
+										<label for="phone">Phone</label>
+										<input type="text" name="phone" class="form-control" placeholder="Phone" value="<?=($$parent_type && ${$parent_type}['phone']) ? ${$parent_type}['phone'] : ''?>"/>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<button type="submit" class="button">Save</button>
+							</div>
+						</form>
+					</div>
+				<? endforeach; ?>
+			</div>
 <? /*
 			<? if (!$student['student_teacher']) : ?>
 			<div class="no-teacher-container">

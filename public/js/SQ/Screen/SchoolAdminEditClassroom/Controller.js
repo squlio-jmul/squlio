@@ -5,7 +5,7 @@ define([
 	'SQ/Model/Classroom',
 	'SQ/Model/ClassroomTeacher',
 	'SQ/Screen/SchoolAdminEditClassroom/Views/EditClassroomForm',
-	'SQ/Screen/SchoolAdminEditClassroom/Views/UploadImageForm',
+	'SQ/Module/UploadImageForm',
 	'SQ/Screen/SchoolAdminEditClassroom/Views/TeachersTab',
 	'underscore',
 	'text!../../Template/loading.tmpl',
