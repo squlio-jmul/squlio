@@ -18,18 +18,20 @@ class Student_library extends SQ_Library {
 
 	public function get($filters = array(), $fields = array(), $order_by = array(), $limit = null, $offset = null, $modules = array()) {
 		try {
-			$modules['all'] = (isset($modules['all']) && filter_var($modules['all'], FILTER_VALIDATE_BOOLEAN)) ? true : false;
-
-			$students = $this->_ci->Student_model->get($filters, $fields, $order_by, $limit, $offset, $modules);
-			return $students;
+			if($students = $this->_ci->Student_model->get($filters, $fields, $order_by, $limit, $offset, $modules)){
+				return $students;
+			} else {
+				return false;
+			}
 		} catch(Exception $err) {
 			die($err->getMessage());
 		}
-
 	}
 
 	public function add($student_data){
 		try{
+			$student_data['birthday'] = new \DateTime($student_data['birthday']);
+			$student_data['code'] = uniqid(strtotime('now'));
 			if ($student_id = $this->_ci->Student_model->add($student_data)) {
 				return $student_id;
 			}
@@ -39,8 +41,14 @@ class Student_library extends SQ_Library {
 		}
 	}
 
-	public function getActiveCountBySchoolId($school_id) {
-		return $this->_ci->Student_model->getActiveCountBySchoolId($school_id);
+	public function update($student_id, $student_data) {
+		try {
+			if ($student = $this->_ci->Student_model->update($student_id, $student_data)) {
+				return $student;
+			}
+			return false;
+		} catch(Exception $err) {
+			die($err->getMessage());
+		}
 	}
-
 }

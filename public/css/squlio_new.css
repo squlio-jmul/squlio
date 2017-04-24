@@ -478,17 +478,3 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	background-position: center;
 	cursor: pointer;
 }
-#sq-school-admin-add-student-container .add-student-container {
-	margin-bottom: 20px;
-}
-#sq-school-admin-add-student-container .add-parents-container .header {
-	font-size: 24px;
-	font-weight: bold;
-	margin-bottom: 20px;
-}
-#sq-school-admin-add-student-container .add-parents-container .add-father-container .header,
-#sq-school-admin-add-student-container .add-parents-container .add-mother-container .header {
-	font-size: 18px;
-	font-weight: bold;
-	margin-bottom: 10px;
-}

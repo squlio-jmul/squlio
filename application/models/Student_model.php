@@ -1,7 +1,6 @@
 <?php
 
 require_once(APPPATH."models/Entities/Student.php");
-require_once(APPPATH."models/Entities/Login.php");
 require_once(APPPATH."models/Entities/School.php");
 require_once(APPPATH."models/Entities/Classroom.php");
 require_once(APPPATH."models/Entities/ClassroomGrade.php");
@@ -32,7 +31,6 @@ class Student_model extends SQ_Model {
 			}
 
 			if(!isset($modules['all'])) $modules['all'] = false;
-			if((isset($modules['login']) && $modules['login']) || $modules['all']) $student['login'] = $obj->getFormattedObject('login');
 			if((isset($modules['school']) && $modules['school']) || $modules['all']) $student['school'] = $obj->getFormattedObject('school');
 			if((isset($modules['classroom']) && $modules['classroom']) || $modules['all']) $student['classroom'] = $obj->getFormattedObject('classroom');
 			if((isset($modules['classroom_grade']) && $modules['classroom_grade']) || $modules['all']) $student['classroom_grade'] = $obj->getFormattedObject('classroom_grade');
@@ -45,11 +43,9 @@ class Student_model extends SQ_Model {
 
 	public function add($student_data) {
 		try {
-			if (!$student_data['login_id'] || !$student_data['school_id'] || !$student_data['classroom_grade_id']) {
+			if (!$student_data['school_id'] || !$student_data['classroom_grade_id']) {
 				return false;
 			}
-			$login_obj = $this->doctrine->em->getRepository('Entities\Login')->findBy(array('id' => $student_data['login_id']));
-			$login = $login_obj[0];
 			$school_obj = $this->doctrine->em->getRepository('Entities\School')->findBy(array('id' => $student_data['school_id']));
 			$school = $school_obj[0];
 			$classroom_grade_obj = $this->doctrine->em->getRepository('Entities\ClassroomGrade')->findBy(array('id' => $student_data['classroom_grade_id']));
@@ -62,7 +58,6 @@ class Student_model extends SQ_Model {
 
 			$new_student = new Entities\Student;
 			$new_student->setData($student_data);
-			$new_student->login = $login;
 			$new_student->school = $school;
 			$new_student->classroom_grade = $classroom_grade;
 			if ($classroom) {
@@ -96,6 +91,9 @@ class Student_model extends SQ_Model {
 				$classroom = $classroom_obj[0];
 				$student->classroom = $classroom;
 			}
+			if (isset($student_data['birthday'])) {
+				$student_data['birthday'] = new \DateTime($student_data['birthday']);
+			}
 			$this->doctrine->em->persist($student);
 			$new_obj = $student->getData();
 			$this->doctrine->em->flush();
@@ -108,29 +106,4 @@ class Student_model extends SQ_Model {
 		}
 		return true;
 	}
-
-	public function getActiveCountBySchoolId($school_id) {
-		$params = array('school_id' => $school_id, 'active'=>true, 'deleted'=>false);
-		$query = $this->doctrine->em->createQuery('SELECT COUNT(st.id) AS num_student FROM Entities\Student st JOIN st.school s JOIN st.login l WHERE s.id = :school_id AND l.active = :active AND l.deleted =:deleted')->setParameters($params);
-		$result = $query->getSingleResult();
-		if ($result['num_student']) {
-			return (int) $result['num_student'];
-		}
-		return 0;
-	}
-
-	public function getActiveStudent($school_id) {
-		$params = array('school_id' => $school_id, 'active'=>true, 'deleted'=>false);
-		$query = $this->doctrine->em->createQuery('SELECT st FROM Entities\Student st JOIN st.login l JOIN st.school s WHERE s.id = :school_id AND l.active = :active AND l.deleted =:deleted')->setParameters($params);
-		$result =  $query->getResult();
-		$students = array();
-		if ($result){
-			foreach ($result as $r) {
-				$students[] = $r->getData();
-			}
-		}
-		return $students;
-	}
-
-
 }

@@ -83,10 +83,10 @@ class Teacher extends \Entities\Teacher implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'id', 'login', 'school', 'first_name', 'last_name', 'address', 'city', 'state', 'zipcode', 'gender', 'birthday', 'photo_url', 'phone', 'push_notification_quiet_hours', 'push_notification_quiet_hours_from', 'push_notification_quiet_hours_to', 'push_notification_mute_weekends', 'allow_story_comments', 'created_on', 'last_updated'];
+            return ['__isInitialized__', 'id', 'login', 'school', 'first_name', 'last_name', 'address', 'city', 'state', 'zipcode', 'gender', 'birthday', 'photo_url', 'phone', 'push_notification_quiet_hours', 'push_notification_quiet_hours_from', 'push_notification_quiet_hours_to', 'push_notification_mute_weekends', 'allow_story_comments', 'created_on', 'last_updated', 'classroom_teacher'];
         }
 
-        return ['__isInitialized__', 'id', 'login', 'school', 'first_name', 'last_name', 'address', 'city', 'state', 'zipcode', 'gender', 'birthday', 'photo_url', 'phone', 'push_notification_quiet_hours', 'push_notification_quiet_hours_from', 'push_notification_quiet_hours_to', 'push_notification_mute_weekends', 'allow_story_comments', 'created_on', 'last_updated'];
+        return ['__isInitialized__', 'id', 'login', 'school', 'first_name', 'last_name', 'address', 'city', 'state', 'zipcode', 'gender', 'birthday', 'photo_url', 'phone', 'push_notification_quiet_hours', 'push_notification_quiet_hours_from', 'push_notification_quiet_hours_to', 'push_notification_mute_weekends', 'allow_story_comments', 'created_on', 'last_updated', 'classroom_teacher'];
     }
 
     /**

@@ -18,8 +18,6 @@ class Classroom_teacher_library extends SQ_Library {
 
 	public function get($filters = array(), $fields = array(), $order_by = array(), $limit = null, $offset = null, $modules = array()) {
 		try {
-			$modules['all'] = (isset($modules['all']) && filter_var($modules['all'], FILTER_VALIDATE_BOOLEAN)) ? true : false;
-
 			if($classroom_teachers = $this->_ci->Classroom_teacher_model->get($filters, $fields, $order_by, $limit, $offset, $modules)){
 				return $classroom_teachers;
 			} else {
