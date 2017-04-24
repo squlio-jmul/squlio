@@ -503,3 +503,29 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	vertical-align: middle;
 	margin-left: 20px;
 }
+/** School Admin Edit Student **/
+#sq-school-admin-edit-student-container .tab-pane {
+	padding-top: 20px;
+}
+#sq-school-admin-edit-student-container #details .add-image-container {
+	height: 250px;
+    background: #b7b9bc;
+    text-align: center;
+    display: table-cell;
+    width: inherit;
+    vertical-align: middle;
+    font-size: 20px;
+    cursor: pointer;
+    color: #FFF;
+}
+#sq-school-admin-edit-student-container #details .image-preview-container {
+	height: 250px;
+    width: 100%;
+	background-size: cover;
+	background-position: center;
+	cursor: pointer;
+}
+#sq-school-admin-edit-student-container #parents .add-parent-container {
+	margin-bottom: 20px;
+}
+

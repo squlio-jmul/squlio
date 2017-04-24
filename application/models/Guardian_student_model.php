@@ -41,7 +41,7 @@ class Guardian_student_model extends SQ_Model {
 
 	public function add($guardian_student_data) {
 		try {
-			if (!$guardian_student_data['classroom_id'] || !$guardian_student_data['teacher_id'] || !$guardian_student_data['classroom_subject_id']) {
+			if (!$guardian_student_data['guardian_id'] || !$guardian_student_data['student_id']) {
 				return false;
 			}
 			$guardian_obj = $this->doctrine->em->getRepository('Entities\Guardian')->findBy(array('id' => $guardian_student_data['guardian_id']));
@@ -83,4 +83,24 @@ class Guardian_student_model extends SQ_Model {
 		}
 		return true;
 	}
+
+	public function delete($filters = array()){
+		if(!$filters){
+			return false;
+		}
+
+		try{
+			$delete_guardian_student_arr = $this->doctrine->em->getRepository('Entities\GuardianStudent')->findBy($filters);
+			foreach($delete_guardian_student_arr as $index => $guardian_student){
+				$this->doctrine->em->remove($guardian_student);
+			}
+			$this->doctrine->em->flush();
+			$this->doctrine->em->clear();
+		}catch(Exception $err){
+			//return false;
+			die($err->getMessage());
+		}
+		return true;
+	}
+
 }

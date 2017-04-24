@@ -80,20 +80,20 @@ class Student_model extends SQ_Model {
 		try {
 			$student = $this->doctrine->em->find('Entities\Student', $student_id);
 			$old_obj = $student->getData();
-			$student->setData($student_data);
-			if ($student_data['classroom_grade_id']) {
+			if (isset($student_data['classroom_grade_id']) && $student_data['classroom_grade_id']) {
 				$classroom_grade_obj = $this->doctrine->em->getRepository('Entities\ClassroomGrade')->findBy(array('id' => $student_data['classroom_grade_id']));
 				$classroom_grade = $classroom_grade_obj[0];
 				$student->classroom_grade = $classroom_grade;
 			}
-			if ($student_data['classroom_id']) {
+			if (isset($student_data['classroom_id']) && $student_data['classroom_id']) {
 				$classroom_obj = $this->doctrine->em->getRepository('Entities\Classroom')->findBy(array('id' => $student_data['classroom_id']));
 				$classroom = $classroom_obj[0];
 				$student->classroom = $classroom;
 			}
-			if (isset($student_data['birthday'])) {
+			if (isset($student_data['birthday']) && $student_data['birthday']) {
 				$student_data['birthday'] = new \DateTime($student_data['birthday']);
 			}
+			$student->setData($student_data);
 			$this->doctrine->em->persist($student);
 			$new_obj = $student->getData();
 			$this->doctrine->em->flush();

@@ -12,8 +12,8 @@ class School_admin extends SQ_Controller {
 		$this->load->library('Student_library');
 		$this->load->library('Material_library');
 		$this->load->library('Account_type_library');
-		$this->load->model('Classroom_teacher_model');
-		$this->load->model('Classroom_grade_model');
+		$this->load->library('Classroom_grade_library');
+		$this->load->library('Guardian_student_library');
 	}
 
 	public function index() {
@@ -200,7 +200,7 @@ class School_admin extends SQ_Controller {
 					redirect('/school_admin/classes');
 				}
 
-				$classroom_grade_obj = $this->Classroom_grade_model->get(array('school'=>$school_id));
+				$classroom_grade_obj = $this->classroom_grade_library->get(array('school'=>$school_id));
 				$data['school_id'] = $school_id;
 				$data['classroom_grade'] = $classroom_grade_obj;
 				$data['jsControllerParam'] = json_encode(array('school_id'=>$school_id));
@@ -265,7 +265,7 @@ class School_admin extends SQ_Controller {
 			if ($school_id) {
 				if ($classroom_obj = $this->classroom_library->get(array('id'=>$classroom_id, 'school'=>$school_id), array(), array(), null, null, array('classroom_teacher'=>true))) {
 					$classroom = $classroom_obj[0];
-					$classroom_grade_obj = $this->Classroom_grade_model->get(array('school'=>$school_id));
+					$classroom_grade_obj = $this->classroom_grade_library->get(array('school'=>$school_id));
 					$teacher_obj = $this->teacher_library->get(array('school'=>$school_id), array(), array('first_name'=>'asc', 'last_name'=>'asc'));
 					$selected_teacher_ids = array_map(function ($obj) {return $obj['teacher_id'];}, $classroom['classroom_teacher']);
 					$primary_teacher_id = null;
@@ -314,7 +314,7 @@ class School_admin extends SQ_Controller {
 					redirect('/school_admin/students');
 				}
 
-				$classroom_grade_obj = $this->Classroom_grade_model->get(array('school'=>$school_id));
+				$classroom_grade_obj = $this->classroom_grade_library->get(array('school'=>$school_id));
 				$data['school'] = $school;
 				$data['classroom_grade'] = $classroom_grade_obj;
 				$data['jsControllerParam'] = json_encode(array('school_id'=>$school_id));
@@ -334,7 +334,7 @@ class School_admin extends SQ_Controller {
 			'requireJsDataSource' => 'school_admin_students',
 			'jsControllerParam' => false,
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
-			'page_title' => 'students',
+			'page_title' => 'Students',
 			'page_subtitle' => null,
 			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
 		);
@@ -357,5 +357,43 @@ class School_admin extends SQ_Controller {
 		}
 		redirect('/');
 	}
+
+	public function edit_student($student_id) {
+		$data = array(
+			'headerCss' => array($this->config->item('static_css') . '/jquery-ui.css'),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'school_admin_edit_student',
+			'jsControllerParam' => false,
+			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
+			'page_title' => 'Students',
+			'page_subtitle' => 'Edit Student',
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+		);
+
+		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
+			$login_id = $this->cookie->get('id');
+			$school_admin = $data['user_obj'];
+			$school_id = $school_admin['school_id'];
+			if ($school_id) {
+				if ($student_obj = $this->student_library->get(array('id'=>$student_id, 'school'=>$school_id))) {
+					$student = $student_obj[0];
+					$classroom_grade_obj = $this->classroom_grade_library->get(array('school'=>$school_id));
+					$classroom_obj = $this->classroom_library->get(array('school'=>$school_id, 'classroom_grade'=>$student['classroom_grade_id'], 'active'=>true, 'deleted'=>false));
+					$guardian_student_obj = $this->guardian_student_library->get(array('student'=>$student['id']), array(), array(), null, null, array('guardian'=>true));
+
+					$data['student'] = $student;
+					$data['classroom_grade'] = $classroom_grade_obj;
+					$data['classroom'] = $classroom_obj;
+					$data['guardian_student'] = $guardian_student_obj;
+					$data['jsControllerParam'] = json_encode(array('student_id' => $student_id, 'school_id' => $student['school_id']));
+					$this->page->show('default', 'Squlio - Edit Student', 'school_admin_edit_student', $data, $data);
+					return;
+				}
+			}
+		}
+		redirect('/');
+	}
+
 
 }
