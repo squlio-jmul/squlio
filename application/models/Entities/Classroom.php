@@ -8,6 +8,7 @@ require_once(APPPATH."models/Entities/EntitySuperClass.php");
 require_once(APPPATH."models/Entities/School.php");
 require_once(APPPATH."models/Entities/ClassroomGrade.php");
 require_once(APPPATH."models/Entities/ClassroomTeacher.php");
+require_once(APPPATH."models/Entities/Student.php");
 
 /**
  * Classroom
@@ -89,6 +90,13 @@ class Classroom extends EntitySuperClass {
 	 * @OneToMany(targetEntity="ClassroomTeacher", mappedBy="classroom", cascade={"persist", "remove"})
 	 */
 	protected $classroom_teacher;
+
+	/**
+	 * @var Student
+	 *
+	 * @OneToMany(targetEntity="Student", mappedBy="classroom", cascade={"persist", "remove"})
+	 */
+	protected $student;
 
 	public function __construct() {
 		$this->created_on = new \DateTime('now');

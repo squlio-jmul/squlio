@@ -52,7 +52,7 @@ define([
 						classroom.name,
 						classroom.classroom_grade.display_name,
 						_teachers.join(', '),
-						'',
+						_util.addCommas(classroom.student.length),
 						(classroom.active) ? 'Active' : 'Inactive',
 						'<a href="/school_admin/edit_classroom/' + classroom.id + '">Edit</a>'
 					]

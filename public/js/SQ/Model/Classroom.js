@@ -20,6 +20,7 @@ define(
 				data.modules.all = data.modules.all || false;
 				data.modules.school = data.modules.school || false;
 				data.modules.classroom_grade = data.modules.classroom_grade || false;
+				data.modules.student = data.modules.student || false;
 
 				var _deferred = Q.defer();
 				$.ajax({
