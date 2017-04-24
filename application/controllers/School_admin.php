@@ -325,4 +325,37 @@ class School_admin extends SQ_Controller {
 		}
 		redirect('/');
 	}
+
+	public function students() {
+		$data = array(
+			'headerCss' => array($this->config->item('static_css') . '/jquery.dataTables.min.css'),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'school_admin_students',
+			'jsControllerParam' => false,
+			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
+			'page_title' => 'students',
+			'page_subtitle' => null,
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+		);
+
+		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
+			$login_id = $this->cookie->get('id');
+			$school_admin = $data['user_obj'];
+			$school_id = $school_admin['school_id'];
+			if ($school_id) {
+				$student_limit = 0;
+				if ($school_obj = $this->school_library->get(array('id'=>$school_id), array(), array(), null, null, array('account_type'=>true))) {
+					$student_limit = $school_obj[0]['account_type']['num_student'];
+				}
+				$students_count = count($this->student_library->get(array('school'=>$school_id), array('id')));
+				$data['students_count'] = $students_count;
+				$data['jsControllerParam'] = json_encode(array('school_id' => $school_id, 'student_limit' => $student_limit));
+				$this->page->show('default', 'Squlio - Students', 'school_admin_students', $data, $data);
+				return;
+			}
+		}
+		redirect('/');
+	}
+
 }

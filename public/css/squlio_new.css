@@ -478,3 +478,28 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	background-position: center;
 	cursor: pointer;
 }
+/** School Admin Students **/
+#sq-school-admin-students-container .header {
+	margin-bottom: 40px;
+}
+#sq-school-admin-students-container .header .students-count {
+	font-size: 32px;
+    font-weight: normal;
+	display: inline-block;
+	vertical-align: middle;
+}
+#sq-school-admin-students-container .header .add-student-container {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 20px;
+}
+#sq-school-admin-students-container .header .bulk-actions-container {
+	display: inline-block;
+	vertical-align: middle;
+	width: 150px;
+}
+#sq-school-admin-students-container .header .apply-button-container {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 20px;
+}
