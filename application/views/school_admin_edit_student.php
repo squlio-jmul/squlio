@@ -123,6 +123,7 @@
 									<div class="form-group">
 										<label for="password">Password</label>
 										<input type="password" name="password" class="form-control" value="<?=($$parent_type && ${$parent_type}['login']['password']) ? ${$parent_type}['login']['password'] : ''?>"/>
+										<i class="glyphicon glyphicon-eye-open form-control-feedback sq-view-password"></i>
 									</div>
 								</div>
 							</div>

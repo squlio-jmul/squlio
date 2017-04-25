@@ -13,7 +13,6 @@
 			<li role="presentation" <?=($page_title == 'Materials') ? 'class="active"':''?>><a href="/school_admin/materials">Materials</a></li>
 			<li role="presentation" <?=($page_title == 'Announcements') ? 'class="active"':''?>><a href="/school_admin/announcements">Announcements</a></li>
 			<li role="presentation" <?=($page_title == 'Messages') ? 'class="active"':''?>><a href="/school_admin/messages">Messages</a></li>
-			<li role="presentation" <?=($page_title == 'Users') ? 'class="active"':''?>><a href="/school_admin/users">Users</a></li>
 			<li role="presentation" <?=($page_title == 'School Settings') ? 'class="active"':''?>><a href="/school_admin/school_settings">School Settings</a></li>
 <?
 			break;

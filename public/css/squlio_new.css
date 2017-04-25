@@ -367,6 +367,12 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	background-position: center;
 	cursor: pointer;
 }
+#sq-school-admin-edit-teacher-container .sq-view-password {
+	top: 25px;
+	right: 15px;
+	pointer-events: auto;
+	cursor: pointer;
+}
 /** School Admin Add Classroom **/
 #sq-school-admin-add-classroom-container .add-image-container {
 	height: 250px;
@@ -529,4 +535,11 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	font-size: 20px;
 	margin-bottom: 20px;
 }
+#sq-school-admin-edit-student-container #parents .sq-view-password {
+	top: 25px;
+	right: 15px;
+	pointer-events: auto;
+	cursor: pointer;
+}
+
 

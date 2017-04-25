@@ -161,7 +161,7 @@ class School_admin extends SQ_Controller {
 			$school_admin = $data['user_obj'];
 			$school_id = $school_admin['school_id'];
 			if ($school_id) {
-				if ($teacher_obj = $this->teacher_library->get(array('id'=>$teacher_id, 'school'=>$school_id))) {
+				if ($teacher_obj = $this->teacher_library->get(array('id'=>$teacher_id, 'school'=>$school_id), array(), array(), null, null, array('classroom'=>true, 'login'=>true))) {
 					$teacher = $teacher_obj[0];
 					$data['teacher'] = $teacher;
 					$data['jsControllerParam'] = json_encode(array('teacher_id' => $teacher_id));

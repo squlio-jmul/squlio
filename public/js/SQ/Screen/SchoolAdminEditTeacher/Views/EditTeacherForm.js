@@ -90,6 +90,19 @@ define([
 					_me.broadcast('edit_teacher', _edit_teacher_data);
 				}
 			});
+			_setListeners($e);
 		};
+
+		function _setListeners($e) {
+			$e.find('.sq-view-password').on('click', function() {
+				var _$self = $(this);
+				if (_$self.siblings('[name="password"]').attr('type') == 'password') {
+					_$self.siblings('[name="password"]').attr('type', 'text');
+				} else {
+					_$self.siblings('[name="password"]').attr('type', 'password');
+
+				}
+			});
+		}
 	}
 });

@@ -35,9 +35,20 @@
 								</label>
 							</div>
 						</div>
-						<div class="form-group">
-							<label for="username">Username</label>
-							<input type="text" name="username" class="form-control" placeholder="Username" value="<?=$teacher['username']?>" />
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label for="username">Username</label>
+									<input type="text" name="username" class="form-control" placeholder="Username" value="<?=$teacher['username']?>" />
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label for="password">Password</label>
+									<input type="password" name="password" class="form-control" value="<?=$teacher['login']['password']?>" />
+									<i class="glyphicon glyphicon-eye-open form-control-feedback sq-view-password"></i>
+								</div>
+							</div>
 						</div>
 						<div class="row">
 							<div class="col-xs-6">

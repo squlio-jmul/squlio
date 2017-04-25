@@ -125,6 +125,7 @@ define([
 					_me.broadcast('save_mother', _mother_data);
 				}
 			});
+			_setListeners($e);
 		};
 
 		this.setGuardianId = function(parent_type, guardian_id) {
@@ -134,6 +135,18 @@ define([
 		this.setLoginId = function(parent_type, login_id) {
 			_$parents_form.find('#' + parent_type + '-form [name="login_id"]').val(login_id);
 		};
+
+		function _setListeners($e) {
+			$e.find('.sq-view-password').on('click', function() {
+				var _$self = $(this);
+				if (_$self.siblings('[name="password"]').attr('type') == 'password') {
+					_$self.siblings('[name="password"]').attr('type', 'text');
+				} else {
+					_$self.siblings('[name="password"]').attr('type', 'password');
+
+				}
+			});
+		}
 
 	}
 });

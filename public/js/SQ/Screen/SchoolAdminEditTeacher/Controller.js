@@ -50,7 +50,7 @@ define([
 
 		function _editTeacher(data) {
 			$('body').append(_.template(loadingTemplate));
-			_loginModel.update(data.login_id, {username: data.username, email:data.email}).then(
+			_loginModel.update(data.login_id, {username: data.username, email:data.email, password: data.password}).then(
 				function(success) {
 					if (success) {
 						_teacherModel.update(_teacher_id, data).then(

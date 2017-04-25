@@ -83,10 +83,10 @@ class Classroom extends \Entities\Classroom implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'id', 'school', 'classroom_grade', 'name', 'photo_url', 'active', 'deleted', 'created_on', 'last_updated', 'classroom_teacher'];
+            return ['__isInitialized__', 'id', 'school', 'classroom_grade', 'name', 'photo_url', 'active', 'deleted', 'created_on', 'last_updated', 'classroom_teacher', 'student'];
         }
 
-        return ['__isInitialized__', 'id', 'school', 'classroom_grade', 'name', 'photo_url', 'active', 'deleted', 'created_on', 'last_updated', 'classroom_teacher'];
+        return ['__isInitialized__', 'id', 'school', 'classroom_grade', 'name', 'photo_url', 'active', 'deleted', 'created_on', 'last_updated', 'classroom_teacher', 'student'];
     }
 
     /**
