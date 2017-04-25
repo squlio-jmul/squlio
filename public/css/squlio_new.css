@@ -373,6 +373,29 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	pointer-events: auto;
 	cursor: pointer;
 }
+#sq-school-admin-edit-teacher-container #classrooms .add-classroom-container {
+	margin-bottom: 20px;
+}
+#sq-school-admin-edit-teacher-container #classrooms .no-classroom-container {
+	font-size: 18px;
+}
+#sq-school-admin-edit-teacher-container #classrooms .classrooms-list-container .existing-classroom-container {
+	margin-bottom: 20px;
+}
+#sq-school-admin-edit-teacher-container #classrooms .classrooms-list-container .existing-classroom-container .classroom-name {
+	font-size: 20px;
+	border: 1px solid #DDD;
+    padding: 6px 10px;
+}
+#sq-school-admin-edit-teacher-container #classrooms .classrooms-list-container .existing-classroom-container .remove-classroom {
+	margin-right: 10px;
+}
+#sq-school-admin-edit-teacher-container #classrooms .classrooms-list-container .existing-classroom-container .is-primary {
+	font-size: 20px;
+    color: #2bad8c;
+    font-weight: bold;
+}
+
 /** School Admin Add Classroom **/
 #sq-school-admin-add-classroom-container .add-image-container {
 	height: 250px;

@@ -1,7 +1,8 @@
 <div id="sq-school-admin-edit-teacher-container" class="sq-container">
 	<ul class="nav nav-tabs" role="tablist">
 		<li role="presentation" class="active"><a href="#details" aria-controls="details" role="tab" data-toggle="tab">Details</a></li>
-		<li role="presentation"><a href="#password" aria-controls="password" role="tab" data-toggle="tab">Password</a></li>
+		<li role="presentation"><a href="#classrooms" aria-controls="classrooms" role="tab" data-toggle="tab">Classrooms</a></li>
+		<!--<li role="presentation"><a href="#password" aria-controls="password" role="tab" data-toggle="tab">Password</a></li>-->
 	</ul>
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane fade in active" id="details">
@@ -122,6 +123,33 @@
 				</div>
 			</div>
 		</div>
+		<div role="tabpanel" class="tab-pane fade" id="classrooms">
+			<div class="add-classroom-container">
+				<button class="button add-classroom">+ Add New Classroom</button>
+			</div>
+			<? if (!$teacher['classroom_teacher']) : ?>
+			<div class="no-classroom-container">
+				Currently, this teacher is not belong to any classroom.
+			</div>
+			<? endif; ?>
+			<div class="classrooms-list-container">
+				<? foreach($teacher['classroom_teacher'] as $ct) : ?>
+					<div class="row existing-classroom-container existing-classroom-container-<?=$ct['id']?>">
+						<div class="col-xs-3">
+							<div class="classroom-name">
+								<?=$ct['classroom_name']?>
+							</div>
+						</div>
+						<div class="col-xs-9">
+							<button class="button red remove-classroom" data-classroom-id="<?=$ct['classroom_id']?>" data-classroom-teacher-id="<?=$ct['id']?>">Remove</button>
+							<button class="button set-primary set-primary-<?=$ct['id']?> <?=($ct['is_primary']) ? 'sq-hidden':'' ?>" data-classroom-teacher-id="<?=$ct['id']?>">Set Primary</button>
+							<span class="is-primary is-primary-<?=$ct['id']?> <?=($ct['is_primary']) ? '':'sq-hidden' ?>" data-classroom-teacher-id="<?=$ct['id']?>">Primary</button>
+						</div>
+					</div>
+				<? endforeach; ?>
+			</div>
+		</div>
+		<!--
 		<div role="tabpanel" class="tab-pane fade" id="password">
 			<form class="sq-change-password-form">
 				<input type="hidden" name="login_id" value="<?=$teacher['login_id']?>" />
@@ -139,5 +167,6 @@
 				</div>
 			</form>
 		</div>
+		-->
 	</div>
 </div>

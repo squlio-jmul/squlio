@@ -79,7 +79,7 @@
 							</div>
 						</div>
 						<div class="col-xs-9">
-							<button class="button red remove-teacher" data-classroom-teacher-id="<?=$ct['id']?>">Remove</button>
+							<button class="button red remove-teacher" data-teacher-id="<?=$ct['teacher_id']?>" data-classroom-teacher-id="<?=$ct['id']?>">Remove</button>
 							<button class="button set-primary set-primary-<?=$ct['id']?> <?=($ct['is_primary']) ? 'sq-hidden':'' ?>" data-classroom-teacher-id="<?=$ct['id']?>">Set Primary</button>
 							<span class="is-primary is-primary-<?=$ct['id']?> <?=($ct['is_primary']) ? '':'sq-hidden' ?>" data-classroom-teacher-id="<?=$ct['id']?>">Primary</button>
 						</div>

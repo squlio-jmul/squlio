@@ -161,10 +161,13 @@ class School_admin extends SQ_Controller {
 			$school_admin = $data['user_obj'];
 			$school_id = $school_admin['school_id'];
 			if ($school_id) {
-				if ($teacher_obj = $this->teacher_library->get(array('id'=>$teacher_id, 'school'=>$school_id), array(), array(), null, null, array('classroom'=>true, 'login'=>true))) {
+				if ($teacher_obj = $this->teacher_library->get(array('id'=>$teacher_id, 'school'=>$school_id), array(), array(), null, null, array('classroom_teacher'=>true, 'login'=>true))) {
 					$teacher = $teacher_obj[0];
+					$selected_classroom_ids = array_map(function ($obj) {return $obj['classroom_id'];}, $teacher['classroom_teacher']);
+
+					$classroom_obj = $this->classroom_library->get(array('school'=>$school_id, 'active'=>true, 'deleted'=>false), array(), array('name'=>'asc'));
 					$data['teacher'] = $teacher;
-					$data['jsControllerParam'] = json_encode(array('teacher_id' => $teacher_id));
+					$data['jsControllerParam'] = json_encode(array('teacher_id' => $teacher_id, 'classrooms'=>$classroom_obj, 'selected_classroom_ids'=>$selected_classroom_ids));
 					$this->page->show('default', 'Squlio - Edit Teacher', 'school_admin_edit_teacher', $data, $data);
 					return;
 				}

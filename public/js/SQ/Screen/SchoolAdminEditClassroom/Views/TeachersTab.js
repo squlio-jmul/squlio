@@ -114,7 +114,8 @@ define([
 
 			$e.find('.remove-teacher').on('click', function() {
 				var _classroom_teacher_id = $(this).attr('data-classroom-teacher-id');
-				_me.broadcast('remove_teacher', _classroom_teacher_id);
+				var _teacher_id = $(this).attr('data-teacher-id');
+				_me.broadcast('remove_teacher', {classroom_teacher_id: _classroom_teacher_id, teacher_id: _teacher_id});
 			});
 		}
 	}

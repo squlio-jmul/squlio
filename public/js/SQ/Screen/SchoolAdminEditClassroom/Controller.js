@@ -134,19 +134,19 @@ define([
 			);
 		}
 
-		function _removeTeacher(classroom_teacher_id) {
+		function _removeTeacher(data) {
 			$('body').append(_.template(loadingTemplate));
-			_classroomTeacherModel.delete({id: classroom_teacher_id}).then(
+			_classroomTeacherModel.delete({id: data.classroom_teacher_id}).then(
 				function(success) {
 					$('body').find('.sq-loading-overlay').remove();
 					if (success) {
-						var _index = _selected_teacher_ids.indexOf(parseInt(classroom_teacher_id));
+						var _index = _selected_teacher_ids.indexOf(parseInt(data.teacher_id));
 						_selected_teacher_ids.splice(_index, 1);
-						$.jGrowl('Teacher is set to primary successfully', {header: 'Success'});
+						$.jGrowl('Teacher is removed successfully', {header: 'Success'});
 						_teachersTab.setSelectedTeacherIds(_selected_teacher_ids);
-						_teachersTab.removeTeacher(classroom_teacher_id);
+						_teachersTab.removeTeacher(data.classroom_teacher_id);
 					} else {
-						$.jGrowl('Unable to set this teacher as primary', {header: 'Error'});
+						$.jGrowl('Unable to remove this class', {header: 'Error'});
 					}
 				}
 			);

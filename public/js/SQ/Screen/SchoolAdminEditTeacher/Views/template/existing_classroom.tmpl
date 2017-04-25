@@ -1,11 +1,11 @@
-<div class="row existing-teacher-container existing-teacher-container-<%= classroom_teacher.id %>">
+<div class="row existing-classroom-container existing-classroom-container-<%= classroom_teacher.id %>">
 	<div class="col-xs-3">
-		<div class="teacher-name">
-			<%= classroom_teacher.teacher.first_name + ' ' + classroom_teacher.teacher.last_name %>
+		<div class="classroom-name">
+			<%= classroom_teacher.classroom.name %>
 		</div>
 	</div>
 	<div class="col-xs-9">
-		<button class="button red remove-teacher" data-teacher-id="<%= classroom_teacher.teacher_id %>" data-classroom-teacher-id="<%= classroom_teacher.id %>">Remove</button>
+		<button class="button red remove-classroom" data-classroom-id="<%= classroom_teacher.classroom_id %>" data-classroom-teacher-id="<%= classroom_teacher.id %>">Remove</button>
 		<button class="button set-primary set-primary-<%= classroom_teacher.id %> <%= (classroom_teacher.is_primary) ? 'sq-hidden':'' %>" data-classroom-teacher-id="<%= classroom_teacher.id %>">Set Primary</button>
 		<span class="is-primary is-primary-<%= classroom_teacher.id %> <%= (classroom_teacher.is_primary) ? '':'sq-hidden' %>" data-classroom-teacher-id="<%= classroom_teacher.id %>">Primary</button>
 	</div>
