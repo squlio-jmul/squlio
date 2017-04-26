@@ -82,9 +82,9 @@ define([
 					[
 						'<input type="checkbox" name="check-schedule[]" value="' + schedule.id + '" />',
 						schedule.id,
-						schedule.term.name,
+						'<a href="/school_admin/edit_term/' + schedule.term.id + '" target="_blank">' + schedule.term.name + '</a>',
 						_date.getDate() + '/' + (_date.getMonth()+1) + '/' + _date.getFullYear(),
-						schedule.subject.title,
+						'<a href="/school_admin/edit_subject/' + schedule.subject.id + '" target="_blank">' + schedule.subject.title + '</a>',
 						'<button class="button delete-schedule" data-schedule-id="' + schedule.id + '">Delete</button>'
 					]
 				);
