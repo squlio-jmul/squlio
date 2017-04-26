@@ -695,4 +695,8 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	vertical-align: middle;
 	margin-left: 20px;
 }
+/** School Admin Edit Classroom Grade **/
+#sq-school-admin-edit-classroom-grade-container {
+	width: 600px;
+}
 
