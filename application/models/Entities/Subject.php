@@ -57,9 +57,9 @@ class Subject extends EntitySuperClass {
 	/**
 	 * @var string
 	 *
-	 * @Column(name="additional_info", type="string", nullable=true)
+	 * @Column(name="material", type="string", nullable=true)
 	 */
-	protected $additional_info;
+	protected $material;
 
 	/**
 	 * @var string
@@ -71,16 +71,16 @@ class Subject extends EntitySuperClass {
 	/**
 	 * @var string
 	 *
-	 * @Column(name="img_url_path", type="string", nullable=true)
+	 * @Column(name="photo_url", type="string", nullable=true)
 	 */
-	protected $img_url_path;
+	protected $photo_url;
 
 	/**
 	 * @var string
 	 *
-	 * @Column(name="video_url_path", type="string", nullable=true)
+	 * @Column(name="video_url", type="string", nullable=true)
 	 */
-	protected $video_url_path;
+	protected $video_url;
 
 	/**
 	 * @var \DateTime
@@ -108,10 +108,10 @@ class Subject extends EntitySuperClass {
 			'classroom_grade_id' => $this->classroom_grade->__get('id'),
 			'title' => $this->title,
 			'description' => $this->description,
-			'additional_info' => $this->additional_info,
+			'material' => $this->material,
 			'url' => $this->url,
-			'img_url_path' => $this->img_url_path,
-			'video_url_path' => $this->video_url_path,
+			'photo_url' => $this->photo_url,
+			'video_url' => $this->video_url,
 			'created_on' => $this->created_on,
 			'last_updated' => $this->last_updated
 		);

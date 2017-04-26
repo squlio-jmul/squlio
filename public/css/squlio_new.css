@@ -597,4 +597,26 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 #sq-school-admin-edit-term-container {
 	width: 600px;
 }
+/** School Admin Add Subject **/
+#sq-school-admin-add-subject-container .add-image-container {
+	height: 250px;
+    background: #b7b9bc;
+    text-align: center;
+    display: table-cell;
+    width: inherit;
+    vertical-align: middle;
+    font-size: 20px;
+    cursor: pointer;
+    color: #FFF;
+}
+#sq-school-admin-add-subject-container .image-preview-container {
+	height: 250px;
+    width: 100%;
+	background-size: cover;
+	background-position: center;
+	cursor: pointer;
+}
+#sq-school-admin-add-subject-container textarea {
+	height: 80px;
+}
 

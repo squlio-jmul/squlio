@@ -100,6 +100,26 @@ define(
 				return _deferred.promise;
 			};
 
+			this.uploadImage = function(data){
+				var _deferred = Q.defer();
+				$.ajax({
+					url: '/ajax/subject/upload_image',
+					type: 'post',
+					data: data,
+					contentType: false,
+					cache: false,
+					processData: false,
+					success: function(response, textStatus, jqXHR) {
+						response = JSON.parse(response);
+						_deferred.resolve(response);
+					},
+					error: function(response, textStatus, jqXHR) {
+						response = JSON.parse(response);
+						_deferred.reject(response);
+					}
+				});
+				return _deferred.promise;
+			};
 		}
 	}
 );

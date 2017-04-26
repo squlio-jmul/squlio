@@ -49,4 +49,11 @@ class Subject extends SQ_Controller {
 		$this->sendResponse();
 	}
 
+	public function upload_image() {
+		$response = $this->subject_library->uploadImage($_FILES['file']);
+		$this->setResponseElement('success', $response['success']);
+		$this->setResponseElement('error_msg', $response['error_msg']);
+		$this->setResponseElement('url_path', $response['url_path']);
+		$this->sendResponse();
+	}
 }
