@@ -471,4 +471,35 @@ class School_admin extends SQ_Controller {
 		redirect('/');
 	}
 
+	public function edit_term($term_id) {
+		$data = array(
+			'headerCss' => array($this->config->item('static_css') . '/jquery-ui.css'),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'school_admin_edit_term',
+			'jsControllerParam' => false,
+			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
+			'page_title' => 'Terms',
+			'page_subtitle' => 'Edit Term',
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+		);
+
+		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
+			$login_id = $this->cookie->get('id');
+			$school_admin = $data['user_obj'];
+			$school_id = $school_admin['school_id'];
+			if ($school_id) {
+				if ($term_obj = $this->term_library->get(array('id'=>$term_id, 'school'=>$school_id))) {
+					$term = $term_obj[0];
+					$data['term'] = $term;
+					$data['jsControllerParam'] = json_encode(array('term_id' => $term_id));
+					$this->page->show('default', 'Squlio - Edit Term', 'school_admin_edit_term', $data, $data);
+					return;
+				}
+			}
+		}
+		redirect('/');
+	}
+
+
 }

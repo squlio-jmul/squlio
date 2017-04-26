@@ -593,4 +593,8 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	vertical-align: middle;
 	margin-left: 20px;
 }
+/** School Admin Edit Term **/
+#sq-school-admin-edit-term-container {
+	width: 600px;
+}
 

@@ -59,4 +59,20 @@ class Term extends SQ_Controller {
 		}
 		return;
 	}
+
+	public function editNameNotExist() {
+		$name = $this->input->post('name');
+		$school_id = $this->input->post('school_id');
+		$term_id = $this->input->post('term_id');
+		if ($term_obj = $this->term_library->get(array('school'=>$school_id, 'name'=>$name))) {
+			if ($term_obj[0]['id'] != $term_id) {
+				echo 'false';
+			} else {
+				echo 'true';
+			}
+		} else {
+			echo 'true';
+		}
+		return;
+	}
 }
