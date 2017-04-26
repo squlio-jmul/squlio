@@ -1,9 +1,10 @@
 define(
 	['jquery', 'Global/SQ', 'ThirdParty/q'],
 	function($, SQ, Q) {
+
 		'use strict';
 
-		return function Classroom_grade() {
+		return function ClassroomGrade() {
 			var _me = this;
 
 			(function _init() {})();
@@ -17,6 +18,7 @@ define(
 				data.offset = offset || null;
 				data.modules = modules || {};
 				data.modules.all = data.modules.all || false;
+				data.modules.school = data.modules.school || false;
 
 				var _deferred = Q.defer();
 				$.ajax({
@@ -34,20 +36,19 @@ define(
 				return _deferred.promise;
 			};
 
-			this.addClassroomGrade= function(school_id, name,  display_name) {
+			this.add = function(classroom_grade_data) {
 				var _deferred = Q.defer();
-				var data= {
-					school_id: school_id,
-					name: name,
-					display_name: display_name,
+
+				var data = {
+					classroom_grade_data: classroom_grade_data
 				};
 				$.ajax({
 					url: '/ajax/classroom_grade/add',
 					type: 'post',
 					dataType: 'json',
 					data: data,
-					success: function(response, textStatus, jqXHR) {
-						_deferred.resolve(response);
+					success: function(response) {
+						_deferred.resolve(response.classroom_grade_id);
 					},
 					error: function(response, textStatus, jqXHR) {
 						_deferred.reject(response);
@@ -56,20 +57,20 @@ define(
 				return _deferred.promise;
 			};
 
-			this.editClassroomGrade = function(id, name, display_name) {
+			this.update = function(classroom_grade_id, classroom_grade_data) {
 				var _deferred = Q.defer();
+
 				var data = {
-					id: id,
-					name: name,
-					display_name: display_name,
+					classroom_grade_id: classroom_grade_id,
+					classroom_grade_data: classroom_grade_data
 				};
 				$.ajax({
 					url: '/ajax/classroom_grade/update',
 					type: 'post',
 					dataType: 'json',
 					data: data,
-					success: function(response, textStatus, jqXHR) {
-						_deferred.resolve(response);
+					success: function(response) {
+						_deferred.resolve(response.success);
 					},
 					error: function(response, textStatus, jqXHR) {
 						_deferred.reject(response);
@@ -78,43 +79,25 @@ define(
 				return _deferred.promise;
 			};
 
-			this.getClassroomGradeData = function(school_id) {
+			this.delete = function(filters) {
+				var data = {};
+				data.filters = filters || {};
+
 				var _deferred = Q.defer();
-
-				var data = {school_id: school_id};
-				$.ajax({
-					url: '/ajax/classroom_grade/displayTable',
-					type: 'post',
-					dataType: 'json',
-					data: data,
-					success: function(response) {
-						_deferred.resolve(response);
-					},
-					error: function(response, textStatus, jqXHR) {
-						_deferred.reject(response);
-					}
-				});
-				return _deferred.promise;
-			}
-
-			this.deleteClassroomGrade = function(classroom_grade_id) {
-				var _deferred = Q.defer();
-
-				var data = {classroom_grade_id: classroom_grade_id};
 				$.ajax({
 					url: '/ajax/classroom_grade/delete',
 					type: 'post',
 					dataType: 'json',
 					data: data,
 					success: function(response, textStatus, jqXHR) {
-						_deferred.resolve(response);
+						_deferred.resolve(response.success);
 					},
 					error: function(response, textStatus, jqXHR) {
 						_deferred.reject(response);
 					}
 				});
 				return _deferred.promise;
-			}
+			};
 		}
 	}
 );

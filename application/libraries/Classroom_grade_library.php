@@ -16,8 +16,6 @@ class Classroom_grade_library extends SQ_Library {
 
 	public function get($filters = array(), $fields = array(), $order_by = array(), $limit = null, $offset = null, $modules = array()) {
 		try {
-			$modules['all'] = (isset($modules['all']) && filter_var($modules['all'], FILTER_VALIDATE_BOOLEAN)) ? true : false;
-
 			if($classroom_grades = $this->_ci->Classroom_grade_model->get($filters, $fields, $order_by, $limit, $offset, $modules)) {
 				return $classroom_grades;
 			} else {
@@ -50,7 +48,11 @@ class Classroom_grade_library extends SQ_Library {
 		}
 	}
 
-	public function delete($classroom_grade_id) {
-		return $this->_ci->Classroom_grade_model->delete($classroom_grade_id);
+	public function delete($filters) {
+		try {
+			return $this->_ci->Classroom_grade_model->delete($filters);
+		} catch(Exception $err) {
+			die($err->getMessage());
+		}
 	}
 }

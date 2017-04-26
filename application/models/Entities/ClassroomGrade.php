@@ -39,27 +39,6 @@ class ClassroomGrade extends EntitySuperClass {
 	protected $name;
 
 	/**
-	 * @var string
-	 *
-	 * @Column(name="display_name", type="string", nullable=false)
-	 */
-	protected $display_name;
-
-	/**
-	 * @var boolean
-	 *
-	 * @Column(name="active", type="boolean", nullable=false)
-	 */
-	protected $active;
-
-	/**
-	 * @var boolean
-	 *
-	 * @Column(name="deleted", type="boolean", nullable=false)
-	 */
-	protected $deleted;
-
-	/**
 	 * @var \DateTime
 	 *
 	 * @Column(name="created_on", type="datetime", nullable=false)
@@ -83,9 +62,6 @@ class ClassroomGrade extends EntitySuperClass {
 			'id' => $this->id,
 			'school_id' => $this->school->__get('id'),
 			'name' => $this->name,
-			'display_name' => $this->display_name,
-			'active' => $this->active,
-			'deleted' => $this->deleted,
 			'created_on' => $this->created_on,
 			'last_updated' => $this->last_updated
 		);

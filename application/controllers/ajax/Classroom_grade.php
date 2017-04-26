@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Classroom_grade extends SQ_Controller {
 	public function __construct() {
@@ -8,90 +8,72 @@ class Classroom_grade extends SQ_Controller {
 	}
 
 	public function get() {
-		$filters = ($this->getInputPost('filters')) ? $this->getInputPost('filters') : array();
-		$fields = ($this->getInputPost('fields')) ? $this->getInputPost('fields') : array();
-		$order_by = ($this->getInputPost('order_by')) ?  $this->getInputPost('order_by') : array();
-		$limit = ($this->getInputPost('limit')) ? $this->getInputPost('limit') : null;
-		$offset = ($this->getInputPost('offset')) ? $this->getInputPost('offset') : null;
-		$modules = ($this->getInputPost('modules')) ? $this->getInputPost('modules') : array();
+		$filters = ($this->input->post('filters')) ? $this->input->post('filters') : array();
+		$fields = ($this->input->post('fields')) ? $this->input->post('fields') : array();
+		$order_by = ($this->input->post('order_by')) ? $this->input->post('order_by') : array();
+		$limit = ($this->input->post('limit')) ? $this->input->post('limit') : null;
+		$offset = ($this->input->post('offset')) ? $this->input->post('offset') : null;
+		$modules = ($this->input->post('modules')) ? $this->input->post('modules') : array();
 
-		if($classroom_grades = $this->classroom_grade_library->get($filters, $fields, $order_by, $limit, $offset, $modules)) {
+		if($classroom_grades = $this->classroom_grade_library->get($filters, $fields, $order_by, $limit, $offset, $modules)){
 			$this->setResponseElement('success', true);
 			$this->setResponseElement('classroom_grades', $classroom_grades);
-		} else {
+		}else{
 			$this->setResponseElement('success', false);
 		}
 		$this->sendResponse();
 	}
 
 	public function add() {
-		$add_classroom_grade_data = array (
-			'school_id' => $this->input->post('school_id'),
-			'name' => $this->input->post('name'),
-			'display_name' => $this->input->post('display_name'),
-			'active' => 1,
-			'deleted' => 0,
-			'created_on' => new \DateTime('now'),
-			'last_updated' => new \DateTime('now')
-		);
-		if ($classroom_grade_id = $this->classroom_grade_library->add($add_classroom_grade_data)) {
-			$this->setResponseElement('success', true);
+		$classroom_grade_data = $this->input->post('classroom_grade_data');
+		if ($classroom_grade_id = $this->classroom_grade_library->add($classroom_grade_data)) {
 			$this->setResponseElement('classroom_grade_id', $classroom_grade_id);
 		} else {
-			$this->setResponseElement('success', false);
+			$this->setResponseElement('classroom_grade_id', null);
 		}
 		$this->sendResponse();
 	}
 
-	public function update(){
-		$classroom_grade_id = $this->input->post('id');
-		$update_classroom_grade_data = array(
-			'name' => $this->input->post('name'),
-			'display_name' => $this->input->post('display_name'),
-			'active' => 1,
-			'deleted' => 0,
-			'created_on' => new \DateTime('now'),
-			'last_updated' => new \DateTime('now')
-		);
-		if ($account_type = $this->classroom_grade_library->update($classroom_grade_id, $update_classroom_grade_data)) {
-			$this->setResponseElement('success', true);
-			$this->setResponseElement('account_type', $account_type);
-		} else {
-			$this->setResponseElement('success', false);
-		}
-		$this->sendResponse();
-	}
-
-	public function displayTable() {
-		$school_id = $this->input->post('school_id');
-		$table_data = array();
-		if ($classroom_grade_obj = $this->classroom_grade_library->get(array('school'=>$school_id), array(), array(), null, null, array('school'=>true))){
-			foreach($classroom_grade_obj as $ca){
-
-				$data = array(
-					'id' => $ca['id'],
-					'school_name' => $ca['school']['name'],
-					'display_name' => $ca['display_name'],
-					'action' => $ca['id']
-				);
-				$table_data[] = $data;
-			}
-		}
-		if ($table_data) {
-			$this->setResponseElement('success', true);
-			$this->setResponseElement('classroom_grade_data', $table_data);
-		} else {
-			$this->setResponseElement('success', false);
-		}
+	public function update() {
+		$classroom_grade_id = $this->input->post('classroom_grade_id');
+		$classroom_grade_data = $this->input->post('classroom_grade_data');
+		$success = $this->classroom_grade_library->update($classroom_grade_id, $classroom_grade_data);
+		$this->setResponseElement('success', $success);
 		$this->sendResponse();
 	}
 
 	public function delete() {
-		$classroom_grade_id = $this->input->post('classroom_grade_id');
-		$delete = $this->classroom_grade_library->delete($classroom_grade_id);
-
-		$this->setResponseElement('success', $delete['success']);
+		$filters = $this->input->post('filters') ? $this->input->post('filters') : array();
+		$success = $this->classroom_grade_library->delete($filters);
+		$this->setResponseElement('success', $success);
 		$this->sendResponse();
-
 	}
+
+	public function nameNotExist() {
+		$name = $this->input->post('name');
+		$school_id = $this->input->post('school_id');
+		if ($classroom_grade_obj = $this->classroom_grade_library->get(array('school'=>$school_id, 'name'=>$name))) {
+			echo 'false';
+		} else {
+			echo 'true';
+		}
+		return;
+	}
+
+	public function editNameNotExist() {
+		$name = $this->input->post('name');
+		$school_id = $this->input->post('school_id');
+		$classroom_grade_id = $this->input->post('classroom_grade_id');
+		if ($classroom_grade_obj = $this->classroom_grade_library->get(array('school'=>$school_id, 'name'=>$name))) {
+			if ($classroom_grade_obj[0]['id'] != $classroom_grade_id) {
+				echo 'false';
+			} else {
+				echo 'true';
+			}
+		} else {
+			echo 'true';
+		}
+		return;
+	}
+
 }

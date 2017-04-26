@@ -666,4 +666,8 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 #sq-school-admin-edit-subject-container textarea {
 	height: 200px;
 }
+/** School Admin Add Classroom Grade **/
+#sq-school-admin-add-classroom-grade-container {
+	width: 600px;
+}
 

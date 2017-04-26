@@ -50,7 +50,7 @@ define([
 						'<input type="checkbox" name="check-classroom[]" value="' + classroom.id + '" />',
 						classroom.id,
 						classroom.name,
-						classroom.classroom_grade.display_name,
+						classroom.classroom_grade.name,
 						_teachers.join(', '),
 						_util.addCommas(classroom.student.length),
 						(classroom.active) ? 'Active' : 'Inactive',

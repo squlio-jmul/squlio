@@ -7,6 +7,7 @@
 		case 'school_admin':
 ?>
 			<li role="presentation" <?=($page_title == 'Dashboard') ? 'class="active"':''?>><a href="/school_admin">Dashboard</a></li>
+			<li role="presentation" <?=($page_title == 'Classroom Grades') ? 'class="active"':''?>><a href="/school_admin/classroom_grades">Classroom Grades</a></li>
 			<li role="presentation" <?=($page_title == 'Terms') ? 'class="active"':''?>><a href="/school_admin/terms">Terms</a></li>
 			<li role="presentation" <?=($page_title == 'Subjects') ? 'class="active"':''?>><a href="/school_admin/subjects">Subjects</a></li>
 			<li role="presentation" <?=($page_title == 'Classes') ? 'class="active"':''?>><a href="/school_admin/classes">Classes</a></li>

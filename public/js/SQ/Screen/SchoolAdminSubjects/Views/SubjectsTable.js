@@ -46,7 +46,7 @@ define([
 						'<input type="checkbox" name="check-subject[]" value="' + subject.id + '" />',
 						subject.id,
 						subject.title,
-						subject.classroom_grade.display_name,
+						subject.classroom_grade.name,
 						'<a href="/school_admin/edit_subject/' + subject.id + '">Edit</a>'
 					]
 				);

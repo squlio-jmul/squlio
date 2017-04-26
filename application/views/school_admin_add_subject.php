@@ -31,7 +31,7 @@
 							<select name="classroom_grade_id" class="form-control">
 								<option value=""> - Select Grade - </option>
 								<? foreach($classroom_grade as $cg) : ?>
-									<option value="<?=$cg['id']?>"><?=$cg['display_name']?></option>
+									<option value="<?=$cg['id']?>"><?=$cg['name']?></option>
 								<? endforeach; ?>
 							</select>
 						</div>

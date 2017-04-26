@@ -79,10 +79,22 @@ class Classroom_grade_model extends SQ_Model {
 		return true;
 	}
 
-	public function delete($classroom_grade_id) {
-		$params = array('classroom_grade_id' => $classroom_grade_id);
-		$query = $this->doctrine->em->createQuery('DELETE  FROM Entities\ClassroomGrade cg WHERE cg.id = :classroom_grade_id')->setParameters($params);
-		$result =  $query->getResult();
+	public function delete($filters = array()){
+		if(!$filters){
+			return false;
+		}
+
+		try{
+			$delete_classroom_grade_arr = $this->doctrine->em->getRepository('Entities\ClassroomGrade')->findBy($filters);
+			foreach($delete_classroom_grade_arr as $index => $classroom_grade){
+				$this->doctrine->em->remove($classroom_grade);
+			}
+			$this->doctrine->em->flush();
+			$this->doctrine->em->clear();
+		}catch(Exception $err){
+			//return false;
+			die($err->getMessage());
+		}
 		return true;
 	}
 }

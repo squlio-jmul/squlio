@@ -83,10 +83,10 @@ class ClassroomGrade extends \Entities\ClassroomGrade implements \Doctrine\ORM\P
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'id', 'school', 'name', 'display_name', 'active', 'deleted', 'created_on', 'last_updated'];
+            return ['__isInitialized__', 'id', 'school', 'name', 'created_on', 'last_updated'];
         }
 
-        return ['__isInitialized__', 'id', 'school', 'name', 'display_name', 'active', 'deleted', 'created_on', 'last_updated'];
+        return ['__isInitialized__', 'id', 'school', 'name', 'created_on', 'last_updated'];
     }
 
     /**
