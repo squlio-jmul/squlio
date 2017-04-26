@@ -2,6 +2,7 @@
 	<ul class="nav nav-tabs" role="tablist">
 		<li role="presentation" class="active"><a href="#details" aria-controls="details" role="tab" data-toggle="tab">Classroom Info</a></li>
 		<li role="presentation"><a href="#teachers" aria-controls="teachers" role="tab" data-toggle="tab">Teachers</a></li>
+		<li role="presentation"><a href="#schedule" aria-controls="schedule" role="tab" data-toggle="tab">Schedule</a></li>
 	</ul>
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane fade in active" id="details">
@@ -85,6 +86,69 @@
 						</div>
 					</div>
 				<? endforeach; ?>
+			</div>
+		</div>
+		<div role="tabpanel" class="tab-pane fade" id="schedule">
+			<div class="header">
+				<div class="row">
+					<div class="col-xs-6">
+						<button class="button add-schedule">+ Add New</button>
+					</div>
+					<div class="col-xs-6 right">
+						<div class="bulk-actions-container">
+							<select name="bulk_actions" class="form-control">
+								<option value="">Bulk Actions</option>
+								<option value="delete">Delete</option>
+							</select>
+						</div>
+						<div class="apply-button-container">
+							<button class="button apply-bulk-actions">Apply</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="schedule-table-container"></div>
+			<div id="add-schedule-container" class="sq-hidden">
+				<div class="title">Add New Schedule</div>
+				<form id="add-schedule-form">
+					<input type="hidden" name="classroom_id" value="<?=$classroom['id']?>" />
+					<input type="hidden" name="school_id" value="<?=$classroom['school_id']?>" />
+					<div class="row">
+						<div class="col-xs-6">
+							<div class="form-group">
+								<label for="term_id">Term</label>
+								<select name="term_id" class="form-control">
+									<option value=""> - Select Term - </option>
+									<? foreach($term as $t) : ?>
+										<option value="<?=$t['id']?>" data-start-date="<?=$t['start_date']->format('Y-m-d')?>" data-end-date="<?=$t['end_date']->format('Y-m-d')?>"><?=$t['name']?></option>
+									<? endforeach; ?>
+								</select>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="form-group">
+								<label for="date">Date</label>
+								<input type="text" name="date" class="form-control" placeholder="Date" />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-6">
+							<div class="form-group">
+								<label for="subject_id">Subject</label>
+								<select name="subject_id" class="form-control">
+									<option value=""> - Select Subject - </option>
+									<? foreach($subject as $s) : ?>
+										<option value="<?=$s['id']?>"><?=$s['title']?></option>
+									<? endforeach; ?>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="button">Save</button>&nbsp;&nbsp;<a class="cancel">Cancel</a>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

@@ -488,6 +488,28 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
     color: #2bad8c;
     font-weight: bold;
 }
+#sq-school-admin-edit-classroom-container #schedule .header {
+	margin-bottom: 40px;
+}
+#sq-school-admin-edit-classroom-container #schedule .header .bulk-actions-container {
+	display: inline-block;
+	vertical-align: middle;
+	width: 150px;
+}
+#sq-school-admin-edit-classroom-container #schedule .header .apply-button-container {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 20px;
+}
+#sq-school-admin-edit-classroom-container #schedule #add-schedule-container {
+	width: 600px;
+}
+#sq-school-admin-edit-classroom-container #schedule #add-schedule-container .title {
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+
+
 /** School Admin Add Student **/
 #sq-school-admin-add-student-container .add-image-container {
 	height: 250px;

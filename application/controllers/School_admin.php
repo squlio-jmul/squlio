@@ -16,6 +16,7 @@ class School_admin extends SQ_Controller {
 		$this->load->library('Guardian_library');
 		$this->load->library('Term_library');
 		$this->load->library('Subject_library');
+		$this->load->library('Schedule_library');
 	}
 
 	public function index() {
@@ -39,7 +40,7 @@ class School_admin extends SQ_Controller {
 				$data['classes_count'] = count($this->classroom_library->get(array('school'=>$school_admin['school_id']), array('id')));
 				$data['teachers_count'] = count($this->teacher_library->get(array('school'=>$school_admin['school_id'])));
 				$data['students_count'] = count($this->student_library->get(array('school'=>$school_admin['school_id'])));
-				$data['subjects_count'] = 0;
+				$data['subjects_count'] = count($this->subject_library->get(array('school'=>$school_admin['school_id'])));
 
 				$this->page->show('default', 'Squlio - Dashboard', 'school_admin_dashboard', $data, $data);
 				return;
@@ -252,7 +253,10 @@ class School_admin extends SQ_Controller {
 
 	public function edit_classroom($classroom_id) {
 		$data = array(
-			'headerCss' => array($this->config->item('static_css') . '/jquery-ui.css'),
+			'headerCss' => array(
+				$this->config->item('static_css') . '/jquery-ui.css',
+				$this->config->item('static_css') . '/jquery.dataTables.min.css'
+			),
 			'headerJs' => array(),
 			'footerJs' => array(),
 			'requireJsDataSource' => 'school_admin_edit_classroom',
@@ -270,7 +274,10 @@ class School_admin extends SQ_Controller {
 			if ($school_id) {
 				if ($classroom_obj = $this->classroom_library->get(array('id'=>$classroom_id, 'school'=>$school_id), array(), array(), null, null, array('classroom_teacher'=>true))) {
 					$classroom = $classroom_obj[0];
-					$classroom_grade_obj = $this->classroom_grade_library->get(array('school'=>$school_id));
+					$classroom_grade_obj = $this->classroom_grade_library->get(array('school'=>$school_id), array(), array('name'=>'asc'));
+					$subject_obj = $this->subject_library->get(array('school'=>$school_id), array(), array('title'=>'asc'));
+					$term_obj = $this->term_library->get(array('school'=>$school_id), array(), array('name'=>'asc'));
+
 					$teacher_obj = $this->teacher_library->get(array('school'=>$school_id), array(), array('first_name'=>'asc', 'last_name'=>'asc'));
 					$selected_teacher_ids = array_map(function ($obj) {return $obj['teacher_id'];}, $classroom['classroom_teacher']);
 					$primary_teacher_id = null;
@@ -282,6 +289,8 @@ class School_admin extends SQ_Controller {
 					}
 					$data['classroom'] = $classroom;
 					$data['classroom_grade'] = $classroom_grade_obj;
+					$data['subject'] = $subject_obj;
+					$data['term'] = $term_obj;
 					$data['jsControllerParam'] = json_encode(array('classroom_id' => $classroom_id, 'teachers'=>$teacher_obj, 'selected_teacher_ids'=>$selected_teacher_ids, 'primary_teacher_id'=>$primary_teacher_id));
 					$this->page->show('default', 'Squlio - Edit Classroom', 'school_admin_edit_classroom', $data, $data);
 					return;

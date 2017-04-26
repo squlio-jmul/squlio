@@ -49,4 +49,15 @@ class Schedule extends SQ_Controller {
 		$this->sendResponse();
 	}
 
+	public function dateNotExist() {
+		$date = new \DateTime($this->input->post('date'));
+		$classroom_id = $this->input->post('classroom_id');
+		if ($schedule_obj = $this->schedule_library->get(array('classroom'=>$classroom_id, 'date'=>$date))) {
+			echo 'false';
+		} else {
+			echo 'true';
+		}
+		return;
+	}
+
 }

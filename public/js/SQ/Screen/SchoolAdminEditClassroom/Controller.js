@@ -4,9 +4,11 @@ define([
 	'SQ/Util',
 	'SQ/Model/Classroom',
 	'SQ/Model/ClassroomTeacher',
+	'SQ/Model/Schedule',
 	'SQ/Screen/SchoolAdminEditClassroom/Views/EditClassroomForm',
 	'SQ/Module/UploadImageForm',
 	'SQ/Screen/SchoolAdminEditClassroom/Views/TeachersTab',
+	'SQ/Screen/SchoolAdminEditClassroom/Views/ScheduleTab',
 	'underscore',
 	'text!../../Template/loading.tmpl',
 	'ThirdParty/q',
@@ -17,9 +19,11 @@ define([
 	Util,
 	ClassroomModel,
 	ClassroomTeacherModel,
+	ScheduleModel,
 	EditClassroomForm,
 	UploadImageForm,
 	TeachersTab,
+	ScheduleTab,
 	_,
 	loadingTemplate,
 	Q,
@@ -37,9 +41,12 @@ define([
 
 		var _classroomModel = new ClassroomModel();
 		var _classroomTeacherModel = new ClassroomTeacherModel();
+		var _scheduleModel = new ScheduleModel();
+
 		var _editClassroomForm = new EditClassroomForm();
 		var _uploadImageForm = new UploadImageForm();
 		var _teachersTab = new TeachersTab(_teachers, _selected_teacher_ids);
+		var _scheduleTab = new ScheduleTab();
 
 		(function _init() {
 			_editClassroomForm.initialize($('#edit-classroom-form'));
@@ -52,6 +59,13 @@ define([
 			_teachersTab.setListener('add_teacher', _addTeacher);
 			_teachersTab.setListener('set_primary', _setPrimary);
 			_teachersTab.setListener('remove_teacher', _removeTeacher);
+
+			_scheduleTab.initialize($('#schedule'));
+			_scheduleTab.setListener('add_schedule', _addSchedule);
+
+			$('a[href="#schedule"]').on('shown.bs.tab', function (e) {
+				_repopulateScheduleTable();
+			})
 		})();
 
 		function _editClassroom(data) {
@@ -152,5 +166,31 @@ define([
 			);
 		}
 
+		function _addSchedule(data) {
+			$('body').append(_.template(loadingTemplate));
+			_scheduleModel.add(data).then(
+				function(schedule_id) {
+					$('body').find('.sq-loading-overlay').remove();
+					if (schedule_id) {
+						$.jGrowl('Schedule is added successfully', {header: 'Error'});
+						_scheduleTab.viewTable();
+						_repopulateScheduleTable();
+					} else {
+						$.jGrowl('Unable to add schedule', {header: 'Error'});
+					}
+				}
+			);
+		}
+
+		function _repopulateScheduleTable() {
+			$('body').append(_.template(loadingTemplate));
+			_scheduleTab.clearTable();
+			_scheduleModel.get({classroom: _classroom_id}, {}, {date: 'asc'}, null, null, {term: true, subject: true}).then(
+				function(schedules) {
+					$('body').find('.sq-loading-overlay').remove();
+					_scheduleTab.populate(schedules);
+				}
+			);
+		}
 	}
 });
