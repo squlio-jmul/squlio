@@ -414,5 +414,33 @@ class School_admin extends SQ_Controller {
 		redirect('/');
 	}
 
+	public function add_term() {
+		$data = array(
+			'headerCss' => array($this->config->item('static_css') . '/jquery-ui.css'),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'school_admin_add_term',
+			'jsControllerParam' => false,
+			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
+			'page_title' => 'Terms',
+			'page_subtitle' => 'Add Term',
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+		);
+
+		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
+			$login_id = $this->cookie->get('id');
+			$school_admin = $data['user_obj'];
+			$school_id = $school_admin['school_id'];
+			if ($school_id) {
+				$data['school_id'] = $school_id;
+				$data['jsControllerParam'] = json_encode(array('school_id'=>$school_id));
+
+				$this->page->show('default', 'Squlio - Add Term', 'school_admin_add_term', $data, $data);
+				return;
+			}
+		}
+		redirect('/');
+	}
+
 
 }

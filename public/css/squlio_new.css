@@ -564,5 +564,9 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	pointer-events: auto;
 	cursor: pointer;
 }
+/** School Admin Add Term **/
+#sq-school-admin-add-term-container {
+	width: 600px;
+}
 
 

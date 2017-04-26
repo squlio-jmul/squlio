@@ -71,9 +71,6 @@ class Teacher_model extends SQ_Model {
 		try {
 			$teacher = $this->doctrine->em->find('Entities\Teacher', $teacher_id);
 			$old_obj = $teacher->getData();
-			if (isset($teacher_data['birthday'])) {
-				$teacher_data['birthday'] = new \DateTime($teacher_data['birthday']);
-			}
 			$teacher->setData($teacher_data);
 			$this->doctrine->em->persist($teacher);
 			$new_obj = $teacher->getData();

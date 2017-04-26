@@ -72,7 +72,9 @@ class Teacher_library extends SQ_Library {
 
 	public function update($teacher_id, $teacher_data) {
 		try {
-
+			if (isset($teacher_data['birthday'])) {
+				$teacher_data['birthday'] = new \DateTime($teacher_data['birthday']);
+			}
 			if ($teacher = $this->_ci->Teacher_model->update($teacher_id, $teacher_data)) {
 				return $teacher;
 			}

@@ -78,4 +78,24 @@ class Term_model extends SQ_Model {
 		}
 		return true;
 	}
+
+	public function delete($filters = array()){
+		if(!$filters){
+			return false;
+		}
+
+		try{
+			$delete_term_arr = $this->doctrine->em->getRepository('Entities\Term')->findBy($filters);
+			foreach($delete_term_arr as $index => $term){
+				$this->doctrine->em->remove($term);
+			}
+			$this->doctrine->em->flush();
+			$this->doctrine->em->clear();
+		}catch(Exception $err){
+			//return false;
+			die($err->getMessage());
+		}
+		return true;
+	}
+
 }
