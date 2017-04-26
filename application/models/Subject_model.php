@@ -73,8 +73,8 @@ class Subject_model extends SQ_Model {
 			$old_obj = $subject->getData();
 			$subject->setData($subject_data);
 
-			if ($grade_data['classroom_grade_id']) {
-				$classroom_grade_obj = $this->doctrine->em->getRepository('Entities\ClassroomGrade')->findBy(array('id' => $grade_data['classroom_grade_id']));
+			if (isset($subject_data['classroom_grade_id'])) {
+				$classroom_grade_obj = $this->doctrine->em->getRepository('Entities\ClassroomGrade')->findBy(array('id' => $subject_data['classroom_grade_id']));
 				$classroom_grade = $classroom_grade_obj[0];
 				$subject->classroom_grade = $classroom_grade;
 			}

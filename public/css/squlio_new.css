@@ -617,7 +617,7 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	cursor: pointer;
 }
 #sq-school-admin-add-subject-container textarea {
-	height: 80px;
+	height: 200px;
 }
 /** School Admin Subjects **/
 #sq-school-admin-subjects-container .header {
@@ -643,5 +643,27 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	display: inline-block;
 	vertical-align: middle;
 	margin-left: 20px;
+}
+/** School Admin Edit Subject **/
+#sq-school-admin-edit-subject-container .add-image-container {
+	height: 250px;
+    background: #b7b9bc;
+    text-align: center;
+    display: table-cell;
+    width: inherit;
+    vertical-align: middle;
+    font-size: 20px;
+    cursor: pointer;
+    color: #FFF;
+}
+#sq-school-admin-edit-subject-container .image-preview-container {
+	height: 250px;
+    width: 100%;
+	background-size: cover;
+	background-position: center;
+	cursor: pointer;
+}
+#sq-school-admin-edit-subject-container textarea {
+	height: 200px;
 }
 

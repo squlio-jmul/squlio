@@ -559,5 +559,36 @@ class School_admin extends SQ_Controller {
 		redirect('/');
 	}
 
+	public function edit_subject($subject_id) {
+		$data = array(
+			'headerCss' => array($this->config->item('static_css') . '/jquery-ui.css'),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'school_admin_edit_subject',
+			'jsControllerParam' => false,
+			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
+			'page_title' => 'Subjects',
+			'page_subtitle' => 'Edit Subject',
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+		);
 
+		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
+			$login_id = $this->cookie->get('id');
+			$school_admin = $data['user_obj'];
+			$school_id = $school_admin['school_id'];
+			if ($school_id) {
+				if ($subject_obj = $this->subject_library->get(array('id'=>$subject_id, 'school'=>$school_id))) {
+					$subject = $subject_obj[0];
+
+					$classroom_grade_obj = $this->classroom_grade_library->get(array('school'=>$school_id));
+					$data['subject'] = $subject;
+					$data['classroom_grade'] = $classroom_grade_obj;
+					$data['jsControllerParam'] = json_encode(array('subject_id' => $subject_id));
+					$this->page->show('default', 'Squlio - Edit Subject', 'school_admin_edit_subject', $data, $data);
+					return;
+				}
+			}
+		}
+		redirect('/');
+	}
 }
