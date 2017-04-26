@@ -620,4 +620,32 @@ class School_admin extends SQ_Controller {
 		redirect('/');
 	}
 
+	public function classroom_grades() {
+		$data = array(
+			'headerCss' => array($this->config->item('static_css') . '/jquery.dataTables.min.css'),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'school_admin_classroom_grades',
+			'jsControllerParam' => false,
+			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
+			'page_title' => 'Classroom Grades',
+			'page_subtitle' => null,
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+		);
+
+		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
+			$login_id = $this->cookie->get('id');
+			$school_admin = $data['user_obj'];
+			$school_id = $school_admin['school_id'];
+			if ($school_id) {
+				$classroom_grades_count = count($this->classroom_grade_library->get(array('school'=>$school_id), array('id')));
+				$data['classroom_grades_count'] = $classroom_grades_count;
+				$data['jsControllerParam'] = json_encode(array('school_id' => $school_id));
+				$this->page->show('default', 'Squlio - Classroom Grades', 'school_admin_classroom_grades', $data, $data);
+				return;
+			}
+		}
+		redirect('/');
+	}
+
 }
