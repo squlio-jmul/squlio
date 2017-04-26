@@ -568,5 +568,29 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 #sq-school-admin-add-term-container {
 	width: 600px;
 }
-
+/** School Admin Terms **/
+#sq-school-admin-terms-container .header {
+	margin-bottom: 40px;
+}
+#sq-school-admin-terms-container .header .terms-count {
+	font-size: 32px;
+    font-weight: normal;
+	display: inline-block;
+	vertical-align: middle;
+}
+#sq-school-admin-terms-container .header .add-term-container {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 20px;
+}
+#sq-school-admin-terms-container .header .bulk-actions-container {
+	display: inline-block;
+	vertical-align: middle;
+	width: 150px;
+}
+#sq-school-admin-terms-container .header .apply-button-container {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 20px;
+}
 

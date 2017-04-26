@@ -23,7 +23,7 @@ define([
 		var _$classrooms_table = null;
 		var _classrooms_table = null;
 
-		SQ.mixin(_me, new Broadcaster(['add_classroom']));
+		SQ.mixin(_me, new Broadcaster());
 
 		(function _init() {
 		})();

@@ -23,7 +23,7 @@ define([
 		var _$teachers_table = null;
 		var _teachers_table = null;
 
-		SQ.mixin(_me, new Broadcaster(['add_teacher']));
+		SQ.mixin(_me, new Broadcaster());
 
 		(function _init() {
 		})();
