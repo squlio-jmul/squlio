@@ -25,7 +25,7 @@ define([
 		var _schedule_table = null;
 		var _add_schedule_data = {};
 
-		SQ.mixin(_me, new Broadcaster(['add_schedule']));
+		SQ.mixin(_me, new Broadcaster(['add_schedule', 'delete_schedule']));
 
 		(function _init() {
 		})();
@@ -83,13 +83,14 @@ define([
 						'<input type="checkbox" name="check-schedule[]" value="' + schedule.id + '" />',
 						schedule.id,
 						schedule.term.name,
-						schedule.subject.title,
 						_date.getDate() + '/' + (_date.getMonth()+1) + '/' + _date.getFullYear(),
+						schedule.subject.title,
 						'<button class="button delete-schedule" data-schedule-id="' + schedule.id + '">Delete</button>'
 					]
 				);
 			});
 			_schedule_table.rows.add(_table_data).draw();
+			_setTableListeners(_$schedule_tab.find('#schedule-table'));
 		};
 
 		this.viewTable = function() {
@@ -124,6 +125,13 @@ define([
 					$e.find('#add-schedule-form [name="date"]').datepicker('option', 'minDate', _start_date);
 					$e.find('#add-schedule-form [name="date"]').datepicker('option', 'maxDate', _end_date);
 				}
+			});
+		}
+
+		function _setTableListeners($e) {
+			$e.find('.delete-schedule').on('click', function() {
+				var _schedule_id = $(this).attr('data-schedule-id');
+				_me.broadcast('delete_schedule', _schedule_id);
 			});
 		}
 	}

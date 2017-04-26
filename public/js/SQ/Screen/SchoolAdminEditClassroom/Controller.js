@@ -62,6 +62,7 @@ define([
 
 			_scheduleTab.initialize($('#schedule'));
 			_scheduleTab.setListener('add_schedule', _addSchedule);
+			_scheduleTab.setListener('delete_schedule', _deleteSchedule);
 
 			$('a[href="#schedule"]').on('shown.bs.tab', function (e) {
 				_repopulateScheduleTable();
@@ -172,7 +173,7 @@ define([
 				function(schedule_id) {
 					$('body').find('.sq-loading-overlay').remove();
 					if (schedule_id) {
-						$.jGrowl('Schedule is added successfully', {header: 'Error'});
+						$.jGrowl('Schedule is added successfully', {header: 'Success'});
 						_scheduleTab.viewTable();
 						_repopulateScheduleTable();
 					} else {
@@ -192,5 +193,21 @@ define([
 				}
 			);
 		}
+
+		function _deleteSchedule(schedule_id) {
+			$('body').append(_.template(loadingTemplate));
+			_scheduleModel.delete({id: schedule_id}).then(
+				function(success) {
+					$('body').find('.sq-loading-overlay').remove();
+					if (success) {
+						$.jGrowl('Schedule is deleted successfully', {header: 'Success'});
+						_repopulateScheduleTable();
+					} else {
+						$.jGrowl('Unable to delete schedule', {header: 'Error'});
+					}
+				}
+			);
+		}
+
 	}
 });
