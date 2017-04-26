@@ -8,15 +8,15 @@ require_once(APPPATH."models/Entities/EntitySuperClass.php");
 require_once(APPPATH."models/Entities/School.php");
 require_once(APPPATH."models/Entities/Term.php");
 require_once(APPPATH."models/Entities/Classroom.php");
-require_once(APPPATH."models/Entities/ClassroomSubject.php");
+require_once(APPPATH."models/Entities/Subject.php");
 
 /**
- * Syllabus
+ * Schedule
  *
- * @Table(name="syllabus")
+ * @Table(name="schedule")
  * @Entity
  */
-class Syllabus extends EntitySuperClass {
+class Schedule extends EntitySuperClass {
 	/**
 	 * @var integer
 	 *
@@ -29,7 +29,7 @@ class Syllabus extends EntitySuperClass {
 	/**
 	 * @var integer
 	 *
-	 * @ManyToOne(targetEntity="School", inversedBy="syllabus", cascade={"persist"})
+	 * @ManyToOne(targetEntity="School", inversedBy="schedule", cascade={"persist"})
 	 * @JoinColumn(name="school_id", referencedColumnName="id", nullable=false)
 	 **/
 	protected $school;
@@ -37,7 +37,7 @@ class Syllabus extends EntitySuperClass {
 	/**
 	 * @var integer
 	 *
-	 * @ManyToOne(targetEntity="Term", inversedBy="syllabus", cascade={"persist"})
+	 * @ManyToOne(targetEntity="Term", inversedBy="schedule", cascade={"persist"})
 	 * @JoinColumn(name="term_id", referencedColumnName="id", nullable=false)
 	 **/
 	protected $term;
@@ -45,7 +45,7 @@ class Syllabus extends EntitySuperClass {
 	/**
 	 * @var integer
 	 *
-	 * @ManyToOne(targetEntity="Classroom", inversedBy="syllabus", cascade={"persist"})
+	 * @ManyToOne(targetEntity="Classroom", inversedBy="schedule", cascade={"persist"})
 	 * @JoinColumn(name="classroom_id", referencedColumnName="id", nullable=false)
 	 **/
 	protected $classroom;
@@ -53,24 +53,10 @@ class Syllabus extends EntitySuperClass {
 	/**
 	 * @var integer
 	 *
-	 * @ManyToOne(targetEntity="ClassroomSubject", inversedBy="syllabus", cascade={"persist"})
-	 * @JoinColumn(name="classroom_subject_id", referencedColumnName="id", nullable=false)
+	 * @ManyToOne(targetEntity="Subject", inversedBy="schedule", cascade={"persist"})
+	 * @JoinColumn(name="subject_id", referencedColumnName="id", nullable=false)
 	 **/
-	protected $classroom_subject;
-
-	/**
-	 * @var string
-	 *
-	 * @Column(name="title", type="string", nullable=false)
-	 */
-	protected $title;
-
-	/**
-	 * @var string
-	 *
-	 * @Column(name="description", type="string", nullable=false)
-	 */
-	protected $description;
+	protected $subject;
 
 	/**
 	 * @var \DateTime
@@ -104,9 +90,7 @@ class Syllabus extends EntitySuperClass {
 			'school_id' => $this->school->__get('id'),
 			'term_id' => $this->term->__get('id'),
 			'classroom_id' => $this->classroom->__get('id'),
-			'classroom_subject_id' => $this->classroom_subject->__get('id'),
-			'title' => $this->title,
-			'description' => $this->description,
+			'subject_id' => $this->subject->__get('id'),
 			'date' => $this->date,
 			'created_on' => $this->created_on,
 			'last_updated' => $this->last_updated

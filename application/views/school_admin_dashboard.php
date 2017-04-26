@@ -38,9 +38,9 @@
 			</a>
 		</div>
 		<div class="col-xs-3">
-			<a href="/school_admin/materials" class="redirect">
+			<a href="/school_admin/subjects" class="redirect">
 				<div class="widget">
-					<?=number_format($materials_count)?> Material<?=($materials_count > 1 ) ? 's' : ''?>
+					<?=number_format($subjects_count)?> Subject<?=($subjects_count > 1 ) ? 's' : ''?>
 				</div>
 			</a>
 		</div>

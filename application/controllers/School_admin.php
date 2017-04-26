@@ -10,7 +10,6 @@ class School_admin extends SQ_Controller {
 		$this->load->library('Classroom_library');
 		$this->load->library('Teacher_library');
 		$this->load->library('Student_library');
-		$this->load->library('Material_library');
 		$this->load->library('Account_type_library');
 		$this->load->library('Classroom_grade_library');
 		$this->load->library('Guardian_student_library');
@@ -39,7 +38,7 @@ class School_admin extends SQ_Controller {
 				$data['classes_count'] = count($this->classroom_library->get(array('school'=>$school_admin['school_id']), array('id')));
 				$data['teachers_count'] = count($this->teacher_library->get(array('school'=>$school_admin['school_id'])));
 				$data['students_count'] = count($this->student_library->get(array('school'=>$school_admin['school_id'])));
-				$data['materials_count'] = 0;
+				$data['subjects_count'] = 0;
 
 				$this->page->show('default', 'Squlio - Dashboard', 'school_admin_dashboard', $data, $data);
 				return;

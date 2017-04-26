@@ -6,15 +6,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 require_once(APPPATH."models/Entities/EntitySuperClass.php");
 require_once(APPPATH."models/Entities/School.php");
-require_once(APPPATH."models/Entities/ClassroomSubject.php");
+require_once(APPPATH."models/Entities/ClassroomGrade.php");
 
 /**
- * Material
+ * Subject
  *
- * @Table(name="material")
+ * @Table(name="subject")
  * @Entity
  */
-class Material extends EntitySuperClass {
+class Subject extends EntitySuperClass {
 	/**
 	 * @var integer
 	 *
@@ -27,7 +27,7 @@ class Material extends EntitySuperClass {
 	/**
 	 * @var integer
 	 *
-	 * @ManyToOne(targetEntity="School", inversedBy="material", cascade={"persist"})
+	 * @ManyToOne(targetEntity="School", inversedBy="subject", cascade={"persist"})
 	 * @JoinColumn(name="school_id", referencedColumnName="id", nullable=false)
 	 **/
 	protected $school;
@@ -35,10 +35,10 @@ class Material extends EntitySuperClass {
 	/**
 	 * @var integer
 	 *
-	 * @ManyToOne(targetEntity="ClassroomSubject", inversedBy="material", cascade={"persist"})
-	 * @JoinColumn(name="classroom_subject_id", referencedColumnName="id", nullable=false)
+	 * @ManyToOne(targetEntity="ClassroomGrade", inversedBy="subject", cascade={"persist"})
+	 * @JoinColumn(name="classroom_grade_id", referencedColumnName="id", nullable=false)
 	 **/
-	protected $classroom_subject;
+	protected $classroom_grade;
 
 	/**
 	 * @var string
@@ -50,9 +50,23 @@ class Material extends EntitySuperClass {
 	/**
 	 * @var string
 	 *
-	 * @Column(name="content", type="string", nullable=false)
+	 * @Column(name="description", type="string", nullable=false)
 	 */
-	protected $content;
+	protected $description;
+
+	/**
+	 * @var string
+	 *
+	 * @Column(name="additional_info", type="string", nullable=true)
+	 */
+	protected $additional_info;
+
+	/**
+	 * @var string
+	 *
+	 * @Column(name="url", type="string", nullable=true)
+	 */
+	protected $url;
 
 	/**
 	 * @var string
@@ -64,9 +78,9 @@ class Material extends EntitySuperClass {
 	/**
 	 * @var string
 	 *
-	 * @Column(name="url", type="string", nullable=true)
+	 * @Column(name="video_url_path", type="string", nullable=true)
 	 */
-	protected $url;
+	protected $video_url_path;
 
 	/**
 	 * @var \DateTime
@@ -91,11 +105,13 @@ class Material extends EntitySuperClass {
 		return array(
 			'id' => $this->id,
 			'school_id' => $this->school->__get('id'),
-			'classroom_subject_id' => $this->classroom_subject->__get('id'),
+			'classroom_grade_id' => $this->classroom_grade->__get('id'),
 			'title' => $this->title,
-			'content' => $this->content,
-			'img_url_path' => $this->img_url_path,
+			'description' => $this->description,
+			'additional_info' => $this->additional_info,
 			'url' => $this->url,
+			'img_url_path' => $this->img_url_path,
+			'video_url_path' => $this->video_url_path,
 			'created_on' => $this->created_on,
 			'last_updated' => $this->last_updated
 		);
