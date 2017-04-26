@@ -619,4 +619,29 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 #sq-school-admin-add-subject-container textarea {
 	height: 80px;
 }
+/** School Admin Subjects **/
+#sq-school-admin-subjects-container .header {
+	margin-bottom: 40px;
+}
+#sq-school-admin-subjects-container .header .subjects-count {
+	font-size: 32px;
+    font-weight: normal;
+	display: inline-block;
+	vertical-align: middle;
+}
+#sq-school-admin-subjects-container .header .add-subject-container {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 20px;
+}
+#sq-school-admin-subjects-container .header .bulk-actions-container {
+	display: inline-block;
+	vertical-align: middle;
+	width: 150px;
+}
+#sq-school-admin-subjects-container .header .apply-button-container {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 20px;
+}
 

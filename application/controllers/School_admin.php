@@ -15,6 +15,7 @@ class School_admin extends SQ_Controller {
 		$this->load->library('Guardian_student_library');
 		$this->load->library('Guardian_library');
 		$this->load->library('Term_library');
+		$this->load->library('Subject_library');
 	}
 
 	public function index() {
@@ -524,6 +525,34 @@ class School_admin extends SQ_Controller {
 				$data['jsControllerParam'] = json_encode(array('school_id'=>$school_id));
 
 				$this->page->show('default', 'Squlio - Add Subject', 'school_admin_add_subject', $data, $data);
+				return;
+			}
+		}
+		redirect('/');
+	}
+
+	public function subjects() {
+		$data = array(
+			'headerCss' => array($this->config->item('static_css') . '/jquery.dataTables.min.css'),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'school_admin_subjects',
+			'jsControllerParam' => false,
+			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
+			'page_title' => 'Subjects',
+			'page_subtitle' => null,
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+		);
+
+		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
+			$login_id = $this->cookie->get('id');
+			$school_admin = $data['user_obj'];
+			$school_id = $school_admin['school_id'];
+			if ($school_id) {
+				$subjects_count = count($this->subject_library->get(array('school'=>$school_id), array('id')));
+				$data['subjects_count'] = $subjects_count;
+				$data['jsControllerParam'] = json_encode(array('school_id' => $school_id));
+				$this->page->show('default', 'Squlio - Subjects', 'school_admin_subjects', $data, $data);
 				return;
 			}
 		}
