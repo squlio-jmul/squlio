@@ -19,11 +19,7 @@ class Guardian_library extends SQ_Library {
 
 	public function get($filters = array(), $fields = array(), $order_by = array(), $limit = null, $offset = null, $modules = array()) {
 		try {
-			if($guardians = $this->_ci->Guardian_model->get($filters, $fields, $order_by, $limit, $offset, $modules)){
-				return $guardians;
-			} else {
-				return false;
-			}
+			return $this->_ci->Guardian_model->get($filters, $fields, $order_by, $limit, $offset, $modules);
 		} catch(Exception $err) {
 			die($err->getMessage());
 		}

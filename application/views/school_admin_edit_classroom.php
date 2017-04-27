@@ -2,6 +2,7 @@
 	<ul class="nav nav-tabs" role="tablist">
 		<li role="presentation" class="active"><a href="#details" aria-controls="details" role="tab" data-toggle="tab">Classroom Info</a></li>
 		<li role="presentation"><a href="#teachers" aria-controls="teachers" role="tab" data-toggle="tab">Teachers</a></li>
+		<li role="presentation"><a href="#students" aria-controls="students" role="tab" data-toggle="tab">Students</a></li>
 		<li role="presentation"><a href="#schedule" aria-controls="schedule" role="tab" data-toggle="tab">Schedule</a></li>
 	</ul>
 	<div class="tab-content">
@@ -64,7 +65,7 @@
 		</div>
 		<div role="tabpanel" class="tab-pane fade" id="teachers">
 			<div class="add-teacher-container">
-				<button class="button add-teacher">+ Add New Teacher</button>
+				<button class="button add-teacher">+ Add Teacher To This Class</button>
 			</div>
 			<? if (!$classroom['classroom_teacher']) : ?>
 			<div class="no-teacher-container">
@@ -88,11 +89,58 @@
 				<? endforeach; ?>
 			</div>
 		</div>
+		<div role="tabpanel" class="tab-pane fade" id="students">
+			<div class="header">
+				<div class="row">
+					<div class="col-xs-6">
+						<button class="button add-student">+ Add Student To This Class</button>
+					</div>
+					<div class="col-xs-6 right">
+						<div class="bulk-actions-container">
+							<select name="bulk_actions" class="form-control">
+								<option value="">Bulk Actions</option>
+								<option value="delete">Delete</option>
+							</select>
+						</div>
+						<div class="apply-button-container">
+							<button class="button apply-bulk-actions">Apply</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="student-table-container"></div>
+			<div id="add-student-container" class="sq-hidden">
+				<div class="title">Add Student to This Class</div>
+				<form id="add-student-form">
+					<input type="hidden" name="classroom_id" value="<?=$classroom['id']?>" />
+					<div class="row">
+						<div class="col-xs-6">
+							<div class="form-group">
+								<label for="student_id">Student</label>
+								<select name="student_id" class="form-control">
+									<option value=""> - Select Student - </option>
+									<? foreach($student as $s) : ?>
+										<option value="<?=$s['id']?>" class="<?=(in_array($s['id'], $selected_student_ids)) ? 'sq-hidden':''?>"><?=$s['first_name'] . ' ' . $s['last_name']?></option>
+									<? endforeach; ?>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-6">
+							<div class="form-group">
+								<button type="submit" class="button">Save</button>&nbsp;&nbsp;<a class="cancel">Cancel</a>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 		<div role="tabpanel" class="tab-pane fade" id="schedule">
 			<div class="header">
 				<div class="row">
 					<div class="col-xs-6">
-						<button class="button add-schedule">+ Add New</button>
+						<button class="button add-schedule">+ Add New Schedule</button>
 					</div>
 					<div class="col-xs-6 right">
 						<div class="bulk-actions-container">

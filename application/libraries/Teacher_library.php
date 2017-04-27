@@ -19,11 +19,7 @@ class Teacher_library extends SQ_Library {
 
 	public function get($filters = array(), $fields = array(), $order_by = array(), $limit = null, $offset = null, $modules = array()) {
 		try {
-			if($teachers = $this->_ci->Teacher_model->get($filters, $fields, $order_by, $limit, $offset, $modules)){
-				return $teachers;
-			} else {
-				return false;
-			}
+			return $this->_ci->Teacher_model->get($filters, $fields, $order_by, $limit, $offset, $modules);
 		} catch(Exception $err) {
 			die($err->getMessage());
 		}

@@ -48,7 +48,7 @@ define([
 						student.first_name,
 						student.last_name,
 						student.classroom_grade.name,
-						student.classroom.name,
+						student.classroom.name || '',
 						(student.active) ? 'Active' : 'Inactive',
 						'<a href="/school_admin/edit_student/' + student.id + '">Edit</a>'
 					]

@@ -19,13 +19,7 @@ class School_admin_library extends SQ_Library {
 
 	public function get($filters = array(), $fields = array(), $order_by = array(), $limit = null, $offset = null, $modules = array()) {
 		try {
-			$modules['all'] = (isset($modules['all']) && filter_var($modules['all'], FILTER_VALIDATE_BOOLEAN)) ? true : false;
-
-			if($school_admins = $this->_ci->School_admin_model->get($filters, $fields, $order_by, $limit, $offset, $modules)){
-				return $school_admins;
-			}else{
-				return false;
-			}
+			return $this->_ci->School_admin_model->get($filters, $fields, $order_by, $limit, $offset, $modules);
 		} catch(Exception $err) {
 			die($err->getMessage());
 		}

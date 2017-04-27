@@ -125,7 +125,7 @@
 		</div>
 		<div role="tabpanel" class="tab-pane fade" id="classrooms">
 			<div class="add-classroom-container">
-				<button class="button add-classroom">+ Add New Classroom</button>
+				<button class="button add-classroom">+ Add Classroom For This Teacher</button>
 			</div>
 			<? if (!$teacher['classroom_teacher']) : ?>
 			<div class="no-classroom-container">

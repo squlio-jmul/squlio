@@ -72,7 +72,7 @@ define([
 					return false;
 				}
 				if (_selected_classroom_ids.length == _classrooms.length) {
-					$.jGrowl('This teacher is teaching in every classrooms.', {header: 'Error'});
+					$.jGrowl('No more available classroom.<br /><a href="/school_admin/add_classroom">Click here to add new classroom</a>', {header: 'Error'});
 					return false;
 				}
 				var _$add_classroom_template = $(_.template(AddClassroomTemplate, {classrooms: _classrooms, selected_classroom_ids: _selected_classroom_ids}));

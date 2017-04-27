@@ -18,11 +18,7 @@ class Term_library extends SQ_Library {
 
 	public function get($filters = array(), $fields = array(), $order_by = array(), $limit = null, $offset = null, $modules = array()) {
 		try {
-			if($terms = $this->_ci->Term_model->get($filters, $fields, $order_by, $limit, $offset, $modules)){
-				return $terms;
-			} else {
-				return false;
-			}
+			return $this->_ci->Term_model->get($filters, $fields, $order_by, $limit, $offset, $modules);
 		} catch(Exception $err) {
 			die($err->getMessage());
 		}

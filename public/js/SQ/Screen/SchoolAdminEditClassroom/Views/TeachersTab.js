@@ -74,7 +74,7 @@ define([
 					return false;
 				}
 				if (_selected_teacher_ids.length == _teachers.length) {
-					$.jGrowl('All teachers have been added to this class.', {header: 'Error'});
+					$.jGrowl('No more available teacher.<br /><a href="/school_admin/add_teacher">Click here to add new teacher</a>', {header: 'Error'});
 					return false;
 				}
 				var _$add_teacher_template = $(_.template(AddTeacherTemplate, {teachers: _teachers, selected_teacher_ids: _selected_teacher_ids}));

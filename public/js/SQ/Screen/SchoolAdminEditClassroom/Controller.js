@@ -5,9 +5,11 @@ define([
 	'SQ/Model/Classroom',
 	'SQ/Model/ClassroomTeacher',
 	'SQ/Model/Schedule',
+	'SQ/Model/Student',
 	'SQ/Screen/SchoolAdminEditClassroom/Views/EditClassroomForm',
 	'SQ/Module/UploadImageForm',
 	'SQ/Screen/SchoolAdminEditClassroom/Views/TeachersTab',
+	'SQ/Screen/SchoolAdminEditClassroom/Views/StudentsTab',
 	'SQ/Screen/SchoolAdminEditClassroom/Views/ScheduleTab',
 	'underscore',
 	'text!../../Template/loading.tmpl',
@@ -20,9 +22,11 @@ define([
 	ClassroomModel,
 	ClassroomTeacherModel,
 	ScheduleModel,
+	StudentModel,
 	EditClassroomForm,
 	UploadImageForm,
 	TeachersTab,
+	StudentsTab,
 	ScheduleTab,
 	_,
 	loadingTemplate,
@@ -38,14 +42,17 @@ define([
 		var _teachers = options.teachers;
 		var _selected_teacher_ids = options.selected_teacher_ids;
 		var _primary_teacher_id = options.primary_teacher_id;
+		var _selected_student_ids = options.selected_student_ids;
 
 		var _classroomModel = new ClassroomModel();
 		var _classroomTeacherModel = new ClassroomTeacherModel();
 		var _scheduleModel = new ScheduleModel();
+		var _studentModel = new StudentModel();
 
 		var _editClassroomForm = new EditClassroomForm();
 		var _uploadImageForm = new UploadImageForm();
 		var _teachersTab = new TeachersTab(_teachers, _selected_teacher_ids);
+		var _studentsTab = new StudentsTab(_selected_student_ids);
 		var _scheduleTab = new ScheduleTab();
 
 		(function _init() {
@@ -67,6 +74,15 @@ define([
 			$('a[href="#schedule"]').on('shown.bs.tab', function (e) {
 				_scheduleTab.viewTable();
 				_repopulateScheduleTable();
+			})
+
+			_studentsTab.initialize($('#students'));
+			_studentsTab.setListener('add_student', _addStudent);
+			_studentsTab.setListener('remove_student', _removeStudent);
+
+			$('a[href="#students"]').on('shown.bs.tab', function (e) {
+				_studentsTab.viewTable();
+				_repopulateStudentTable();
 			})
 		})();
 
@@ -162,7 +178,7 @@ define([
 						_teachersTab.setSelectedTeacherIds(_selected_teacher_ids);
 						_teachersTab.removeTeacher(data.classroom_teacher_id);
 					} else {
-						$.jGrowl('Unable to remove this class', {header: 'Error'});
+						$.jGrowl('Unable to remove this teacher', {header: 'Error'});
 					}
 				}
 			);
@@ -205,6 +221,54 @@ define([
 						_repopulateScheduleTable();
 					} else {
 						$.jGrowl('Unable to delete schedule', {header: 'Error'});
+					}
+				}
+			);
+		}
+
+		function _repopulateStudentTable() {
+			$('body').append(_.template(loadingTemplate));
+			_studentsTab.clearTable();
+			_studentModel.get({classroom: _classroom_id, active: 1, deleted: 0}, {}, {first_name: 'asc', last_name: 'asc'}).then(
+				function(students) {
+					$('body').find('.sq-loading-overlay').remove();
+					_studentsTab.populate(students);
+				}
+			);
+		}
+
+		function _addStudent(student_id) {
+			$('body').append(_.template(loadingTemplate));
+			_studentModel.update(student_id, {classroom_id: _classroom_id}).then(
+				function(success) {
+					$('body').find('.sq-loading-overlay').remove();
+					if (success) {
+						_selected_student_ids.push(parseInt(student_id));
+						_studentsTab.setSelectedStudentIds(_selected_student_ids);
+
+						$.jGrowl('Student is added successfully', {header: 'Success'});
+						_studentsTab.viewTable();
+						_repopulateStudentTable();
+					} else {
+						$.jGrowl('Unable to add student', {header: 'Error'});
+					}
+				}
+			);
+		}
+
+		function _removeStudent(student_id) {
+			$('body').append(_.template(loadingTemplate));
+			_studentModel.update(student_id, {classroom_id: null}).then(
+				function(success) {
+					$('body').find('.sq-loading-overlay').remove();
+					if (success) {
+						var _index = _selected_student_ids.indexOf(parseInt(student_id));
+						_selected_student_ids.splice(_index, 1);
+						$.jGrowl('Student is removed successfully', {header: 'Success'});
+						_studentsTab.setSelectedStudentIds(_selected_student_ids);
+						_repopulateStudentTable();
+					} else {
+						$.jGrowl('Unable to remove this student', {header: 'Error'});
 					}
 				}
 			);

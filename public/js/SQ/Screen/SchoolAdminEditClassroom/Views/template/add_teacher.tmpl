@@ -4,7 +4,7 @@
 		<div class="col-xs-3">
 			<div class="form-group">
 				<select name="teacher_id" class="form-control">
-					<option value=""> Select Teacher</option>
+					<option value=""> - Select Teacher - </option>
 					<% _.each(teachers, function(teacher) { %>
 						<% if (teacher.active && selected_teacher_ids.indexOf(teacher.id) < 0) { %>
 							<option value="<%= teacher.id %>"><%= teacher.first_name + ' ' + teacher.last_name %></option>

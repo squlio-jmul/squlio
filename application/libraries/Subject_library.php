@@ -18,15 +18,10 @@ class Subject_library extends SQ_Library {
 
 	public function get($filters = array(), $fields = array(), $order_by = array(), $limit = null, $offset = null, $modules = array()) {
 		try {
-			if($subjects = $this->_ci->Subject_model->get($filters, $fields, $order_by, $limit, $offset, $modules)){
-				return $subjects;
-			} else {
-				return false;
-			}
+			return $this->_ci->Subject_model->get($filters, $fields, $order_by, $limit, $offset, $modules);
 		} catch(Exception $err) {
 			die($err->getMessage());
 		}
-
 	}
 
 	public function add($subject_data){

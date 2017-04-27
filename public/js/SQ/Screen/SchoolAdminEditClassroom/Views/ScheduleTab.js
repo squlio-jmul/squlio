@@ -5,6 +5,7 @@ define([
 	'SQ/Util',
 	'underscore',
 	'text!./template/schedule_table.tmpl',
+	'jgrowl',
 	'datatables',
 	'jqueryui'
 ], function(
@@ -13,7 +14,8 @@ define([
 	Broadcaster,
 	Util,
 	_,
-	ScheduleTableTemplate
+	ScheduleTableTemplate,
+	jGrowl
 ) {
 	'use strict';
 
@@ -104,6 +106,11 @@ define([
 
 		function _setListeners($e) {
 			$e.find('.add-schedule').on('click', function() {
+				if ($e.find('[name="subject_id"] option').length == 1) {
+					$.jGrowl('Currently there is no active subject for this grade.<br /><a href="/school_admin/add_subject">Click here to add new subject</a>', {header: 'Error'});
+					return false;
+				}
+
 				$e.find('.header, #schedule-table-container').hide();
 				$e.find('#add-schedule-form').trigger('reset');
 				$e.find('#add-schedule-container').fadeIn(300);
