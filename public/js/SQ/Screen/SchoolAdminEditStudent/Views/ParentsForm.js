@@ -35,7 +35,7 @@ define([
 						remote: {
 							url: '/ajax/login/editUsernameNotExist',
 							type: 'post',
-							data: {login_id: $e.find('[name="login_id"]').val()}
+							data: {login_id: $e.find('#father-form [name="login_id"]').val()}
 						}
 					},
 					password: {
@@ -53,7 +53,7 @@ define([
 						remote: {
 							url: '/ajax/login/editEmailNotExist',
 							type: 'post',
-							data: {login_id: $e.find('[name="login_id"]').val()}
+							data: {login_id: $e.find('#father-form [name="login_id"]').val()}
 						}
 					},
 					phone: {
@@ -84,7 +84,7 @@ define([
 						remote: {
 							url: '/ajax/login/editUsernameNotExist',
 							type: 'post',
-							data: {login_id: $e.find('[name="login_id"]').val()}
+							data: {login_id: $e.find('#mother-form [name="login_id"]').val()}
 						}
 					},
 					password: {
@@ -102,7 +102,7 @@ define([
 						remote: {
 							url: '/ajax/login/editEmailNotExist',
 							type: 'post',
-							data: {login_id: $e.find('[name="login_id"]').val()}
+							data: {login_id: $e.find('#mother-form [name="login_id"]').val()}
 						}
 					},
 					phone: {
