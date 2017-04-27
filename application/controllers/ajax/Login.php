@@ -15,12 +15,9 @@ class Login extends SQ_Controller {
 		$offset = ($this->getInputPost('offset')) ? $this->getInputPost('offset') : null;
 		$modules = ($this->getInputPost('modules')) ? $this->getInputPost('modules') : array();
 
-		if($logins = $this->login_library->get($filters, $fields, $order_by, $limit, $offset, $modules)){
-			$this->setResponseElement('success', true);
-			$this->setResponseElement('logins', $logins);
-		}else{
-			$this->setResponseElement('success', false);
-		}
+		$logins = $this->login_library->get($filters, $fields, $order_by, $limit, $offset, $modules);
+		$this->setResponseElement('success', true);
+		$this->setResponseElement('logins', $logins);
 		$this->sendResponse();
 	}
 

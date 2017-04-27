@@ -15,12 +15,9 @@ class Classroom extends SQ_Controller {
 		$offset = ($this->input->post('offset')) ? $this->input->post('offset') : null;
 		$modules = ($this->input->post('modules')) ? $this->input->post('modules') : array();
 
-		if($classrooms = $this->classroom_library->get($filters, $fields, $order_by, $limit, $offset, $modules)){
-			$this->setResponseElement('success', true);
-			$this->setResponseElement('classrooms', $classrooms);
-		}else{
-			$this->setResponseElement('success', false);
-		}
+		$classrooms = $this->classroom_library->get($filters, $fields, $order_by, $limit, $offset, $modules);
+		$this->setResponseElement('success', true);
+		$this->setResponseElement('classrooms', $classrooms);
 		$this->sendResponse();
 	}
 

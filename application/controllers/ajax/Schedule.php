@@ -15,12 +15,9 @@ class Schedule extends SQ_Controller {
 		$offset = ($this->input->post('offset')) ? $this->input->post('offset') : null;
 		$modules = ($this->input->post('modules')) ? $this->input->post('modules') : array();
 
-		if($schedules = $this->schedule_library->get($filters, $fields, $order_by, $limit, $offset, $modules)){
-			$this->setResponseElement('success', true);
-			$this->setResponseElement('schedules', $schedules);
-		}else{
-			$this->setResponseElement('success', false);
-		}
+		$schedules = $this->schedule_library->get($filters, $fields, $order_by, $limit, $offset, $modules);
+		$this->setResponseElement('success', true);
+		$this->setResponseElement('schedules', $schedules);
 		$this->sendResponse();
 	}
 

@@ -15,12 +15,9 @@ class Classroom_grade extends SQ_Controller {
 		$offset = ($this->input->post('offset')) ? $this->input->post('offset') : null;
 		$modules = ($this->input->post('modules')) ? $this->input->post('modules') : array();
 
-		if($classroom_grades = $this->classroom_grade_library->get($filters, $fields, $order_by, $limit, $offset, $modules)){
-			$this->setResponseElement('success', true);
-			$this->setResponseElement('classroom_grades', $classroom_grades);
-		}else{
-			$this->setResponseElement('success', false);
-		}
+		$classroom_grades = $this->classroom_grade_library->get($filters, $fields, $order_by, $limit, $offset, $modules);
+		$this->setResponseElement('success', true);
+		$this->setResponseElement('classroom_grades', $classroom_grades);
 		$this->sendResponse();
 	}
 

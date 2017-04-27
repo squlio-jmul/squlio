@@ -1,10 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Subject extends SQ_Controller {
+class Announcement extends SQ_Controller {
 	public function __construct() {
 		parent::__construct();
-		$this->load->library('Subject_library');
+		$this->load->library('Announcement_library');
 	}
 
 	public function get() {
@@ -15,42 +15,34 @@ class Subject extends SQ_Controller {
 		$offset = ($this->input->post('offset')) ? $this->input->post('offset') : null;
 		$modules = ($this->input->post('modules')) ? $this->input->post('modules') : array();
 
-		$subjects = $this->subject_library->get($filters, $fields, $order_by, $limit, $offset, $modules);
+		$announcements = $this->announcement_library->get($filters, $fields, $order_by, $limit, $offset, $modules);
 		$this->setResponseElement('success', true);
-		$this->setResponseElement('subjects', $subjects);
+		$this->setResponseElement('announcements', $announcements);
 		$this->sendResponse();
 	}
 
 	public function add() {
-		$subject_data = $this->input->post('subject_data');
-		if ($subject_id = $this->subject_library->add($subject_data)) {
-			$this->setResponseElement('subject_id', $subject_id);
+		$announcement_data = $this->input->post('announcement_data');
+		if ($announcement_id = $this->announcement_library->add($announcement_data)) {
+			$this->setResponseElement('announcement_id', $announcement_id);
 		} else {
-			$this->setResponseElement('subject_id', null);
+			$this->setResponseElement('announcement_id', null);
 		}
 		$this->sendResponse();
 	}
 
 	public function update() {
-		$subject_id = $this->input->post('subject_id');
-		$subject_data = $this->input->post('subject_data');
-		$success = $this->subject_library->update($subject_id, $subject_data);
+		$announcement_id = $this->input->post('announcement_id');
+		$announcement_data = $this->input->post('announcement_data');
+		$success = $this->announcement_library->update($announcement_id, $announcement_data);
 		$this->setResponseElement('success', $success);
 		$this->sendResponse();
 	}
 
 	public function delete() {
 		$filters = $this->input->post('filters') ? $this->input->post('filters') : array();
-		$success = $this->subject_library->delete($filters);
+		$success = $this->announcement_library->delete($filters);
 		$this->setResponseElement('success', $success);
-		$this->sendResponse();
-	}
-
-	public function upload_image() {
-		$response = $this->subject_library->uploadImage($_FILES['file']);
-		$this->setResponseElement('success', $response['success']);
-		$this->setResponseElement('error_msg', $response['error_msg']);
-		$this->setResponseElement('url_path', $response['url_path']);
 		$this->sendResponse();
 	}
 }

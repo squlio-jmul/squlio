@@ -15,12 +15,9 @@ class Guardian extends SQ_Controller {
 		$offset = ($this->input->post('offset')) ? $this->input->post('offset') : null;
 		$modules = ($this->input->post('modules')) ? $this->input->post('modules') : array();
 
-		if($guardians = $this->guardian_library->get($filters, $fields, $order_by, $limit, $offset, $modules)){
-			$this->setResponseElement('success', true);
-			$this->setResponseElement('guardians', $guardians);
-		}else{
-			$this->setResponseElement('success', false);
-		}
+		$guardians = $this->guardian_library->get($filters, $fields, $order_by, $limit, $offset, $modules);
+		$this->setResponseElement('success', true);
+		$this->setResponseElement('guardians', $guardians);
 		$this->sendResponse();
 	}
 

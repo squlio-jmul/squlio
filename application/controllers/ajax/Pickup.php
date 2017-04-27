@@ -1,10 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Student extends SQ_Controller {
+class Pickup extends SQ_Controller {
 	public function __construct() {
 		parent::__construct();
-		$this->load->library('Student_library');
+		$this->load->library('Pickup_library');
 	}
 
 	public function get() {
@@ -15,35 +15,34 @@ class Student extends SQ_Controller {
 		$offset = ($this->input->post('offset')) ? $this->input->post('offset') : null;
 		$modules = ($this->input->post('modules')) ? $this->input->post('modules') : array();
 
-		$students = $this->student_library->get($filters, $fields, $order_by, $limit, $offset, $modules);
+		$pickups = $this->pickup_library->get($filters, $fields, $order_by, $limit, $offset, $modules);
 		$this->setResponseElement('success', true);
-		$this->setResponseElement('students', $students);
+		$this->setResponseElement('pickups', $pickups);
 		$this->sendResponse();
 	}
 
 	public function add() {
-		$student_data = $this->input->post('student_data');
-		if ($student_id = $this->student_library->add($student_data)) {
-			$this->setResponseElement('student_id', $student_id);
+		$pickup_data = $this->input->post('pickup_data');
+		if ($pickup_id = $this->pickup_library->add($pickup_data)) {
+			$this->setResponseElement('pickup_id', $pickup_id);
 		} else {
-			$this->setResponseElement('student_id', null);
+			$this->setResponseElement('pickup_id', null);
 		}
 		$this->sendResponse();
 	}
 
 	public function update() {
-		$student_id = $this->input->post('student_id');
-		$student_data = $this->input->post('student_data');
-		$success = $this->student_library->update($student_id, $student_data);
+		$pickup_id = $this->input->post('pickup_id');
+		$pickup_data = $this->input->post('pickup_data');
+		$success = $this->pickup_library->update($pickup_id, $pickup_data);
 		$this->setResponseElement('success', $success);
 		$this->sendResponse();
 	}
 
-	public function upload_image() {
-		$response = $this->student_library->uploadImage($_FILES['file']);
-		$this->setResponseElement('success', $response['success']);
-		$this->setResponseElement('error_msg', $response['error_msg']);
-		$this->setResponseElement('url_path', $response['url_path']);
+	public function delete() {
+		$filters = $this->input->post('filters') ? $this->input->post('filters') : array();
+		$success = $this->pickup_library->delete($filters);
+		$this->setResponseElement('success', $success);
 		$this->sendResponse();
 	}
 }
