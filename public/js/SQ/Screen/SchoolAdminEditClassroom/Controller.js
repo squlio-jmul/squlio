@@ -65,6 +65,7 @@ define([
 			_scheduleTab.setListener('delete_schedule', _deleteSchedule);
 
 			$('a[href="#schedule"]').on('shown.bs.tab', function (e) {
+				_scheduleTab.viewTable();
 				_repopulateScheduleTable();
 			})
 		})();

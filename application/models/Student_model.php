@@ -85,9 +85,13 @@ class Student_model extends SQ_Model {
 				$classroom_grade = $classroom_grade_obj[0];
 				$student->classroom_grade = $classroom_grade;
 			}
-			if (isset($student_data['classroom_id']) && $student_data['classroom_id']) {
-				$classroom_obj = $this->doctrine->em->getRepository('Entities\Classroom')->findBy(array('id' => $student_data['classroom_id']));
-				$classroom = $classroom_obj[0];
+			if (isset($student_data['classroom_id'])) {
+				if ($student_data['classroom_id']) {
+					$classroom_obj = $this->doctrine->em->getRepository('Entities\Classroom')->findBy(array('id' => $student_data['classroom_id']));
+					$classroom = $classroom_obj[0];
+				} else {
+					$classroom = null;
+				}
 				$student->classroom = $classroom;
 			}
 			if (isset($student_data['birthday']) && $student_data['birthday']) {

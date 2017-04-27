@@ -41,9 +41,6 @@ define([
 					classroom_grade_id: {
 						required: true
 					},
-					classroom_id: {
-						required: true
-					},
 					birthday: {
 						required: true
 					}
@@ -51,6 +48,8 @@ define([
 				submitHandler: function(form) {
 					_edit_student_data = _util.serializeJSON($(form));
 					_edit_student_data.active = _$edit_student_form.find("[name='active']").prop('checked') ? 1 : 0;
+					_edit_student_data.classroom_id = parseInt(_edit_student_data.classroom_id) || null;
+
 					_me.broadcast('edit_student', _edit_student_data);
 				}
 			});

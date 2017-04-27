@@ -41,9 +41,6 @@ define([
 					classroom_grade_id: {
 						required: true
 					},
-					classroom_id: {
-						required: true
-					},
 					birthday: {
 						required: true
 					}
