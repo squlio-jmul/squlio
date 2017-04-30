@@ -2,6 +2,7 @@
 	<ul class="nav nav-tabs" role="tablist">
 		<li role="presentation" class="active"><a href="#details" aria-controls="details" role="tab" data-toggle="tab">Student Info</a></li>
 		<li role="presentation"><a href="#parents" aria-controls="parents" role="tab" data-toggle="tab">Parents</a></li>
+		<li role="presentation"><a href="#pickups" aria-controls="pickups" role="tab" data-toggle="tab">Pickup List</a></li>
 	</ul>
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane fade in active" id="details">
@@ -162,30 +163,42 @@
 					</div>
 				<? endforeach; ?>
 			</div>
-<? /*
-			<? if (!$student['student_teacher']) : ?>
-			<div class="no-teacher-container">
-				Currently, there is no teacher assigned to this student.
+		</div>
+		<div role="tabpanel" class="tab-pane fade" id="pickups">
+			<div class="add-pickup-container">
+				<button class="button add-pickup">+ Add Pickup</button>
+			</div>
+			<? if (!$pickup) : ?>
+			<div class="no-pickup-container">
+				Currently, there is no pickup assigned for this student.
 			</div>
 			<? endif; ?>
-			<div class="teachers-list-container">
-				<? foreach($student['student_teacher'] as $ct) : ?>
-					<div class="row existing-teacher-container existing-teacher-container-<?=$ct['id']?>">
-						<div class="col-xs-3">
-							<div class="teacher-name">
-								<?=$ct['teacher_first_name'] . ' ' . $ct['teacher_last_name']?>
+			<div class="pickups-list-container">
+				<? foreach($pickup as $p) : ?>
+					<div class="row existing-pickup-container existing-pickup-container-<?=$p['id']?>">
+						<div class="col-xs-2">
+							<div class="pickup-type">
+								<?=ucfirst($p['type'])?>
 							</div>
 						</div>
-						<div class="col-xs-9">
-							<button class="button red remove-teacher" data-student-teacher-id="<?=$ct['id']?>">Remove</button>
-							<button class="button set-primary set-primary-<?=$ct['id']?> <?=($ct['is_primary']) ? 'sq-hidden':'' ?>" data-student-teacher-id="<?=$ct['id']?>">Set Primary</button>
-							<span class="is-primary is-primary-<?=$ct['id']?> <?=($ct['is_primary']) ? '':'sq-hidden' ?>" data-student-teacher-id="<?=$ct['id']?>">Primary</button>
+						<div class="col-xs-2">
+							<div class="pickup-name">
+								<?=$p['first_name'] . ' ' . $p['last_name']?>
+							</div>
+						</div>
+						<div class="col-xs-2">
+							<div class="pickup-phone">
+								<?=$p['phone']?>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<button class="button red remove-pickup" data-pickup-id="<?=$p['id']?>">Remove</button>
+							<button class="button edit-pickup" data-pickup-id="<?=$p['id']?>">Edit</button>
 						</div>
 					</div>
 				<? endforeach; ?>
 			</div>
- */
-?>
 		</div>
+
 	</div>
 </div>

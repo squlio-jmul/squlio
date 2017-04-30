@@ -17,6 +17,7 @@ class School_admin extends SQ_Controller {
 		$this->load->library('Term_library');
 		$this->load->library('Subject_library');
 		$this->load->library('Schedule_library');
+		$this->load->library('Pickup_library');
 	}
 
 	public function index() {
@@ -413,6 +414,7 @@ class School_admin extends SQ_Controller {
 							}
 						}
 					}
+					$pickup_obj = $this->pickup_library->get(array('student'=>$student['id']), array(), array('first_name'=>'asc', 'last_name'=>'asc'));
 
 					$data['student'] = $student;
 					$data['classroom_grade'] = $classroom_grade_obj;
@@ -420,6 +422,7 @@ class School_admin extends SQ_Controller {
 					$data['guardian_student'] = $guardian_student_obj;
 					$data['father'] = $father;
 					$data['mother'] = $mother;
+					$data['pickup'] = $pickup_obj;
 					$data['jsControllerParam'] = json_encode(array('student_id' => $student_id, 'school_id' => $student['school_id']));
 					$this->page->show('default', 'Squlio - Edit Student', 'school_admin_edit_student', $data, $data);
 					return;

@@ -1,0 +1,38 @@
+<div class="row edit-pickup-form-container" data-pickup-id="<%=pickup.id%>">
+	<form class="edit-pickup-form">
+		<input type="hidden" name="pickup_id" value="<%=pickup.id%>" />
+		<div class="col-xs-2">
+			<div class="form-group">
+				<label for="type">Type</label>
+				<select name="type" class="form-control">
+					<option value=""> - Select Pickup - </option>
+					<option value="driver" <%= (pickup.type=='driver') ? 'selected':''%>>Driver</option>
+					<option value="nanny" <%= (pickup.type=='nanny') ? 'selected':''%>>Nanny</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-2">
+			<div class="form-group">
+				<label for="first_name">First Name</label>
+				<input type="text" name="first_name" class="form-control" placeholder="First Name" value="<%=pickup.first_name%>" />
+			</div>
+		</div>
+		<div class="col-xs-2">
+			<div class="form-group">
+				<label for="last_name">Last Name</label>
+				<input type="text" name="last_name" class="form-control" placeholder="Last Name" value="<%=pickup.last_name%>" />
+			</div>
+		</div>
+		<div class="col-xs-2">
+			<div class="form-group">
+				<label for="phone">Phone</label>
+				<input type="text" name="phone" class="form-control" placeholder="Phone" value="<%=pickup.phone%>" />
+			</div>
+		</div>
+		<div class="col-xs-4">
+			<div class="edit-pickup-button-container">
+				<button class="button edit-pickup">Save</button>&nbsp;&nbsp;&nbsp;<a class="cancel">Cancel</a>
+			</div>
+		</div>
+	</form>
+</div>

@@ -7,8 +7,10 @@ define([
 	'SQ/Model/Login',
 	'SQ/Model/Guardian',
 	'SQ/Model/GuardianStudent',
+	'SQ/Model/Pickup',
 	'SQ/Screen/SchoolAdminEditStudent/Views/EditStudentForm',
 	'SQ/Screen/SchoolAdminEditStudent/Views/ParentsForm',
+	'SQ/Screen/SchoolAdminEditStudent/Views/PickupsTab',
 	'SQ/Module/UploadImageForm',
 	'underscore',
 	'text!../../Template/loading.tmpl',
@@ -23,8 +25,10 @@ define([
 	LoginModel,
 	GuardianModel,
 	GuardianStudentModel,
+	PickupModel,
 	EditStudentForm,
 	ParentsForm,
+	PickupsTab,
 	UploadImageForm,
 	_,
 	loadingTemplate,
@@ -44,10 +48,12 @@ define([
 		var _loginModel = new LoginModel();
 		var _guardianModel = new GuardianModel();
 		var _guardianStudentModel = new GuardianStudentModel();
+		var _pickupModel = new PickupModel();
 
 		var _editStudentForm = new EditStudentForm();
 		var _uploadImageForm = new UploadImageForm();
 		var _parentsForm = new ParentsForm();
+		var _pickupsTab = new PickupsTab();
 
 		(function _init() {
 			_editStudentForm.initialize($('#edit-student-form'));
@@ -60,6 +66,12 @@ define([
 			_parentsForm.initialize($('#parents'));
 			_parentsForm.setListener('save_father', _saveFather);
 			_parentsForm.setListener('save_mother', _saveMother);
+
+			_pickupsTab.initialize($('#pickups'));
+			_pickupsTab.setListener('add_pickup', _addPickup);
+			_pickupsTab.setListener('remove_pickup', _removePickup);
+			_pickupsTab.setListener('get_pickup', _getPickup);
+			_pickupsTab.setListener('edit_pickup', _editPickup);
 		})();
 
 		function _getClassroom(classroom_grade_id) {
@@ -224,6 +236,86 @@ define([
 				);
 			}
 		}
+
+		function _addPickup(data) {
+			$('body').append(_.template(loadingTemplate));
+			data.student_id = _student_id;
+			_pickupModel.add(data).then(
+				function(pickup_id) {
+					if (pickup_id) {
+						_pickupModel.get({id: pickup_id}).then(
+							function(pickups) {
+								$('body').find('.sq-loading-overlay').remove();
+								if (pickups.length) {
+									$.jGrowl('Pickup is added successfully', {header: 'Success'});
+									pickups[0].type = _util.ucfirst(pickups[0].type);
+									_pickupsTab.appendPickup(pickups[0]);
+								} else {
+									$.jGrowl('Unable to add pickup for this student', {header: 'Error'});
+								}
+							}
+						);
+					} else {
+						$('body').find('.sq-loading-overlay').remove();
+						$.jGrowl('Unable to add pickup for this student', {header: 'Error'});
+					}
+				}
+			);
+		}
+
+		function _removePickup(data) {
+			$('body').append(_.template(loadingTemplate));
+			_pickupModel.delete({id: data.pickup_id}).then(
+				function(success) {
+					$('body').find('.sq-loading-overlay').remove();
+					if (success) {
+						$.jGrowl('Pickup is removed successfully', {header: 'Success'});
+						_pickupsTab.removePickup(data.pickup_id);
+					} else {
+						$.jGrowl('Unable to remove this pickup', {header: 'Error'});
+					}
+				}
+			);
+		}
+
+		function _getPickup(data) {
+			$('body').append(_.template(loadingTemplate));
+			_pickupModel.get({id: data.pickup_id}).then(
+				function(pickups) {
+					$('body').find('.sq-loading-overlay').remove();
+					if (pickups.length) {
+						_pickupsTab.populateEdit(pickups[0]);
+					} else {
+						$.jGrowl('Unable to get this pickup info', {header: 'Error'});
+					}
+				}
+			);
+		}
+
+		function _editPickup(data) {
+			$('body').append(_.template(loadingTemplate));
+			_pickupModel.update(data.pickup_id, data).then(
+				function(success) {
+					if (success) {
+						_pickupModel.get({id: data.pickup_id}).then(
+							function(pickups) {
+								$('body').find('.sq-loading-overlay').remove();
+								if (pickups.length) {
+									$.jGrowl('Pickup is updated successfully', {header: 'Success'});
+									_pickupsTab.editSuccess(pickups[0]);
+								} else {
+									$.jGrowl('Unable to get this pickup info', {header: 'Error'});
+								}
+							}
+						);
+					} else {
+						$('body').find('.sq-loading-overlay').remove();
+						$.jGrowl('Unable to update this pickup', {header: 'Error'});
+					}
+				}
+			);
+		}
+
 
 	}
 });

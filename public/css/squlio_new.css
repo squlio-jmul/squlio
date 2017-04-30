@@ -607,6 +607,25 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	pointer-events: auto;
 	cursor: pointer;
 }
+#sq-school-admin-edit-student-container #pickups .add-pickup-container {
+	margin-bottom: 20px;
+}
+#sq-school-admin-edit-student-container #pickups .no-pickup-container {
+	font-size: 18px;
+}
+#sq-school-admin-edit-student-container #pickups .pickups-list-container .existing-pickup-container {
+	margin-bottom: 20px;
+}
+#sq-school-admin-edit-student-container #pickups .pickups-list-container .existing-pickup-container .pickup-type,
+#sq-school-admin-edit-student-container #pickups .pickups-list-container .existing-pickup-container .pickup-name,
+#sq-school-admin-edit-student-container #pickups .pickups-list-container .existing-pickup-container .pickup-phone {
+	font-size: 18px;
+    padding: 6px 10px;
+}
+#sq-school-admin-edit-student-container #pickups .pickups-list-container .existing-pickup-container .remove-pickup {
+	margin-right: 10px;
+}
+
 /** School Admin Add Term **/
 #sq-school-admin-add-term-container {
 	width: 600px;

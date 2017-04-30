@@ -1,0 +1,21 @@
+<div class="row existing-pickup-container existing-pickup-container-<%= pickup.id %>">
+	<div class="col-xs-2">
+		<div class="pickup-type">
+			<%= pickup.type %>
+		</div>
+	</div>
+	<div class="col-xs-2">
+		<div class="pickup-name">
+			<%= pickup.first_name + ' ' + pickup.last_name %>
+		</div>
+	</div>
+	<div class="col-xs-2">
+		<div class="pickup-phone">
+			<%= pickup.phone %>
+		</div>
+	</div>
+	<div class="col-xs-6">
+		<button class="button red remove-pickup" data-pickup-id="<%= pickup.id %>">Remove</button>
+		<button class="button edit-pickup" data-pickup-id="<%= pickup.id %>">Edit</button>
+	</div>
+</div>
