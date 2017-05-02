@@ -42,7 +42,6 @@ class Principal_library extends SQ_Library {
 		foreach($principals as $p) {
 			$login_data = array(
 				'email' => $p['email'],
-				'username' => $p['username'],
 				'password' => $p['password'],
 				'type' => 'principal',
 				'token' => md5(strtotime('now')),

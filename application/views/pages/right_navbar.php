@@ -13,9 +13,9 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right border-left most-right">
 				<? if ($login_type == 'school_admin') : ?>
-					<li class="hello">Hello, <?=$user_obj['username']?></li>
+					<li class="hello">Hello, <?=$user_obj['first_name'] . ' ' . $user_obj['last_name']?></li>
 					<li class="dropdown border-left">
-						<a href="#" class="dropdown-toggle avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="navbar-username"><img src="<?=$img_path?>/avatar.png" class="avatar-logo" /></a>
+						<a href="#" class="dropdown-toggle avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="navbar-avatar"><img src="<?=$img_path?>/avatar.png" class="avatar-logo" /></a>
 						<ul class="dropdown-menu">
 							<li><a href="/logout">Log Out</a></li>
 						</ul>

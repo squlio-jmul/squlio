@@ -26,11 +26,11 @@ class Login_library extends SQ_Library {
 		}
 	}
 
-	public function verifyLogin($username, $password, $login_token = null) {
+	public function verifyLogin($email, $password, $login_token = null) {
 		$success_obj = array('success' => false, 'redirect_page' => null, 'id' => null, 'cookie_obj' => null);
 
 		try {
-			if ($login_obj = $this->_ci->Login_model->get(array('username'=>$username))) {
+			if ($login_obj = $this->_ci->Login_model->get(array('email'=>$email))) {
 				$login = $login_obj[0];
 				if ($login['password'] == $password && $login['active'] && !$login['deleted']) {
 					$redirect_page = '/';

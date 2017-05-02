@@ -32,14 +32,6 @@ define([
 			});
 			_$edit_teacher_form.validate({
 				rules: {
-					username : {
-						required: true,
-						remote: {
-							url: '/ajax/login/editUsernameNotExist',
-							type: 'post',
-							data: {login_id: $e.find('[name="login_id"]').val()}
-						}
-					},
 					first_name: {
 						required: true
 					},
@@ -77,9 +69,6 @@ define([
 					}
 				},
 				messages: {
-					username: {
-						remote: 'Username has been taken'
-					},
 					email: {
 						remote: 'Email has been taken'
 					}

@@ -30,14 +30,6 @@ define([
 			_$parents_form = $e;
 			_$parents_form.find('#father-form').validate({
 				rules: {
-					username : {
-						required: true,
-						remote: {
-							url: '/ajax/login/editUsernameNotExist',
-							type: 'post',
-							data: {login_id: $e.find('#father-form [name="login_id"]').val()}
-						}
-					},
 					password: {
 						required: true
 					},
@@ -62,9 +54,6 @@ define([
 					}
 				},
 				messages: {
-					username: {
-						remote: 'Username has been taken'
-					},
 					email: {
 						remote: 'Email has been taken'
 					}
@@ -79,14 +68,6 @@ define([
 
 			_$parents_form.find('#mother-form').validate({
 				rules: {
-					username : {
-						required: true,
-						remote: {
-							url: '/ajax/login/editUsernameNotExist',
-							type: 'post',
-							data: {login_id: $e.find('#mother-form [name="login_id"]').val()}
-						}
-					},
 					password: {
 						required: true
 					},
@@ -111,9 +92,6 @@ define([
 					}
 				},
 				messages: {
-					username: {
-						remote: 'Username has been taken'
-					},
 					email: {
 						remote: 'Email has been taken'
 					}

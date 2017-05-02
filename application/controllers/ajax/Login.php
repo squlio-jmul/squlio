@@ -22,9 +22,9 @@ class Login extends SQ_Controller {
 	}
 
 	public function verifyLogin() {
-		$username = $this->input->post('username');
+		$email = $this->input->post('email');
 		$password = $this->input->post('password');
-		$login_response = $this->login_library->verifyLogin($username, $password);
+		$login_response = $this->login_library->verifyLogin($email, $password);
 
 		$this->setResponseElement('success', $login_response['success']);
 		if($login_response['success']){
@@ -43,16 +43,6 @@ class Login extends SQ_Controller {
 		$this->sendResponse();
 	}
 
-	public function usernameNotExist() {
-		$username = $this->input->post('username');
-		if ($login_obj = $this->login_library->get(array('username'=>$username))) {
-			echo 'false';
-		} else {
-			echo 'true';
-		}
-		return;
-	}
-
 	public function emailExist() {
 		$email = $this->input->post('email');
 		$exist = $this->login_library->emailExist($email);
@@ -67,18 +57,6 @@ class Login extends SQ_Controller {
 	public function emailNotExist() {
 		$email = $this->input->post('email');
 		if ($login_obj = $this->login_library->get(array('email'=>$email))) {
-			echo 'false';
-		} else {
-			echo 'true';
-		}
-		return;
-	}
-
-	public function editUsernameNotExist() {
-		$username = $this->input->post('username');
-		$login_id = $this->input->post('login_id');
-		$username_obj  = $this->login_library->get(array('username'=>$username));
-		if ($username_obj[0]['username'] == $username && $username_obj[0]['id'] !=$login_id){
 			echo 'false';
 		} else {
 			echo 'true';
@@ -109,17 +87,4 @@ class Login extends SQ_Controller {
 		}
 		return;
 	}
-
-
-/*	public function parentUsernameNotExist() {
-		$father_username = $this->input->post('father_username');
-		$mother_username = $this->input->post('mother_username');
-		if ($login_obj = $this->login_library->get(array('username'=>$father_username)) || $login_obj = $this->login_library->get(array('username'=>$mother_username) {
-			echo 'false';
-		} else {
-			echo 'true';
-		}
-		return;
-}*/
-
 }

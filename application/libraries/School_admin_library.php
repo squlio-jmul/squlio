@@ -23,18 +23,6 @@ class School_admin_library extends SQ_Library {
 		} catch(Exception $err) {
 			die($err->getMessage());
 		}
-
-	}
-	public function usernameExist($username) {
-		try {
-			if ($exist = $this->_ci->Login_model->get(array('username'=>$username), array('username'))) {
-				return true;
-			} else {
-				return false;
-			}
-		} catch(Exception $err) {
-			die($err->getMessage());
-		}
 	}
 
 	public function add($school_admin_data) {
@@ -53,7 +41,6 @@ class School_admin_library extends SQ_Library {
 		foreach($school_admins as $sa) {
 			$login_data = array(
 				'email' => $sa['email'],
-				'username' => $sa['username'],
 				'password' => $sa['password'],
 				'type' => 'school_admin',
 				'token' => md5(strtotime('now')),

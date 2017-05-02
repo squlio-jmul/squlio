@@ -88,7 +88,6 @@ class Principal extends EntitySuperClass {
 			'login_id' => $this->login->__get('id'),
 			'active' => $this->login->__get('active'),
 			'email' => $this->login->__get('email'),
-			'username' => $this->login->__get('username'),
 			'token' => $this->login->__get('token'),
 			'school_id' => $this->school->__get('id'),
 			'first_name' => $this->first_name,

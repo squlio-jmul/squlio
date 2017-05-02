@@ -116,8 +116,8 @@
 							<div class="row">
 								<div class="col-xs-6">
 									<div class="form-group">
-										<label for="username">Username</label>
-										<input type="text" name="username" class="form-control" placeholder="Username" value="<?=($$parent_type && ${$parent_type}['username']) ? ${$parent_type}['username'] : ''?>" />
+										<label for="email">Email</label>
+										<input type="text" name="email" class="form-control" placeholder="Email" value="<?=($$parent_type && ${$parent_type}['email']) ? ${$parent_type}['email'] : ''?>"/>
 									</div>
 								</div>
 								<div class="col-xs-6">
@@ -143,12 +143,6 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-xs-6">
-									<div class="form-group">
-										<label for="email">Email</label>
-										<input type="text" name="email" class="form-control" placeholder="Email" value="<?=($$parent_type && ${$parent_type}['email']) ? ${$parent_type}['email'] : ''?>"/>
-									</div>
-								</div>
 								<div class="col-xs-6">
 									<div class="form-group">
 										<label for="phone">Phone</label>

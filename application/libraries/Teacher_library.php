@@ -31,7 +31,6 @@ class Teacher_library extends SQ_Library {
 			$token = uniqid(strtotime('now'));
 			$login_data = array(
 				'email' => $teacher_data['email'],
-				'username' => $teacher_data['username'],
 				'password' => $teacher_data['password'],
 				'type' => 'teacher',
 				'token' => $token,

@@ -34,13 +34,13 @@ define([
 		function _verifyLogin(data) {
 			_loginForm.clearError();
 			$('body').append(_.template(loadingTemplate));
-			_loginModel.verifyLogin(data.username, data.password).then(
+			_loginModel.verifyLogin(data.email, data.password).then(
 				function(response) {
 					if (response.success) {
 						window.location = response.redirect_page;
 					} else {
 						$('body').find('.sq-loading-overlay').remove();
-						_loginForm.displayError('Invalid username and password.');
+						_loginForm.displayError('Invalid email and password.');
 					}
 				}
 			);

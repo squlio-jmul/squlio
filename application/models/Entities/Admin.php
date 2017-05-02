@@ -69,7 +69,6 @@ class Admin extends EntitySuperClass {
 			'id' => $this->id,
 			'login_id' => $this->login->__get('id'),
 			'email' => $this->login->__get('email'),
-			'username' => $this->login->__get('username'),
 			'token' => $this->login->__get('token'),
 			'first_name' => $this->first_name,
 			'last_name' => $this->last_name,

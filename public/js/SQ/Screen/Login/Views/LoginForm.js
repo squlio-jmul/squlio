@@ -27,7 +27,7 @@ define([
 			_$login_form = $e;
 			_$login_form.validate({
 				rules: {
-					'username': {
+					'email': {
 						required: true
 					},
 					'password': {

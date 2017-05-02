@@ -32,13 +32,6 @@ define([
 			});
 			_$add_teacher_form.validate({
 				rules: {
-					username : {
-						required: true,
-						remote: {
-							url: '/ajax/login/usernameNotExist',
-							type: 'post'
-						}
-					},
 					password: {
 						required: true,
 						minlength: 5
@@ -79,9 +72,6 @@ define([
 					}
 				},
 				messages: {
-					username: {
-						remote: 'Username has been taken'
-					},
 					email: {
 						remote: 'Email has been taken'
 					}

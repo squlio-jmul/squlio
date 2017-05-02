@@ -5,7 +5,7 @@
 	<div class="form-container">
 		<form id="login-form">
 			<div class="form-group">
-				<input type="text" name="username" class="form-control" placeholder="Username" value="" />
+				<input type="text" name="email" class="form-control" placeholder="Email" value="" />
 			</div>
 			<div class="form-group">
 				<input type="password" name="password" class="form-control" placeholder="Password" value="" />

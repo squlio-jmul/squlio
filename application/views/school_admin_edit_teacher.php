@@ -39,8 +39,8 @@
 						<div class="row">
 							<div class="col-xs-6">
 								<div class="form-group">
-									<label for="username">Username</label>
-									<input type="text" name="username" class="form-control" placeholder="Username" value="<?=$teacher['username']?>" />
+									<label for="email">Email</label>
+									<input type="text" name="email" class="form-control" placeholder="Email" value="<?=$teacher['email']?>" />
 								</div>
 							</div>
 							<div class="col-xs-6">
@@ -64,10 +64,6 @@
 									<input type="text" name="last_name" class="form-control" placeholder="Last Name" value="<?=$teacher['last_name']?>" />
 								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<label for="email">Email</label>
-							<input type="text" name="email" class="form-control" placeholder="Email" value="<?=$teacher['email']?>" />
 						</div>
 						<div class="form-group">
 							<label for="address">Address</label>

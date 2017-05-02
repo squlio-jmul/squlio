@@ -25,22 +25,9 @@ class School_admin extends SQ_Controller {
 		$this->sendResponse();
 	}
 
-	public function usernameExist() {
-		$username = $this->input->post('username');
-
-		$exist = $this->school_admin_library->usernameExist($username);
-		if ($exist) {
-			echo 'true';
-		} else {
-			echo 'false';
-		}
-		die();
-	}
-
 	public function add() {
 		$add_login_data = array (
 			'email' => $this->input->post('email'),
-			'username' => $this->input->post('username'),
 			'password' => $this->input->post('password'),
 			'type' => 'school_admin',
 			'token' => 'blah',

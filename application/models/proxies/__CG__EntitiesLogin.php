@@ -83,10 +83,10 @@ class Login extends \Entities\Login implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'id', 'email', 'username', 'password', 'type', 'token', 'active', 'deleted', 'reset_password', 'last_login', 'created_on', 'last_updated'];
+            return ['__isInitialized__', 'id', 'email', 'password', 'type', 'token', 'active', 'deleted', 'reset_password', 'last_login', 'created_on', 'last_updated'];
         }
 
-        return ['__isInitialized__', 'id', 'email', 'username', 'password', 'type', 'token', 'active', 'deleted', 'reset_password', 'last_login', 'created_on', 'last_updated'];
+        return ['__isInitialized__', 'id', 'email', 'password', 'type', 'token', 'active', 'deleted', 'reset_password', 'last_login', 'created_on', 'last_updated'];
     }
 
     /**

@@ -32,13 +32,6 @@ class Login extends EntitySuperClass {
 	/**
 	 * @var string
 	 *
-	 * @Column(name="username", type="string", nullable=false)
-	 */
-	protected $username;
-
-	/**
-	 * @var string
-	 *
 	 * @Column(name="password", type="string", nullable=false)
 	 */
 	protected $password;
@@ -108,7 +101,6 @@ class Login extends EntitySuperClass {
 		return array(
 			'id' => $this->id,
 			'email' => $this->email,
-			'username' => $this->username,
 			'password' => $this->password,
 			'type' => $this->type,
 			'token' => $this->token,

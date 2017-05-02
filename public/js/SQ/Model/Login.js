@@ -36,11 +36,11 @@ define(
 				return _deferred.promise;
 			};
 
-			this.verifyLogin = function(username, password) {
+			this.verifyLogin = function(email, password) {
 				var _deferred = Q.defer();
 
 				var data = {
-					username: username,
+					email: email,
 					password: password
 				};
 				$.ajax({

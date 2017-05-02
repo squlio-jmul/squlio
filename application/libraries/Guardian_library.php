@@ -30,7 +30,6 @@ class Guardian_library extends SQ_Library {
 			$token = uniqid(strtotime('now'));
 			$login_data = array(
 				'email' => $guardian_data['email'],
-				'username' => $guardian_data['username'],
 				'password' => $guardian_data['password'],
 				'type' => 'guardian',
 				'token' => $token,

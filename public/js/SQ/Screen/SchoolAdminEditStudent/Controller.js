@@ -128,7 +128,7 @@ define([
 		function _saveFather(data) {
 			$('body').append(_.template(loadingTemplate));
 			if (parseInt(data.guardian_id) && parseInt(data.login_id)) {
-				_loginModel.update(data.login_id, {username: data.username, password: data.password, email: data.email}).then(
+				_loginModel.update(data.login_id, {password: data.password, email: data.email}).then(
 					function(success) {
 						if (success) {
 							_guardianModel.update(data.guardian_id, data).then(
@@ -184,7 +184,7 @@ define([
 		function _saveMother(data) {
 			$('body').append(_.template(loadingTemplate));
 			if (parseInt(data.guardian_id) && parseInt(data.login_id)) {
-				_loginModel.update(data.login_id, {username: data.username, password: data.password, email: data.email}).then(
+				_loginModel.update(data.login_id, {password: data.password, email: data.email}).then(
 					function(success) {
 						if (success) {
 							_guardianModel.update(data.guardian_id, data).then(
