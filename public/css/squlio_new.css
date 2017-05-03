@@ -206,6 +206,10 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 .nav-tabs > li > a {
 	font-size: 18px;
 }
+.form-group .input-value {
+	font-size: 18px;
+	font-weight: bold;
+}
 /** Login **/
 #sq-login-container {
 	width: 450px;

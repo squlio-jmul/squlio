@@ -47,12 +47,7 @@
 							<div class="col-xs-6">
 								<div class="form-group">
 									<label for="classroom_grade_id">Grade</label>
-									<select name="classroom_grade_id" class="form-control">
-										<option value=""> - Select Grade - </option>
-										<? foreach($classroom_grade as $cg) : ?>
-											<option value="<?=$cg['id']?>" <?=($classroom['classroom_grade_id'] == $cg['id']) ? 'selected':''?>><?=$cg['name']?></option>
-										<? endforeach; ?>
-									</select>
+									<div class="input-value"><?=$classroom['classroom_grade']['name']?></div>
 								</div>
 							</div>
 						</div>

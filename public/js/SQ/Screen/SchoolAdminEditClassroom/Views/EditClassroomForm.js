@@ -38,9 +38,6 @@ define([
 								classroom_id: $e.find('[name="classroom_id"]').val()
 							}
 						}
-					},
-					classroom_grade_id: {
-						required: true
 					}
 				},
 				messages: {

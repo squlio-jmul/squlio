@@ -273,9 +273,8 @@ class School_admin extends SQ_Controller {
 			$school_admin = $data['user_obj'];
 			$school_id = $school_admin['school_id'];
 			if ($school_id) {
-				if ($classroom_obj = $this->classroom_library->get(array('id'=>$classroom_id, 'school'=>$school_id), array(), array(), null, null, array('classroom_teacher'=>true, 'student'=>true))) {
+				if ($classroom_obj = $this->classroom_library->get(array('id'=>$classroom_id, 'school'=>$school_id), array(), array(), null, null, array('classroom_teacher'=>true, 'student'=>true, 'classroom_grade'=>true))) {
 					$classroom = $classroom_obj[0];
-					$classroom_grade_obj = $this->classroom_grade_library->get(array('school'=>$school_id), array(), array('name'=>'asc'));
 					$subject_obj = $this->subject_library->get(array('school'=>$school_id, 'classroom_grade'=>$classroom['classroom_grade_id']), array(), array('title'=>'asc'));
 					$term_obj = $this->term_library->get(array('school'=>$school_id), array(), array('name'=>'asc'));
 
@@ -292,7 +291,6 @@ class School_admin extends SQ_Controller {
 					$selected_student_ids = array_map(function ($obj) { return $obj['id'];}, $classroom['student']);
 
 					$data['classroom'] = $classroom;
-					$data['classroom_grade'] = $classroom_grade_obj;
 					$data['subject'] = $subject_obj;
 					$data['student'] = $student_obj;
 					$data['selected_student_ids'] = $selected_student_ids;
