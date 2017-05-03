@@ -401,6 +401,9 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 }
 
 /** School Admin Add Classroom **/
+#sq-school-admin-add-classroom-container .no-classroom-grade-container {
+	font-size: 18px;
+}
 #sq-school-admin-add-classroom-container .add-image-container {
 	height: 250px;
     background: #b7b9bc;
