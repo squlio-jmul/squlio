@@ -59,140 +59,162 @@
 			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane fade" id="teachers">
-			<div class="add-teacher-container">
-				<button class="button add-teacher">+ Add Teacher To This Class</button>
-			</div>
-			<? if (!$classroom['classroom_teacher']) : ?>
-			<div class="no-teacher-container">
-				Currently, there is no teacher assigned to this classroom.
-			</div>
-			<? endif; ?>
-			<div class="teachers-list-container">
-				<? foreach($classroom['classroom_teacher'] as $ct) : ?>
-					<div class="row existing-teacher-container existing-teacher-container-<?=$ct['id']?>">
-						<div class="col-xs-3">
-							<div class="teacher-name">
-								<?=$ct['teacher_first_name'] . ' ' . $ct['teacher_last_name']?>
+			<? if (!$teacher) : ?>
+				<div class="no-teacher-container">
+					Currently, you do not have any teacher in this school. <a href="/school_admin/add_teacher">Click here to add one now.</a>
+				</div>
+			<? else: ?>
+				<div class="add-teacher-container">
+					<button class="button add-teacher">+ Add Teacher To This Class</button>
+				</div>
+				<? if (!$classroom['classroom_teacher']) : ?>
+				<div class="no-teacher-container">
+					Currently, there is no teacher assigned to this classroom.
+				</div>
+				<? endif; ?>
+				<div class="teachers-list-container">
+					<? foreach($classroom['classroom_teacher'] as $ct) : ?>
+						<div class="row existing-teacher-container existing-teacher-container-<?=$ct['id']?>">
+							<div class="col-xs-3">
+								<div class="teacher-name">
+									<?=$ct['teacher_first_name'] . ' ' . $ct['teacher_last_name']?>
+								</div>
+							</div>
+							<div class="col-xs-9">
+								<button class="button red remove-teacher" data-teacher-id="<?=$ct['teacher_id']?>" data-classroom-teacher-id="<?=$ct['id']?>">Remove</button>
+								<button class="button set-primary set-primary-<?=$ct['id']?> <?=($ct['is_primary']) ? 'sq-hidden':'' ?>" data-classroom-teacher-id="<?=$ct['id']?>">Set Primary</button>
+								<span class="is-primary is-primary-<?=$ct['id']?> <?=($ct['is_primary']) ? '':'sq-hidden' ?>" data-classroom-teacher-id="<?=$ct['id']?>">Primary</button>
 							</div>
 						</div>
-						<div class="col-xs-9">
-							<button class="button red remove-teacher" data-teacher-id="<?=$ct['teacher_id']?>" data-classroom-teacher-id="<?=$ct['id']?>">Remove</button>
-							<button class="button set-primary set-primary-<?=$ct['id']?> <?=($ct['is_primary']) ? 'sq-hidden':'' ?>" data-classroom-teacher-id="<?=$ct['id']?>">Set Primary</button>
-							<span class="is-primary is-primary-<?=$ct['id']?> <?=($ct['is_primary']) ? '':'sq-hidden' ?>" data-classroom-teacher-id="<?=$ct['id']?>">Primary</button>
-						</div>
-					</div>
-				<? endforeach; ?>
-			</div>
+					<? endforeach; ?>
+				</div>
+			<? endif; ?>
 		</div>
 		<div role="tabpanel" class="tab-pane fade" id="students">
-			<div class="header">
-				<div class="row">
-					<div class="col-xs-6">
-						<button class="button add-student">+ Add Student To This Class</button>
-					</div>
-					<div class="col-xs-6 right">
-						<div class="bulk-actions-container">
-							<select name="bulk_actions" class="form-control">
-								<option value="">Bulk Actions</option>
-								<option value="delete">Delete</option>
-							</select>
+			<? if (!$student) : ?>
+				<div class="no-student-container">
+					Currently, you do not have any student in this school. <a href="/school_admin/add_student">Click here to add one now.</a>
+				</div>
+			<? else: ?>
+				<div class="header">
+					<div class="row">
+						<div class="col-xs-6">
+							<button class="button add-student">+ Add Student To This Class</button>
 						</div>
-						<div class="apply-button-container">
-							<button class="button apply-bulk-actions">Apply</button>
+						<div class="col-xs-6 right">
+							<div class="bulk-actions-container">
+								<select name="bulk_actions" class="form-control">
+									<option value="">Bulk Actions</option>
+									<option value="delete">Delete</option>
+								</select>
+							</div>
+							<div class="apply-button-container">
+								<button class="button apply-bulk-actions">Apply</button>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div id="student-table-container"></div>
-			<div id="add-student-container" class="sq-hidden">
-				<div class="title">Add Student to This Class</div>
-				<form id="add-student-form">
-					<input type="hidden" name="classroom_id" value="<?=$classroom['id']?>" />
-					<div class="row">
-						<div class="col-xs-6">
-							<div class="form-group">
-								<label for="student_id">Student</label>
-								<select name="student_id" class="form-control">
-									<option value=""> - Select Student - </option>
-									<? foreach($student as $s) : ?>
-										<option value="<?=$s['id']?>" class="<?=(in_array($s['id'], $selected_student_ids)) ? 'sq-hidden':''?>"><?=$s['first_name'] . ' ' . $s['last_name']?></option>
-									<? endforeach; ?>
-								</select>
+				<div id="student-table-container"></div>
+				<div id="add-student-container" class="sq-hidden">
+					<div class="title">Add Student to This Class</div>
+					<form id="add-student-form">
+						<input type="hidden" name="classroom_id" value="<?=$classroom['id']?>" />
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label for="student_id">Student</label>
+									<select name="student_id" class="form-control">
+										<option value=""> - Select Student - </option>
+										<? foreach($student as $s) : ?>
+											<option value="<?=$s['id']?>" class="<?=(in_array($s['id'], $selected_student_ids)) ? 'sq-hidden':''?>"><?=$s['first_name'] . ' ' . $s['last_name']?></option>
+										<? endforeach; ?>
+									</select>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-6">
-							<div class="form-group">
-								<button type="submit" class="button">Save</button>&nbsp;&nbsp;<a class="cancel">Cancel</a>
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="form-group">
+									<button type="submit" class="button">Save</button>&nbsp;&nbsp;<a class="cancel">Cancel</a>
+								</div>
 							</div>
 						</div>
-					</div>
-				</form>
-			</div>
+					</form>
+				</div>
+			<? endif; ?>
 		</div>
 		<div role="tabpanel" class="tab-pane fade" id="schedule">
-			<div class="header">
-				<div class="row">
-					<div class="col-xs-6">
-						<button class="button add-schedule">+ Add New Schedule</button>
-					</div>
-					<div class="col-xs-6 right">
-						<div class="bulk-actions-container">
-							<select name="bulk_actions" class="form-control">
-								<option value="">Bulk Actions</option>
-								<option value="delete">Delete</option>
-							</select>
+			<? if (!$term) : ?>
+				<div class="no-term-container">
+					Currently, you do not have any term in this school. <a href="/school_admin/add_term">Click here to add one now.</a>
+				</div>
+			<? elseif (!$subject) : ?>
+				<div class="no-subject-container">
+					Currently, you do not have any subject in this school. <a href="/school_admin/add_subject">Click here to add one now.</a>
+				</div>
+			<? else : ?>
+				<div class="header">
+					<div class="row">
+						<div class="col-xs-6">
+							<button class="button add-schedule">+ Add New Schedule</button>
 						</div>
-						<div class="apply-button-container">
-							<button class="button apply-bulk-actions">Apply</button>
+						<div class="col-xs-6 right">
+							<div class="bulk-actions-container">
+								<select name="bulk_actions" class="form-control">
+									<option value="">Bulk Actions</option>
+									<option value="delete">Delete</option>
+								</select>
+							</div>
+							<div class="apply-button-container">
+								<button class="button apply-bulk-actions">Apply</button>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div id="schedule-table-container"></div>
-			<div id="add-schedule-container" class="sq-hidden">
-				<div class="title">Add New Schedule</div>
-				<form id="add-schedule-form">
-					<input type="hidden" name="classroom_id" value="<?=$classroom['id']?>" />
-					<input type="hidden" name="school_id" value="<?=$classroom['school_id']?>" />
-					<div class="row">
-						<div class="col-xs-6">
-							<div class="form-group">
-								<label for="term_id">Term</label>
-								<select name="term_id" class="form-control">
-									<option value=""> - Select Term - </option>
-									<? foreach($term as $t) : ?>
-										<option value="<?=$t['id']?>" data-start-date="<?=$t['start_date']->format('Y-m-d')?>" data-end-date="<?=$t['end_date']->format('Y-m-d')?>"><?=$t['name']?></option>
-									<? endforeach; ?>
-								</select>
+				<div id="schedule-table-container"></div>
+				<div id="add-schedule-container" class="sq-hidden">
+					<div class="title">Add New Schedule</div>
+					<form id="add-schedule-form">
+						<input type="hidden" name="classroom_id" value="<?=$classroom['id']?>" />
+						<input type="hidden" name="school_id" value="<?=$classroom['school_id']?>" />
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label for="term_id">Term</label>
+									<select name="term_id" class="form-control">
+										<option value=""> - Select Term - </option>
+										<? foreach($term as $t) : ?>
+											<option value="<?=$t['id']?>" data-start-date="<?=$t['start_date']->format('Y-m-d')?>" data-end-date="<?=$t['end_date']->format('Y-m-d')?>"><?=$t['name']?></option>
+										<? endforeach; ?>
+									</select>
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label for="date">Date</label>
+									<input type="text" name="date" class="form-control" placeholder="Date" />
+								</div>
 							</div>
 						</div>
-						<div class="col-xs-6">
-							<div class="form-group">
-								<label for="date">Date</label>
-								<input type="text" name="date" class="form-control" placeholder="Date" />
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label for="subject_id">Subject</label>
+									<select name="subject_id" class="form-control">
+										<option value=""> - Select Subject - </option>
+										<? foreach($subject as $s) : ?>
+											<option value="<?=$s['id']?>"><?=$s['title']?></option>
+										<? endforeach; ?>
+									</select>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-6">
-							<div class="form-group">
-								<label for="subject_id">Subject</label>
-								<select name="subject_id" class="form-control">
-									<option value=""> - Select Subject - </option>
-									<? foreach($subject as $s) : ?>
-										<option value="<?=$s['id']?>"><?=$s['title']?></option>
-									<? endforeach; ?>
-								</select>
-							</div>
+						<div class="form-group">
+							<button type="submit" class="button">Save</button>&nbsp;&nbsp;<a class="cancel">Cancel</a>
 						</div>
-					</div>
-					<div class="form-group">
-						<button type="submit" class="button">Save</button>&nbsp;&nbsp;<a class="cancel">Cancel</a>
-					</div>
-				</form>
-			</div>
+					</form>
+				</div>
+			<? endif; ?>
 		</div>
 	</div>
 </div>

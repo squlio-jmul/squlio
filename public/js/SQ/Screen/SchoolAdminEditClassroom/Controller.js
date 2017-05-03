@@ -72,8 +72,10 @@ define([
 			_scheduleTab.setListener('delete_schedule', _deleteSchedule);
 
 			$('a[href="#schedule"]').on('shown.bs.tab', function (e) {
-				_scheduleTab.viewTable();
-				_repopulateScheduleTable();
+				if (options.has_term && options.has_subject) {
+					_scheduleTab.viewTable();
+					_repopulateScheduleTable();
+				}
 			})
 
 			_studentsTab.initialize($('#students'));
@@ -81,8 +83,10 @@ define([
 			_studentsTab.setListener('remove_student', _removeStudent);
 
 			$('a[href="#students"]').on('shown.bs.tab', function (e) {
-				_studentsTab.viewTable();
-				_repopulateStudentTable();
+				if (options.has_student) {
+					_studentsTab.viewTable();
+					_repopulateStudentTable();
+				}
 			})
 		})();
 

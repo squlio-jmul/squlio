@@ -291,11 +291,12 @@ class School_admin extends SQ_Controller {
 					$selected_student_ids = array_map(function ($obj) { return $obj['id'];}, $classroom['student']);
 
 					$data['classroom'] = $classroom;
+					$data['teacher'] = $teacher_obj;
 					$data['subject'] = $subject_obj;
 					$data['student'] = $student_obj;
 					$data['selected_student_ids'] = $selected_student_ids;
 					$data['term'] = $term_obj;
-					$data['jsControllerParam'] = json_encode(array('classroom_id' => $classroom_id, 'teachers'=>$teacher_obj, 'selected_teacher_ids'=>$selected_teacher_ids, 'primary_teacher_id'=>$primary_teacher_id, 'selected_student_ids'=>$selected_student_ids));
+					$data['jsControllerParam'] = json_encode(array('classroom_id' => $classroom_id, 'teachers'=>$teacher_obj, 'selected_teacher_ids'=>$selected_teacher_ids, 'primary_teacher_id'=>$primary_teacher_id, 'selected_student_ids'=>$selected_student_ids, 'has_student' => (($student_obj) ? true: false), 'has_term' => (($term_obj) ? true: false), 'has_subject' => (($subject_obj) ? true: false)));
 					$this->page->show('default', 'Squlio - Edit Classroom', 'school_admin_edit_classroom', $data, $data);
 					return;
 				}
