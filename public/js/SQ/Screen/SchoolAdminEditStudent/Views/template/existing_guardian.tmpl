@@ -1,0 +1,11 @@
+<div class="row existing-guardian-container existing-guardian-container-<%= guardian_student.id %>">
+	<div class="col-xs-3">
+		<div class="guardian-name">
+			<%= guardian_student.guardian.first_name + ' ' + guardian_student.guardian.last_name %>
+		</div>
+	</div>
+	<div class="col-xs-9">
+		<button class="button red remove-guardian" data-guardian-id="<%= guardian_student.guardian_id %>" data-guardian-student-id="<%= guardian_student.id %>">Remove</button>
+		<button class="button edit-guardian" data-guardian-id="<%= guardian_student.guardian_id %>" data-guardian-student-id="<%= guardian_student.id %>">Edit</button>
+	</div>
+</div>

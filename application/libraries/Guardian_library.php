@@ -15,6 +15,7 @@ class Guardian_library extends SQ_Library {
 		parent::__construct();
 		$this->_ci->load->model('Guardian_model');
 		$this->_ci->load->model('Login_model');
+		$this->_ci->load->model('Guardian_student_model');
 	}
 
 	public function get($filters = array(), $fields = array(), $order_by = array(), $limit = null, $offset = null, $modules = array()) {
@@ -66,5 +67,28 @@ class Guardian_library extends SQ_Library {
 		} catch(Exception $err) {
 			die($err->getMessage());
 		}
+	}
+
+	public function verifyEmail($student_id, $email) {
+		$email_avail = true;
+		$guardian = null;
+		$guardian_exist = false;
+		try {
+			if ($login_obj = $this->_ci->Login_model->get(array('email'=>$email))) {
+				$login = $login_obj[0];
+				$email_avail = false;
+				if ($login['type'] == 'guardian') {
+					if ($guardian_obj = $this->_ci->Guardian_model->get(array('login'=>$login['id']))) {
+						$guardian = $guardian_obj[0];
+						if ($guardian_student_obj = $this->_ci->Guardian_student_model->get(array('student'=>$student_id, 'guardian'=>$guardian['id']))) {
+							$guardian_exist = true;
+						}
+					}
+				}
+			}
+		} catch (Exception $err) {
+			die($err->getMessage());
+		}
+		return array('email_available'=>$email_avail, 'guardian'=>$guardian, 'guardian_exist' => $guardian_exist);
 	}
 }

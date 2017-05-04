@@ -38,4 +38,14 @@ class Guardian extends SQ_Controller {
 		$this->setResponseElement('success', $success);
 		$this->sendResponse();
 	}
+
+	public function verifyEmail() {
+		$student_id = $this->input->post('student_id');
+		$email = $this->input->post('email');
+		$success_obj = $this->guardian_library->verifyEmail($student_id, $email);
+		$this->setResponseElement('email_available', $success_obj['email_available']);
+		$this->setResponseElement('guardian', $success_obj['guardian']);
+		$this->setResponseElement('guardian_exist', $success_obj['guardian_exist']);
+		$this->sendResponse();
+	}
 }

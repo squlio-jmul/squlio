@@ -399,30 +399,17 @@ class School_admin extends SQ_Controller {
 					$student = $student_obj[0];
 					$classroom_grade_obj = $this->classroom_grade_library->get(array('school'=>$school_id));
 					$classroom_obj = $this->classroom_library->get(array('school'=>$school_id, 'classroom_grade'=>$student['classroom_grade_id'], 'active'=>true, 'deleted'=>false));
-					$father = $mother = array();
-					$guardian_student_obj = $this->guardian_student_library->get(array('student'=>$student['id']), array('guardian_id'));
-					if ($guardian_student_obj) {
-						$guardian_ids = array_map(function ($obj) {return $obj['guardian_id'];}, $guardian_student_obj);
-						if ($guardian_obj = $this->guardian_library->get(array('id'=>$guardian_ids), array(), array(), null, null, array('login'=>true))) {
-							foreach($guardian_obj as $g) {
-								if ($g['type'] == 'father') {
-									$father = $g;
-								} elseif ($g['type'] == 'mother') {
-									$mother = $g;
-								}
-							}
-						}
-					}
+					$guardian_student_obj = $this->guardian_student_library->get(array('student'=>$student['id']), array('guardian_id'), array(), null, null, array('guardian'=>true));
+					$selected_guardian_ids = array_map(function ($obj) {return $obj['guardian_id'];}, $guardian_student_obj);
 					$pickup_obj = $this->pickup_library->get(array('student'=>$student['id']), array(), array('first_name'=>'asc', 'last_name'=>'asc'));
 
 					$data['student'] = $student;
 					$data['classroom_grade'] = $classroom_grade_obj;
 					$data['classroom'] = $classroom_obj;
 					$data['guardian_student'] = $guardian_student_obj;
-					$data['father'] = $father;
-					$data['mother'] = $mother;
 					$data['pickup'] = $pickup_obj;
-					$data['jsControllerParam'] = json_encode(array('student_id' => $student_id, 'school_id' => $student['school_id']));
+					$data['selected_guardian_ids'] = $selected_guardian_ids;
+					$data['jsControllerParam'] = json_encode(array('student_id' => $student_id, 'school_id' => $student['school_id'], 'selected_guardian_ids'=>$selected_guardian_ids));
 					$this->page->show('default', 'Squlio - Edit Student', 'school_admin_edit_student', $data, $data);
 					return;
 				}

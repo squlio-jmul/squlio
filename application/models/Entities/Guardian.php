@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 require_once(APPPATH."models/Entities/EntitySuperClass.php");
 require_once(APPPATH."models/Entities/Login.php");
+require_once(APPPATH."models/Entities/School.php");
 
 /**
  * Guardian
@@ -32,25 +33,26 @@ class Guardian extends EntitySuperClass {
 	protected $login;
 
 	/**
+	 * @var integer
+	 *
+	 * @ManyToOne(targetEntity="School", inversedBy="guardian", cascade={"persist"})
+	 * @JoinColumn(name="school_id", referencedColumnName="id", nullable=false)
+	 **/
+	protected $school;
+
+	/**
 	 * @var string
 	 *
-	 * @Column(name="first_name", type="string", nullable=true)
+	 * @Column(name="first_name", type="string", nullable=false)
 	 */
 	protected $first_name;
 
 	/**
 	 * @var string
 	 *
-	 * @Column(name="last_name", type="string", nullable=true)
+	 * @Column(name="last_name", type="string", nullable=false)
 	 */
 	protected $last_name;
-
-	/**
-	 * @var string
-	 *
-	 * @Column(name="phone", type="string", nullable=false)
-	 */
-	protected $phone;
 
 	/**
 	 * @var string
@@ -58,6 +60,13 @@ class Guardian extends EntitySuperClass {
 	 * @Column(name="type", type="string", nullable=false)
 	 */
 	protected $type;
+
+	/**
+	 * @var string
+	 *
+	 * @Column(name="phone", type="string", nullable=false)
+	 */
+	protected $phone;
 
 	/**
 	 * @var boolean
@@ -89,13 +98,14 @@ class Guardian extends EntitySuperClass {
 		return array(
 			'id' => $this->id,
 			'login_id' => $this->login->__get('id'),
+			'school_id' => $this->school->__get('id'),
 			'active' => $this->login->__get('active'),
 			'email' => $this->login->__get('email'),
 			'token' => $this->login->__get('token'),
 			'first_name' => $this->first_name,
 			'last_name' => $this->last_name,
-			'phone' => $this->phone,
 			'type' => $this->type,
+			'phone' => $this->phone,
 			'app_connected' => $this->app_connected,
 			'created_on' => $this->created_on,
 			'last_updated' => $this->last_updated

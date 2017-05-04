@@ -2,6 +2,7 @@
 
 require_once(APPPATH."models/Entities/Guardian.php");
 require_once(APPPATH."models/Entities/Login.php");
+require_once(APPPATH."models/Entities/School.php");
 
 class Guardian_model extends SQ_Model {
 
@@ -30,6 +31,7 @@ class Guardian_model extends SQ_Model {
 
 			if(!isset($modules['all'])) $modules['all'] = false;
 			if((isset($modules['login']) && $modules['login']) || $modules['all']) $guardian['login'] = $obj->getFormattedObject('login');
+			if((isset($modules['school']) && $modules['school']) || $modules['all']) $guardian['school'] = $obj->getFormattedObject('school');
 
 			$guardians[] = $guardian;
 		}
@@ -39,15 +41,18 @@ class Guardian_model extends SQ_Model {
 
 	public function add($guardian_data) {
 		try {
-			if (!$guardian_data['login_id']) {
+			if (!$guardian_data['login_id'] || !$guardian_data['school_id']) {
 				return false;
 			}
 			$login_obj = $this->doctrine->em->getRepository('Entities\Login')->findBy(array('id' => $guardian_data['login_id']));
 			$login = $login_obj[0];
+			$school_obj = $this->doctrine->em->getRepository('Entities\School')->findBy(array('id' => $guardian_data['school_id']));
+			$school = $school_obj[0];
 
 			$new_guardian = new Entities\Guardian;
 			$new_guardian->setData($guardian_data);
 			$new_guardian->login = $login;
+			$new_guardian->school = $school;
 
 			$this->doctrine->em->persist($new_guardian);
 			$this->doctrine->em->flush();

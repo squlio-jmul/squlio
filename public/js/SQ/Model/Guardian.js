@@ -78,6 +78,29 @@ define(
 				});
 				return _deferred.promise;
 			};
+
+			this.verifyEmail = function(student_id, email) {
+				var _deferred = Q.defer();
+
+				var data = {
+					student_id: student_id,
+					email: email
+				};
+				$.ajax({
+					url: '/ajax/guardian/verifyEmail',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(response) {
+						_deferred.resolve(response);
+					},
+					error: function(response, textStatus, jqXHR) {
+						_deferred.reject(response);
+					}
+				});
+				return _deferred.promise;
+			};
+
 		}
 	}
 );

@@ -1,0 +1,18 @@
+<div class="similar-guardian">
+	<div class="form-group">
+		We found similar guardian for this email.
+	</div>
+	<div class="guardian-info">
+		<%= guardian.first_name + ' ' + guardian.last_name %><br />
+		<%= guardian.email %><br />
+		<%= guardian.type %><br />
+		<%= guardian.phone %><br />
+	</div>
+	<div class="form-group">
+		Do you want to select this guardian instead?
+	</div>
+	<div class="form-group">
+		<button type="button" class="button select-guardian" data-guardian-id="<%=guardian.id%>">Yes</button>
+		<button type="button" class="button no-similar-guardian">No</button>
+	</div>
+</div>

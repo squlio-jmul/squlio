@@ -610,16 +610,44 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	background-position: center;
 	cursor: pointer;
 }
-#sq-school-admin-edit-student-container #parents .header {
+#sq-school-admin-edit-student-container #guardians .header {
 	font-size: 20px;
 	margin-bottom: 20px;
 }
-#sq-school-admin-edit-student-container #parents .sq-view-password {
+#sq-school-admin-edit-student-container #guardians .sq-view-password {
 	top: 25px;
 	right: 15px;
 	pointer-events: auto;
 	cursor: pointer;
 }
+#sq-school-admin-edit-student-container #guardians .add-guardian-container {
+	margin-bottom: 20px;
+}
+#sq-school-admin-edit-student-container #guardians .no-guardian-container {
+	font-size: 18px;
+}
+#sq-school-admin-edit-student-container #guardians .guardians-list-container .existing-guardian-container {
+	margin-bottom: 20px;
+}
+#sq-school-admin-edit-student-container #guardians .guardians-list-container .existing-guardian-container .guardian-name {
+	font-size: 20px;
+	border: 1px solid #DDD;
+    padding: 6px 10px;
+}
+#sq-school-admin-edit-student-container #guardians .guardians-list-container .existing-guardian-container .remove-guardian {
+	margin-right: 10px;
+}
+#sq-school-admin-edit-student-container #guardians .add-guardian-form-container .header {
+	font-size: 20px;
+	font-weight: bold;
+}
+#sq-school-admin-edit-student-container #guardians .add-guardian-form-container .similar-guardian-container .guardian-info {
+	margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 20;
+    width: 300px;
+}
+
 #sq-school-admin-edit-student-container #pickups .add-pickup-container {
 	margin-bottom: 20px;
 }

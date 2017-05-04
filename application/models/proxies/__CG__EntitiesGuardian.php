@@ -83,10 +83,10 @@ class Guardian extends \Entities\Guardian implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'id', 'login', 'first_name', 'last_name', 'phone', 'type', 'app_connected', 'created_on', 'last_updated'];
+            return ['__isInitialized__', 'id', 'login', 'school', 'first_name', 'last_name', 'type', 'phone', 'app_connected', 'created_on', 'last_updated'];
         }
 
-        return ['__isInitialized__', 'id', 'login', 'first_name', 'last_name', 'phone', 'type', 'app_connected', 'created_on', 'last_updated'];
+        return ['__isInitialized__', 'id', 'login', 'school', 'first_name', 'last_name', 'type', 'phone', 'app_connected', 'created_on', 'last_updated'];
     }
 
     /**
