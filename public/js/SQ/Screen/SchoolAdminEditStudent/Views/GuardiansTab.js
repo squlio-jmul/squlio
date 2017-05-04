@@ -27,9 +27,8 @@ define([
 		var _$guardians_tab = null;
 		var _selected_guardian_ids = [];
 		var _step_1_data = {};
-		var _step_2_data = {};
 
-		SQ.mixin(_me, new Broadcaster(['verify_email', 'select_guardian']));
+		SQ.mixin(_me, new Broadcaster(['verify_email', 'select_guardian', 'add_guardian']));
 
 		(function _init() {
 		})();
@@ -50,6 +49,36 @@ define([
 				submitHandler: function(form) {
 					_step_1_data = _util.serializeJSON($(form));
 					_me.broadcast('verify_email', _step_1_data);
+				}
+			});
+
+			_$guardians_tab.find('#add-guardian-form-step-2').validate({
+				rules: {
+					password: {
+						required: true
+					},
+					first_name: {
+						required: true
+					},
+					last_name: {
+						required: true
+					},
+					type: {
+						required: true
+					},
+					phone: {
+						required: true,
+						number: true
+					}
+				},
+				messages: {
+					phone: 'Please enter a valid phone number'
+				},
+				submitHandler: function(form) {
+					var _add_guardian_data = _util.serializeJSON($(form));
+					_add_guardian_data.email = _step_1_data.email;
+					_add_guardian_data.active = (_add_guardian_data.status == 'active') ? 1 : 0;
+					_me.broadcast('add_guardian', _add_guardian_data);
 				}
 			});
 
@@ -91,6 +120,7 @@ define([
 			_$guardians_tab.find('.guardians-list-container').append(_$existing_guardian);
 			_setGuardianListener(_$existing_guardian);
 
+			_step_1_data = {};
 			_$guardians_tab.find('#add-guardian-form-step-1, #add-guardian-form-step-2').trigger('reset');
 			_$guardians_tab.find('#add-guardian-form-step-1 label.error, #add-guardian-form-step-2 label.error').remove();
 			_$guardians_tab.find('.similar-guardian-container').empty();
@@ -98,16 +128,6 @@ define([
 			_$guardians_tab.find('.add-guardian-form-step-2-container').hide();
 			_$guardians_tab.find('.add-guardian-form-container').hide();
 			_$guardians_tab.find('.add-guardian-container, .guardians-list-container').fadeIn(300);
-		};
-
-		this.displayPickExistingGuardian = function(guardians) {
-			_$guardians_tab.find('#pick-existing-guardian-form [name="guardian_id"] option').remove();
-			_$guardians_tab.find('#pick-existing-guardian-form [name="guardian_id"]').append('<option value=""> - Select Guardian - </option>');
-			$.each(guardians || [], function(index, guardian) {
-				_$guardians_tab.find('#pick-existing-guardian-form [name="guardian_id"]').append('<option value="' + guardian.id + '">' + guardian.first_name + ' ' + guardian.last_name + '</option>');
-			});
-			_$guardians_tab.find('.add-guardian-option-container').hide();
-			_$guardians_tab.find('.pick-existing-guardian-form-container').fadeIn(300);
 		};
 
 		function _setListeners($e) {
@@ -122,6 +142,16 @@ define([
 				$e.find('.add-guardian-container, .guardians-list-container, .no-guardian-container').fadeIn(300);
 				$e.find('#add-guardian-form-step-1 label.error').remove();
 				$e.find('#add-guardian-form-step-1').trigger('reset');
+			});
+
+			$e.find('.sq-view-password').on('click', function() {
+				var _$self = $(this);
+				if (_$self.siblings('[name="password"]').attr('type') == 'password') {
+					_$self.siblings('[name="password"]').attr('type', 'text');
+				} else {
+					_$self.siblings('[name="password"]').attr('type', 'password');
+
+				}
 			});
 		}
 

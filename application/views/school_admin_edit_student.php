@@ -179,6 +179,23 @@
 								<div class="row">
 									<div class="col-xs-6">
 										<div class="form-group">
+											<label for="type">Type</label>
+											<select name="type" class="form-control">
+												<option value=""> Select Type </option>
+												<option value="father">Father</option>
+												<option value="mother">Mother</option>
+												<option value="uncle">Uncle</option>
+												<option value="aunt">Aunt</option>
+												<option value="grandfather">Grandfather</option>
+												<option value="grandmother">Grandmother</option>
+												<option value="brother">Brother</option>
+												<option value="sister">Sister</option>
+												<option value="other">Other</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-xs-6">
+										<div class="form-group">
 											<label for="phone">Phone</label>
 											<input type="text" name="phone" class="form-control" placeholder="Phone" />
 										</div>

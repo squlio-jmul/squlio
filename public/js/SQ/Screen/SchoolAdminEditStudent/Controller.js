@@ -68,6 +68,7 @@ define([
 			_guardiansTab.setSelectedGuardianIds(_selected_guardian_ids);
 			_guardiansTab.setListener('verify_email', _verifyEmail);
 			_guardiansTab.setListener('select_guardian', _selectGuardian);
+			_guardiansTab.setListener('add_guardian', _addGuardian);
 
 			_pickupsTab.initialize($('#pickups'));
 			_pickupsTab.setListener('add_pickup', _addPickup);
@@ -126,118 +127,6 @@ define([
 					}
 				}
 			);
-		}
-
-		function _saveFather(data) {
-			$('body').append(_.template(loadingTemplate));
-			if (parseInt(data.guardian_id) && parseInt(data.login_id)) {
-				_loginModel.update(data.login_id, {password: data.password, email: data.email}).then(
-					function(success) {
-						if (success) {
-							_guardianModel.update(data.guardian_id, data).then(
-								function(success) {
-									$('body').find('.sq-loading-overlay').remove();
-									if (success) {
-										$.jGrowl('Father information is saved successfully', {header: 'Success'});
-									} else {
-										$.jGrowl('Unable to save father information', {header: 'Error'});
-									}
-								}
-							);
-						} else {
-							$.jGrowl('Unable to save father information', {header: 'Error'});
-						}
-					}
-				)
-			} else {
-				_guardianModel.add(data).then(
-					function(guardian_id) {
-						if (guardian_id) {
-							_guardianStudentModel.add({guardian_id: guardian_id, student_id: _student_id}).then(
-								function(guardian_student_id) {
-									if (guardian_student_id) {
-										_guardianModel.get({id: guardian_id}, ['login_id']).then(
-											function(guardian_obj) {
-												$('body').find('.sq-loading-overlay').remove();
-												if (guardian_obj.length) {
-													var _login_id = guardian_obj[0].login_id;
-													$.jGrowl('Father information is saved successfully', {header: 'Success'});
-													_parentsForm.setGuardianId('father', guardian_id);
-													_parentsForm.setLoginId('father', _login_id);
-												} else {
-													$.jGrowl('Unable to assign this parent to this student', {header: 'Error'});
-												}
-											}
-										)
-									} else {
-										$('body').find('.sq-loading-overlay').remove();
-										$.jGrowl('Unable to assign this parent to this student', {header: 'Error'});
-									}
-								}
-							);
-						} else {
-							$('body').find('.sq-loading-overlay').remove();
-							$.jGrowl('Unable to save father information', {header: 'Error'});
-						}
-					}
-				);
-			}
-		}
-
-		function _saveMother(data) {
-			$('body').append(_.template(loadingTemplate));
-			if (parseInt(data.guardian_id) && parseInt(data.login_id)) {
-				_loginModel.update(data.login_id, {password: data.password, email: data.email}).then(
-					function(success) {
-						if (success) {
-							_guardianModel.update(data.guardian_id, data).then(
-								function(success) {
-									$('body').find('.sq-loading-overlay').remove();
-									if (success) {
-										$.jGrowl('Mother information is saved successfully', {header: 'Success'});
-									} else {
-										$.jGrowl('Unable to save mother information', {header: 'Error'});
-									}
-								}
-							);
-						} else {
-							$.jGrowl('Unable to save mother information', {header: 'Error'});
-						}
-					}
-				)
-			} else {
-				_guardianModel.add(data).then(
-					function(guardian_id) {
-						if (guardian_id) {
-							_guardianStudentModel.add({guardian_id: guardian_id, student_id: _student_id}).then(
-								function(guardian_student_id) {
-									if (guardian_student_id) {
-										_guardianModel.get({id: guardian_id}, ['login_id']).then(
-											function(guardian_obj) {
-												$('body').find('.sq-loading-overlay').remove();
-												if (guardian_obj.length) {
-													var _login_id = guardian_obj[0].login_id;
-													$.jGrowl('Mother information is saved successfully', {header: 'Success'});
-													_parentsForm.setGuardianId('mother', guardian_id);
-													_parentsForm.setLoginId('mother', _login_id);
-												} else {
-													$.jGrowl('Unable to assign this parent to this student', {header: 'Error'});
-												}
-											}
-										)
-									} else {
-										$('body').find('.sq-loading-overlay').remove();
-										$.jGrowl('Unable to assign this parent to this student', {header: 'Error'});
-									}
-								}
-							);
-						} else {
-							$('body').find('.sq-loading-overlay').remove();
-							$.jGrowl('Unable to save mother information', {header: 'Error'});
-						}
-					}
-				);
-			}
 		}
 
 		function _addPickup(data) {
@@ -346,6 +235,7 @@ define([
 							function(guardian_students) {
 								$('body').find('.sq-loading-overlay').remove();
 								if (guardian_students.length) {
+									$.jGrowl('Guardian is added successfully', {header: 'Error'});
 									_guardiansTab.appendNewGuardian(guardian_students[0]);
 								} else {
 									$.jGrowl('Unable to find this guardian', {header: 'Error'});
@@ -360,5 +250,38 @@ define([
 			);
 		}
 
+		function _addGuardian(data) {
+			$('body').append(_.template(loadingTemplate));
+			data.school_id = _school_id;
+			_guardianModel.add(data).then(
+				function(guardian_id) {
+					if (guardian_id) {
+						_guardianStudentModel.add({guardian_id: guardian_id, student_id: _student_id}).then(
+							function(guardian_student_id) {
+								if (guardian_student_id) {
+									_guardianStudentModel.get({id: guardian_student_id}, {}, {}, null, null, {guardian: true}).then(
+										function(guardian_students) {
+											$('body').find('.sq-loading-overlay').remove();
+											if (guardian_students.length) {
+												$.jGrowl('Guardian is added successfully', {header: 'Error'});
+												_guardiansTab.appendNewGuardian(guardian_students[0]);
+											} else {
+												$.jGrowl('Unable to find this guardian', {header: 'Error'});
+											}
+										}
+									);
+								} else {
+									$('body').find('.sq-loading-overlay').remove();
+									$.jGrowl('Unable to add guardian for this student', {header: 'Error'});
+								}
+							}
+						);
+					} else {
+						$('body').find('.sq-loading-overlay').remove();
+						$.jGrowl('Unable to add guardian', {header: 'Error'});
+					}
+				}
+			);
+		}
 	}
 });
