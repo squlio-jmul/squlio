@@ -69,6 +69,7 @@ define([
 			_guardiansTab.setListener('verify_email', _verifyEmail);
 			_guardiansTab.setListener('select_guardian', _selectGuardian);
 			_guardiansTab.setListener('add_guardian', _addGuardian);
+			_guardiansTab.setListener('remove_guardian', _removeGuardian);
 
 			_pickupsTab.initialize($('#pickups'));
 			_pickupsTab.setListener('add_pickup', _addPickup);
@@ -282,6 +283,22 @@ define([
 					}
 				}
 			);
+		}
+
+		function _removeGuardian(data) {
+			$('body').append(_.template(loadingTemplate));
+			_guardianStudentModel.delete({id: data.guardian_student_id}).then(
+				function(success) {
+					$('body').find('.sq-loading-overlay').remove();
+					if (success) {
+						$.jGrowl('Guardian is removed successfully', {header: 'Success'});
+						_guardiansTab.removeGuardianStudent(data.guardian_student_id);
+					} else {
+						$.jGrowl('Unable to delete guardian', {header: 'Error'});
+					}
+				}
+			);
+
 		}
 	}
 });

@@ -102,6 +102,7 @@ define([
 
 		this.displaySimilarGuardian = function(guardian) {
 			_$guardians_tab.find('#add-guardian-form-step-1 [name="email"]').after('<label class="error" for="email">This email is taken.</label>');
+			guardian.type = _util.ucfirst(guardian.type);
 			var _$similar_guardian = $(_.template(SimilarGuardianTemplate, {guardian: guardian}));
 			_$guardians_tab.find('.similar-guardian-container').append(_$similar_guardian);
 
@@ -126,8 +127,15 @@ define([
 			_$guardians_tab.find('.similar-guardian-container').empty();
 			_$guardians_tab.find('.add-guardian-form-step-1-container').show();
 			_$guardians_tab.find('.add-guardian-form-step-2-container').hide();
-			_$guardians_tab.find('.add-guardian-form-container').hide();
+			_$guardians_tab.find('.add-guardian-form-container, .no-guardian-container').hide();
 			_$guardians_tab.find('.add-guardian-container, .guardians-list-container').fadeIn(300);
+		};
+
+		this.removeGuardianStudent = function(guardian_student_id) {
+			_$guardians_tab.find('.guardians-list-container .existing-guardian-container-' + guardian_student_id).remove();
+			if (!_$guardians_tab.find('.guardians-list-container .existing-guardian-container').length) {
+				_$guardians_tab.find('.no-guardian-container').fadeIn(300);
+			}
 		};
 
 		function _setListeners($e) {
@@ -157,8 +165,8 @@ define([
 
 		function _setGuardianListener($e) {
 			$e.find('.remove-guardian').on('click', function() {
-				var _guardian_id = $(this).attr('data-guardian-id');
-				_me.broadcast('remove_guardian', {guardian_id: _guardian_id});
+				var _guardian_student_id = $(this).attr('data-guardian-student-id');
+				_me.broadcast('remove_guardian', {guardian_student_id: _guardian_student_id});
 			});
 
 			$e.find('.edit-guardian').on('click', function() {

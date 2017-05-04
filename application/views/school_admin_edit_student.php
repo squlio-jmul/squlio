@@ -101,11 +101,9 @@
 			<div class="add-guardian-container">
 				<button class="button add-guardian">+ Add Guardian</button>
 			</div>
-			<? if (!$guardian_student) : ?>
-			<div class="no-guardian-container">
+			<div class="no-guardian-container <?=(!$guardian_student) ? '':'sq-hidden'?>">
 				Currently, there is no guardian for this student.
 			</div>
-			<? endif; ?>
 			<div class="guardians-list-container">
 				<? foreach($guardian_student as $gs) : ?>
 					<div class="row existing-guardian-container existing-guardian-container-<?=$gs['id']?>">
