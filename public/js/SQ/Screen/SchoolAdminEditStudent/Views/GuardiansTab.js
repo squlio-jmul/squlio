@@ -28,7 +28,7 @@ define([
 		var _selected_guardian_ids = [];
 		var _step_1_data = {};
 
-		SQ.mixin(_me, new Broadcaster(['verify_email', 'select_guardian', 'add_guardian']));
+		SQ.mixin(_me, new Broadcaster(['verify_email', 'select_guardian', 'add_guardian', 'get_guardian', 'edit_guardian']));
 
 		(function _init() {
 		})();
@@ -135,7 +135,66 @@ define([
 			_$guardians_tab.find('.guardians-list-container .existing-guardian-container-' + guardian_student_id).remove();
 			if (!_$guardians_tab.find('.guardians-list-container .existing-guardian-container').length) {
 				_$guardians_tab.find('.no-guardian-container').fadeIn(300);
+			} else {
+				_$guardians_tab.find('.no-guardian-container').hide();
 			}
+		};
+
+		this.populateEdit = function(guardian) {
+			var _$edit_form = _$guardians_tab.find('#edit-guardian-form');
+			_$edit_form.find('[name="active"]').prop('checked', guardian.active);
+			_$edit_form.find('[name="login_id"]').val(guardian.login_id);
+			_$edit_form.find('[name="guardian_id"]').val(guardian.id);
+			_$edit_form.find('[name="email"]').val(guardian.email);
+			_$edit_form.find('[name="password"]').val(guardian.login.password);
+			_$edit_form.find('[name="first_name"]').val(guardian.first_name);
+			_$edit_form.find('[name="last_name"]').val(guardian.last_name);
+			_$edit_form.find('[name="type"]').val(guardian.type);
+			_$edit_form.find('[name="phone"]').val(guardian.phone);
+			_$guardians_tab.find('.edit-guardian-form-container').fadeIn(300);
+			_$guardians_tab.find('.add-guardian-container, .guardians-list-container, .no-guardian-container').hide();
+			_$guardians_tab.find('#edit-guardian-form').validate({
+				rules: {
+					email: {
+						required: true,
+						email: true,
+						remote: {
+							url: '/ajax/login/editEmailNotExist',
+							type: 'post',
+							data: {login_id: _$guardians_tab.find('#edit-guardian-form [name="login_id"]').val()}
+						}
+					},
+					password: {
+						required: true
+					},
+					first_name: {
+						required: true
+					},
+					last_name: {
+						required: true
+					},
+					type: {
+						required: true
+					},
+					phone: {
+						required: true,
+						number: true
+					}
+				},
+				messages: {
+					email: {
+						remote: 'This email has been taken'
+					},
+					phone: 'Please enter a valid phone number'
+				},
+				submitHandler: function(form) {
+					var _edit_guardian_data = _util.serializeJSON($(form));
+					_edit_guardian_data.active = _$guardians_tab.find("#edit-guardian-form [name='active']").prop('checked') ? 1 : 0;
+					_me.broadcast('edit_guardian', _edit_guardian_data);
+				}
+			});
+
+
 		};
 
 		function _setListeners($e) {
@@ -147,7 +206,12 @@ define([
 			$e.find('.add-guardian-form-step-1-container .cancel').on('click', function(e) {
 				e.preventDefault();
 				$e.find('.add-guardian-form-container').hide();
-				$e.find('.add-guardian-container, .guardians-list-container, .no-guardian-container').fadeIn(300);
+				$e.find('.add-guardian-container, .guardians-list-container').fadeIn(300);
+				if (!_$guardians_tab.find('.guardians-list-container .existing-guardian-container').length) {
+					_$guardians_tab.find('.no-guardian-container').fadeIn(300);
+				} else {
+					_$guardians_tab.find('.no-guardian-container').hide();
+				}
 				$e.find('#add-guardian-form-step-1 label.error').remove();
 				$e.find('#add-guardian-form-step-1').trigger('reset');
 			});
@@ -161,6 +225,20 @@ define([
 
 				}
 			});
+
+			$e.find('#edit-guardian-form .cancel').on('click', function(e) {
+				e.preventDefault();
+				$e.find('.edit-guardian-form-container').hide();
+				$e.find('.add-guardian-container, .guardians-list-container').fadeIn(300);
+				if (!_$guardians_tab.find('.guardians-list-container .existing-guardian-container').length) {
+					_$guardians_tab.find('.no-guardian-container').fadeIn(300);
+				} else {
+					_$guardians_tab.find('.no-guardian-container').hide();
+				}
+				$e.find('#edit-guardian-form label.error').remove();
+				$e.find('#edit-guardian-form').trigger('reset');
+			});
+
 		}
 
 		function _setGuardianListener($e) {
@@ -173,7 +251,6 @@ define([
 				var _guardian_id = $(this).attr('data-guardian-id');
 				_me.broadcast('get_guardian', {guardian_id: _guardian_id});
 			});
-
 		}
 	}
 });

@@ -68,7 +68,7 @@ class Login extends SQ_Controller {
 		$email = $this->input->post('email');
 		$login_id = $this->input->post('login_id');
 		$email_obj = $this->login_library->get(array('email'=>$email));
-		if ($email_obj[0]['email'] == $email && $email_obj[0]['id'] != $login_id) {
+		if ($email_obj && $email_obj[0]['id'] != $login_id) {
 			echo 'false';
 		} else {
 			echo 'true';

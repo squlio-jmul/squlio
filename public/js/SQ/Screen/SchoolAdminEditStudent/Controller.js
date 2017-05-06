@@ -70,6 +70,8 @@ define([
 			_guardiansTab.setListener('select_guardian', _selectGuardian);
 			_guardiansTab.setListener('add_guardian', _addGuardian);
 			_guardiansTab.setListener('remove_guardian', _removeGuardian);
+			_guardiansTab.setListener('get_guardian', _getGuardian);
+			_guardiansTab.setListener('edit_guardian', _editGuardian);
 
 			_pickupsTab.initialize($('#pickups'));
 			_pickupsTab.setListener('add_pickup', _addPickup);
@@ -298,7 +300,35 @@ define([
 					}
 				}
 			);
-
 		}
+
+		function _getGuardian(data) {
+			$('body').append(_.template(loadingTemplate));
+			_guardianModel.get({id: data.guardian_id}, {}, {}, null, null, {login: true}).then(
+				function(guardians) {
+					$('body').find('.sq-loading-overlay').remove();
+					if (guardians.length) {
+						_guardiansTab.populateEdit(guardians[0]);
+					} else {
+						$.jGrowl('Unable to find this guardian', {header: 'Error'});
+					}
+				}
+			);
+		}
+
+		function _editGuardian(data) {
+			$('body').append(_.template(loadingTemplate));
+			Q.all([_loginModel.update(data.login_id, data), _guardianModel.update(data.guardian_id, data)]).done(
+				function(responses) {
+					$('body').find('.sq-loading-overlay').remove();
+					if (responses[0] && responses[1]) {
+						$.jGrowl('Guardian is updated successfully', {header: 'Success'});
+					} else {
+						$.jGrowl('Unable to update this guardian', {header: 'Error'});
+					}
+				}
+			);
+		}
+
 	}
 });
