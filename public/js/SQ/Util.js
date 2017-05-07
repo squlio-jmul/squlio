@@ -63,6 +63,32 @@ define(
 			this.ucfirst = function (string) {
 				return string.charAt(0).toUpperCase() + string.slice(1);
 			};
+
+			this.utcToLocal = function (utc_date_string) {
+				var _utc = new Date(utc_date_string);
+				var _local = new Date(Date.UTC(
+					_utc.getFullYear(),
+					_utc.getMonth(),
+					_utc.getDate(),
+					_utc.getHours(),
+					_utc.getMinutes(),
+					_utc.getMilliseconds()
+				));
+				return (((_local.getMonth() + 1) < 10) ? '0' : '' ) + (_local.getMonth() + 1) + '/' +
+					((_local.getDate() < 10) ? '0' : '' ) + (_local.getDate()) + '/' +
+					_local.getFullYear() + ' ' +
+					((_local.getHours() < 10) ? '0' : '' ) + (_local.getHours()) + ':' +
+					((_local.getMinutes() < 10) ? '0' : '' ) + (_local.getMinutes());
+			};
+
+			this.localToUtc = function (local_date_string) {
+				var _local = new Date(local_date_string);
+				return (((_local.getUTCMonth() + 1) < 10) ? '0' : '' ) + (_local.getUTCMonth() + 1) + '/' +
+					((_local.getUTCDate() < 10) ? '0' : '' ) + (_local.getUTCDate()) + '/' +
+					_local.getUTCFullYear() + ' ' +
+					((_local.getUTCHours() < 10) ? '0' : '' ) + (_local.getUTCHours()) + ':' +
+					((_local.getUTCMinutes() < 10) ? '0' : '' ) + (_local.getUTCMinutes());
+			};
 		}
 	}
 );

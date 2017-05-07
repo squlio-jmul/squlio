@@ -51,6 +51,9 @@ a.button, a.button:hover {
 .margintop10 {
 	margin-top: 10px;
 }
+.marginbottom20 {
+	margin-bottom: 20px;
+}
 .marginbottom30 {
 	margin-bottom: 30px;
 }
@@ -811,4 +814,44 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	height: 150px;
 	border: 1px solid #DDDDDD;
 	padding: 10px;
+}
+/** School Admin Messages **/
+#sq-school-admin-messages-container {
+	padding: 20px;
+}
+#sq-school-admin-messages-container .tab-pane {
+	padding-top: 20px;
+}
+#sq-school-admin-messages-container .table th:first-child {
+	width: 18%;
+}
+#sq-school-admin-messages-container .table th:nth-child(3) {
+	width: 18%;
+}
+#sq-school-admin-messages-container .table .view-message {
+	color: #AAAAAA;
+	cursor: pointer;
+}
+#sq-school-admin-messages-container .table .view-message.bold {
+	color: #000000;
+	font-weight: bold;
+}
+#sq-school-admin-messages-container .sq-view-message-container {
+	width: 800px;
+}
+#sq-school-admin-messages-container .sq-view-message-container .title {
+	font-size: 16px;
+	font-weight: bold;
+}
+#sq-school-admin-messages-container .sq-view-message-container .reply {
+	margin-right: 20px;
+}
+#sq-school-admin-messages-container .sq-reply-message-container {
+	width: 800px;
+}
+#sq-school-admin-messages-container .sq-reply-message-container .message {
+	height: 150px;
+}
+#sq-school-admin-messages-container .sq-reply-message-container .send {
+	margin-right: 20px;
 }

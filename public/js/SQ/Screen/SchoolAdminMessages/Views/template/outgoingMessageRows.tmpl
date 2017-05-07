@@ -1,0 +1,7 @@
+<% _.each(school_admin_teacher_contacts, function(satc) { %>
+<tr class="view-message" data-contact-id="<%=satc.id%>">
+	<td><%=satc.teacher.first_name + ' ' + satc.teacher.last_name%></td>
+	<td><%=satc.title%></td>
+	<td><%=satc.created_on.date%></td>
+</tr>
+<% }); %>
