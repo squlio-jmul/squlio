@@ -65,11 +65,9 @@ define(
 								function(success) {
 									$('body').find('.sq-loading-overlay').remove();
 									if (success) {
-										var _num_new_messages = parseInt($('.sq-badge.num-messages').text());
-										if (!_school_admin_teacher_contact.message_read) {
-											_num_new_messages -= 1;
-										}
-										if (_num_new_messages) {
+										var _num_new_messages = parseInt($('.sq-badge.num-messages:first').text());
+										_num_new_messages -= 1;
+										if (_num_new_messages > 0) {
 											$('.num-messages').text(_num_new_messages);
 										} else {
 											$('.num-messages').hide();

@@ -855,3 +855,10 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 #sq-school-admin-messages-container .sq-reply-message-container .send {
 	margin-right: 20px;
 }
+/** Message Badge **/
+.sq-badge {
+	background-color: #f36a5a;
+}
+.sq-badge.sq-hidden {
+	display: none;
+}

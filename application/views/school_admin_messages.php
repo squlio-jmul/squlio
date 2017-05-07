@@ -1,6 +1,6 @@
 <div id="sq-school-admin-messages-container">
 	<ul class="nav nav-tabs" role="tablist">
-		<li role="presentation" class="active"><a href="#incoming" aria-controls="incoming" role="tab" data-toggle="tab">Incoming Messages <span class="badge num-messages <?=($num_new_message ? '' : 'sq-hidden')?>"><?=$num_new_message?></span></a></li>
+		<li role="presentation" class="active"><a href="#incoming" aria-controls="incoming" role="tab" data-toggle="tab">Incoming Messages <span class="badge sq-badge num-messages <?=($num_new_message ? '' : 'sq-hidden')?>"><?=$num_new_message?></span></a></li>
 		<li role="presentation"><a href="#outgoing" aria-controls="outgoing" role="tab" data-toggle="tab">Outgoing Messages</a></li>
 	</ul>
 

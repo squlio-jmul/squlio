@@ -75,8 +75,16 @@ class SchoolAdminTeacherContact extends EntitySuperClass {
 	 */
 	protected $created_on;
 
+	/**
+	 * @var \DateTime
+	 *
+	 * @Column(name="last_updated", type="datetime", nullable=false)
+	 */
+	protected $last_updated;
+
 	public function __construct() {
 		$this->created_on = new \DateTime('now');
+		$this->last_updated = new \DateTime('now');
 	}
 
 	public function getData() {
@@ -88,7 +96,8 @@ class SchoolAdminTeacherContact extends EntitySuperClass {
 			'title' => $this->title,
 			'message' => $this->message,
 			'message_read' => $this->message_read,
-			'created_on' => $this->created_on
+			'created_on' => $this->created_on,
+			'last_updated' => $this->last_updated
 		);
 	}
 }

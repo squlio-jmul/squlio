@@ -3,6 +3,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class School_admin extends SQ_Controller {
+	private $num_new_message;
+
 	public function __construct() {
 		parent::__construct();
 		$this->load->library('School_admin_library');
@@ -18,6 +20,15 @@ class School_admin extends SQ_Controller {
 		$this->load->library('Subject_library');
 		$this->load->library('Schedule_library');
 		$this->load->library('Pickup_library');
+		$this->load->library('School_admin_teacher_contact_library');
+
+		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
+			$school_admin = $this->cookie->get('type_info');
+
+			if ($messages = $this->school_admin_teacher_contact_library->get(array('school_admin'=>$school_admin['id'], 'message_read'=>0, 'direction'=>'teacher_to_school_admin'), array('id'))) {
+				$this->num_new_message = count($messages);
+			}
+		}
 	}
 
 	public function index() {
@@ -30,7 +41,8 @@ class School_admin extends SQ_Controller {
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'Dashboard',
 			'page_subtitle' => null,
-			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null,
+			'num_new_message' => $this->num_new_message
 		);
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
@@ -60,7 +72,8 @@ class School_admin extends SQ_Controller {
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'School Settings',
 			'page_subtitle' => null,
-			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null,
+			'num_new_message' => $this->num_new_message
 		);
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
@@ -87,7 +100,8 @@ class School_admin extends SQ_Controller {
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'Teachers',
 			'page_subtitle' => 'Add Teacher',
-			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null,
+			'num_new_message' => $this->num_new_message
 		);
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
@@ -124,7 +138,8 @@ class School_admin extends SQ_Controller {
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'Teachers',
 			'page_subtitle' => null,
-			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null,
+			'num_new_message' => $this->num_new_message
 		);
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
@@ -156,7 +171,8 @@ class School_admin extends SQ_Controller {
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'Teachers',
 			'page_subtitle' => 'Edit Teacher',
-			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null,
+			'num_new_message' => $this->num_new_message
 		);
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
@@ -189,7 +205,8 @@ class School_admin extends SQ_Controller {
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'Classes',
 			'page_subtitle' => 'Add Class',
-			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null,
+			'num_new_message' => $this->num_new_message
 		);
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
@@ -229,7 +246,8 @@ class School_admin extends SQ_Controller {
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'Classes',
 			'page_subtitle' => null,
-			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null,
+			'num_new_message' => $this->num_new_message
 		);
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
@@ -265,7 +283,8 @@ class School_admin extends SQ_Controller {
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'Classes',
 			'page_subtitle' => 'Edit Class',
-			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null,
+			'num_new_message' => $this->num_new_message
 		);
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
@@ -315,7 +334,8 @@ class School_admin extends SQ_Controller {
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'Students',
 			'page_subtitle' => 'Add Student',
-			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null,
+			'num_new_message' => $this->num_new_message
 		);
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
@@ -355,7 +375,8 @@ class School_admin extends SQ_Controller {
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'Students',
 			'page_subtitle' => null,
-			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null,
+			'num_new_message' => $this->num_new_message
 		);
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
@@ -387,7 +408,8 @@ class School_admin extends SQ_Controller {
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'Students',
 			'page_subtitle' => 'Edit Student',
-			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null,
+			'num_new_message' => $this->num_new_message
 		);
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
@@ -428,7 +450,8 @@ class School_admin extends SQ_Controller {
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'Terms',
 			'page_subtitle' => 'Add Term',
-			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null,
+			'num_new_message' => $this->num_new_message
 		);
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
@@ -456,7 +479,8 @@ class School_admin extends SQ_Controller {
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'Terms',
 			'page_subtitle' => null,
-			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null,
+			'num_new_message' => $this->num_new_message
 		);
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
@@ -484,7 +508,8 @@ class School_admin extends SQ_Controller {
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'Terms',
 			'page_subtitle' => 'Edit Term',
-			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null,
+			'num_new_message' => $this->num_new_message
 		);
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
@@ -514,7 +539,8 @@ class School_admin extends SQ_Controller {
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'Subjects',
 			'page_subtitle' => 'Add Subject',
-			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null,
+			'num_new_message' => $this->num_new_message
 		);
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
@@ -544,7 +570,8 @@ class School_admin extends SQ_Controller {
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'Subjects',
 			'page_subtitle' => null,
-			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null,
+			'num_new_message' => $this->num_new_message
 		);
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
@@ -572,7 +599,8 @@ class School_admin extends SQ_Controller {
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'Subjects',
 			'page_subtitle' => 'Edit Subject',
-			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null,
+			'num_new_message' => $this->num_new_message
 		);
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
@@ -605,7 +633,8 @@ class School_admin extends SQ_Controller {
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'Classroom Grades',
 			'page_subtitle' => 'Add Classroom Grade',
-			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null,
+			'num_new_message' => $this->num_new_message
 		);
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
@@ -633,7 +662,8 @@ class School_admin extends SQ_Controller {
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'Classroom Grades',
 			'page_subtitle' => null,
-			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null,
+			'num_new_message' => $this->num_new_message
 		);
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
@@ -661,7 +691,8 @@ class School_admin extends SQ_Controller {
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'Classroom Grades',
 			'page_subtitle' => 'Edit Classroom Grade',
-			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null,
+			'num_new_message' => $this->num_new_message
 		);
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
@@ -691,14 +722,14 @@ class School_admin extends SQ_Controller {
 			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
 			'page_title' => 'Messages',
 			'page_subtitle' => '',
-			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null,
+			'num_new_message' => $this->num_new_message
 		);
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
 			$login_id = $this->cookie->get('id');
 			$school_admin = $data['user_obj'];
 			$school_id = $school_admin['school_id'];
-			$data['num_new_message'] = 0;
 			$data['jsControllerParam'] = json_encode(array('school_admin_id' => $school_admin['id']));
 			$this->page->show('default', 'Squlio - Messages', 'school_admin_messages', $data, $data);
 			return;
