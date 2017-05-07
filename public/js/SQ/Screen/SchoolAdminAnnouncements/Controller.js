@@ -37,6 +37,8 @@ define([
 		(function _init() {
 			_announcementsTable.initialize($('#announcements-table-container'));
 			_announcementsTable.setListener('view_announcement', _viewAnnouncement);
+			_announcementsTable.setListener('delete_announcement', _deleteAnnouncement);
+
 			$('body').append(_.template(loadingTemplate));
 			_announcementModel.get({school: _school_id}, [], {created_on: 'desc'}, null, null, {classroom: true}).then(
 				function(announcements) {
@@ -101,5 +103,30 @@ define([
 				}
 			);
 		}
+
+		function _deleteAnnouncement(announcement_id) {
+			$('body').append(_.template(loadingTemplate));
+			_announcementModel.delete({id: announcement_id}).then(
+				function(success) {
+					if (success) {
+						_announcementModel.get({school: _school_id}, [], {created_on: 'desc'}, null, null, {classroom: true}).then(
+							function(announcements) {
+								$('body').find('.sq-loading-overlay').remove();
+								$.jGrowl('Announcement is deleted successfully', {header: 'Success'});
+								$('.announcements-count').text(_util.addCommas(announcements.length) + ' Announcement' + ((announcements.length > 1) ? 's':''));
+								_addAnnouncementForm.hide();
+								_viewTable();
+								_announcementsTable.clearTable();
+								_announcementsTable.populate(announcements);
+							}
+						);
+					} else {
+						$('body').find('.sq-loading-overlay').remove();
+						$.jGrowl('Unable to delete announcement', {header: 'Error'});
+					}
+				}
+			);
+		}
+
 	}
 });

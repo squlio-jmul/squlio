@@ -23,7 +23,7 @@ define([
 		var _$announcements_table = null;
 		var _announcements_table = null;
 
-		SQ.mixin(_me, new Broadcaster(['view_announcement']));
+		SQ.mixin(_me, new Broadcaster(['view_announcement', 'delete_announcement']));
 
 		(function _init() {
 		})();
@@ -49,7 +49,7 @@ define([
 						announcement.classroom.name,
 						announcement.title,
 						_created_on.getDate() + '/' + (_created_on.getMonth()+1) + '/' + _created_on.getFullYear(),
-						'<a class="view-announcement" data-announcement-id="' + announcement.id + '">View Details</a>'
+						'<a class="view-announcement" data-announcement-id="' + announcement.id + '">View Details</a><a class="delete-announcement" data-announcement-id="' + announcement.id + '">Delete</a>'
 					]
 				);
 			});
@@ -68,6 +68,13 @@ define([
 				var _announcement_id = _$self.attr('data-announcement-id');
 				_me.broadcast('view_announcement', _announcement_id);
 			});
+			$e.find('.delete-announcement').on('click', function(e) {
+				e.preventDefault();
+				var _$self = $(e.target);
+				var _announcement_id = _$self.attr('data-announcement-id');
+				_me.broadcast('delete_announcement', _announcement_id);
+			});
+
 		}
 	}
 });

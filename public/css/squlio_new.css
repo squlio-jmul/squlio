@@ -905,6 +905,9 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 #sq-school-admin-announcements-container #sq-school-admin-add-announcement-container textarea.content {
 	height: 200px;
 }
+#sq-school-admin-announcements-container #announcements-table .view-announcement {
+	margin-right: 20px;
+}
 #sq-view-modal .title {
 	margin: 20px 0;
 	font-size: 18px;
