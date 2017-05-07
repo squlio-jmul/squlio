@@ -84,6 +84,8 @@ define([
 			});
 			_students_table.rows.add(_table_data).draw();
 			_setTableListeners(_$students_tab.find('#student-table'));
+
+			_$students_tab.find('.students-count').text(_util.addCommas(students.length) + ' Student' + ((students.length > 1) ? 's':''));
 		};
 
 		this.viewTable = function() {

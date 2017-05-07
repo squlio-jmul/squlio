@@ -99,7 +99,10 @@
 				<div class="header">
 					<div class="row">
 						<div class="col-xs-6">
-							<button class="button add-student">+ Add Student To This Class</button>
+							<div class="students-count"></div>
+							<div class="add-student-container">
+								<button class="button add-student">+ Add Student To This Class</button>
+							</div>
 						</div>
 						<div class="col-xs-6 right">
 							<div class="bulk-actions-container">

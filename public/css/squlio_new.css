@@ -507,6 +507,18 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 #sq-school-admin-edit-classroom-container #students .header {
 	margin-bottom: 40px;
 }
+#sq-school-admin-edit-classroom-container #students .header .students-count {
+	font-size: 32px;
+    font-weight: normal;
+	display: inline-block;
+	vertical-align: middle;
+}
+#sq-school-admin-edit-classroom-container #students .header .add-student-container {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 20px;
+}
+
 #sq-school-admin-edit-classroom-container #students .header .bulk-actions-container {
 	display: inline-block;
 	vertical-align: middle;
