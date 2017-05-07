@@ -38,7 +38,7 @@ class SchoolAdminTeacherContact extends EntitySuperClass {
 	 * @ManyToOne(targetEntity="Teacher", inversedBy="school_admin_teacher_contact", cascade={"persist"})
 	 * @JoinColumn(name="teacher_id", referencedColumnName="id", nullable=false)
 	 **/
-	protected $teacher_id;
+	protected $teacher;
 
 	/**
 	 * @var string

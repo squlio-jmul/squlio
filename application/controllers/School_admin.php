@@ -138,7 +138,7 @@ class School_admin extends SQ_Controller {
 				}
 				$teachers_count = count($this->teacher_library->get(array('school'=>$school_id), array('id')));
 				$data['teachers_count'] = $teachers_count;
-				$data['jsControllerParam'] = json_encode(array('school_id' => $school_id, 'teacher_limit' => $teacher_limit));
+				$data['jsControllerParam'] = json_encode(array('school_id' => $school_id, 'teacher_limit' => $teacher_limit, 'school_admin_id' => $school_admin['id']));
 				$this->page->show('default', 'Squlio - Teachers', 'school_admin_teachers', $data, $data);
 				return;
 			}

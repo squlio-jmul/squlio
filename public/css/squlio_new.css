@@ -346,6 +346,9 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	font-weight: bold;
 	color: #2bad8c;
 }
+#sq-school-admin-teachers-container #teachers-table .contact-teacher {
+	margin-left: 20px;
+}
 /** School Admin Edit Teacher **/
 #sq-school-admin-edit-teacher-container .tab-pane {
 	padding-top: 20px;
@@ -802,4 +805,10 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 #sq-school-admin-edit-classroom-grade-container {
 	width: 600px;
 }
-
+/** Contact Modal **/
+#sq-contact-modal .message {
+	width: 100%;
+	height: 150px;
+	border: 1px solid #DDDDDD;
+	padding: 10px;
+}

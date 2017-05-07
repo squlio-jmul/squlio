@@ -31,7 +31,9 @@ class School_admin_teacher_contact_library extends SQ_Library {
 				'message_read' => 0,
 				'created_on' => new \DateTime('now')
 			);
+
 			$school_admin_teacher_contact_data = array_merge($school_admin_teacher_contact_data, $default_school_admin_teacher_contact_data);
+
 			if ($school_admin_teacher_contact_id = $this->_ci->School_admin_teacher_contact_model->add($school_admin_teacher_contact_data)) {
 				return $school_admin_teacher_contact_id;
 			}

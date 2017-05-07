@@ -26,3 +26,27 @@
 	</div>
 	<div id="teachers-table-container"></div>
 </div>
+<div id="sq-contact-modal" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<form class="sq-contact-form">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title"></h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<input type="text" name="title" placeholder="Title" class="form-control" />
+					</div>
+					<div class="form-group">
+						<textarea name="message" class="form-control message" placeholder="Message"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="button close-modal" data-dismiss="modal">Close</button>
+					<button type="submit" class="button">Send</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
