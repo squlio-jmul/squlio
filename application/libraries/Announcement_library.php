@@ -69,4 +69,31 @@ class Announcement_library extends SQ_Library {
 		}
 	}
 
+	public function addBulk($announcement_data){
+		try{
+			$success = true;
+			$classroom_ids = $announcement_data['classroom_ids'];
+			unset($announcement_data['classroom_ids']);
+			$start_date = new \DateTime($announcement_data['start_date']);
+			$end_date = new \DateTime($announcement_data['end_date']);
+			foreach($classroom_ids as $classroom_id) {
+				$default_announcement_data = array(
+					'classroom_id' => $classroom_id,
+					'start_date' => $start_date,
+					'end_date' => $end_date,
+					'created_on' => new \DateTime('now'),
+					'last_updated' => new \DateTime('now')
+				);
+				$announcement_data = array_merge($announcement_data, $default_announcement_data);
+				if ($announcement_id = $this->_ci->Announcement_model->add($announcement_data)) {
+				} else {
+					$success = false;
+				}
+			}
+			return $success;
+		} catch(Exception $err) {
+			die($err->getMessage());
+		}
+	}
+
 }

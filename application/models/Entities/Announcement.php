@@ -55,13 +55,6 @@ class Announcement extends EntitySuperClass {
 	protected $content;
 
 	/**
-	 * @var string
-	 *
-	 * @Column(name="type", type="string", nullable=false)
-	 */
-	protected $type;
-
-	/**
 	 * @var \DateTime
 	 *
 	 * @Column(name="start_date", type="datetime", nullable=false)
@@ -74,13 +67,6 @@ class Announcement extends EntitySuperClass {
 	 * @Column(name="end_date", type="datetime", nullable=false)
 	 */
 	protected $end_date;
-
-	/**
-	 * @var boolean
-	 *
-	 * @Column(name="announcement_read", type="boolean", nullable=false)
-	 */
-	protected $annnouncement_read;
 
 	/**
 	 * @var \DateTime
@@ -108,10 +94,8 @@ class Announcement extends EntitySuperClass {
 			'classroom_id' => $this->classroom->__get('id'),
 			'title' => $this->title,
 			'content' => $this->content,
-			'type' => $this->type,
 			'start_date' => $this->start_date,
 			'end_date' => $this->end_date,
-			'announcement_read' => $this->announcement_read,
 			'created_on' => $this->created_on,
 			'last_updated' => $this->last_updated
 		);

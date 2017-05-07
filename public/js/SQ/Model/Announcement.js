@@ -99,6 +99,28 @@ define(
 				});
 				return _deferred.promise;
 			};
+
+			this.addBulk = function(announcement_data) {
+				var _deferred = Q.defer();
+
+				var data = {
+					announcement_data: announcement_data
+				};
+				$.ajax({
+					url: '/ajax/announcement/addBulk',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(response) {
+						_deferred.resolve(response.success);
+					},
+					error: function(response, textStatus, jqXHR) {
+						_deferred.reject(response);
+					}
+				});
+				return _deferred.promise;
+			};
+
 		}
 	}
 );

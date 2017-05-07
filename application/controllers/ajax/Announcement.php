@@ -45,4 +45,12 @@ class Announcement extends SQ_Controller {
 		$this->setResponseElement('success', $success);
 		$this->sendResponse();
 	}
+
+	public function addBulk() {
+		$announcement_data = $this->input->post('announcement_data');
+		$success = $this->announcement_library->addBulk($announcement_data);
+		$this->setResponseElement('success', $success);
+		$this->sendResponse();
+	}
+
 }

@@ -21,6 +21,7 @@ class School_admin extends SQ_Controller {
 		$this->load->library('Schedule_library');
 		$this->load->library('Pickup_library');
 		$this->load->library('School_admin_teacher_contact_library');
+		$this->load->library('Announcement_library');
 
 		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
 			$school_admin = $this->cookie->get('type_info');
@@ -736,4 +737,41 @@ class School_admin extends SQ_Controller {
 		}
 		redirect('/');
 	}
+
+	public function announcements() {
+		$data = array(
+			'headerCss' => array(
+				$this->config->item('static_css') . '/jquery-ui.css',
+				$this->config->item('static_css') . '/jquery.dataTables.min.css'
+			),
+			'headerJs' => array(),
+			'footerJs' => array(),
+			'requireJsDataSource' => 'school_admin_announcements',
+			'jsControllerParam' => false,
+			'user_obj' => $this->cookie->get('type_info') ? $this->cookie->get('type_info') : array(),
+			'page_title' => 'Announcements',
+			'page_subtitle' => '',
+			'login_type' => $this->cookie->get('type') ? $this->cookie->get('type') : null,
+			'num_new_message' => $this->num_new_message
+		);
+
+		if ($this->cookie->get('id') && $this->cookie->get('type') == 'school_admin') {
+			$login_id = $this->cookie->get('id');
+			$school_admin = $data['user_obj'];
+			$school_id = $school_admin['school_id'];
+			if ($school_id) {
+				$classroom_obj = $this->classroom_library->get(array('school'=>$school_id, 'active'=>true, 'deleted'=>false), array(), array('name'=>'asc'));
+				$announcement_obj = $this->announcement_library->get(array('school'=>$school_id), array('id'));
+				$data['announcements_count'] = count($announcement_obj);
+				$data['classroom'] = $classroom_obj;
+				$data['school_id'] = $school_id;
+				$data['jsControllerParam'] = json_encode(array('school_id'=>$school_id));
+
+				$this->page->show('default', 'Squlio - Announcements', 'school_admin_announcements', $data, $data);
+				return;
+			}
+		}
+		redirect('/');
+	}
+
 }
