@@ -6,6 +6,7 @@ define([
 	'SQ/Screen/SchoolAdminAnnouncements/Views/AnnouncementsTable',
 	'SQ/Screen/SchoolAdminAnnouncements/Views/AddAnnouncementForm',
 	'SQ/Screen/SchoolAdminAnnouncements/Views/ViewDetailModal',
+	'SQ/Screen/SchoolAdminAnnouncements/Views/DeleteModal',
 	'underscore',
 	'text!../../Template/loading.tmpl',
 	'ThirdParty/q',
@@ -18,6 +19,7 @@ define([
 	AnnouncementsTable,
 	AddAnnouncementForm,
 	ViewDetailModal,
+	DeleteModal,
 	_,
 	loadingTemplate,
 	Q,
@@ -32,12 +34,15 @@ define([
 		var _announcementsTable = new AnnouncementsTable();
 		var _addAnnouncementForm = new AddAnnouncementForm();
 		var _viewDetailModal = new ViewDetailModal();
+		var _deleteModal = new DeleteModal();
+
 		var _school_id = options.school_id;
+		var _delete_announcement_id = null;
 
 		(function _init() {
 			_announcementsTable.initialize($('#announcements-table-container'));
 			_announcementsTable.setListener('view_announcement', _viewAnnouncement);
-			_announcementsTable.setListener('delete_announcement', _deleteAnnouncement);
+			_announcementsTable.setListener('open_delete_modal', _openDeleteModal);
 
 			$('body').append(_.template(loadingTemplate));
 			_announcementModel.get({school: _school_id}, [], {created_on: 'desc'}, null, null, {classroom: true}).then(
@@ -57,6 +62,9 @@ define([
 				$('.header, #announcements-table-container').hide();
 				_addAnnouncementForm.show();
 			});
+
+			_deleteModal.initialize($('#sq-delete-modal'));
+			_deleteModal.setListener('delete_announcement', _deleteAnnouncement);
 		})();
 
 		function _viewTable() {
@@ -104,9 +112,18 @@ define([
 			);
 		}
 
-		function _deleteAnnouncement(announcement_id) {
+		function _openDeleteModal(announcement_id) {
+			_delete_announcement_id = announcement_id;
+			_deleteModal.show();
+		}
+
+		function _deleteAnnouncement() {
+			_deleteModal.hide();
+			if (!_delete_announcement_id) {
+				return false;
+			}
 			$('body').append(_.template(loadingTemplate));
-			_announcementModel.delete({id: announcement_id}).then(
+			_announcementModel.delete({id: _delete_announcement_id}).then(
 				function(success) {
 					if (success) {
 						_announcementModel.get({school: _school_id}, [], {created_on: 'desc'}, null, null, {classroom: true}).then(

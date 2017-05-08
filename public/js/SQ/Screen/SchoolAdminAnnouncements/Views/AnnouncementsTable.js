@@ -23,7 +23,7 @@ define([
 		var _$announcements_table = null;
 		var _announcements_table = null;
 
-		SQ.mixin(_me, new Broadcaster(['view_announcement', 'delete_announcement']));
+		SQ.mixin(_me, new Broadcaster(['view_announcement', 'open_delete_modal']));
 
 		(function _init() {
 		})();
@@ -72,7 +72,7 @@ define([
 				e.preventDefault();
 				var _$self = $(e.target);
 				var _announcement_id = _$self.attr('data-announcement-id');
-				_me.broadcast('delete_announcement', _announcement_id);
+				_me.broadcast('open_delete_modal', _announcement_id);
 			});
 
 		}

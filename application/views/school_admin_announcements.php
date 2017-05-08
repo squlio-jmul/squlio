@@ -89,3 +89,20 @@
 		</div>
 	</div>
 </div>
+<div id="sq-delete-modal" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Delete Announcement</h4>
+			</div>
+			<div class="modal-body">
+				Are you sure you want to delete this announcement?
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="button close-modal" data-dismiss="modal">No</button>
+				<button type="button" class="button delete-announcement">Yes</button>
+			</div>
+		</div>
+	</div>
+</div>
