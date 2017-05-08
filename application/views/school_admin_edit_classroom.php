@@ -82,6 +82,7 @@
 							</div>
 							<div class="col-xs-9">
 								<button class="button red remove-teacher" data-teacher-id="<?=$ct['teacher_id']?>" data-classroom-teacher-id="<?=$ct['id']?>">Remove</button>
+								<button class="button contact-teacher" data-teacher-id="<?=$ct['teacher_id']?>">Contact</button>
 								<button class="button set-primary set-primary-<?=$ct['id']?> <?=($ct['is_primary']) ? 'sq-hidden':'' ?>" data-classroom-teacher-id="<?=$ct['id']?>">Set Primary</button>
 								<span class="is-primary is-primary-<?=$ct['id']?> <?=($ct['is_primary']) ? '':'sq-hidden' ?>" data-classroom-teacher-id="<?=$ct['id']?>">Primary</button>
 							</div>
@@ -219,5 +220,29 @@
 				</div>
 			<? endif; ?>
 		</div>
+	</div>
+</div>
+<div id="sq-contact-modal" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<form class="sq-contact-form">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title"></h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<input type="text" name="title" placeholder="Title" class="form-control" />
+					</div>
+					<div class="form-group">
+						<textarea name="message" class="form-control message" placeholder="Message"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="button close-modal" data-dismiss="modal">Close</button>
+					<button type="submit" class="button">Send</button>
+				</div>
+			</div>
+		</form>
 	</div>
 </div>

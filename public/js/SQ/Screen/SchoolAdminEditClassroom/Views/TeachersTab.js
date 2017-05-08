@@ -29,7 +29,7 @@ define([
 		var _selected_teacher_ids = selected_teacher_ids;
 		var _add_teacher_form_opened = false;
 
-		SQ.mixin(_me, new Broadcaster(['add_teacher', 'remove_teacher', 'set_primary']));
+		SQ.mixin(_me, new Broadcaster(['add_teacher', 'remove_teacher', 'set_primary', 'contact_teacher']));
 
 		(function _init() {
 		})();
@@ -117,6 +117,13 @@ define([
 				var _teacher_id = $(this).attr('data-teacher-id');
 				_me.broadcast('remove_teacher', {classroom_teacher_id: _classroom_teacher_id, teacher_id: _teacher_id});
 			});
+
+			$e.find('.contact-teacher').on('click', function() {
+				var _teacher_id = $(this).attr('data-teacher-id');
+				var _teacher_name = $(this).closest('.existing-teacher-container').find('.teacher-name').text();
+				_me.broadcast('contact_teacher', {teacher_id: _teacher_id, teacher_name: _teacher_name});
+			});
+
 		}
 	}
 });

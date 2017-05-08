@@ -493,7 +493,8 @@ div.jGrowl div.jGrowl-notification div.jGrowl-message a {
 	border: 1px solid #DDD;
     padding: 6px 10px;
 }
-#sq-school-admin-edit-classroom-container #teachers .teachers-list-container .existing-teacher-container .remove-teacher {
+#sq-school-admin-edit-classroom-container #teachers .teachers-list-container .existing-teacher-container .remove-teacher,
+#sq-school-admin-edit-classroom-container #teachers .teachers-list-container .existing-teacher-container .contact-teacher {
 	margin-right: 10px;
 }
 #sq-school-admin-edit-classroom-container #teachers .teachers-list-container .existing-teacher-container .is-primary {

@@ -6,11 +6,13 @@ define([
 	'SQ/Model/ClassroomTeacher',
 	'SQ/Model/Schedule',
 	'SQ/Model/Student',
+	'SQ/Model/SchoolAdminTeacherContact',
 	'SQ/Screen/SchoolAdminEditClassroom/Views/EditClassroomForm',
 	'SQ/Module/UploadImageForm',
 	'SQ/Screen/SchoolAdminEditClassroom/Views/TeachersTab',
 	'SQ/Screen/SchoolAdminEditClassroom/Views/StudentsTab',
 	'SQ/Screen/SchoolAdminEditClassroom/Views/ScheduleTab',
+	'SQ/Screen/SchoolAdminEditClassroom/Views/ContactFormModal',
 	'underscore',
 	'text!../../Template/loading.tmpl',
 	'ThirdParty/q',
@@ -23,11 +25,13 @@ define([
 	ClassroomTeacherModel,
 	ScheduleModel,
 	StudentModel,
+	SchoolAdminTeacherContactModel,
 	EditClassroomForm,
 	UploadImageForm,
 	TeachersTab,
 	StudentsTab,
 	ScheduleTab,
+	ContactFormModal,
 	_,
 	loadingTemplate,
 	Q,
@@ -38,22 +42,26 @@ define([
 	return function SchoolAdminEditClassroomController(options) {
 		var _me = this;
 		var _util = new Util();
+		var _school_admin_id = options.school_admin_id;
 		var _classroom_id = options.classroom_id;
 		var _teachers = options.teachers;
 		var _selected_teacher_ids = options.selected_teacher_ids;
 		var _primary_teacher_id = options.primary_teacher_id;
 		var _selected_student_ids = options.selected_student_ids;
+		var _contact_teacher_id = null;
 
 		var _classroomModel = new ClassroomModel();
 		var _classroomTeacherModel = new ClassroomTeacherModel();
 		var _scheduleModel = new ScheduleModel();
 		var _studentModel = new StudentModel();
+		var _schoolAdminTeacherContactModel = new SchoolAdminTeacherContactModel();
 
 		var _editClassroomForm = new EditClassroomForm();
 		var _uploadImageForm = new UploadImageForm();
 		var _teachersTab = new TeachersTab(_teachers, _selected_teacher_ids);
 		var _studentsTab = new StudentsTab(_selected_student_ids);
 		var _scheduleTab = new ScheduleTab();
+		var _contactFormModal = new ContactFormModal();
 
 		(function _init() {
 			_editClassroomForm.initialize($('#edit-classroom-form'));
@@ -66,6 +74,7 @@ define([
 			_teachersTab.setListener('add_teacher', _addTeacher);
 			_teachersTab.setListener('set_primary', _setPrimary);
 			_teachersTab.setListener('remove_teacher', _removeTeacher);
+			_teachersTab.setListener('contact_teacher', _openContactModal);
 
 			_scheduleTab.initialize($('#schedule'));
 			_scheduleTab.setListener('add_schedule', _addSchedule);
@@ -88,6 +97,9 @@ define([
 					_repopulateStudentTable();
 				}
 			})
+
+			_contactFormModal.initialize($('#sq-contact-modal'));
+			_contactFormModal.setListener('send_message', _sendMessage);
 		})();
 
 		function _editClassroom(data) {
@@ -273,6 +285,34 @@ define([
 						_repopulateStudentTable();
 					} else {
 						$.jGrowl('Unable to remove this student', {header: 'Error'});
+					}
+				}
+			);
+		}
+
+		function _openContactModal(data) {
+			_contactFormModal.setTitle('Contact ' + data.teacher_name);
+			_contact_teacher_id = data.teacher_id;
+			_contactFormModal.show();
+		}
+
+		function _sendMessage(data) {
+			$('body').append(_.template(loadingTemplate));
+			var _add_data = {
+				school_admin_id: _school_admin_id,
+				teacher_id: _contact_teacher_id,
+				direction: 'school_admin_to_teacher',
+				title: data.title,
+				message: data.message
+			};
+			_schoolAdminTeacherContactModel.add(_add_data).then(
+				function(school_admin_teacher_contact_id){
+					$('body').find('.sq-loading-overlay').remove();
+					if (school_admin_teacher_contact_id) {
+						$.jGrowl('Your message has been sent.', {header: 'Success'});
+						_contactFormModal.hide();
+					} else {
+						$.jGrowl('Unable to contact this host.', {header: 'Error'});
 					}
 				}
 			);
